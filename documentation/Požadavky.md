@@ -1,18 +1,39 @@
 # Majitel
 
-- Vkládání pizz do nabídky – název, suroviny, cena.
-- Editace vytvoøenıch pizz.
-- Vkládání ingrediencí a jejich cen – ceny v pøedpøipravené pizze a ceny jako pøídavku.
-- Zadávání cen na dvì desetinná místa, poèítání s DPH.
-- Pøístup k historii objednávek.
-- Pøehledy (statistiky) – za období, na základì druhu pizz, nejprodávanìjší pizzy.
+- VklÃ¡dÃ¡nÃ­ pizz do nabÃ­dky â€“ nÃ¡zev, suroviny, cena.
+- Editace vytvoÅ™enÃ½ch pizz.
+- VklÃ¡dÃ¡nÃ­ ingrediencÃ­ a jejich cen â€“ ceny v pÅ™edpÅ™ipravenÃ© pizze a ceny jako pÅ™Ã­davku.
+- ZadÃ¡vÃ¡nÃ­ cen na dvÄ› desetinnÃ¡ mÃ­sta, poÄÃ­tÃ¡nÃ­ s DPH.
+- PÅ™Ã­stup k historii objednÃ¡vek.
+- PÅ™ehledy (statistiky) â€“ za obdobÃ­, na zÃ¡kladÄ› druhu pizz, nejprodÃ¡vanÄ›jÅ¡Ã­ pizzy.
 
-# Zákazník
+# ZÃ¡kaznÃ­k
 
-- Pøístup na reálnou stránku.
-- Vıbìr ze seznamu nabízenıch pizz.
-- Editace nabízené pizzy.
-- Monost vytvoøení vlastní pizzy.
-- Pokud navolené suroviny obsahuje ji existující pizza z nabídky, pouije se cena pøedpøipravené pizzy.
-- Na základì emailové adresy doplnìní informací o zákazníkovi (adresa).
-- Po odeslání objednávky pøijde potvrzení na mail s obsahem a hodnotou objednávky.
+- PÅ™Ã­stup na reÃ¡lnou strÃ¡nku.
+- VÃ½bÄ›r ze seznamu nabÃ­zenÃ½ch pizz.
+- Editace nabÃ­zenÃ© pizzy.
+- MoÅ¾nost vytvoÅ™enÃ­ vlastnÃ­ pizzy.
+- Pokud navolenÃ© suroviny obsahuje jiÅ¾ existujÃ­cÃ­ pizza z nabÃ­dky, pouÅ¾ije se cena pÅ™edpÅ™ipravenÃ© pizzy.
+- Na zÃ¡kladÄ› emailovÃ© adresy doplnÄ›nÃ­ informacÃ­ o zÃ¡kaznÃ­kovi (adresa).
+- Po odeslÃ¡nÃ­ objednÃ¡vky pÅ™ijde potvrzenÃ­ na mail s obsahem a hodnotou objednÃ¡vky.
+
+--------
+######Pod Äarou
+##### Admin (majitel)
+	- PÅ™idÃ¡vÃ¡nÃ­ ingrediencÃ­
+	- VytvÃ¡Å™enÃ­ pizzy
+	- KlonovÃ¡nÃ­ a editace pizzy
+	- PÅ™ehled o uskuteÄnÄ›nÃ½ch objednÃ¡vkÃ¡ch 
+##### ZÃ¡kaznÃ­k
+	- VÃ½bÄ›r pizzy
+	- SestavenÃ­ vlastnÃ­ pizzy â€“ pÅ™i sestavenÃ­ pizzy z ingrediencÃ­ jiÅ¾ stÃ¡vajÃ­cÃ­ ÃºÄtovat ji
+##### Ingredience
+	- Cena samostatnÃ¡
+	- Cena pÅ™Ã­lohovÃ¡
+##### ObjednÃ¡vka
+	-	PotÅ™ebnÃ© Ãºdaje: JmÃ©no, PÅ™Ã­jmenÃ­, Email, Adresa, Telefon
+	- UloÅ¾enÃ­ vÅ¡ech ÃºdajÅ¯ do databÃ¡ze
+	- ZaslÃ¡nÃ­ potvrzovacÃ­ho emailu
+	- Autocomplete podle emailu â€“ prvnÃ­ poloÅ¾ka pÅ™i vyplÅˆovÃ¡nÃ­
+##### DalÅ¡Ã­ poÅ¾adavky
+	- Cena bude uklÃ¡dÃ¡na bez DPH, DPH se bude nastavovat v aplikaci na jednom mÃ­stÄ›.
