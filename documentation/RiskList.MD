@@ -1,4 +1,4 @@
-|	Risk | Fakt	  |	Dopad   |Pravdìpodobnost |	MA	|
+|	Risk | Fakt	  |	Dopad   |PravdÄ›podobnost |	MA	|
 |:-------|:-------|:--------|:--------------:|:-----|
-|Získání hostingu a deploy aplikace na server|Neznalost hostingu pro java aplikace, nezkušenost s nastavením serveru|Aplikace nebude dostupná z internetu |50%|Deploy aplikace v brzké fázi, inicializace problémù a vyhledání øešení|
-|Implementace emailového klienta| Neznalost implementace emailového klienta v Javì| Aplikace nebude správnì odesílat potvrzení o objednávkách | 15% | Nastudování implementace emailového klienta v Javì a jeho brzká základní implementace|
+|ZÃ­skÃ¡nÃ­ hostingu a deploy aplikace na server|Neznalost hostingu pro java aplikace, nezkuÅ¡enost s nastavenÃ­m serveru|Aplikace nebude dostupnÃ¡ z internetu |50%|Deploy prototipu|
+|Implementace emailovÃ©ho klienta| Neznalost implementace emailovÃ©ho klienta v JavÄ›| Aplikace nebude sprÃ¡vnÄ› odesÃ­lat potvrzenÃ­ o objednÃ¡vkÃ¡ch | 15% | NastudovÃ¡nÃ­ implementace emailovÃ©ho klienta v JavÄ› |
