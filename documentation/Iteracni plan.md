@@ -18,7 +18,7 @@
 |:------|:----------------|:-----------------:|
 |Aktualizovat požadavky na aplikaci| Celý tým | 20m|
 |Vytvořit projektový plán| Náhlý | 1h|
-|Sepsat scénáře k UC | Križová, Pravda | 3h|
+|Sepsat scénáře k UC | Krížová, Pravda | 3h|
 
 ####Kritéria hodnocení
 | úkol | stav |
