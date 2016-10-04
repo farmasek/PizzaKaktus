@@ -1,10 +1,11 @@
-# Majitel
+﻿# Majitel
 
 - Vkládání pizz do nabídky – název, suroviny, cena.
-- Editace vytvořených pizz.
+- Editace vytvořených pizz, kopírování pizz pro snadnější editaci.
 - Vkládání ingrediencí a jejich cen – ceny v předpřipravené pizze a ceny jako přídavku.
 - Zadávání cen na dvě desetinná místa, počítání s DPH.
 - Přístup k historii objednávek.
+- Přehled o stavu a správa objednávek (uzavírání).
 - Přehledy (statistiky) – za období, na základě druhu pizz, nejprodávanější pizzy.
 
 # Zákazník
@@ -12,10 +13,10 @@
 - Přístup na reálnou stránku.
 - Výběr ze seznamu nabízených pizz.
 - Editace nabízené pizzy.
-- Možnost vytvoření vlastní pizzy.
+- Možnost jednorázového seskládání vlastní pizzy.
 - Pokud navolené suroviny obsahuje již existující pizza z nabídky, použije se cena předpřipravené pizzy.
 - Na základě emailové adresy doplnění informací o zákazníkovi (adresa).
-- Po odeslání objednávky přijde potvrzení na mail s obsahem a hodnotou objednávky.
+- Po odeslání objednávky přijde potvrzení na mail s obsahem a cenou objednávky.
 
 --------
 ######Pod čarou
