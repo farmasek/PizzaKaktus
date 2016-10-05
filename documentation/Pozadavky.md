@@ -14,7 +14,7 @@
 - Výběr ze seznamu nabízených pizz.
 - Editace nabízené pizzy.
 - Možnost jednorázového seskládání vlastní pizzy.
-- Pokud navolené suroviny obsahuje již existující pizza z nabídky, použije se cena předpřipravené pizzy.
+- Pokud navolené ingredience obsahuje již existující pizza z nabídky, použije se cena předpřipravené pizzy.
 - Na základě emailové adresy doplnění informací o zákazníkovi (adresa).
 - Po odeslání objednávky přijde potvrzení na mail s obsahem a cenou objednávky.
 
@@ -32,7 +32,7 @@
 	- Cena samostatná
 	- Cena přílohová
 ##### Objednávka
-	-	Potřebné údaje: Jméno, Příjmení, Email, Adresa, Telefon
+	- Potřebné údaje: Jméno, Příjmení, Email, Adresa, Telefon
 	- Uložení všech údajů do databáze
 	- Zaslání potvrzovacího emailu
 	- Autocomplete podle emailu – první položka při vyplňování
