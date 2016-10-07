@@ -17,10 +17,10 @@
 
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
-|Zvolit název týmu| Celý tým | 10m|
-|Poslat e-mail se jmény členů| Krížová, | 10m|
-|Vytvořit RiskList | Celý tým | 2h|
-|Vytvořit Vizi | Celý tým | 1h|
+|Zvolit název týmu| Celý tým | 10 m|
+|Poslat e-mail se jmény členů| Krížová, | 10 m|
+|Vytvořit RiskList | Celý tým | 2 h|
+|Vytvořit Vizi | Celý tým | 1 h|
 
 ####Kritéria hodnocení
 | Úkol | Stav |
@@ -51,9 +51,9 @@ Dodržovat terminologii ve vizi a v dokumentech obecně.
 
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
-|Aktualizovat požadavky na aplikaci| Celý tým | 20m|
-|Vytvořit projektový plán| Náhlý | 1h|
-|Sepsat scénáře k UC | Krížová, Pravda | 3h|
+|Aktualizovat požadavky na aplikaci| Celý tým | 20 m|
+|Vytvořit projektový plán| Náhlý | 1 h|
+|Sepsat scénáře k UC | Krížová, Pravda | 3 h|
 
 ####Kritéria hodnocení
 | Úkol | Stav |
