@@ -66,6 +66,8 @@ Dodržovat terminologii ve vizi a v dokumentech obecně.
 
 ####Lessons learned
 Naslouchat přáním zákazníka. Sjednotit slovník pojmů.
+
+
 ----
 
 ##I2
