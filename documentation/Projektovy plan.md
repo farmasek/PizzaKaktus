@@ -52,19 +52,19 @@ Projektový plán pro projekt PizzaKaktus
 <td align="left"></td>
 <td align="left">C1</td>
 <td align="left">nějaké věci...</td>
-<td align="left">Letní semestr</td>
+<td align="left"></td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">C2</td>
 <td align="left">nějaké věci...</td>
-<td align="left">Letní semestr</td>
+<td align="left"></td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">C3</td>
 <td align="left">nějaké věci...</td>
-<td align="left">Letní semestr</td>
+<td align="left"></td>
 </tr>
 <tr>
 <td align="left">Transition</td>
