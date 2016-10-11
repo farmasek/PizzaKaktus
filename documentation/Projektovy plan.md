@@ -16,7 +16,13 @@ Projektový plán pro projekt PizzaKaktus
 <td align="left">Inception</td>
 <td align="left">I0</td>
 <td align="left">Sestavení týmu,Identifikace základních požadavků a rizik, LCO (shoda na vizi, rozsahu, rozpočtu)</td>
-<td align="left">26.9.-Konec října?</td>
+<td align="left">26.9.-2.10</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">I1</td>
+<td align="left">Sestavení týmu,Identifikace základních požadavků a rizik, LCO (shoda na vizi, rozsahu, rozpočtu)</td>
+<td align="left">3.10-10.10</td>
 </tr>
 <tr>
 <td align="left">Elaboration</td>
