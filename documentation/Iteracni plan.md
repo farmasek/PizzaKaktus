@@ -18,9 +18,10 @@
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
 |Zvolit název týmu| Celý tým | 10 m|
-|Poslat e-mail se jmény členů| Krížová, | 10 m|
+|Poslat e-mail se jmény členů| Krížová, Pravda | 10 m|
 |Vytvořit RiskList | Celý tým | 2 h|
 |Vytvořit Vizi | Celý tým | 1 h|
+|Vytvořit UC diagram | Celý tým | 2 h|
 
 ####Kritéria hodnocení
 | Úkol | Stav |
