@@ -59,10 +59,45 @@ Dodržovat terminologii ve vizi a v dokumentech obecně.
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| Zákazník souhlasí s aktualizovanými požadavky| |
+| Zákazník souhlasí s aktualizovanými požadavky| splněno |
+| Tým souhlasí s projektovým plánem | splněno |
+| Tým souhlasí se scénáři k UC| splněno |
+| Zákazník souhlasí se scénáři k UC| nesplněno |
+
+####Lessons learned
+Naslouchat přáním zákazníka. Sjednotit slovník pojmů.
+----
+
+##I2
+11.10.2016 - 18.10.2016
+
+####Cíle
+
+- Aktualizovat scénáře a UC dle přání zákazníka
+- Vytvořit diagram architektury a nasazení
+- Upravit projektový plán
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+|Přidat roli zaměstnanec do UC| Krížová, Pravda | 1h |
+|Upravit scénáře| Jaroš | 1 h|
+|Seřadit scénáře dle složitosti| Celý tým | 1 h|
+|Rozepsat kritické scénáře| Celý tým | 3 h|
+|Přidat milníky do projektového plánu a upravit texty | Náhlý | 10m |
+|Vytvořit diagram architektury a nasazení| Baránek | 3 h|
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| Tým souhlasí s aktualizovanými UC| |
+| Zákazník souhlasí s aktualizovanými UC| |
+| Tým souhlasí se scénáři| |
+| Zákazník souhlasí se scénáři| |
 | Tým souhlasí s projektovým plánem | |
-| Tým souhlasí se scénáři k UC| |
-| Zákazník souhlasí se scénáři k UC| |
+| Tým souhlasí s diagram architektury a nasazení| |
+| Zákazník souhlasí s diagram architektury a nasazení| |
 
 ####Lessons learned
 
