@@ -15,14 +15,14 @@ Projektový plán pro projekt PizzaKaktus
 <tr>
 <td align="left">Inception</td>
 <td align="left">I0</td>
-<td align="left">Sestavení týmu,Identifikace základních požadavků a rizik, LCO (shoda na vizi, rozsahu, rozpočtu)</td>
-<td align="left">26.9.-2.10</td>
+<td align="left">Sestavení týmu,Identifikace základních požadavků a rizik, shoda na vizi, rozsahu, rozpočtu</td>
+<td align="left">27.9.-3.10</td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">I1</td>
-<td align="left">Sestavení týmu,Identifikace základních požadavků a rizik, LCO (shoda na vizi, rozsahu, rozpočtu)</td>
-<td align="left">3.10-10.10</td>
+<td align="left">Aktualizovat požadavky dle přání zákazníka,Vytvořit projektový plán, Sepsat scénáře k UC</td>
+<td align="left">4.10-11.10</td>
 </tr>
 <tr>
 <td align="left">Elaboration</td>
@@ -45,6 +45,24 @@ Projektový plán pro projekt PizzaKaktus
 <tr>
 <td align="left">Construction</td>
 <td align="left">C0</td>
+<td align="left">nějaké věci...</td>
+<td align="left">Letní semestr</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">C1</td>
+<td align="left">nějaké věci...</td>
+<td align="left">Letní semestr</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">C2</td>
+<td align="left">nějaké věci...</td>
+<td align="left">Letní semestr</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">C3</td>
 <td align="left">nějaké věci...</td>
 <td align="left">Letní semestr</td>
 </tr>
