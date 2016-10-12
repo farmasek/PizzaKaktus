@@ -1,5 +1,5 @@
-!!! Sepsat !!!
-- vybrat pár kritických/důležitých scénářů
+!!! Sepsat !!!  (vybrat pár kritických/důležitých scénářů)
+
 
 Actor: Zakázník
 
