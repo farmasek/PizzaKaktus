@@ -17,8 +17,8 @@
 | UC1 | S1 | Přihlásit zaměstnance/majitele | 6 h |
 | UC5 | S1 | Vložení nové ingredience | 4 h |
 | UC1 | S3 | Změna hesla | 3 h |
-| UC5 | S2 | Editace ingredience | 2 h |
 | UC1 | S2 | Odhlásit zaměstnance/majitele | 2 h |
+| UC5 | S2 | Editace ingredience | 2 h |
 
 
 
