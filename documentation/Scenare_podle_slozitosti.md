@@ -2,7 +2,7 @@
 (můžeme sloučit se "Scenare.md", nebo nechat zvlášť)
 
 | Use Case | Scénář | Popis |
-|:--------|:------|:------:|
+|:--------:|:------:|:------|
 | UC3 | S2 | Editace vytvořené pizzy + aktivace/deaktivace |
 | UC4 | S2 | Otevření a potvrzení přijaté objednávky | 
 | UC3 | S1 | Vložení nové pizzy do nabídky |
