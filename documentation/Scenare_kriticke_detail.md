@@ -1,4 +1,4 @@
-﻿## UC1	S1	Přihlásit zaměstnance/majitele
+## UC1	S1	Přihlásit zaměstnance/majitele
 ### Preconditions: Spuštěná aplikace
 ### Basic flow:
 | Krok | Actor | Akce |
@@ -7,11 +7,11 @@
 | 2 | Majitel/Zaměstnanec | Uživatel zadá uživatelské jméno a heslo, potvrdí zadání údajů tlačítkem. |
 | 3 | Aplikace | Formulář pro přihlášení zmizí, místo něj se zobrazí jméno uživatele a možnost odhlášení. |
 
-Alternative flow:
+### Alternative flow:
 | Krok | Actor | Reakce |
 |:---:|:---|:---|
-| 2a | Majitel/Zaměstnanec | Vložení špatných údajů. |
-|  | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. |
+| 2a | Majitel/Zaměstnanec | Vložení špatných údajů. | 
+| | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
 
 
 ## UC5	S1	Vložení nové ingredience
