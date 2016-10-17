@@ -50,8 +50,25 @@
 
 
 ## UC2	S1	Objednání pizzy z nabídky
-!!! DODĚLAT!!!
+### Preconditions: Spuštěná aplikace, přihlášený uživatel, zobrazená nabídka
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | Zobrazený list pizz s tlačítkem přidání do košíku a zobrazením košíku. |
+| 2 | Uživatel | Uživatel přidá pizzy do košíku kliknutím na tlačítko. |
+| 3 | Uživatel | Uživatel přejde do košíku. |
+| 4 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
+| 5 | Uživatel | Vyplní údaje a potvrdí ojednávku |
+| 6 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou a pošle se uživateli informační email |
 
+### Alternative flow:
+| Krok | Actor | Reakce |
+|:---:|:---|:---| 
+| 5a | Uživatel | Vložení emailové adresy na kterou již proběhla objednávka | 
+| | Aplikace | Doplnění formuláře daty z poslední provedené objednávky | 
+| | Uživatel | Upraví, nebo potvrdí doplněné údaje | 
+| 5b  | Uživatel | Vložení nevalidních údajů. | 
+| | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
 
 ## UC4	S2	Otevření a potvrzení přijaté objednávky
 ### Preconditions: Spuštěná aplikace, přihlášený uživatel, založená objednávka
