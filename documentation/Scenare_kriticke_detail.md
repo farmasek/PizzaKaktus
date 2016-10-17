@@ -32,7 +32,21 @@
 | | Aplikace | U chybně zadaných polí se zobrazí hláška s upozorněním. | 
 
 ## UC3	S1	Vložení nové pizzy do nabídky
-!!! DODĚLAT !!!
+### Preconditions: Spuštěná aplikace, přihlášený uživatel
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | V menu pro správce je u položky "Správa pizz" možnost "Vložení nove pizzy do nabídky". |
+| 2 | Majitel | Majitel vybere tuto možnost.|
+| 3 | Aplikace | Zobrazí se stránka s formulářem pro vytvoření nové pizzy. |
+| 4 | Majitel | Zadání názvu, ceny, ingrediencí a obrázku pro novou pizzu. |
+| 5 | Majitel | Potvrzení nové pizzy. |
+
+### Alternative flow:
+| Krok | Actor | Reakce |
+|:---:|:---|:---|
+| 4a | Majitel | Vložení nevalidních údajů. | 
+| | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
 
 
 ## UC2	S1	Objednání pizzy z nabídky
