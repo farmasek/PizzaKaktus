@@ -19,7 +19,7 @@
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
-| 1 | Aplikace | Zobrazené menu pro správce s položkou Vložení ingredience. |
+| 1 | Aplikace | Zobrazené menu pro majitele s položkou Vložení ingredience. |
 | 2 | Majitel/Zaměstnanec | Uživatel vybere možnost Vložení ingredience. |
 | 3 | Aplikace | Zobrazí se stránka s formulářem pro vložení nové ingredience - název, množství v gramech, cena, spolu s tlačíkem pro odeslání formuláře. |
 | 4 | Majitel/Zaměstnanec | Uživatel vyplní formulář a odešle jej kliknutím na tlačítko. |
@@ -36,11 +36,11 @@
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
-| 1 | Aplikace | V menu pro správce je u položky "Správa pizz" možnost "Vložení nove pizzy do nabídky". |
+| 1 | Aplikace | V menu pro majitele je u položky "Správa pizz" možnost "Vložení nove pizzy do nabídky". |
 | 2 | Majitel | Majitel vybere tuto možnost.|
 | 3 | Aplikace | Zobrazí se stránka s formulářem pro vytvoření nové pizzy. |
 | 4 | Majitel | Zadání názvu, ceny, ingrediencí a obrázku pro novou pizzu. |
-| 5 | Majitel | Potvrzení nové pizzy. |
+| 5 | Aplikace | Zobrazení seznamu pizz. |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
@@ -75,7 +75,7 @@
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
-| 1 | Aplikace | V menu pro správce je u položky zobrazení stavu objednávek počet založených objednávek. |
+| 1 | Aplikace | V menu pro majitele/zaměstnance je u položky zobrazení stavu objednávek počet založených objednávek. |
 | 2 | Majitel/Zaměstnanec | Uživatel vybere položku menu pro zobrazení objednávek. |
 | 3 | Aplikace | Zobrazí se stránka s výčtem posledních 20 objednávek na základě data a času. U každé objednávky je uveden stav. Stav lze změnit pomocí select boxů s možnostmi - založená, otevřená, uzavřená. Vedle je tlačítko pro potvrzení změny stavu. |
 | 4 | Majitel/Zaměstnanec | Uživatel vybere možnost "otevřená" a potvrdí ji tlačítkem. |
@@ -88,7 +88,7 @@
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
-| 1 | Aplikace | V menu pro správce je položka pro zobrazení stavů objednávek. |
+| 1 | Aplikace | V menu pro majitele/zaměstnance je položka pro zobrazení stavů objednávek. |
 | 2 | Majitel/Zaměstnanec | Uživatel klikne na položku menu. |
 | 3 | Aplikace | Zobrazí se stránka s výčtem posledních 20 objednávek na základě data a času. U každé objednávky je uveden stav. Stav lze změnit pomocí select boxů s možnostmi - založená, otevřená, uzavřená. Vedle je tlačítko pro potvrzení změny stavu. |
 | 4 | Majitel/Zaměstnanec | Uživatel vybere nový stav objednávky a potvrdí uložení tlačítkem. |
