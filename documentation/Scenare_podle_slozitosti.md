@@ -1,4 +1,4 @@
-##Seznam scénářu seřazený podle složitosti 
+﻿##Seznam scénářu seřazený podle složitosti 
 (můžeme sloučit se "Scenare.md", nebo nechat zvlášť)
 
 | Use Case | Scénář | Popis | Složitost |
@@ -14,12 +14,14 @@
 | UC3 | S3 | Vložení nové pizzy do nabídky založené na existující pizze | 10 h |
 | UC4 | S3 | Editace stavu otevřené objednávky - uzavřena, zrušena, spracovávána | 10 h |
 | UC6 | S1 | Zobrazení prodejnosti pizz za období | 10 h |
+| UC7 | S1 | Vložení nového uživatele | 10 h | 
+| UC7 | S2 | Smazání uživatele | 8 h | 
 | UC1 | S1 | Přihlásit zaměstnance/majitele | 6 h |
+| UC5 | S1 | Vložení nové ingredience | 6 h |
 | UC4 | S4 | Storno objednávky | 5 h |
-| UC5 | S1 | Vložení nové ingredience | 4 h |
-| UC1 | S3 | Změna hesla | 3 h |
+| UC5 | S2 | Editace ingredience | 5 h |
+| UC7 | S3 | Změna hesla | 4 h |
 | UC1 | S2 | Odhlásit zaměstnance/majitele | 2 h |
-| UC5 | S2 | Editace ingredience | 2 h |
 
 
 
