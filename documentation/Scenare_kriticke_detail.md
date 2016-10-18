@@ -1,17 +1,17 @@
-## UC1	S1	Přihlásit zaměstnance/majitele
+﻿## UC1	S1	Přihlásit zaměstnance/majitele
 ### Preconditions: Spuštěná aplikace
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
-| 1 | Aplikace | Zobrazený formulář pro přihlášení - pole pro uživatelské jméno, heslo a tlačítko pro odeslání formuláře, spolu s odkazem na změnu hesla. |
-| 2 | Majitel/Zaměstnanec | Uživatel zadá uživatelské jméno a heslo, potvrdí zadání údajů tlačítkem. |
-| 3 | Aplikace | Formulář pro přihlášení zmizí, místo něj se zobrazí jméno uživatele a možnost odhlášení. |
+| 1 | Aplikace | Zobrazená hlavní strana, na ní formulář pro přihlášení - pole pro uživatelské jméno, heslo a tlačítko pro odeslání formuláře, spolu s odkazem na změnu hesla. |
+| 2 | Majitel/Zaměstnanec | Uživatel zadá uživatelské jméno a heslo, potvrdí zadání údajů. |
+| 4 | Aplikace | Zobrazí se stránka se seznamem objednávek. |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
 |:---:|:---|:---|
 | 2a | Majitel/Zaměstnanec | Vložení špatných údajů. | 
-| | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
+| | Aplikace | Zobrazení hlášky s upozorněním na nesprávné údaje. | 
 
 
 ## UC5	S1	Vložení nové ingredience
@@ -20,9 +20,10 @@
 | Krok | Actor | Akce |
 |:---:|:---|:---|
 | 1 | Aplikace | Zobrazené menu pro majitele s položkou Vložení ingredience. |
-| 2 | Majitel/Zaměstnanec | Uživatel vybere možnost Vložení ingredience. |
-| 3 | Aplikace | Zobrazí se stránka s formulářem pro vložení nové ingredience - název, množství v gramech, cena, spolu s tlačíkem pro odeslání formuláře. |
-| 4 | Majitel/Zaměstnanec | Uživatel vyplní formulář a odešle jej kliknutím na tlačítko. |
+| 2 | Majitel | Uživatel vybere možnost Vložení ingredience. |
+| 3 | Aplikace | Zobrazí se stránka s formulářem pro vložení nové ingredience - název, množství, cena, spolu s tlačíkem pro odeslání formuláře. |
+| 4 | Majitel | Uživatel vyplní formulář a odešle jej. |
+| 5 | Aplikace | Zobrazí se seznam všech ingrediencí. |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
@@ -54,12 +55,13 @@
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
-| 1 | Aplikace | Zobrazený list pizz s tlačítkem přidání do košíku a zobrazením košíku. |
+| 1 | Aplikace | Zobrazený list pizz s tlačítkem přidání do košíku a zobrazením ikony košíku. |
 | 2 | Uživatel | Uživatel přidá pizzy do košíku kliknutím na tlačítko. |
-| 3 | Uživatel | Uživatel přejde do košíku. |
-| 4 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
-| 5 | Uživatel | Vyplní údaje a potvrdí ojednávku |
-| 6 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou a pošle se uživateli informační email |
+| 3 | Aplikace | Aplikace přidá pizzu do košíku. |
+| 4 | Uživatel | Uživatel přejde do košíku. |
+| 5 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
+| 6 | Uživatel | Vyplní údaje a potvrdí ojednávku |
+| 7 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou a pošle se uživateli informační email |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
@@ -78,9 +80,8 @@
 | 1 | Aplikace | V menu pro majitele/zaměstnance je u položky zobrazení stavu objednávek počet založených objednávek. |
 | 2 | Majitel/Zaměstnanec | Uživatel vybere položku menu pro zobrazení objednávek. |
 | 3 | Aplikace | Zobrazí se stránka s výčtem posledních 20 objednávek na základě data a času. U každé objednávky je uveden stav. Stav lze změnit pomocí select boxů s možnostmi - založená, otevřená, uzavřená. Vedle je tlačítko pro potvrzení změny stavu. |
-| 4 | Majitel/Zaměstnanec | Uživatel vybere možnost "otevřená" a potvrdí ji tlačítkem. |
+| 4 | Majitel/Zaměstnanec | Uživatel vybere možnost "otevřená" a potvrdí ji. |
 | 5 | Aplikace | Aplikace změní stav u vybrané objednávky. |
-| 6 | Aplikace | Aplikace odešle email s potvrzením přijetí objednávky. | 
 
 
 ## UC4	S3	Editace stavu otevřené objednávky - založená, otevřená, uzavřená
@@ -90,7 +91,7 @@
 |:---:|:---|:---|
 | 1 | Aplikace | V menu pro majitele/zaměstnance je položka pro zobrazení stavů objednávek. |
 | 2 | Majitel/Zaměstnanec | Uživatel klikne na položku menu. |
-| 3 | Aplikace | Zobrazí se stránka s výčtem posledních 20 objednávek na základě data a času. U každé objednávky je uveden stav. Stav lze změnit pomocí select boxů s možnostmi - založená, otevřená, uzavřená. Vedle je tlačítko pro potvrzení změny stavu. |
-| 4 | Majitel/Zaměstnanec | Uživatel vybere nový stav objednávky a potvrdí uložení tlačítkem. |
+| 3 | Aplikace | Zobrazí se stránka s výčtem založených a otevřených objednávek. U každé objednávky je uveden stav. Stav lze změnit na základě aktuálního stavu - ze založené na otevřenou nebo z otevřené na uzavřenou. Vedle je tlačítko pro potvrzení změny stavu. |
+| 4 | Majitel/Zaměstnanec | Uživatel vybere nový stav objednávky a potvrdí uložení. |
 | 5 | Aplikace | U vybrané objednávky se ve výpisu změní stav podle zadání uživatele. |
-
+| 6 | Aplikace | Do logu se zapíše zápis o změně - kdo, kdy a co změnil. |
