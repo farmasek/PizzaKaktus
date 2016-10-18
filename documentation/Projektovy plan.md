@@ -39,13 +39,13 @@ Projektový plán pro projekt PizzaKaktus
 <tr>
 <td align="left"></td>
 <td align="left">E1</td>
-<td align="left">nějaké věci...</td>
+<td align="left">doplní se..</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">E2</td>
-<td align="left">nějaké věci...</td>
+<td align="left">doplní se..</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -57,25 +57,25 @@ Projektový plán pro projekt PizzaKaktus
 <tr>
 <td align="left">Construction</td>
 <td align="left">C0</td>
-<td align="left">nějaké věci...</td>
+<td align="left">doplní se..</td>
 <td align="left">Letní semestr</td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">C1</td>
-<td align="left">nějaké věci...</td>
+<td align="left">doplní se..</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">C2</td>
-<td align="left">nějaké věci...</td>
+<td align="left">doplní se..</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">C3</td>
-<td align="left">nějaké věci...</td>
+<td align="left">doplní se..</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -87,7 +87,7 @@ Projektový plán pro projekt PizzaKaktus
 <tr>
 <td align="left">Transition</td>
 <td align="left">T0</td>
-<td align="left">nějaké věci...</td>
+<td align="left">doplní se..</td>
 <td align="left">Letní semestr</td>
 </tr>
 <tr>
