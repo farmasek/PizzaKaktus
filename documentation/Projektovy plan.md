@@ -28,13 +28,13 @@ Projektový plán pro projekt PizzaKaktus
 <td align="left"></td>
 <td align="left">LCO</td>
 <td align="left"></td>
-<td align="left"></td>
+<td align="left">Říjen 2016</td>
 </tr>
 <tr>
 <td align="left">Elaboration</td>
 <td align="left">E0</td>
 <td align="left">architektura, řešení největších rizik</td>
-<td align="left">konec října - prosinec 2016</td>
+<td align="left"></td>
 </tr>
 <tr>
 <td align="left"></td>
@@ -52,13 +52,13 @@ Projektový plán pro projekt PizzaKaktus
 <td align="left"></td>
 <td align="left">LCA</td>
 <td align="left"></td>
-<td align="left"></td>
+<td align="left">Prosinec 2016</td>
 </tr>
 <tr>
 <td align="left">Construction</td>
 <td align="left">C0</td>
 <td align="left">doplní se..</td>
-<td align="left">Letní semestr</td>
+<td align="left"></td>
 </tr>
 <tr>
 <td align="left"></td>
@@ -82,18 +82,18 @@ Projektový plán pro projekt PizzaKaktus
 <td align="left"></td>
 <td align="left">IOP</td>
 <td align="left"></td>
-<td align="left"></td>
+<td align="left">Duben 2017</td>
 </tr>
 <tr>
 <td align="left">Transition</td>
 <td align="left">T0</td>
 <td align="left">doplní se..</td>
-<td align="left">Letní semestr</td>
+<td align="left"></td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">PR</td>
 <td align="left"></td>
-<td align="left"></td>
+<td align="left">Květen 2017</td>
 </tr>
 </tbody></table>
