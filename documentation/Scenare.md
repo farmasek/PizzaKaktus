@@ -1,11 +1,10 @@
-## Scénáře
+﻿## Scénáře
 
 ### UC1 &nbsp;&nbsp;  Přihlášení
 | Označení  | Název  | Časový odhad  |
 |:---:|:---|:---:|
 |  S1 | Přihlásit zaměstnance/majitele  |  6 h |
 |  S2 | Odhlásit zaměstnance/majitele  |  2 h | 
-|  S3 | Změna hesla  |  3 h | 
 
 ### UC2 &nbsp;&nbsp; Objednávání
 
@@ -36,8 +35,8 @@
 
 | Označení  | Název  | Časový odhad  |
 |:---:|:---|:---:|
-|  S1 | Vložení nové ingredience  | 4 h |
-|  S2 | Editace ingredience  | 2 h | 
+|  S1 | Vložení nové ingredience  | 6 h |
+|  S2 | Editace ingredience  | 5 h | 
 
 ### UC6 &nbsp;&nbsp; Statistiky
 
@@ -45,3 +44,12 @@
 |:---:|:---|:---:|
 |  S1 | Zobrazení prodejnosti pizz za období  | 10 h |
 |  S2 | Zobrazení prodejnosti pizz podle druhu + řazení  | 15 h | 
+
+
+### UC7 &nbsp;&nbsp; Správa uživatelů
+
+| Označení  | Název  | Časový odhad  |
+|:---:|:---|:---:|
+| S1 | Vložení nového uživatele | 10 h | 
+| S2 | Smazání uživatele | 8 h | 
+| S3 | Změna hesla | 4 h | 
