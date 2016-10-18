@@ -25,6 +25,12 @@ Projektový plán pro projekt PizzaKaktus
 <td align="left">4.10-11.10</td>
 </tr>
 <tr>
+<td align="left"></td>
+<td align="left">LCO</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="left">Elaboration</td>
 <td align="left">E0</td>
 <td align="left">architektura, řešení největších rizik</td>
@@ -40,6 +46,12 @@ Projektový plán pro projekt PizzaKaktus
 <td align="left"></td>
 <td align="left">E2</td>
 <td align="left">nějaké věci...</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">LCA</td>
+<td align="left"></td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -67,9 +79,21 @@ Projektový plán pro projekt PizzaKaktus
 <td align="left"></td>
 </tr>
 <tr>
+<td align="left"></td>
+<td align="left">IOP</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="left">Transition</td>
 <td align="left">T0</td>
 <td align="left">nějaké věci...</td>
 <td align="left">Letní semestr</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">PR</td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 </tbody></table>
