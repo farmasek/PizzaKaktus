@@ -93,14 +93,54 @@ Naslouchat přáním zákazníka. Sjednotit slovník pojmů.
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| Tým souhlasí s aktualizovanými UC| |
-| Zákazník souhlasí s aktualizovanými UC| |
-| Tým souhlasí se scénáři| |
-| Zákazník souhlasí se scénáři| |
-| Tým souhlasí s projektovým plánem | |
-| Tým souhlasí s diagram architektury a nasazení| |
-| Zákazník souhlasí s diagram architektury a nasazení| |
+| Tým souhlasí s aktualizovanými UC| splněno |
+| Zákazník souhlasí s aktualizovanými UC| splněno |
+| Tým souhlasí se scénáři| splněno |
+| Zákazník souhlasí se scénáři| nesplněno |
+| Tým souhlasí s projektovým plánem | splněno |
+| Tým souhlasí s diagram architektury a nasazení| splněno |
+| Zákazník souhlasí s diagram architektury a nasazení| nesplněno |
 
 ####Lessons learned
 
 ----
+
+##E0
+18.10.2016 - 25.10.2016
+
+####Cíle
+
+- Vytvořit stránku pro vkládání ingrediencí
+- Opravit scénaře
+- Opravit deployment diagram
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+|Oprava deployment diagramu | Baránek | 10 m |
+|Vytvoření dosavadního class diagramu| Náhlý, Jaroš | 3 h|
+|Vytvoření dosavadního sekvenčního diagramu| Náhlý, Jaroš | 3 h|
+|Vytvoření dosavadního databázového diagramu| Náhlý, Jaroš | 3 h|
+|Založit projekt| Baránek | 3 h |
+|Nastavení pracovní stanice do konzistentního stavu| Celý tým | 2 h|
+|Vytvoření architektůry programu| Baránek | 1 h|
+|Implementace vkládání ingrediencí| Baránek | 1 h|
+|Opravit chybné scénaře| Krížová, Pravda | 10m |
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| Tým souhlasí s opraveným deployment diagramem| |
+| Zákazník souhlasí se opraveným deployment diagramem| |
+| Tým souhlasí se class diagramem| |
+| Tým souhlasí se sekvenčním diagramem| |
+| Tým souhlasí se databázovým diagramem | |
+| Funkční projekt je založen| |
+| Celý tým má projekt sprovozněný na svém pracovním stroji| |
+| Projekt má vytvořenou architektůru| |
+| Projekt má naimplementované vkládání ingradiencí| |
+| Zákazník souhlasí s opravenými scénaři| |
+| Tým souhlasí s opravenými scénaři| |
+
+####Lessons learned
