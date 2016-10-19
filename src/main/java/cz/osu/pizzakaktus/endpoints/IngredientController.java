@@ -1,0 +1,52 @@
+package cz.osu.pizzakaktus.endpoints;
+
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
+import cz.osu.pizzakaktus.endpoints.models.IngredientDTO;
+import cz.osu.pizzakaktus.repositories.models.IngredientDb;
+import cz.osu.pizzakaktus.services.IngredientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+/**
+ * Created by baranvoj on 19.10.2016.
+ */
+@RestController
+@RequestMapping("/ingredient")
+public class IngredientController {
+
+    @Autowired
+    IngredientService ingredientService;
+
+    /**
+     * Return all ingredients
+     * @return Json list of all ingredients
+     */
+    @RequestMapping(value = "/all-ingredients", method = RequestMethod.GET)
+    public HttpEntity<?> findAllIngredients() {
+        List<IngredientDb> allIngredients = ingredientService.findAll();
+        return new ResponseEntity<>(new Gson().toJson(allIngredients), HttpStatus.OK);
+    }
+
+    /**
+     * Insert ingredient into database
+     * @param ingredient - Json of ingredient
+     * @return if successful then inserted object, if not successful then error message
+     */
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public HttpEntity<?> addIngredient(@RequestBody IngredientDTO ingredient) {
+        Optional<IngredientDb> insert = ingredientService.insert(new IngredientDb(ingredient.getName(), ingredient.getWeight()));
+        return insert.isPresent()?
+                new ResponseEntity<>(new Gson().toJson(insert.get()), HttpStatus.OK)
+                :
+                new ResponseEntity<>("Error inserting to database", HttpStatus.NOT_ACCEPTABLE);
+    }
+
+}
