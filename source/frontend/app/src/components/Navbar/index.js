@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 const Navbar = () => (
   <div>
     <Navigation type="horizontal">
-      <Link to="#">First page</Link>
+      <Link to="/manager">Manager page</Link>
       <Link to="#">Second page</Link>
     </Navigation>
   </div>

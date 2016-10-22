@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
  * Created by baranvoj on 19.10.2016.
  */
 @RestController
+@CrossOrigin(origins = "http://localhost:1337") // TODO Implement global cross origin settings :)
 @RequestMapping("/ingredient")
 public class IngredientController {
 
