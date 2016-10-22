@@ -2,8 +2,12 @@
  * Created by Farmas on 21.10.2016.
  */
 import { combineEpics } from 'redux-observable';
-import { fetchIngredientListEpic } from './containers/IngredientContainer/actions';
+import {
+  fetchIngredientListEpic,
+  saveIngredientListEpic,
+} from './containers/IngredientContainer/actions';
 
 export default combineEpics(
   fetchIngredientListEpic,
+  saveIngredientListEpic,
 );
