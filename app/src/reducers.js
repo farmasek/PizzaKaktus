@@ -4,10 +4,12 @@ import { reducer as formReducer } from 'redux-form';
 
 // Import all of your reducers here:
 import featureComponent from 'containers/FeatureFirstContainer/reducer';
+import ingredientContainer from 'containers/IngredientContainer/reducer';
 
 const rootReducer = combineReducers({
   // Apply all of the reducers here.
   featureComponent,
+  ingredientContainer,
   routing: routerReducer,
   form: formReducer,
 });
