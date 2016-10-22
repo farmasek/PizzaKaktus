@@ -5,6 +5,8 @@ import * as IngredientActionCreators from './actions';
 import cssModules from 'react-css-modules';
 import styles from './index.module.scss';
 import * as PropTypes from 'react/lib/ReactPropTypes';
+import CreateIngredient from '../../components/CreateIngredient';
+import IngredientList from '../../components/IngredientList';
 
 class Ingredient extends Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -15,9 +17,16 @@ class Ingredient extends Component { // eslint-disable-line react/prefer-statele
   render() {
     return (
       <div className={styles.ingredient}>
-        {
-          this.props.ingredients.ingredients.map(ingredient => <span>{ingredient.name}<br/></span>)
-        }
+        <div className={styles.flexChild}>
+          <IngredientList ingredients={this.props.ingredients.ingredients}/>
+        </div>
+        <div className={styles.flexChild}>
+          <CreateIngredient
+            editValue={this.props.actions.changeValue}
+            ingredientForm={this.props.ingredients.ingredientForm}
+            confirmForm={this.props.actions.saveIngredient}
+          />
+        </div>
       </div>
     );
   }

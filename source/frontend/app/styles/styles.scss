@@ -1,11 +1,7 @@
-// Included if you are using grommet.  Otherwise, just erase this next line.
-
-// Add globally used utility styles here.
-// Or import scss libraries that are to be used without CSS modules.
-/*
-.my-style {
-  max-width: 20px;
-  color: goldenrod;
+html {
+  font-family: 'Roboto', sans-serif;
+  background-color: $background-color;
 }
-<div className="my-style" />
-*/
+h5{
+  margin: 0;
+}
