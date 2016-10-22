@@ -1,6 +1,5 @@
 package cz.osu.pizzakaktus.endpoints;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
 import cz.osu.pizzakaktus.endpoints.models.IngredientDTO;
 import cz.osu.pizzakaktus.repositories.models.IngredientDb;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Created by baranvoj on 19.10.2016.
@@ -28,6 +26,7 @@ public class IngredientController {
 
     /**
      * Return all ingredients
+     *
      * @return Json list of all ingredients
      */
     @RequestMapping(value = "/all-ingredients", method = RequestMethod.GET)
@@ -38,14 +37,16 @@ public class IngredientController {
 
     /**
      * Insert ingredient into database
+     *
      * @param ingredient - Json of ingredient
      * @return if successful then inserted object, if not successful then error message
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addIngredient(@RequestBody IngredientDTO ingredient) {
-        Optional<IngredientDb> insert = ingredientService.insert(new IngredientDb(ingredient.getName(), ingredient.getWeight()));
-        return insert.isPresent()?
-                new ResponseEntity<>(new Gson().toJson(insert.get()), HttpStatus.OK)
+        //TODO implement ingredient validation
+        Optional<IngredientDb> insert = ingredientService.insert(new IngredientDb(ingredient));
+        return insert.isPresent() ?
+                new ResponseEntity<>(insert.get(), HttpStatus.OK)
                 :
                 new ResponseEntity<>("Error inserting to database", HttpStatus.NOT_ACCEPTABLE);
     }
