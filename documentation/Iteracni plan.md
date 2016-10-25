@@ -155,9 +155,9 @@ Naslouchat přáním zákazníka. Sjednotit slovník pojmů.
 
 ####Cíle
 
-- Implementace registrace
-- Opravit diagramy
-- Rozšířit
+- Implementace registrace (UC7 S1)
+- Opravit sekvenční diagram
+- Rozšířit diagramy (class, sekvenční, databázový)
 
 ####Úkoly
 
@@ -174,12 +174,12 @@ Naslouchat přáním zákazníka. Sjednotit slovník pojmů.
 | Úkol | Stav |
 |:---|:----|
 | Tým souhlasí s opraveným sekvenčním diagramem| |
-| Zákazník souhlasí s opraveným sekvenčním diagramem| |
 | Tým souhlasí s class diagramem| |
-| Tým souhlasí se sekvenčním diagramem| |
+| Tým souhlasí s novým sekvenčním diagramem| |
 | Tým souhlasí s databázovým diagramem | |
-| Registrace uživatele je naimplementována | |
-| Tým souhlasí se stavem registrace | | 
+| Registrace (backend) uživatele je funkční | |
+| Registrace (frontend) uživatele je funkční | |
+| Tým souhlasí s vytvořenou implementací registrace | | 
 | Zákazník souhlasí s implementací registrace | |
 
 ####Lessons learned
