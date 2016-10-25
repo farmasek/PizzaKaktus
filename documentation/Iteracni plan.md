@@ -124,7 +124,7 @@ Naslouchat přáním zákazníka. Sjednotit slovník pojmů.
 |Vytvoření dosavadního databázového diagramu| Náhlý, Jaroš | 3 h|
 |Založit projekt| Baránek | 3 h |
 |Nastavení pracovní stanice do konzistentního stavu| Celý tým | 2 h|
-|Vytvoření architektůry programu| Baránek | 1 h|
+|Vytvoření architektury programu| Baránek | 1 h|
 |Implementace vkládání ingrediencí| Baránek | 1 h|
 |Opravit chybné scénaře| Krížová, Pravda | 10m |
 
@@ -132,14 +132,14 @@ Naslouchat přáním zákazníka. Sjednotit slovník pojmů.
 | Úkol | Stav |
 |:---|:----|
 | Tým souhlasí s opraveným deployment diagramem| |
-| Zákazník souhlasí se opraveným deployment diagramem| |
-| Tým souhlasí se class diagramem| |
+| Zákazník souhlasí s opraveným deployment diagramem| |
+| Tým souhlasí s class diagramem| |
 | Tým souhlasí se sekvenčním diagramem| |
-| Tým souhlasí se databázovým diagramem | |
+| Tým souhlasí s databázovým diagramem | |
 | Funkční projekt je založen| |
-| Celý tým má projekt sprovozněný na svém pracovním stroji| |
-| Projekt má vytvořenou architektůru| |
-| Projekt má naimplementované vkládání ingradiencí| |
+| Celý tým má projekt zprovozněný na svém pracovním stroji| |
+| Projekt má vytvořenou architekturu| |
+| Projekt má naimplementované vkládání ingrediencí| |
 | Zákazník souhlasí s opravenými scénaři| |
 | Tým souhlasí s opravenými scénaři| |
 
