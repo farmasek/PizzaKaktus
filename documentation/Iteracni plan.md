@@ -131,16 +131,57 @@ Naslouchat přáním zákazníka. Sjednotit slovník pojmů.
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| Tým souhlasí s opraveným deployment diagramem| |
-| Zákazník souhlasí s opraveným deployment diagramem| |
+| Tým souhlasí s opraveným deployment diagramem| Splněno |
+| Zákazník souhlasí s opraveným deployment diagramem| Splněno |
+| Tým souhlasí s class diagramem| Splněno |
+| Tým souhlasí se sekvenčním diagramem| Splněno |
+| Tým souhlasí s databázovým diagramem | Splněno |
+| Funkční projekt je založen| Splněno |
+| Celý tým má projekt zprovozněný na svém pracovním stroji| Splněno |
+| Projekt má vytvořenou architekturu| Splněno |
+| Projekt má naimplementované vkládání ingrediencí| Splněno |
+| Zákazník souhlasí s opravenými scénaři| Splněno |
+| Tým souhlasí s opravenými scénaři| Splněno |
+
+####Lessons learned
+- Vytváření diagramů.
+- Seznámení s architekturou a použitými technologiemi.
+- Nastavení pracovní stanice.
+
+----
+
+##E1
+26.10.2016 - 1.11.2016
+
+####Cíle
+
+- Implementace registrace
+- Opravit diagramy
+- Rozšířit
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+|Oprava sekvenčního diagramu | Náhlý | 10 m|
+|Rozšíření dosavadního class diagramu| Jaroš | 3 h|
+|Rozšíření dosavadního sekvenčního diagramu| Náhlý | 3 h|
+|Rozšíření dosavadního databázového diagramu| Krížová, Pravda | 3 h|
+|Implementace backend registrace uživatele| Jaroš, Náhlý | 20 h|
+|Implementace frontend registrace uživatele| Krížová, Pravda | 15 h |
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| Tým souhlasí s opraveným sekvenčním diagramem| |
+| Zákazník souhlasí s opraveným sekvenčním diagramem| |
 | Tým souhlasí s class diagramem| |
 | Tým souhlasí se sekvenčním diagramem| |
 | Tým souhlasí s databázovým diagramem | |
-| Funkční projekt je založen| |
-| Celý tým má projekt zprovozněný na svém pracovním stroji| |
-| Projekt má vytvořenou architekturu| |
-| Projekt má naimplementované vkládání ingrediencí| |
-| Zákazník souhlasí s opravenými scénaři| |
-| Tým souhlasí s opravenými scénaři| |
+| Registrace uživatele je naimplementována | |
+| Tým souhlasí se stavem registrace | | 
+| Zákazník souhlasí s implementací registrace | |
 
 ####Lessons learned
+
+
