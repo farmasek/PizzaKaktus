@@ -7,8 +7,8 @@ import { Link } from 'react-router';
 const Navbar = () => (
   <div>
     <Navigation type="horizontal">
-      <Link to="/manager">Manager page</Link>
-      <Link to="#">Second page</Link>
+      <Link to="/manager/ingredients">Správa ingrediencí</Link>
+      <Link to="/manager/users">Správa uživatelů</Link>
     </Navigation>
   </div>
 );
