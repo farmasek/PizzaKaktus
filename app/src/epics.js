@@ -6,8 +6,14 @@ import {
   fetchIngredientListEpic,
   saveIngredientListEpic,
 } from './containers/IngredientContainer/actions';
+import {
+  fetchUserListEpic,
+  saveUserListEpic,
+} from './containers/UserContainer/actions';
 
 export default combineEpics(
   fetchIngredientListEpic,
   saveIngredientListEpic,
+  fetchUserListEpic,
+  saveUserListEpic,
 );

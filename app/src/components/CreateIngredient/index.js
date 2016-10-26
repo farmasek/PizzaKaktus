@@ -28,10 +28,10 @@ class CreateIngredient extends Component { // eslint-disable-line react/prefer-s
     this.props.editValue(name, value);
   };
   handleConfirm = (event) =>
-    event.key === 'Enter' ? this.confirmDialog() : null
+    event.key === 'Enter' ? this.confirmDialog() : null;
 
   handleErrorChange = (name, value = 'Je nutné vyplnit') =>
-    this.setState({ ...this.state, [name]: value })
+    this.setState({ ...this.state, [name]: value });
 
 
   confirmDialog() {
@@ -124,7 +124,7 @@ class CreateIngredient extends Component { // eslint-disable-line react/prefer-s
           </div>
         </CardText>
         <CardActions>
-          <Button label="Přidat" primary raised onClick={() => this.confirmDialog()}/>
+          <Button label="Přidat" primary raised onClick={() => this.confirmDialog()} />
         </CardActions>
       </Card>);
   }
