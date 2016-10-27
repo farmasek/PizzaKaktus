@@ -53,7 +53,8 @@ public class UserController {
     private boolean isUserValid(UserDTO user) {
         boolean valid = true;
         if (user.getRole().isEmpty() &&
-                user.getName().isEmpty() &&
+                user.getFirstName().isEmpty() &&
+                user.getLastName().isEmpty() &&
                 user.getLogin().isEmpty() &&
                 user.getPhone().isEmpty()) {
             valid = false;
