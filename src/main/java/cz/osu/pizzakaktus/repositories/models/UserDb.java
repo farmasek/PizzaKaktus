@@ -20,29 +20,29 @@ public class UserDb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String name;
+    private String firstName;
+    private String lastName;
+    private String password;
     private String login;
     private String role;
     private String phone;
 
-    public UserDb(String name, String login, String role, String phone) {
-        this.name = name;
+    public UserDb(String firstName, String lastName, String password, String login, String role, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
         this.login = login;
         this.role = role;
         this.phone = phone;
     }
 
-
-
-    public UserDb(UserDTO user) {
-
-
-        this.name = user.getName();
+    public UserDb(UserDTO user)    {
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.password = user.getPassword();
         this.login = user.getLogin();
         this.role = user.getRole();
         this.phone = user.getPhone();
-
-
     }
 
 
