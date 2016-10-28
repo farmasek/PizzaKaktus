@@ -6,7 +6,6 @@ import { Navbar } from 'components';
 import styles from './index.module.scss';
 import AppBar from 'react-toolbox/lib/app_bar';
 
-
 const Main = (props) => (
   <div>
     <AppBar fixed flat>
