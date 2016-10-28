@@ -10,10 +10,14 @@ import {
   fetchUserListEpic,
   saveUserListEpic,
 } from './containers/UserContainer/actions';
+import {
+  saveUserRegistrationEpic,
+} from './containers/RegistrationContainer/actions';
 
 export default combineEpics(
   fetchIngredientListEpic,
   saveIngredientListEpic,
   fetchUserListEpic,
   saveUserListEpic,
+  saveUserRegistrationEpic,
 );

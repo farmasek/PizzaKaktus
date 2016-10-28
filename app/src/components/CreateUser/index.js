@@ -6,6 +6,7 @@ import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
 import { Dropdown } from 'react-toolbox/lib/dropdown';
 import { Snackbar } from 'react-toolbox/lib/snackbar';
+import { browserHistory } from 'react-router';
 
 const roles = [
   { value: '', label: 'Zvolte roli' },
@@ -68,7 +69,7 @@ class CreateUser extends Component {
       validation.errLastName = '';
     }
     if (this.state.password.length < 6) {
-      validation.errPassword = 'Mmusí být aspoň 6 znaků dlouhé. ';
+      validation.errPassword = 'Musí být aspoň 6 znaků dlouhé. ';
       valid = false;
     } else {
       validation.errPassword = '';
@@ -85,11 +86,13 @@ class CreateUser extends Component {
     } else {
       validation.errLogin = '';
     }
-    if (this.state.role === '') {
-      validation.errRole = 'Je nutné vyplnit. ';
-      valid = false;
-    } else {
-      validation.errRole = '';
+    if (this.props.type !== 'registration') {
+      if (this.state.role === '') {
+        validation.errRole = 'Je nutné vyplnit. ';
+        valid = false;
+      } else {
+        validation.errRole = '';
+      }
     }
     if (this.state.phone === '') {
       validation.errPhone = 'Je nutné vyplnit. ';
@@ -103,7 +106,6 @@ class CreateUser extends Component {
 
   confirmDialog() {
     // TODO better validation
-
     if (this.validateState()) {
       this.props.confirmForm();
       this.setState({
@@ -123,6 +125,11 @@ class CreateUser extends Component {
         },
       });
       this.setState({ snackbar: true });
+      if (this.props.type === 'registration') {
+        setTimeout(() => {
+          browserHistory.push('/home');
+        }, 1000);
+      }
     }
   }
 
@@ -160,13 +167,17 @@ class CreateUser extends Component {
               error={ this.state.validation.errPassword }
               onKeyPress={ (event) => this.handleConfirm(event) }
             />
-            <Dropdown
-              auto
-              onChange={ (value) => this.handleChange('role', value) }
-              source={ roles }
-              value={ this.state.role }
-              error={ this.state.validation.errRole }
-            />
+            {
+              this.props.type !== 'registration'
+                ? <Dropdown
+                  auto
+                  onChange={ (value) => this.handleChange('role', value) }
+                  source={ roles }
+                  value={ this.state.role }
+                  error={ this.state.validation.errRole }
+                />
+                : null
+            }
             <Input
               type="text" label="Telefon" maxLength={ 15 }
               value={ this.state.phone }
@@ -200,6 +211,7 @@ CreateUser.propTypes = {
   userForm: PropTypes.object,
   formTitle: PropTypes.string.isRequired,
   snackbarText: PropTypes.string.isRequired,
+  type: PropTypes.string,
 };
 
 

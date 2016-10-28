@@ -13,7 +13,7 @@ const InitialState = new Record(
       lastName: '',
       password: '',
       login: '',
-      rule: '',
+      role: '',
       phone: '',
     }),
   }
