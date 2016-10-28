@@ -9,7 +9,9 @@ const InitialState = new Record(
     loading: false,
     users: new List(),
     userForm: fromJS({
-      name: '',
+      firstName: '',
+      lastName: '',
+      password: '',
       login: '',
       rule: '',
       phone: '',

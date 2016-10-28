@@ -16,12 +16,16 @@ const roles = [
 class CreateUser extends Component {
 
   state = {
-    name: '',
+    firstName: '',
+    lastName: '',
+    password: '',
     login: '',
     role: '',
     phone: '',
     validation: {
-      errName: '',
+      errFirstName: '',
+      errLastName: '',
+      errPassword: '',
       errLogin: '',
       errPhone: '',
       errRole: '',
@@ -34,7 +38,7 @@ class CreateUser extends Component {
     this.props.editValue(name, value);
   };
 
-  handleSnackbarTimeout = (event, instance) => {
+  handleSnackbarTimeout = () => {
     this.setState({ snackbar: false });
   };
 
@@ -43,32 +47,52 @@ class CreateUser extends Component {
 
   validateState() {
     const validation = {
-      errName: '',
+      errFirstName: '',
+      errLastName: '',
+      errPassword: '',
       errLogin: '',
       errPhone: '',
       errRole: '',
     };
     let valid = true;
-    if (this.state.name === '') {
-      validation.errName = 'Je nutné vyplnit';
+    if (this.state.firstName === '') {
+      validation.errFirstName = 'Je nutné vyplnit. ';
       valid = false;
     } else {
-      validation.errName = '';
+      validation.errFirstName = '';
+    }
+    if (this.state.lastName === '') {
+      validation.errLastName = 'Je nutné vyplnit. ';
+      valid = false;
+    } else {
+      validation.errLastName = '';
+    }
+    if (this.state.password.length < 6) {
+      validation.errPassword = 'Mmusí být aspoň 6 znaků dlouhé. ';
+      valid = false;
+    } else {
+      validation.errPassword = '';
+    }
+    if (this.state.password === '') {
+      validation.errPassword = 'Je nutné vyplnit. ';
+      valid = false;
+    } else {
+      validation.errPassword = '';
     }
     if (this.state.login === '') {
-      validation.errLogin = 'Je nutné vyplnit';
+      validation.errLogin = 'Je nutné vyplnit. ';
       valid = false;
     } else {
       validation.errLogin = '';
     }
     if (this.state.role === '') {
-      validation.errRole = 'Je nutné vyplnit';
+      validation.errRole = 'Je nutné vyplnit. ';
       valid = false;
     } else {
       validation.errRole = '';
     }
     if (this.state.phone === '') {
-      validation.errPhone = 'Je nutné vyplnit';
+      validation.errPhone = 'Je nutné vyplnit. ';
       valid = false;
     } else {
       validation.errPhone = '';
@@ -83,12 +107,16 @@ class CreateUser extends Component {
     if (this.validateState()) {
       this.props.confirmForm();
       this.setState({
-        name: '',
+        firstName: '',
+        lastName: '',
+        password: '',
         login: '',
         role: '',
         phone: '',
         validation: {
-          errName: '',
+          errFirstName: '',
+          errLastName: '',
+          errPassword: '',
           errLogin: '',
           errPhone: '',
           errRole: '',
@@ -102,20 +130,34 @@ class CreateUser extends Component {
     return (
       <div>
         <Card>
-          <CardTitle>Přidat uživatele</CardTitle>
+          <CardTitle>{ this.props.formTitle }</CardTitle>
           <CardText>
             <Input
-              type="text" label="Jméno a příjmení" maxLength={ 50 }
-              value={ this.state.name }
-              onChange={ (value) => this.handleChange('name', value) }
-              error={ this.state.validation.errName }
+              type="text" label="Jméno" maxLength={ 50 }
+              value={ this.state.firstName }
+              onChange={ (value) => this.handleChange('firstName', value) }
+              error={ this.state.validation.errFirstName }
               onKeyPress={ (event) => this.handleConfirm(event) }
             />
             <Input
-              type="text" label="Uživatelské jméno" maxLength={ 20 }
+              type="text" label="Příjmení" maxLength={ 50 }
+              value={ this.state.lastName }
+              onChange={ (value) => this.handleChange('lastName', value) }
+              error={ this.state.validation.errLastName }
+              onKeyPress={ (event) => this.handleConfirm(event) }
+            />
+            <Input
+              type="text" label="Login" maxLength={ 20 }
               value={ this.state.login}
               onChange={ (value) => this.handleChange('login', value) }
               error={ this.state.validation.errLogin }
+              onKeyPress={ (event) => this.handleConfirm(event) }
+            />
+            <Input
+              type="password" label="Heslo" maxLength={ 20 } minLength={ 6 }
+              value={ this.state.password}
+              onChange={ (value) => this.handleChange('password', value) }
+              error={ this.state.validation.errPassword }
               onKeyPress={ (event) => this.handleConfirm(event) }
             />
             <Dropdown
@@ -140,7 +182,7 @@ class CreateUser extends Component {
         <Snackbar
           active={ this.state.snackbar }
           icon="person_add"
-          label="Uživatel byl přidán."
+          label={ this.props.snackbarText }
           onTimeout={ this.handleSnackbarTimeout }
           timeout={ 3000 }
           ref="snackbar"
@@ -156,6 +198,8 @@ CreateUser.propTypes = {
   editValue: PropTypes.func.isRequired,
   confirmForm: PropTypes.func.isRequired,
   userForm: PropTypes.object,
+  formTitle: PropTypes.string.isRequired,
+  snackbarText: PropTypes.string.isRequired,
 };
 
 

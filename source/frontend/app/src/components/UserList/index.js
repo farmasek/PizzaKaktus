@@ -6,8 +6,9 @@ import Table from 'react-toolbox/lib/table';
 
 
 const TableModel = {
-  name: { type: String, title: 'Jméno a příjmení' },
-  login: { type: String, title: 'Uživatelské jméno' },
+  firstName: { type: String, title: 'Jméno' },
+  lastName: { type: String, title: 'Příjmení' },
+  login: { type: String, title: 'Login' },
   role: { type: String, title: 'Role' },
   phone: { type: String, title: 'Telefon' },
 };
