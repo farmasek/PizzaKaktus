@@ -7,7 +7,10 @@ import { Link } from 'react-router';
 const Navbar = () => (
   <div>
     <Navigation type="horizontal">
-      <Link to="/manager/ingredients">Správa ingrediencí</Link>
+      <span>Menu uživatele&nbsp;&nbsp;</span>
+      <Link to="/registration">Registrace</Link><br />
+      <span>Menu majitele&nbsp;&nbsp;</span>
+      <Link to="/manager/ingredients">Správa ingrediencí</Link>&nbsp;
       <Link to="/manager/users">Správa uživatelů</Link>
     </Navigation>
   </div>
