@@ -5,29 +5,21 @@ import cssModules from 'react-css-modules';
 import styles from './index.module.scss';
 import CreateUser from '../../components/CreateUser/index';
 import * as PropTypes from 'react/lib/ReactPropTypes';
-import * as UserActionCreators from './actions';
-import UserList from '../../components/UserList/index';
+import * as RegistrationActionCreators from './actions';
 
-class User extends Component {
-
-  componentWillMount() {
-    this.props.actions.fetchUserList();
-  }
+class Registration extends Component {
 
   render() {
     return (
       <div className={styles.user}>
         <div className={styles.flexChild}>
-          <UserList users={this.props.manageUser.users} />
-        </div>
-        <div className={styles.flexChild}>
           <CreateUser
             editValue={this.props.actions.changeValue}
-            userForm={this.props.manageUser.userForm}
+            userForm={this.props.registration.registrationForm}
             confirmForm={this.props.actions.saveUser}
-            formTitle={"Přidat uživatele"}
-            snackbarText={"Uživatel byl přidán."}
-            type={"manageUsers"}
+            formTitle={"Registrace"}
+            snackbarText={"Uživatel byl úspěšně registrován."}
+            type={"registration"}
           />
         </div>
       </div>
@@ -36,25 +28,25 @@ class User extends Component {
 
 }
 
-User.propTypes = {
-  manageUser: PropTypes.object,
+Registration.propTypes = {
+  registration: PropTypes.object,
   actions: PropTypes.object,
 };
 
 // mapStateToProps :: {State} -> {Props}
 const mapStateToProps = (state) => ({
-  manageUser: state.userContainer,
+  registration: state.registrationContainer,
 });
 
 // mapDispatchToProps :: Dispatch -> {Action}
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
-    UserActionCreators,
+    RegistrationActionCreators,
     dispatch
   ),
 });
 
-const Container = cssModules(User, styles);
+const Container = cssModules(Registration, styles);
 
 export default connect(
   mapStateToProps,

@@ -14,10 +14,16 @@ const routes = (
       onUpdate={() => window.scrollTo(0, 0)} // eslint-disable-line
     >
       <Route path="/" component={App}>
+
         <IndexRoute component={Pages.LandingPage} />
+
+        <Route path="/registration" component={Pages.RegistrationPage} />
+
         <Route path="/manager/ingredients" component={Pages.ManageIngredientsPage} />
         <Route path="/manager/users" component={Pages.ManageUsersPage} />
+
         <Route path="*" component={Pages.NotFoundPage} />
+
       </Route>
     </Router>
   </Provider>
