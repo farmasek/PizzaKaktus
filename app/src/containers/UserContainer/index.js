@@ -25,6 +25,8 @@ class User extends Component {
             editValue={this.props.actions.changeValue}
             userForm={this.props.manageUser.userForm}
             confirmForm={this.props.actions.saveUser}
+            formTitle={"Přidat uživatele"}
+            snackbarText={"Uživatel byl přidán."}
           />
         </div>
       </div>
