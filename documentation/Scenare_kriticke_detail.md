@@ -1,4 +1,4 @@
-﻿## UC1	S1	Přihlásit zaměstnance/majitele
+## UC1	S1	Přihlásit zaměstnance/majitele
 ### Preconditions: Spuštěná aplikace
 ### Basic flow:
 | Krok | Actor | Akce |
@@ -72,7 +72,7 @@
 | | Aplikace | Doplnění formuláře daty z poslední provedené objednávky | 
 | | Uživatel | Upraví, nebo potvrdí doplněné údaje | 
 | 5b  | Uživatel | Vložení nevalidních údajů. | 
-| | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
+| | Aplikace | Zobrazí se hláška s upozorněním na nevalidní údaje. | 
 
 
 ## UC4	S2	Editace stavu otevřené objednávky - založená, otevřená, uzavřená
@@ -86,3 +86,19 @@
 | 4 | Majitel/Zaměstnanec | Uživatel provede změny a potvrdí uložení. |
 | 5 | Aplikace | V výpisu objednávek se změní stavy podle zadání uživatele. |
 | 6 | Aplikace | Do logu se přidají zápisy o změnách - kdo, kdy a co změnil. |
+
+## UC7	S1	Vložení nového uživatele
+### Preconditions: Spuštěná aplikace, přihlášený majitel, zobrazená stránka pro správu uživatelů
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | Na stránce je seznam všech uživatelů a formulář pro vložení nového uživatele. |
+| 2 | Majitel | Majitel vyplní formulář a odešle jej. |
+| 3 | Aplikace | Na stránce se na chvíli zobrazí potvzrení o vložení nového uživatele. |
+| 4 | Aplikace | Na stránce se aktualizuje seznam uživatelů a vyprázdní formulář. |
+
+### Alternative flow:
+| Krok | Actor | Reakce |
+|:---:|:---|:---| 
+| 2b  | Majitel | Majitel vloží a odešle nevalidní údaje. | 
+| | Aplikace | Zobrazí se hláška s upozorněním na nevalidní údaje. | 
