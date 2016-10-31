@@ -37,7 +37,7 @@ public class UserController {
     /**
      * Insert user into database
      *
-     * @param user - Json of ingredient
+     * @param user - Json of User
      * @return if successful then inserted object, if not successful then error message
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -50,6 +50,23 @@ public class UserController {
                 new ResponseEntity<>("Error inserting to database", HttpStatus.NOT_ACCEPTABLE);
     }
 
+    /**
+     * Update user in database
+     *
+     * @param user - Json of user
+     * @return if successful then updated object, if not successful then error message
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public HttpEntity<?> updateUser(@RequestBody UserDb user) {
+
+        Optional<UserDb> insertedUser = userService.update(user);
+        return insertedUser.isPresent() ?
+                new ResponseEntity<>(insertedUser.get(), HttpStatus.OK)
+                :
+                new ResponseEntity<>("Error inserting to database", HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    //TODO use validator
     private boolean isUserValid(UserDTO user) {
         boolean valid = true;
         if (user.getRole().isEmpty() &&

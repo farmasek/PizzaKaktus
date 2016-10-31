@@ -1,9 +1,20 @@
 .createUser {
 
 }
-.insideNumbers{
+
+.insideNumbers {
   display: flex;
-  div{
+  div {
     flex-grow: 1;
+  }
+}
+
+.regBody {
+  display: flex;
+  div {
+    width: 50%;
+    div {
+      width: 90%;
+    }
   }
 }

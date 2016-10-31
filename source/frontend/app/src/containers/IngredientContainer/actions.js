@@ -19,7 +19,7 @@ export const changeValue = (input, value) => ({
 export const saveIngredient = () => ({
   type: INGREDIENT_CREATE_NEW,
 });
-
+// TODO create model
 export const saveIngredientListEpic = (action$, store$) =>
   action$.ofType(INGREDIENT_CREATE_NEW)
     .switchMap(() =>

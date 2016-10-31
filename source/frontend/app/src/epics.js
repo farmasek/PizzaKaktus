@@ -9,6 +9,7 @@ import {
 import {
   fetchUserListEpic,
   saveUserListEpic,
+  updateUserEpic,
 } from './containers/UserContainer/actions';
 import {
   saveUserRegistrationEpic,
@@ -20,4 +21,5 @@ export default combineEpics(
   fetchUserListEpic,
   saveUserListEpic,
   saveUserRegistrationEpic,
+  updateUserEpic,
 );

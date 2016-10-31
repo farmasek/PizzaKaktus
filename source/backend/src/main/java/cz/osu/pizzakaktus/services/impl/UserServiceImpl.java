@@ -21,13 +21,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<UserDb> insert(UserDb userDb) {
-       if (isLoginTaken(userDb.getLogin()))
+        if (isLoginTaken(userDb.getLogin()))
             return Optional.empty();
-        else
-        {
+        else {
             UserDb insertedUser = userRepository.save(userDb);
             return Optional.of(insertedUser);
         }
+    }
+
+    @Override
+    public Optional<UserDb> update(UserDb userDb) {
+        try {
+            UserDb updatedUser = userRepository.save(userDb);
+            return Optional.of(updatedUser);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+
     }
 
     @Override
