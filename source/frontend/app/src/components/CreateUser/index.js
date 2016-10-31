@@ -68,17 +68,17 @@ class CreateUser extends Component {
     } else {
       validation.errLastName = '';
     }
-    if (this.state.password === '') {
-      validation.errPassword = 'Je nutné vyplnit. ';
-      valid = false;
-    } else {
-      validation.errPassword = '';
-    }
     if (this.state.password.length < 6) {
       validation.errPassword = 'Heslo musí mít 6 a více znaků. ';
       valid = false;
     } else {
       validation.errPassword = '';
+    }
+    if (this.state.login === '') {
+      validation.errLogin = 'Je nutné vyplnit. ';
+      valid = false;
+    } else {
+      validation.errLogin = '';
     }
     if (this.props.type !== 'registration') {
       if (this.state.role === '') {
