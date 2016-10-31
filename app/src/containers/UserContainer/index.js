@@ -17,19 +17,16 @@ class User extends Component {
   render() {
     return (
       <div className={styles.user}>
-        <div className={styles.flexChild}>
-          <UserList users={this.props.manageUser.users} />
-        </div>
-        <div className={styles.flexChild}>
-          <CreateUser
-            editValue={this.props.actions.changeValue}
-            userForm={this.props.manageUser.userForm}
-            confirmForm={this.props.actions.saveUser}
-            formTitle={"Přidat uživatele"}
-            snackbarText={"Uživatel byl přidán."}
-            type={"manageUsers"}
-          />
-        </div>
+
+        <UserList users={this.props.manageUser.users} updateUser={this.props.actions.updateUser}/>
+        <CreateUser
+          editValue={this.props.actions.changeValue}
+          userForm={this.props.manageUser.userForm}
+          confirmForm={this.props.actions.saveUser}
+          formTitle={"Přidat uživatele"}
+          snackbarText={"Uživatel byl přidán."}
+          type={"manageUsers"}
+        />
       </div>
     );
   }

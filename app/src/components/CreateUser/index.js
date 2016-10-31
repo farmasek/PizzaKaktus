@@ -6,7 +6,6 @@ import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
 import { Dropdown } from 'react-toolbox/lib/dropdown';
 import { Snackbar } from 'react-toolbox/lib/snackbar';
-import { browserHistory } from 'react-router';
 
 const roles = [
   { value: '', label: 'Zvolte roli' },
@@ -119,11 +118,6 @@ class CreateUser extends Component {
         },
       });
       this.setState({ snackbar: true });
-      if (this.props.type === 'registration') {
-        setTimeout(() => {
-          browserHistory.push('/home');
-        }, 1000);
-      }
     }
   }
 
@@ -132,53 +126,56 @@ class CreateUser extends Component {
       <div>
         <Card>
           <CardTitle>{ this.props.formTitle }</CardTitle>
-          <CardText>
-            <Input
-              type="text" label="Jméno" maxLength={ 50 }
-              value={ this.state.firstName }
-              onChange={ (value) => this.handleChange('firstName', value) }
-              error={ this.state.validation.errFirstName }
-              onKeyPress={ (event) => this.handleConfirm(event) }
-            />
-            <Input
-              type="text" label="Příjmení" maxLength={ 50 }
-              value={ this.state.lastName }
-              onChange={ (value) => this.handleChange('lastName', value) }
-              error={ this.state.validation.errLastName }
-              onKeyPress={ (event) => this.handleConfirm(event) }
-            />
-            <Input
-              type="text" label="Login" maxLength={ 20 }
-              value={ this.state.login}
-              onChange={ (value) => this.handleChange('login', value) }
-              error={ this.state.validation.errLogin }
-              onKeyPress={ (event) => this.handleConfirm(event) }
-            />
-            <Input
-              type="password" label="Heslo" maxLength={ 20 } minLength={ 6 }
-              value={ this.state.password}
-              onChange={ (value) => this.handleChange('password', value) }
-              error={ this.state.validation.errPassword }
-              onKeyPress={ (event) => this.handleConfirm(event) }
-            />
-            {
-              this.props.type !== 'registration'
-                ? <Dropdown
-                  auto
-                  onChange={ (value) => this.handleChange('role', value) }
-                  source={ roles }
-                  value={ this.state.role }
-                  error={ this.state.validation.errRole }
-                />
-                : null
-            }
-            <Input
-              type="text" label="Telefon" maxLength={ 15 }
-              value={ this.state.phone }
-              onChange={ (value) => this.handleChange('phone', value) }
-              error={ this.state.validation.errPhone }
-              onKeyPress={ (event) => this.handleConfirm(event) }
-            />
+          <CardText className={styles.regBody}>
+            <div>
+              <Input
+                type="text" label="Jméno" maxLength={ 50 }
+                value={ this.state.firstName }
+                onChange={ (value) => this.handleChange('firstName', value) }
+                error={ this.state.validation.errFirstName }
+                onKeyPress={ (event) => this.handleConfirm(event) }
+              />
+              <Input
+                type="text" label="Příjmení" maxLength={ 50 }
+                value={ this.state.lastName }
+                onChange={ (value) => this.handleChange('lastName', value) }
+                error={ this.state.validation.errLastName }
+                onKeyPress={ (event) => this.handleConfirm(event) }
+              />
+              <Input
+                type="text" label="Login" maxLength={ 20 }
+                value={ this.state.login}
+                onChange={ (value) => this.handleChange('login', value) }
+                error={ this.state.validation.errLogin }
+                onKeyPress={ (event) => this.handleConfirm(event) }
+              />
+            </div>
+            <div>
+              <Input
+                type="password" label="Heslo" maxLength={ 20 } minLength={ 6 }
+                value={ this.state.password}
+                onChange={ (value) => this.handleChange('password', value) }
+                error={ this.state.validation.errPassword }
+                onKeyPress={ (event) => this.handleConfirm(event) }
+              />
+              {
+                this.props.type !== 'registration' ?
+                  <Dropdown
+                    auto
+                    onChange={ (value) => this.handleChange('role', value) }
+                    source={ roles }
+                    value={ this.state.role }
+                    error={ this.state.validation.errRole }
+                  />
+                  : null
+              }
+              <Input
+                type="text" label="Telefon" maxLength={ 15 }
+                value={ this.state.phone }
+                onChange={ (value) => this.handleChange('phone', value) }
+                error={ this.state.validation.errPhone }
+                onKeyPress={ (event) => this.handleConfirm(event) }
+              /></div>
           </CardText>
           <CardActions>
             <Button label="Přidat" primary raised onClick={ () => this.confirmDialog() }/>

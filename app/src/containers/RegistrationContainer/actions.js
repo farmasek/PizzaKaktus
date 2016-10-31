@@ -2,7 +2,7 @@ import {
   REGISTRATION_CHANGE_FORM_VALUE,
   REGISTRATION_USER_CREATE_NEW,
 } from './constants';
-
+import { browserHistory } from 'react-router';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
 
@@ -22,6 +22,11 @@ export const saveUserRegistrationEpic = (action$, store$) =>
       Observable.ajax(doIt(hosts.pk, 'user/add', 'POST',
         JSON.stringify(store$.getState().registrationContainer.registrationForm)
         , true))
+        .map(() => ({
+          type: 'successfully added',
+        }))
+        .do(() => browserHistory.push('/manager/users'))
+        .ignoreElements()
         .catch(() =>
           Observable.of({
             type: `${REGISTRATION_USER_CREATE_NEW}_FAILED}`,

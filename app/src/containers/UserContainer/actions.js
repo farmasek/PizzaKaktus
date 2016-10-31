@@ -2,10 +2,12 @@ import {
   FETCH_USER_LIST,
   USER_CHANGE_FORM_VALUE,
   USER_CREATE_NEW,
+  USER_UPDATE_FIELD,
 } from './constants';
 
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
+import { fromJS } from 'immutable';
 
 export const fetchUserList = () => ({
   type: FETCH_USER_LIST,
@@ -21,6 +23,15 @@ export const saveUser = () => ({
   type: USER_CREATE_NEW,
 });
 
+export const updateUser = (user, field, value) => {
+  let userMap = fromJS(user);
+  userMap = userMap.set(field, value);
+  return {
+    type: USER_UPDATE_FIELD,
+    userMap,
+  };
+};
+// TODO create model
 export const saveUserListEpic = (action$, store$) =>
   action$.ofType(USER_CREATE_NEW)
     .switchMap(() =>
@@ -33,6 +44,20 @@ export const saveUserListEpic = (action$, store$) =>
         .catch(() =>
           Observable.of({
             type: `${USER_CREATE_NEW}_FAILED}`,
+          }))
+    );
+// TODO better error handling
+export const updateUserEpic = (action$) =>
+  action$.ofType(USER_UPDATE_FIELD)
+    .switchMap(({ userMap }) =>
+      Observable.ajax(doIt(hosts.pk, 'user/update', 'PUT',
+        userMap, true))
+        .map(() => ({
+          type: `${FETCH_USER_LIST}`,
+        }))
+        .catch(() =>
+          Observable.of({
+            type: `Noop, failed fetch`,
           }))
     );
 
