@@ -17,6 +17,13 @@ public interface UserService {
      */
     Optional<UserDb> insert(UserDb userDb);
 
+  /**
+     *
+     * @param userDb
+     * @return update user based on his ID
+     */
+    Optional<UserDb> update(UserDb userDb);
+
     /**
      *
      * @return List of users
