@@ -190,11 +190,8 @@ Implementace nových požadavků do stávající architektury
 
 ####Cíle
 
-- Implementace vytvoření pizzy (UC3 S1)
+- Realizace vytvoření pizzy (UC3 S1)
 - Opravit sekvenční diagram (vložení ingredience, vložení uživatele)
-- Rozšířit diagramy (class, sekvenční, databázový)
-- Upravit implementaci práv uživatelů
-- Upravit implementaci hesel uživatelů
 
 ####Úkoly
 
@@ -202,13 +199,13 @@ Implementace nových požadavků do stávající architektury
 |:------|:----------------|:-----------------:|
 |Oprava sekvenčního diagramu vložení ingredience | Náhlý | 10 m|
 |Oprava sekvenčního diagramu vložení uživatele | Náhlý | 10 m|
-|Rozšíření dosavadního class diagramu| Jaroš | 3 h|
-|Vytvoření sekvenčního diagramu vložení pizzy| Baránek | 1 h|
-|Rozšíření dosavadního databázového diagramu | Baránek | 10m |
-|Implementace backend vložení pizzy | Krížová, Pravda | 20 h|
-|Implementace frontend vložení pizzy | Jaroš, Náhlý  | 20 h |
-|Úprava implementace práv uživatelů | Baránek  | 2 h |
-|Úprava implementace hesel uživatelů | Baránek  | 2 h |
+|Rozšíření dosavadního class diagramu o UC3 S1 | Jaroš | 3 h|
+|Vytvoření sekvenčního diagramu UC3 S1| Baránek | 1 h|
+|Rozšíření dosavadního databázového diagramu o UC3 S1 | Baránek | 10m |
+|Implementace backend UC3 S1 | Krížová, Pravda | 20 h|
+|Implementace frontend UC3 S1 | Jaroš, Náhlý  | 20 h |
+|Úprava implementace práv uživatelů - odstranění Enumu jako String | Baránek  | 2 h |
+|Úprava implementace hesel uživatelů - hashování hesel | Baránek  | 2 h |
 
 ####Kritéria hodnocení
 | Úkol | Stav |
@@ -216,13 +213,13 @@ Implementace nových požadavků do stávající architektury
 | Tým souhlasí s opraveným sekvenčním diagramem vložení ingredience | |
 | Tým souhlasí s opraveným sekvenčním diagramem vložení uživatele | |
 | Tým souhlasí s class diagramem| |
-| Tým souhlasí se sekvenčním diagramem vložení pizzy| |
+| Tým souhlasí se sekvenčním diagramem UC3 S1 | |
 | Tým souhlasí s databázovým diagramem | |
 | Vytvoření pizzy (backend) je funkční | |
 | Vytvoření pizzy (frontend) je funkční | |
 | Tým souhlasí s vytvořenou implementací vytvoření pizzy | | 
 | Zákazník souhlasí s implementací vytvoření pizzy | |
-| Zákazník souhlasí s implementací práv uživatele | |
+| Práva jsou implementována v databázi jako int | |
 | Zákazník souhlasí s implementací ukládání hesel | |
 
 ####Lessons learned
