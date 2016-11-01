@@ -173,15 +173,56 @@ Naslouchat přáním zákazníka. Sjednotit slovník pojmů.
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| Tým souhlasí s opraveným sekvenčním diagramem| |
-| Tým souhlasí s class diagramem| |
-| Tým souhlasí s novým sekvenčním diagramem| |
-| Tým souhlasí s databázovým diagramem | |
-| Registrace (backend) uživatele je funkční | |
-| Registrace (frontend) uživatele je funkční | |
-| Tým souhlasí s vytvořenou implementací registrace | | 
-| Zákazník souhlasí s implementací registrace | |
+| Tým souhlasí s opraveným sekvenčním diagramem| Splněno |
+| Tým souhlasí s class diagramem| Splněno |
+| Tým souhlasí s novým sekvenčním diagramem| Splněno |
+| Tým souhlasí s databázovým diagramem | Splněno |
+| Registrace (backend) uživatele je funkční | Splněno |
+| Registrace (frontend) uživatele je funkční | Splněno |
+| Tým souhlasí s vytvořenou implementací registrace | Splněno | 
+| Zákazník souhlasí s implementací registrace | Splněno |
 
 ####Lessons learned
+Implementace nových požadavků do stávající architektury
+----
+##E2
+1.11.2016 - 8.11.2016
 
+####Cíle
 
+- Implementace vytvoření pizzy (UC3 S1)
+- Opravit sekvenční diagram (vložení ingredience, vložení uživatele)
+- Rozšířit diagramy (class, sekvenční, databázový)
+- Upravit implementaci práv uživatelů
+- Upravit implementaci hesel uživatelů
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+|Oprava sekvenčního diagramu vložení ingredience | Náhlý | 10 m|
+|Oprava sekvenčního diagramu vložení uživatele | Náhlý | 10 m|
+|Rozšíření dosavadního class diagramu| Jaroš | 3 h|
+|Vytvoření sekvenčního diagramu vložení pizzy| Baránek | 1 h|
+|Rozšíření dosavadního databázového diagramu | Baránek | 10m |
+|Implementace backend vložení pizzy | Krížová, Pravda | 20 h|
+|Implementace frontend vložení pizzy | Jaroš, Náhlý  | 20 h |
+|Úprava implementace práv uživatelů | Baránek  | 2 h |
+|Úprava implementace hesel uživatelů | Baránek  | 2 h |
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| Tým souhlasí s opraveným sekvenčním diagramem vložení ingredience | |
+| Tým souhlasí s opraveným sekvenčním diagramem vložení uživatele | |
+| Tým souhlasí s class diagramem| |
+| Tým souhlasí se sekvenčním diagramem vložení pizzy| |
+| Tým souhlasí s databázovým diagramem | |
+| Vytvoření pizzy (backend) je funkční | |
+| Vytvoření pizzy (frontend) je funkční | |
+| Tým souhlasí s vytvořenou implementací vytvoření pizzy | | 
+| Zákazník souhlasí s implementací vytvoření pizzy | |
+| Zákazník souhlasí s implementací práv uživatele | |
+| Zákazník souhlasí s implementací ukládání hesel | |
+
+####Lessons learned
