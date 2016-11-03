@@ -1,7 +1,11 @@
 package cz.osu.pizzakaktus.services.impl;
 
+import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
+import cz.osu.pizzakaktus.repositories.IngredientRepository;
 import cz.osu.pizzakaktus.repositories.PizzaRepository;
+import cz.osu.pizzakaktus.repositories.models.IngredientDb;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
+import cz.osu.pizzakaktus.services.IngredientService;
 import cz.osu.pizzakaktus.services.PizzaService;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +22,14 @@ public class PizzaServiceImpl implements PizzaService {
     @Autowired
     PizzaRepository pizzaRepository;
 
+    @Autowired
+    IngredientService ingredientService;
+
     @Override
-    public Optional<PizzaDb> insert(PizzaDb pizzaDb) {
-        PizzaDb insertedPizza = pizzaRepository.save(pizzaDb);
+    public Optional<PizzaDb> insert(PizzaDTO pizzaDTO) {
+        List<IngredientDb> allById = ingredientService.findAllById(pizzaDTO.getIngredientsId());
+        PizzaDb insertedPizza = pizzaRepository.save(
+                new PizzaDb(pizzaDTO.getTitle(), pizzaDTO.getCategory(), allById));
         return Optional.of(insertedPizza);
     }
 
