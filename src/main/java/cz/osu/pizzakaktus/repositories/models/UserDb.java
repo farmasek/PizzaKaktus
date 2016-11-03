@@ -1,6 +1,5 @@
 package cz.osu.pizzakaktus.repositories.models;
 
-import cz.osu.pizzakaktus.endpoints.models.IngredientDTO;
 import cz.osu.pizzakaktus.endpoints.models.UserDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
