@@ -13,21 +13,21 @@ public interface PizzaService {
 
     /**
      *
-     * @param pizzaDb
+     * @param pizzaDTO
      * @return insert Pizza
      */
-    Optional<PizzaDb> insert(PizzaDTO pizzaDb);
+    Optional<PizzaDb> insert(PizzaDTO pizzaDTO);
 
     /**
      *
      * @param pizzaDb
-     * @return update user based on his ID
+     * @return pizza user based on ID
      */
     Optional<PizzaDb> update(PizzaDb pizzaDb);
 
     /**
      *
-     * @return List of users
+     * @return List of pizzas
      */
     List<PizzaDb> findAll();
 }

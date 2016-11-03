@@ -16,7 +16,7 @@ import java.util.Optional;
  * Created by Mish.k.a on 3. 11. 2016.
  */
 @RestController
-//@CrossOrigin(origins = "http://localhost:1337")
+@CrossOrigin(origins = "http://localhost:1337")
 @RequestMapping("/pizza")
 public class PizzaController {
     @Autowired
@@ -41,7 +41,6 @@ public class PizzaController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addPizza(@RequestBody PizzaDTO pizza) {
-
         Optional<PizzaDb> insertedPizza = pizzaService.insert(pizza);
         return insertedPizza.isPresent() ?
                 new ResponseEntity<>(insertedPizza.get(), HttpStatus.OK)
