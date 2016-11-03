@@ -22,11 +22,12 @@ public class PizzaDb {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String title;
-    private String category;
+    @ManyToOne
+    private CategoryDb category;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<IngredientDb> ingredients;
 
-    public PizzaDb(String title, String category, List<IngredientDb> ingredients) {
+    public PizzaDb(String title, CategoryDb category, List<IngredientDb> ingredients) {
         this.title = title;
         this.category = category;
 //        List<IngredientDb> ingredientDb = new ArrayList<>(ingredients.size());

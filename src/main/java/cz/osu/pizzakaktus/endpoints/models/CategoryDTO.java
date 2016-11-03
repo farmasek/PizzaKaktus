@@ -5,19 +5,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 /**
  * Created by Mish.k.a on 3. 11. 2016.
  */
-
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
-public class PizzaDTO {
+public class CategoryDTO {
 
-    private String title;
-    private Integer categoryId;
-    private List<Integer> ingredientsId;
+    private String name;
 }
