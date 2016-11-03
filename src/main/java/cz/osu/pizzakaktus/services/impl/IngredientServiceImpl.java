@@ -30,4 +30,10 @@ public class IngredientServiceImpl implements IngredientService {
         Iterable<IngredientDb> all = ingredientRepository.findAll();
         return Lists.newArrayList(all);
     }
+
+    @Override
+    public List<IngredientDb> findAllById(List<Integer> ids) {
+        Iterable<IngredientDb> all = ingredientRepository.findAll(ids);
+        return Lists.newArrayList(all);
+    }
 }

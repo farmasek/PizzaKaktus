@@ -12,6 +12,7 @@ import java.util.Optional;
  * Created by Farmas on 18.10.2016.
  */
 @Repository
-public interface IngredientRepository extends CrudRepository<IngredientDb, Long> {
-    List<IngredientDb> findById(Long Id);
+public interface IngredientRepository extends CrudRepository<IngredientDb, Integer> {
+    List<IngredientDb> findById(Integer Id);
+
 }

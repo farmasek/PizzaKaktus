@@ -12,6 +12,7 @@ public interface IngredientService {
 
     /**
      * Insert ingredient into database
+     *
      * @param ingredientDb - ingredient to be put in database
      * @return inserted ingredient
      */
@@ -19,8 +20,10 @@ public interface IngredientService {
 
     /**
      * Find all ingredients in database
+     *
      * @return list of ingredients
      */
     List<IngredientDb> findAll();
 
+    List<IngredientDb> findAllById(List<Integer> ids);
 }

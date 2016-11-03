@@ -1,5 +1,6 @@
 package cz.osu.pizzakaktus.services;
 
+import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface PizzaService {
      * @param pizzaDb
      * @return insert Pizza
      */
-    Optional<PizzaDb> insert(PizzaDb pizzaDb);
+    Optional<PizzaDb> insert(PizzaDTO pizzaDb);
 
     /**
      *

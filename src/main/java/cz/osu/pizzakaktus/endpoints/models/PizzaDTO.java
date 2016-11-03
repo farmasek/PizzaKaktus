@@ -19,5 +19,5 @@ public class PizzaDTO {
 
     private String title;
     private String category;
-    private List<IngredientDTO> ingredients;
+    private List<Integer> ingredientsId;
 }
