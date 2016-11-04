@@ -200,8 +200,8 @@ Implementace nových požadavků do stávající architektury
 |Oprava sekvenčního diagramu vložení ingredience | Náhlý | 10 m|
 |Oprava sekvenčního diagramu vložení uživatele | Náhlý | 10 m|
 |Rozšíření dosavadního class diagramu o UC3 S1 | Jaroš | 3 h|
-|Vytvoření sekvenčního diagramu UC3 S1| Baránek | 1 h|
-|Rozšíření dosavadního databázového diagramu o UC3 S1 | Baránek | 10m |
+|Vytvoření sekvenčního diagramu UC3 S1| Pravda | 1 h|
+|Rozšíření dosavadního databázového diagramu o UC3 S1 | Pravda | 10m |
 |Implementace backend UC3 S1 | Krížová, Pravda | 20 h|
 |Implementace frontend UC3 S1 | Jaroš, Náhlý  | 20 h |
 |Úprava implementace práv uživatelů - odstranění Enumu jako String | Baránek  | 2 h |
