@@ -1,19 +1,21 @@
 package cz.osu.pizzakaktus.repositories.models;
 
 import cz.osu.pizzakaktus.endpoints.models.UserDTO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by e-myslivost on 26.10.2016.
  */
 @Entity
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class UserDb {
     @Id
@@ -21,28 +23,30 @@ public class UserDb {
     private Integer id;
     private String firstName;
     private String lastName;
-    private String password;
+    private String passwordHash;
     private String login;
-    private String role;
+    @ManyToMany
+    private Set<Role> roles;
     private String phone;
 
-    public UserDb(String firstName, String lastName, String password, String login, String role, String phone) {
+
+    public UserDb(String firstName, String lastName, String passwordHash, String login, Set<Role> roles, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.login = login;
-        this.role = role;
+        this.roles = roles;
         this.phone = phone;
     }
 
-    public UserDb(UserDTO user)    {
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.password = user.getPassword();
-        this.login = user.getLogin();
-        this.role = user.getRole();
-        this.phone = user.getPhone();
-    }
+//    public UserDb(UserDTO user)    {
+//        this.firstName = user.getFirstName();
+//        this.lastName = user.getLastName();
+//        this.passwordHash = user.getPassword();
+//        this.login = user.getLogin();
+//        this.role = user.getRole();
+//        this.phone = user.getPhone();
+//    }
 
 
 }

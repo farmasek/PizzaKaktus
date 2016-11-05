@@ -16,7 +16,7 @@ import java.util.Optional;
  * Created by Mish.k.a on 3. 11. 2016.
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:1337")
+@CrossOrigin
 @RequestMapping("/pizza")
 public class PizzaController {
     @Autowired
