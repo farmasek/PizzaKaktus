@@ -1,5 +1,6 @@
 package cz.osu.pizzakaktus.services;
 
+import cz.osu.pizzakaktus.endpoints.models.UserDTO;
 import cz.osu.pizzakaktus.repositories.models.UserDb;
 
 import java.util.List;
@@ -12,17 +13,17 @@ public interface UserService {
 
     /**
      *
-     * @param userDb
+     * @param userDTO
      * @return insert Users
      */
-    Optional<UserDb> insert(UserDb userDb);
+    Optional<UserDb> insert(UserDTO userDTO);
 
   /**
      *
-     * @param userDb
+     * @param userDTO
      * @return update user based on his ID
      */
-    Optional<UserDb> update(UserDb userDb);
+    Optional<UserDb> update(UserDTO userDTO);
 
     /**
      *

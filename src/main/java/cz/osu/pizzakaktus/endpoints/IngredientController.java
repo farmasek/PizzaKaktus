@@ -17,7 +17,7 @@ import java.util.Optional;
  * Created by baranvoj on 19.10.2016.
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:1337") // TODO Implement global cross origin settings :)
+@CrossOrigin
 @RequestMapping("/ingredient")
 public class IngredientController {
 

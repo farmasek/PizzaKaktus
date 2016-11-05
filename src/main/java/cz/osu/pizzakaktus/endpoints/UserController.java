@@ -16,7 +16,7 @@ import java.util.Optional;
  * Created by e-myslivost on 26.10.2016.
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:1337") // TODO Implement global cross origin settings :)
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -43,7 +43,7 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addUser(@RequestBody UserDTO user) {
 
-        Optional<UserDb> insertedUser = userService.insert(new UserDb(user));
+        Optional<UserDb> insertedUser = userService.insert(user);
         return insertedUser.isPresent() ?
                 new ResponseEntity<>(insertedUser.get(), HttpStatus.OK)
                 :
@@ -69,7 +69,7 @@ public class UserController {
     //TODO use validator
     private boolean isUserValid(UserDTO user) {
         boolean valid = true;
-        if (user.getRole().isEmpty() &&
+        if (user.getRoles().isEmpty() &&
                 user.getFirstName().isEmpty() &&
                 user.getLastName().isEmpty() &&
                 user.getLogin().isEmpty() &&
