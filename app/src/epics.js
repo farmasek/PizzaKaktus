@@ -7,6 +7,14 @@ import {
   saveIngredientListEpic,
 } from './containers/IngredientContainer/actions';
 import {
+  fetchCategoryListEpic,
+  saveCategoryListEpic,
+} from './containers/CategoryContainer/actions';
+import {
+  fetchPizzaListEpic,
+  savePizzaListEpic,
+} from './containers/PizzaContainer/actions';
+import {
   fetchUserListEpic,
   saveUserListEpic,
   updateUserEpic,
@@ -18,6 +26,10 @@ import {
 export default combineEpics(
   fetchIngredientListEpic,
   saveIngredientListEpic,
+  fetchPizzaListEpic,
+  savePizzaListEpic,
+  fetchCategoryListEpic,
+  saveCategoryListEpic,
   fetchUserListEpic,
   saveUserListEpic,
   saveUserRegistrationEpic,
