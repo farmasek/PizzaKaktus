@@ -18,7 +18,11 @@ class User extends Component {
     return (
       <div className={styles.user}>
 
-        <UserList users={this.props.manageUser.users} updateUser={this.props.actions.updateUser}/>
+        <UserList
+          users={this.props.manageUser.users}
+          updateUser={this.props.actions.updateUser}
+          updateRole={this.props.actions.updateRole}
+        />
         <CreateUser
           editValue={this.props.actions.changeValue}
           userForm={this.props.manageUser.userForm}

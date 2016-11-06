@@ -31,6 +31,24 @@ export const updateUser = (user, field, value) => {
     userMap,
   };
 };
+export const updateRole = (user, role) => {
+  let userMap;
+  let modRoles;
+  const roles = fromJS(user.roles);
+  const indexOfRole = roles.indexOf(role);
+  if (indexOfRole > -1) {
+    modRoles = roles.splice(indexOfRole, 1);
+  } else {
+    user.roles.push(role);
+    modRoles = user.roles;
+  }
+  userMap = user;
+  userMap.roles = modRoles;
+  return {
+    type: USER_UPDATE_FIELD,
+    userMap,
+  };
+};
 // TODO create model
 export const saveUserListEpic = (action$, store$) =>
   action$.ofType(USER_CREATE_NEW)
