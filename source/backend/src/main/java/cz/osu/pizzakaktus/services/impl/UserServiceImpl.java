@@ -86,6 +86,7 @@ public class UserServiceImpl implements UserService {
         Set<Role> roleStream = userDTO.getRoles().stream().map(role -> roleRepository.findByRole(role)).collect(Collectors.toSet());
 
         UserDb userToInsert = UserDb.builder()
+                .id(userDTO.getId())
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
                 .login(userDTO.getLogin())

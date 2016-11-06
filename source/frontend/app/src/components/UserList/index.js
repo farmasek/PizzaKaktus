@@ -1,14 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import { Dropdown } from 'react-toolbox/lib/dropdown';
 import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
-// import Table from 'react-toolbox/lib/table';
-
-
-const roles = [
-  { value: 'admin', label: 'Majitel' },
-  { value: 'employee', label: 'Zaměstnanec' },
-];
+import Checkbox from 'react-toolbox/lib/checkbox';
 
 
 class UserList extends Component { // eslint-disable-line react/prefer-stateless-function
@@ -21,13 +14,18 @@ class UserList extends Component { // eslint-disable-line react/prefer-stateless
       <td>{user.lastName}</td>
       <td>{user.login}</td>
       <td>{user.phone}</td>
-      <td><Dropdown
-        className={styles.dropdown}
-        auto
-        onChange={ (value) => this.props.updateUser(user, 'role', value)}
-        source={ roles }
-        value={user.role}
-      /></td>
+      <td>
+        <Checkbox
+          checked={user.roles ? user.roles.indexOf('ADMIN') > -1 : false}
+          onChange={() => this.props.updateRole(user, 'ADMIN')}
+        />
+      </td>
+      <td>
+        <Checkbox
+          checked={user.roles ? user.roles.indexOf('EMPLOYEE') > -1 : false}
+          onChange={() => this.props.updateRole(user, 'EMPLOYEE')}
+        />
+      </td>
     </tr>
 
   render() {
@@ -41,7 +39,8 @@ class UserList extends Component { // eslint-disable-line react/prefer-stateless
             <th>Příjmení</th>
             <th>Login</th>
             <th>Telefon</th>
-            <th>Role</th>
+            <th>Majitel</th>
+            <th>Zaměstnanec</th>
           </tr>
           </thead>
           <tbody>
@@ -58,6 +57,7 @@ class UserList extends Component { // eslint-disable-line react/prefer-stateless
 UserList.propTypes = {
   users: PropTypes.object.isRequired,
   updateUser: PropTypes.func.isRequired,
+  updateRole: PropTypes.func.isRequired,
 };
 
 export default cssModules(UserList, styles);

@@ -9,8 +9,8 @@ import { Snackbar } from 'react-toolbox/lib/snackbar';
 
 const roles = [
   { value: '', label: 'Zvolte roli' },
-  { value: 'admin', label: 'Majitel' },
-  { value: 'employee', label: 'Zaměstnanec' },
+  { value: ['ADMIN'], label: 'Majitel' },
+  { value: ['EMPLOYEE'], label: 'Zaměstnanec' },
 ];
 
 class CreateUser extends Component {
@@ -20,7 +20,7 @@ class CreateUser extends Component {
     lastName: '',
     password: '',
     login: '',
-    role: '',
+    roles: '',
     phone: '',
     validation: {
       errFirstName: '',
@@ -80,7 +80,7 @@ class CreateUser extends Component {
       validation.errLogin = '';
     }
     if (this.props.type !== 'registration') {
-      if (this.state.role === '') {
+      if (this.state.roles === '') {
         validation.errRole = 'Je nutné vyplnit. ';
         valid = false;
       } else {
@@ -106,7 +106,7 @@ class CreateUser extends Component {
         lastName: '',
         password: '',
         login: '',
-        role: '',
+        roles: '',
         phone: '',
         validation: {
           errFirstName: '',
@@ -162,9 +162,9 @@ class CreateUser extends Component {
                 this.props.type !== 'registration' ?
                   <Dropdown
                     auto
-                    onChange={ (value) => this.handleChange('role', value) }
+                    onChange={ (value) => this.handleChange('roles', value) }
                     source={ roles }
-                    value={ this.state.role }
+                    value={ this.state.roles }
                     error={ this.state.validation.errRole }
                   />
                   : null
