@@ -23,9 +23,10 @@ public class UserDb {
     private Integer id;
     private String firstName;
     private String lastName;
+    @Column(updatable = false)
     private String passwordHash;
     private String login;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE})
     private Set<Role> roles;
     private String phone;
 

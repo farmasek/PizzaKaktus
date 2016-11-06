@@ -1,6 +1,7 @@
 package cz.osu.pizzakaktus.endpoints;
 
 import cz.osu.pizzakaktus.endpoints.models.UserDTO;
+import cz.osu.pizzakaktus.repositories.models.Role;
 import cz.osu.pizzakaktus.repositories.models.UserDb;
 import cz.osu.pizzakaktus.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by e-myslivost on 26.10.2016.
@@ -31,7 +34,20 @@ public class UserController {
     @RequestMapping(value = "/all-users", method = RequestMethod.GET)
     public HttpEntity<?> findAllUsers() {
         List<UserDb> allUsers = userService.findAll();
-        return new ResponseEntity<>(allUsers, HttpStatus.OK);
+
+        List<UserDTO> collect = allUsers.stream()
+                .map(userDb -> UserDTO.builder()
+                        .id(userDb.getId())
+                        .firstName(userDb.getFirstName())
+                        .lastName(userDb.getLastName())
+                        .login(userDb.getLogin())
+                        .phone(userDb.getPhone())
+                        .roles(userDb.getRoles().stream().map(Role::getRole).collect(Collectors.toList()))
+                        .build())
+                .collect(Collectors.toList());
+
+
+        return new ResponseEntity<>(collect, HttpStatus.OK);
     }
 
     /**
@@ -57,7 +73,7 @@ public class UserController {
      * @return if successful then updated object, if not successful then error message
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public HttpEntity<?> updateUser(@RequestBody UserDb user) {
+    public HttpEntity<?> updateUser(@RequestBody UserDTO user) {
 
         Optional<UserDb> insertedUser = userService.update(user);
         return insertedUser.isPresent() ?

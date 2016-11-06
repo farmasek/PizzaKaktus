@@ -18,7 +18,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 public class UserDTO {
-
+    private Integer id;
     private String firstName;
     private String lastName;
     private String password;
