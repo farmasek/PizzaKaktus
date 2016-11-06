@@ -20,6 +20,8 @@ const routes = (
         <Route path="/registration" component={Pages.RegistrationPage} />
 
         <Route path="/manager/ingredients" component={Pages.ManageIngredientsPage} />
+        <Route path="/manager/pizzas" component={Pages.ManagePizzasPage} />
+        <Route path="/manager/category" component={Pages.ManageCategoryPage} />
         <Route path="/manager/users" component={Pages.ManageUsersPage} />
 
         <Route path="*" component={Pages.NotFoundPage} />

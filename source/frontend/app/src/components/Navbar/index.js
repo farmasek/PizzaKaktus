@@ -11,7 +11,9 @@ const Navbar = () => (
       <Link to="/registration">Registrace</Link><br />
       <span>Menu majitele&nbsp;&nbsp;</span>
       <Link to="/manager/ingredients">Správa ingrediencí</Link>&nbsp;
-      <Link to="/manager/users">Správa uživatelů</Link>
+      <Link to="/manager/users">Správa uživatelů</Link>&nbsp;
+      <Link to="/manager/category">Správa kategorií pizz</Link>&nbsp;
+      <Link to="/manager/pizzas">Správa pizz</Link>&nbsp;
     </Navigation>
   </div>
 );

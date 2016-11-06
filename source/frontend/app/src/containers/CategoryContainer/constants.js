@@ -1,0 +1,6 @@
+/**
+ * Created by e-myslivost on 6.11.2016.
+ */
+export const FETCH_CATEGORY_LIST = 'FETCH_CATEGORY_LIST';
+export const CATEGORY_CHANGE_FORM_VALUE = 'CATEGORY_CHANGE_FORM_VALUE';
+export const CATEGORY_CREATE_NEW = 'CATEGORY_CREATE_NEW';
