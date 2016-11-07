@@ -11,19 +11,24 @@ import java.util.Optional;
 public interface IngredientService {
 
     /**
-     * Insert ingredient into database
+     * Inserts ingredient into database
      *
-     * @param ingredientDb - ingredient to be put in database
+     * @param ingredientDb - ingredient to be inserted in database
      * @return inserted ingredient
      */
     Optional<IngredientDb> insert(IngredientDb ingredientDb);
 
     /**
-     * Find all ingredients in database
+     * Returns all ingredients in database
      *
      * @return list of ingredients
      */
     List<IngredientDb> findAll();
 
+    /**
+     * Returns all ingredients in database by ID
+     *
+     * @return list of ingredients
+     */
     List<IngredientDb> findAllById(List<Integer> ids);
 }

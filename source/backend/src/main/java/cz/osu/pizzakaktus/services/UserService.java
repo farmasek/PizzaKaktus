@@ -12,20 +12,23 @@ import java.util.Optional;
 public interface UserService {
 
     /**
+     * Inserts user into database
      *
-     * @param userDTO
-     * @return insert Users
+     * @param userDTO - user to be inserted in database
+     * @return inserted User
      */
     Optional<UserDb> insert(UserDTO userDTO);
 
-  /**
+    /**
+     * Updates user data based on his ID
      *
-     * @param userDTO
-     * @return update user based on his ID
+     * @param userDTO - the user to be updated in database
+     * @return updated user based on his ID
      */
     Optional<UserDb> update(UserDTO userDTO);
 
     /**
+     * Returns list of all users
      *
      * @return List of users
      */
