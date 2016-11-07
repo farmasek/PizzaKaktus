@@ -12,20 +12,23 @@ import java.util.Optional;
 public interface PizzaService {
 
     /**
+     * Inserts pizza into database
      *
-     * @param pizzaDTO
-     * @return insert Pizza
+     * @param pizzaDTO - pizza to be inserted in database
+     * @return inserted pizza
      */
     Optional<PizzaDb> insert(PizzaDTO pizzaDTO);
 
     /**
+     * Updates pizza data based on its ID
      *
-     * @param pizzaDb
-     * @return pizza user based on ID
+     * @param pizzaDb - the pizza to be updated in database
+     * @return updated pizza based on its ID
      */
     Optional<PizzaDb> update(PizzaDb pizzaDb);
 
     /**
+     * Returns list of all pizzas
      *
      * @return List of pizzas
      */

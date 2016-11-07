@@ -12,21 +12,31 @@ import java.util.Optional;
 public interface CategoryService {
 
     /**
-     * Insert category into database
+     * Inserts category into database
      *
-     * @param categoryDb - ingredient to be put in database
+     * @param categoryDTO - category to be inserted in database
      * @return inserted category
      */
     Optional<CategoryDb> insert(CategoryDTO categoryDTO);
 
     /**
-     * Find all categories in database
+     * Returns all categories in database
      *
      * @return list of categories
      */
     List<CategoryDb> findAll();
 
+    /**
+     * Finds category based on its IDs
+     *
+     * @return category based on its IDs
+     */
     CategoryDb findById(Integer id);
 
+    /**
+     * Returns list of categories based on its IDs
+     *
+     * @return list of categories based on its IDs
+     */
     List<CategoryDb> findAllById(List<Integer> ids);
 }
