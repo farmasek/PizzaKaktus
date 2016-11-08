@@ -210,16 +210,48 @@ Implementace nových požadavků do stávající architektury
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| Tým souhlasí s opraveným sekvenčním diagramem vložení ingredience | |
-| Tým souhlasí s opraveným sekvenčním diagramem vložení uživatele | |
-| Tým souhlasí s class diagramem| |
-| Tým souhlasí se sekvenčním diagramem UC3 S1 | |
-| Tým souhlasí s databázovým diagramem | |
-| Vytvoření pizzy (backend) je funkční | |
-| Vytvoření pizzy (frontend) je funkční | |
-| Tým souhlasí s vytvořenou implementací vytvoření pizzy | | 
-| Zákazník souhlasí s implementací vytvoření pizzy | |
-| Práva jsou implementována v databázi jako int | |
-| Zákazník souhlasí s implementací ukládání hesel | |
+| Tým souhlasí s opraveným sekvenčním diagramem vložení ingredience | Splněno |
+| Tým souhlasí s opraveným sekvenčním diagramem vložení uživatele | Splněno |
+| Tým souhlasí s class diagramem| Splněno |
+| Tým souhlasí se sekvenčním diagramem UC3 S1 | Splněno |
+| Tým souhlasí s databázovým diagramem | Splněno |
+| Vytvoření pizzy (backend) je funkční | Splněno |
+| Vytvoření pizzy (frontend) je funkční | Nesplněno |
+| Tým souhlasí s vytvořenou implementací vytvoření pizzy | Nesplněno | 
+| Zákazník souhlasí s implementací vytvoření pizzy | Nesplněno |
+| Práva jsou implementována v databázi jako int | Splněno |
+| Zákazník souhlasí s implementací ukládání hesel | Splněno |
+
+####Lessons learned
+Implementace nových požadavků do stávající architektury
+
+----
+##E3
+8.11.2016 - 15.11.2016
+
+####Cíle
+
+- Realizace vytvoření pizzy (UC3 S1)
+- Opravit sekvenční diagram (vložení uživatele)
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+|Oprava sekvenčního diagramu vložení uživatele | Náhlý | 10 m|
+|Rozšíření dosavadního class diagramu o UC3 S1 | Jaroš | 3 h|
+|Změnit název množství v ingredienci na amount | Baránek | 1m |
+|Implementace backend UC3 S1 | Krížová, Pravda | 5 h|
+|Implementace frontend UC3 S1 | Jaroš, Náhlý  | 20 h |
+|Vytvoření tabulky stavů scénářů | Križová | 2 h |
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+|Tým souhlasí s diagramem vložení uživatele |  |
+|Tým souhlasí s tabulkou stavů scénářů |  |
+|Tým souhlasí s class diagramem UC3 S1 |  |
+|Tým souhlasí implementací vytvoření pizzy |  |
+|Zákazník souhlasí s implementací vytvoření pizzy |  |
 
 ####Lessons learned
