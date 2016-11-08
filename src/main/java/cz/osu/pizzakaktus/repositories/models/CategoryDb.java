@@ -3,11 +3,7 @@ package cz.osu.pizzakaktus.repositories.models;
 import cz.osu.pizzakaktus.endpoints.models.CategoryDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Mish.k.a on 3. 11. 2016.

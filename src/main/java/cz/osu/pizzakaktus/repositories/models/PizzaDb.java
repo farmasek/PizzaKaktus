@@ -1,14 +1,9 @@
 package cz.osu.pizzakaktus.repositories.models;
 
-import cz.osu.pizzakaktus.endpoints.models.IngredientDTO;
-import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Mish.k.a on 3. 11. 2016.
@@ -22,7 +17,7 @@ public class PizzaDb {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String title;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CategoryDb category;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<IngredientDb> ingredients;
