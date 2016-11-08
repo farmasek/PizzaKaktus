@@ -1,12 +1,10 @@
-﻿##Seznam scénářu seřazený podle složitosti 
-(můžeme sloučit se "Scenare.md", nebo nechat zvlášť)
+##Seznam scénářů seřazený podle složitosti
 
 | Use Case | Scénář | Popis | Složitost |
 |:--------:|:------:|:------|:------:|
 | UC3 | S2 | Editace vytvořené pizzy + aktivace/deaktivace | 20 h |
 | UC2 | S2 | Objednání pizzy z nabídky s editací | 15 h |
 | UC3 | S1 | Vložení nové pizzy do nabídky | 15 h |
-| UC4 | S2 | Otevření a potvrzení přijaté objednávky | 15 h |
 | UC6 | S2 | Zobrazení prodejnosti pizz podle druhu + řazení | 15 h |
 | UC4 | S1 | Zobrazení historie objednávek, řazení dle: datum, zákazník, pizza | 12 h |
 | UC2 | S1 | Objednání pizzy z nabídky | 10 h |
