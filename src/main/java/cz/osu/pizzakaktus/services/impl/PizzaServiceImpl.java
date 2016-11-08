@@ -36,7 +36,7 @@ public class PizzaServiceImpl implements PizzaService {
         List<IngredientDb> ingredientsById = ingredientService.findAllById(pizzaDTO.getIngredientsId());
         CategoryDb categoryDb = categoryService.findById(pizzaDTO.getCategoryId());
         PizzaDb insertedPizza = pizzaRepository.save(
-                new PizzaDb(pizzaDTO.getTitle(), categoryDb, ingredientsById));
+                new PizzaDb(pizzaDTO.getTitle(), categoryDb, ingredientsById, pizzaDTO.isActive()));
         return Optional.of(insertedPizza);
     }
 
