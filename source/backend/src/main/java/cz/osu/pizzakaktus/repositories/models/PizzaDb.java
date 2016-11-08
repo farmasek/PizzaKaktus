@@ -22,17 +22,19 @@ public class PizzaDb {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String title;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private CategoryDb category;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<IngredientDb> ingredients;
+    private boolean active;
 
-    public PizzaDb(String title, CategoryDb category, List<IngredientDb> ingredients) {
+    public PizzaDb(String title, CategoryDb category, List<IngredientDb> ingredients, boolean active) {
         this.title = title;
         this.category = category;
 //        List<IngredientDb> ingredientDb = new ArrayList<>(ingredients.size());
 //        ingredientDb.addAll(ingredients.stream().map(IngredientDb::new).collect(Collectors.toList()));
         this.ingredients = ingredients;
+        this.active = active;
     }
 
 //    public PizzaDb(PizzaDTO pizza) {
@@ -41,5 +43,6 @@ public class PizzaDb {
 //        List<IngredientDb> ingredientDb = new ArrayList<>(pizza.getIngredients().size());
 //        ingredientDb.addAll(pizza.getIngredients().stream().map(IngredientDb::new).collect(Collectors.toList()));
 //        this.ingredients = ingredientDb;
+    //    this.active = pizza.getActive();
 //    }
 }

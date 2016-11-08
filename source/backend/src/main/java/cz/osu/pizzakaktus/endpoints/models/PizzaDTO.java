@@ -20,4 +20,5 @@ public class PizzaDTO {
     private String title;
     private Integer categoryId;
     private List<Integer> ingredientsId;
+    private boolean active;
 }
