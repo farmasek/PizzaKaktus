@@ -1,5 +1,6 @@
 package cz.osu.pizzakaktus.services.impl;
 
+import cz.osu.pizzakaktus.endpoints.models.CategoryDTO;
 import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import cz.osu.pizzakaktus.repositories.IngredientRepository;
 import cz.osu.pizzakaktus.repositories.PizzaRepository;
@@ -35,9 +36,12 @@ public class PizzaServiceImpl implements PizzaService {
     public Optional<PizzaDb> insert(PizzaDTO pizzaDTO) {
         List<IngredientDb> ingredientsById = ingredientService.findAllById(pizzaDTO.getIngredientsId());
         CategoryDb categoryDb = categoryService.findById(pizzaDTO.getCategoryId());
-        PizzaDb insertedPizza = pizzaRepository.save(
-                new PizzaDb(pizzaDTO.getTitle(), categoryDb, ingredientsById, pizzaDTO.isActive()));
-        return Optional.of(insertedPizza);
+        if (isCategoryValid(categoryDb)) {
+            PizzaDb insertedPizza = pizzaRepository.save(
+                    new PizzaDb(pizzaDTO.getTitle(), categoryDb, ingredientsById, pizzaDTO.isActive()));
+            return Optional.of(insertedPizza);
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -54,5 +58,9 @@ public class PizzaServiceImpl implements PizzaService {
     public List<PizzaDb> findAll() {
         Iterable<PizzaDb> pizzasList = pizzaRepository.findAll();
         return Lists.newArrayList(pizzasList);
+    }
+
+    public boolean isCategoryValid(CategoryDb categoryDb) {
+        return !(categoryDb == null);
     }
 }
