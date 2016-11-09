@@ -243,7 +243,9 @@ Implementace nových požadavků do stávající architektury
 |Změnit název množství v ingredienci na amount | Baránek | 1m |
 |Implementace backend UC3 S1 | Krížová, Pravda | 5 h|
 |Implementace frontend UC3 S1 | Jaroš, Náhlý  | 20 h |
-|Vytvoření tabulky stavů scénářů | Križová | 2 h |
+|Vytvoření tabulky stavů scénářů | Krížová | 2 h |
+|Rozepsání 5 scénářů | Pravda | 3 h |
+|Testování | Baránek | 3 h |
 
 ####Kritéria hodnocení
 | Úkol | Stav |
