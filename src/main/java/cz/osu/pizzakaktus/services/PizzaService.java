@@ -1,6 +1,7 @@
 package cz.osu.pizzakaktus.services;
 
 import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
+import cz.osu.pizzakaktus.repositories.models.CategoryDb;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
 
 import java.util.List;
@@ -33,4 +34,8 @@ public interface PizzaService {
      * @return List of pizzas
      */
     List<PizzaDb> findAll();
+
+    boolean isCategoryValid(CategoryDb categoryDb);
+
+    boolean isTitleTaken(String title);
 }

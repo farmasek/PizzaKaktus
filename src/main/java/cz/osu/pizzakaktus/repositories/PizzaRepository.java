@@ -13,4 +13,5 @@ import java.util.List;
 public interface PizzaRepository extends CrudRepository<PizzaDb, Long> {
     List<PizzaDb> findById(Long Id);
     List<PizzaDb> findByCategory(Integer categoryId);
+    List<PizzaDb> findByTitle(String title);
 }
