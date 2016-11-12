@@ -64,7 +64,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isLoginTaken(String login) {
-
         List<UserDb> byLogin = userRepository.findByLogin(login);
         return !byLogin.isEmpty();
     }

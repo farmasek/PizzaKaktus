@@ -45,7 +45,7 @@ public class PizzaController {
         return insertedPizza.isPresent() ?
                 new ResponseEntity<>(insertedPizza.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>("Error inserting to database", HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>("Error inserting into database", HttpStatus.NOT_ACCEPTABLE);
     }
 
     /**
