@@ -111,8 +111,8 @@
 | 1 | Aplikace | Zobrazený list pizz s tlačítkem přidání do košíku, tlačítkem pro editaci a zobrazením ikony košíku. |
 | 2 | Uživatel | Uživatel klikne na tlačítko editace u dané pizzy. |
 | 3 | Aplikace | Zobrazí se vyskakovací okno s ingrediencemi, které uživatel může upravit a jejich ceny. |
-| 4 | Uživatel | Uživatel přidá nebo odebere ingredience pomocí tlačítka + nebo -. |
-| 5 | Uživatel | Po navolení ingrediencí uživatel klikne na tlačítko pro přidání do košíku. |
+| 4 | Uživatel | Uživatel přidá nebo odebere ingredience. |
+| 5 | Uživatel | Po navolení ingrediencí uživatel přidá pizzu do košíku. |
 | 6 | Aplikace | Pizza se přidá do košíku. |
 | 7 | Uživatel | Uživatel přejde do košíku. |
 | 8 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
@@ -136,8 +136,8 @@
 | 1 | Aplikace | V menu pro uživatele je položka pro vytvoření vlastní pizzy. |
 | 2 | Uživatel | Uživatel klikne na tuto položku. |
 | 3 | Aplikace | Zobrazí se stránka s volbou základu pro pizzu, ingrediencemi, které uživatel může přidat a jejich ceny. |
-| 4 | Uživatel | Uživatel zvolí základ a přidá nebo odebere ingredience pomocí tlačítka + nebo -. |
-| 5 | Uživatel | Po navolení základu a ingrediencí uživatel klikne na tlačítko pro přidání do košíku. |
+| 4 | Uživatel | Uživatel přidá nebo odebere ingredience. |
+| 5 | Uživatel | Po navolení ingrediencí uživatel klikne na tlačítko pro přidání do košíku. |
 | 6 | Aplikace | Pizza se přidá do košíku. |
 | 7 | Uživatel | Uživatel přejde do košíku. |
 | 8 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
@@ -161,9 +161,11 @@
 | 1 | Aplikace | V menu pro majitele je u položky "Správa pizz" možnost "Vložení nové pizzy do nabídky". |
 | 2 | Majitel | Majitel vybere tuto možnost.|
 | 3 | Aplikace | Zobrazí se stránka s formulářem pro vytvoření nové pizzy. |
-| 4 | Majitel | Majitel zvolí pizzu, ze které bude vytvářet novou pizzu, změní název, cenu, ingredience a obrázek pro novou pizzu a potvrdí. |
-| 5 | Aplikace | Uloží se nová pizza. |
-| 6 | Aplikace | Zobrazí se seznam všech pizz. |
+| 4 | Majitel | Majitel zvolí pizzu, ze které bude vytvářet novou pizzu. |
+| 5 | Aplikace | Do polí se načtou informace vybrané pizzy. |
+| 6 | Majitel | Majitel upraví údaje a potvrdí uložení. |
+| 7 | Aplikace | Uloží se nová pizza. |
+| 8 | Aplikace | Zobrazí se stránka se seznamem všech pizz. |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
@@ -178,20 +180,18 @@
 |:---:|:---|:---|
 | 1 | Aplikace | Na stránce je seznam všech uživatelů. |
 | 2 | Majitel | Majitel zvolí uživatele, kterého chce smazat a potvrdí. |
-| 3 | Aplikace | Na stránce se na chvíli zobrazí potvzrení smazání uživatele. |
-| 4 | Aplikace | Na stránce se aktualizuje seznam uživatelů a vyprázdní formulář. |
+| 3 | Aplikace | Na stránce se aktualizuje seznam uživatelů. |
+| 4 | Aplikace | Na stránce se zobrazí potvrzení smazání uživatele. |
 
 ## UC5	S2	Editace ingredience
-### Preconditions: Spuštěná aplikace, přihlášený majitel
+### Preconditions: Spuštěná aplikace, přihlášený majitel, zobrazená stránka s ingrediencemi
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
-| 1 | Aplikace | Zobrazené menu pro majitele s položkou Editace ingredience. |
+| 1 | Aplikace | Zobrazený seznam ingrediencí a u každé možnost editovat ji. |
 | 2 | Majitel | Uživatel vybere možnost Editace ingredience. |
-| 3 | Aplikace | Zobrazí se stránka se seznamem ingrediencí. |
-| 4 | Majitel | Majitel zvolí ingredienci, kterou chce editovat. |
-| 5 | Aplikace | Zobrazí se formulář pro editaci ingredience. |
-| 6 | Majitel | Majitel změní název, cenu, množství a potvrdí. |
+| 5 | Aplikace | Zobrazí se stránka s formulářem pro editaci ingredience. |
+| 6 | Majitel | Majitel provede změny a potvrdí. |
 | 7 | Aplikace | Zobrazí se seznam všech ingrediencí. |
 
 ### Alternative flow:
