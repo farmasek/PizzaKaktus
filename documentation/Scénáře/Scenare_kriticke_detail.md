@@ -62,7 +62,7 @@
 | 3 | Aplikace | Pizza se přidá do košíku. |
 | 4 | Uživatel | Uživatel přejde do košíku. |
 | 5 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
-| 6 | Uživatel | Vyplní údaje a potvrdí ojednávku |
+| 6 | Uživatel | Vyplní údaje a potvrdí objednávku |
 | 7 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou a pošle se uživateli informační email |
 
 ### Alternative flow:
@@ -101,4 +101,29 @@
 | Krok | Actor | Reakce |
 |:---:|:---|:---| 
 | 2b  | Majitel | Majitel vloží a odešle nevalidní údaje. | 
+| | Aplikace | Zobrazí se hláška s upozorněním na nevalidní údaje. | 
+
+## UC2	S2	Objednání pizzy z nabídky s editací
+### Preconditions: Spuštěná aplikace, přihlášený uživatel, zobrazená nabídka
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | Zobrazený list pizz s tlačítkem přidání do košíku, tlačítkem pro editaci a zobrazením ikony košíku. |
+| 2 | Uživatel | Uživatel klikne na tlačítko editace u dané pizzy. |
+| 3 | Aplikace | Zobrazí se vyskakovací okno s ingrediencemi, které uživatel může upravit a jejich ceny. |
+| 4 | Uživatel | Uživatel přidá nebo odebere ingredience pomocí tlačítka + nebo -. |
+| 5 | Uživatel | Po navolení ingrediencí uživatel klikne na tlačítko pro přidání do košíku. |
+| 6 | Aplikace | Pizza se přidá do košíku. |
+| 7 | Uživatel | Uživatel přejde do košíku. |
+| 8 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
+| 9 | Uživatel | Vyplní údaje a potvrdí objednávku |
+| 10 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou a pošle se uživateli informační email |
+
+### Alternative flow:
+| Krok | Actor | Reakce |
+|:---:|:---|:---| 
+| 8a | Uživatel | Vložení emailové adresy, na kterou již proběhla objednávka | 
+| | Aplikace | Doplnění formuláře daty z poslední provedené objednávky | 
+| | Uživatel | Upraví, nebo potvrdí doplněné údaje | 
+| 8b  | Uživatel | Vložení nevalidních údajů. | 
 | | Aplikace | Zobrazí se hláška s upozorněním na nevalidní údaje. | 
