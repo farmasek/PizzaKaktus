@@ -127,3 +127,75 @@
 | | Uživatel | Upraví, nebo potvrdí doplněné údaje | 
 | 8b  | Uživatel | Vložení nevalidních údajů. | 
 | | Aplikace | Zobrazí se hláška s upozorněním na nevalidní údaje. | 
+
+## UC2	S3	Objednání vlastní složené pizzy
+### Preconditions: Spuštěná aplikace, přihlášený uživatel
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | V menu pro uživatele je položka pro vytvoření vlastní pizzy. |
+| 2 | Uživatel | Uživatel klikne na tuto položku. |
+| 3 | Aplikace | Zobrazí se stránka s volbou základu pro pizzu, ingrediencemi, které uživatel může přidat a jejich ceny. |
+| 4 | Uživatel | Uživatel zvolí základ a přidá nebo odebere ingredience pomocí tlačítka + nebo -. |
+| 5 | Uživatel | Po navolení základu a ingrediencí uživatel klikne na tlačítko pro přidání do košíku. |
+| 6 | Aplikace | Pizza se přidá do košíku. |
+| 7 | Uživatel | Uživatel přejde do košíku. |
+| 8 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
+| 9 | Uživatel | Vyplní údaje a potvrdí objednávku |
+| 10 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou a pošle se uživateli informační email |
+
+### Alternative flow:
+| Krok | Actor | Reakce |
+|:---:|:---|:---| 
+| 8a | Uživatel | Vložení emailové adresy, na kterou již proběhla objednávka | 
+| | Aplikace | Doplnění formuláře daty z poslední provedené objednávky | 
+| | Uživatel | Upraví, nebo potvrdí doplněné údaje | 
+| 8b  | Uživatel | Vložení nevalidních údajů. | 
+| | Aplikace | Zobrazí se hláška s upozorněním na nevalidní údaje. | 
+
+## UC3	S3	Vložení nové pizzy do nabídky založené na existující pizze
+### Preconditions: Spuštěná aplikace, přihlášený majitel
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | V menu pro majitele je u položky "Správa pizz" možnost "Vložení nové pizzy do nabídky". |
+| 2 | Majitel | Majitel vybere tuto možnost.|
+| 3 | Aplikace | Zobrazí se stránka s formulářem pro vytvoření nové pizzy. |
+| 4 | Majitel | Majitel zvolí pizzu, ze které bude vytvářet novou pizzu, změní název, cenu, ingredience a obrázek pro novou pizzu a potvrdí. |
+| 5 | Aplikace | Uloží se nová pizza. |
+| 6 | Aplikace | Zobrazí se seznam všech pizz. |
+
+### Alternative flow:
+| Krok | Actor | Reakce |
+|:---:|:---|:---|
+| 4a | Majitel | Vložení nevalidních údajů. | 
+| | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
+
+## UC7	S2	Smazání uživatele
+### Preconditions: Spuštěná aplikace, přihlášený majitel, zobrazená stránka pro správu uživatelů
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | Na stránce je seznam všech uživatelů. |
+| 2 | Majitel | Majitel zvolí uživatele, kterého chce smazat a potvrdí. |
+| 3 | Aplikace | Na stránce se na chvíli zobrazí potvzrení smazání uživatele. |
+| 4 | Aplikace | Na stránce se aktualizuje seznam uživatelů a vyprázdní formulář. |
+
+## UC5	S2	Editace ingredience
+### Preconditions: Spuštěná aplikace, přihlášený majitel
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | Zobrazené menu pro majitele s položkou Editace ingredience. |
+| 2 | Majitel | Uživatel vybere možnost Editace ingredience. |
+| 3 | Aplikace | Zobrazí se stránka se seznamem ingrediencí. |
+| 4 | Majitel | Majitel zvolí ingredienci, kterou chce editovat. |
+| 5 | Aplikace | Zobrazí se formulář pro editaci ingredience. |
+| 6 | Majitel | Majitel změní název, cenu, množství a potvrdí. |
+| 7 | Aplikace | Zobrazí se seznam všech ingrediencí. |
+
+### Alternative flow:
+| Krok | Actor | Reakce |
+|:---:|:---|:---|
+| 6a | Majitel | Vložení nevalidních údajů. | 
+| | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
