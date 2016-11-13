@@ -1,10 +1,8 @@
 package cz.osu.pizzakaktus.repositories.models;
 
 import cz.osu.pizzakaktus.endpoints.models.UserDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.Wither;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -17,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Wither
 public class UserDb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

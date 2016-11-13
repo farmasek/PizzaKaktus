@@ -18,7 +18,9 @@ class Ingredient extends Component { // eslint-disable-line react/prefer-statele
     return (
       <div className={styles.ingredient}>
         <div className={styles.flexChild}>
-          <IngredientList ingredients={this.props.ingredients.ingredients}/>
+          {this.props.isLoading ?
+            <IngredientList ingredients={this.props.ingredients.ingredients}/>
+            : null}
         </div>
         <div className={styles.flexChild}>
           <CreateIngredient
