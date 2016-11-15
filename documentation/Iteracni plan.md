@@ -250,10 +250,45 @@ Implementace nových požadavků do stávající architektury
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-|Tým souhlasí s diagramem vložení uživatele |  |
-|Tým souhlasí s tabulkou stavů scénářů |  |
-|Tým souhlasí s class diagramem UC3 S1 |  |
+|Tým souhlasí s diagramem vložení uživatele | Splněno |
+|Tým souhlasí s tabulkou stavů scénářů | Splněno |
+|Tým souhlasí s class diagramem UC3 S1 | Splněno |
+|Tým souhlasí implementací vytvoření pizzy | Nesplněno |
+|Zákazník souhlasí s implementací vytvoření pizzy | Nesplněno |
+
+####Lessons learned
+
+----
+##E4
+15.11.2016 - 22.11.2016
+
+####Cíle
+
+- Realizace smazání uživatele (UC7 S2)
+- Rozepsání dalších scénářů
+- Dokončení implementace pizzy (UC3 S1)
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+|Rozšíření dosavadního class diagramu o UC7 S2 | Jaroš | 3 h|
+|Spojení všech class diagramů | Jaroš | 3 h|
+|Implementace backend UC3 S1 | Baránek | 2h |
+|Implementace backend UC7 S2 s testy | Krížová, Pravda | 5 h|
+|Implementace frontend UC7 S2 s testy | Jaroš, Náhlý  | 20 h |
+|Rozepsání 5 scénářů | Pravda | 3 h |
+
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+|Tým souhlasí s novým class diagramem |  |
+|Tým souhlasí s class diagramem UC7 S1 |  |
 |Tým souhlasí implementací vytvoření pizzy |  |
+|Tým souhlasí implementací mazání uživatele |  |
 |Zákazník souhlasí s implementací vytvoření pizzy |  |
+|Zákazník souhlasí implementací mazání uživatele |  |
+|Zákazník souhlasí s rozepsanými scénáři |  |
 
 ####Lessons learned
