@@ -274,10 +274,10 @@ Implementace nových požadavků do stávající architektury
 |:------|:----------------|:-----------------:|
 |Rozšíření dosavadního class diagramu o UC7 S2 | Jaroš | 3 h|
 |Spojení všech class diagramů | Jaroš | 3 h|
-|Implementace backend UC3 S1 | Baránek | 2h |
-|Implementace backend UC7 S2 s testy | Krížová, Pravda | 5 h|
+|Implementace backend UC3 S1 | Krížová, Pravda | 5 h |
+|Implementace backend UC7 S2 s testy | Baránek | 5 h|
 |Implementace frontend UC7 S2 s testy | Jaroš, Náhlý  | 20 h |
-|Rozepsání 5 scénářů | Pravda | 3 h |
+|Rozepsání 5 scénářů | Krížová, Pravda | 3 h |
 
 
 ####Kritéria hodnocení
