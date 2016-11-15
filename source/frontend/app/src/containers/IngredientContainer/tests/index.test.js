@@ -1,35 +1,59 @@
-// import IngredientContainer from '../index';
-// import IngredientList from '../../../components/IngredientList'
-// import { Provider } from 'react-redux';
-// import store, { history } from '../../../store';
-// import expect from 'expect';
-// import { shallow } from 'enzyme';
-// import React from 'react';
-//
-// function setup() {
-//   const props = {
-//     isLoading: false,
-//   };
-//   const wrapper = shallow(
-//     <Provider store={store}>
-//     <IngredientContainer isLoading={props.isLoading} />
-//     </Provider>
-//   );
-//   return {
-//     props,
-//     wrapper,
-//   };
-// }
-//
-// describe('INGREDIENT CONTAINER', () => {
-//   it('it should not render table while loading', () => {
-//     const {
-//       wrapper,
-//     } = setup();
-//     expect(
-//       wrapper.contains(
-//         <IngredientList/>
-//       )
-//     ).toBe(true);
-//   });
-// });
+import IngredientContainer from '../index';
+import IngredientList from '../../../components/IngredientList'
+import { Provider } from 'react-redux';
+import { expect } from 'chai';
+import React from 'react';
+import thunk from 'redux-thunk';
+import { mount, shallow } from 'enzyme';
+import { List, fromJS } from 'immutable'
+import events from 'events';
+
+import configureMockStore from 'redux-mock-store';
+
+
+const mockStore = configureMockStore([thunk]);
+
+
+describe('INGREDIENT CONTAINER', () => {
+
+  let store, component;
+
+  const storeToMock = {
+    ingredientContainer: {
+      isLoading: false,
+      ingredients: new List(),
+      ingredientForm: fromJS({
+        name: '',
+        weight: null,
+        cost: null,
+        customCost: null,
+      }),
+    }
+  }
+  const storeToMockIsLoading = {
+    ingredientContainer: {
+      isLoading: true,
+      ingredients: new List(),
+      ingredientForm: fromJS({
+        name: '',
+        weight: null,
+        cost: null,
+        customCost: null,
+      }),
+    }
+  }
+
+
+  it('should render Ingredient list if not loading', () => {
+    store = mockStore(storeToMock);
+    component = shallow(<IngredientContainer store={store}/>).shallow();
+    expect(component.contains(<IngredientList ingredients={new List()}/>)).to.be.equal(true);
+  });
+
+  it('should not render Ingredient list if loading', () => {
+    store = mockStore(storeToMockIsLoading);
+    component = shallow(<IngredientContainer store={store}/>).shallow();
+    expect(component.contains(<IngredientList ingredients={new List()}/>)).to.be.equal(false);
+  });
+
+});
