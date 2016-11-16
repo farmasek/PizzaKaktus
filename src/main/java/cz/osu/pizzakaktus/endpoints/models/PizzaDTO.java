@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class PizzaDTO {
-
+    private Integer id;
     private String title;
     private Integer categoryId;
     private List<Integer> ingredientsId;

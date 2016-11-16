@@ -34,11 +34,8 @@ public class UserServiceImpl implements UserService {
         if (isLoginTaken(userDTO.getLogin()))
             return Optional.empty();
         else {
-
             UserDb userWithRoles = addRolesToUser(userDTO);
-
             UserDb insertedUser = userRepository.save(userWithRoles);
-
             return Optional.of(insertedUser);
         }
     }
@@ -53,7 +50,6 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             return Optional.empty();
         }
-
     }
 
     @Override
@@ -77,13 +73,11 @@ public class UserServiceImpl implements UserService {
     private boolean checkPassword(String passwordPlainText, String storedHash) {
         return !(null == storedHash || !storedHash.startsWith("$2a$"))
                 && BCrypt.checkpw(passwordPlainText, storedHash);
-
     }
 
 
     private UserDb addRolesToUser(UserDTO userDTO) {
         Set<Role> roleStream = userDTO.getRoles().stream().map(role -> roleRepository.findByRole(role)).collect(Collectors.toSet());
-
         UserDb userToInsert = UserDb.builder()
                 .id(userDTO.getId())
                 .firstName(userDTO.getFirstName())
