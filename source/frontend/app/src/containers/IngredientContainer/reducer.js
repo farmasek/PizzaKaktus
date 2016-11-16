@@ -6,12 +6,11 @@ import { Record, List, fromJS } from 'immutable';
 
 const InitialState = new Record(
   {
-    // Initial State goes here!
     isLoading: false,
     ingredients: new List(),
     ingredientForm: fromJS({
       name: '',
-      weight: null,
+      amount: null,
       cost: null,
       customCost: null,
     }),

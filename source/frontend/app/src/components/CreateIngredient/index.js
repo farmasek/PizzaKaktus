@@ -11,12 +11,12 @@ class CreateIngredient extends Component { // eslint-disable-line react/prefer-s
 
   state = {
     name: '',
-    weight: '',
+    amount: '',
     cost: '',
     costCustom: '',
     validation: {
       errName: '',
-      errWeight: '',
+      errAmount: '',
       errCost: '',
       errCostCustom: '',
     },
@@ -41,12 +41,12 @@ class CreateIngredient extends Component { // eslint-disable-line react/prefer-s
       this.props.confirmForm();
       this.setState({
         name: '',
-        weight: '',
+        amount: '',
         cost: '',
         costCustom: '',
         validation: {
           errName: '',
-          errWeight: '',
+          errAmount: '',
           errCost: '',
           errCostCustom: '',
         },
@@ -57,7 +57,7 @@ class CreateIngredient extends Component { // eslint-disable-line react/prefer-s
   validateState() {
     const validation = {
       errName: '',
-      errWeight: '',
+      errAmount: '',
       errCost: '',
       errCostCustom: '',
     };
@@ -68,11 +68,11 @@ class CreateIngredient extends Component { // eslint-disable-line react/prefer-s
     } else {
       validation.errName = '';
     }
-    if (this.state.weight === '') {
-      validation.errWeight = 'Je nutné vyplnit';
+    if (this.state.amount === '') {
+      validation.errAmount = 'Je nutné vyplnit';
       valid = false;
     } else {
-      validation.errWeight = '';
+      validation.errAmount = '';
     }
     if (this.state.cost === '') {
       validation.errCost = 'Je nutné vyplnit';
@@ -103,10 +103,10 @@ class CreateIngredient extends Component { // eslint-disable-line react/prefer-s
             error={this.state.validation.errName}
           />
           <Input
-            type="text" label="Množství" value={this.state.weight}
-            onChange={(value) => this.handleChange('weight', value)}
+            type="text" label="Množství" value={this.state.amount}
+            onChange={(value) => this.handleChange('amount', value)}
             onKeyPress={(event) => this.handleConfirm(event)}
-            error={this.state.validation.errWeight}
+            error={this.state.validation.errAmount}
           />
           <div className={styles.insideNumbers}>
             <Input
