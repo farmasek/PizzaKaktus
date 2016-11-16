@@ -7,7 +7,7 @@ import Table from 'react-toolbox/lib/table';
 
 const TableModel = {
   name: { type: String, title: 'Jméno' },
-  weight: { type: String, title: 'Množství' },
+  amount: { type: String, title: 'Množství' },
   cost: { type: Number, title: 'Cena sam.' },
   costCustom: { type: Number, title: 'Cena dopl.' },
 };
