@@ -81,6 +81,21 @@ public class UserController {
                 :
                 new ResponseEntity<>("Error inserting to database", HttpStatus.NOT_ACCEPTABLE);
     }
+    /**
+     * Delete user in database
+     *
+     * @param userId - Json of user
+     * @return if successful then OK HttpStatus, if not successful then error message
+     */
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public HttpEntity<?> deleteUser(@PathVariable("id") int userId) {
+
+        boolean successfullyDeleted = userService.deleteById(userId);
+        return successfullyDeleted ?
+                new ResponseEntity<>("Successfully deleted user", HttpStatus.OK)
+                :
+                new ResponseEntity<>("Error deleting to database", HttpStatus.NOT_ACCEPTABLE);
+    }
 
     //TODO use validator
     private boolean isUserValid(UserDTO user) {

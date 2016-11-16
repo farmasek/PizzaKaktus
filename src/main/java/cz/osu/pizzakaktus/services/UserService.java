@@ -35,4 +35,11 @@ public interface UserService {
     List<UserDb> findAll();
 
     boolean isLoginTaken(String login);
+
+    /**
+     * Delete user in database
+     * @param userId - id of user to be deleted
+     * @return - true if successful, false if failed
+     */
+    boolean deleteById(int userId);
 }
