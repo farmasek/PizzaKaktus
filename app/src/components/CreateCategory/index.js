@@ -64,7 +64,7 @@ class CreateCategory extends Component { // eslint-disable-line react/prefer-sta
   render() {
     return (
       <Card >
-        <CardTitle>Přidat Kategorii</CardTitle>
+        <CardTitle>Přidat kategorii</CardTitle>
         <CardText>
           <Input
             type="text" label="Název" value={this.state.name}
