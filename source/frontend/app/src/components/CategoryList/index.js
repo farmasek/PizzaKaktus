@@ -1,9 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-
 import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
 import Table from 'react-toolbox/lib/table';
-
 
 const TableModel = {
   name: { type: String, title: 'Název Kategorie' },

@@ -21,7 +21,7 @@ class Category extends Component { // eslint-disable-line react/prefer-stateless
     return (
       <div className={styles.category}>
         <div className={styles.flexChild}>
-          <CategoryList category={this.props.categories.categories}/>
+          <CategoryList category={this.props.categories.categories} />
         </div>
         <div className={styles.flexChild}>
           <CreateCategory

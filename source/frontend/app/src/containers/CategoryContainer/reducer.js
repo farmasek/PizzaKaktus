@@ -25,11 +25,13 @@ const categoryReducer =
         return state.set('loading', true);
       }
       case `${FETCH_CATEGORY_LIST}_FULFILLED`: {
-        return state.withMutations(s => s.set('categories', new List(action.response))
+        return state.withMutations(s => s
+          .set('categories', new List(action.response))
           .set('loading', false));
       }
       case `${FETCH_CATEGORY_LIST}_FAILED`: {
-        return state.withMutations(s => s.set('categories', new List())
+        return state.withMutations(s => s
+          .set('categories', new List())
           .set('loading', false));
       }
       case `${CATEGORY_CHANGE_FORM_VALUE}`: {
