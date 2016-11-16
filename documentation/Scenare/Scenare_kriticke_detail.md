@@ -63,7 +63,9 @@
 | 4 | Uživatel | Uživatel přejde do košíku. |
 | 5 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
 | 6 | Uživatel | Vyplní údaje a potvrdí objednávku |
-| 7 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou a pošle se uživateli informační email |
+| 7 | Aplikace | Aplikace pošle uživateli informační email |
+| 8 | Aplikace | Aplikace uloží novou objednávku |
+| 9 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
@@ -104,7 +106,7 @@
 | | Aplikace | Zobrazí se hláška s upozorněním na nevalidní údaje. | 
 
 ## UC2	S2	Objednání pizzy z nabídky s editací
-### Preconditions: Spuštěná aplikace, přihlášený uživatel, zobrazená nabídka
+### Preconditions: Spuštěná aplikace, přihlášený uživatel, zobrazená nabídka pizz
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
@@ -117,7 +119,9 @@
 | 7 | Uživatel | Uživatel přejde do košíku. |
 | 8 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
 | 9 | Uživatel | Vyplní údaje a potvrdí objednávku |
-| 10 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou a pošle se uživateli informační email |
+| 10 | Aplikace | Aplikace pošle uživateli informační email |
+| 11 | Aplikace | Aplikace uloží novou objednávku |
+| 12 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
@@ -142,7 +146,9 @@
 | 7 | Uživatel | Uživatel přejde do košíku. |
 | 8 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
 | 9 | Uživatel | Vyplní údaje a potvrdí objednávku |
-| 10 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou a pošle se uživateli informační email |
+| 10 | Aplikace | Aplikace pošle uživateli informační email |
+| 11 | Aplikace | Aplikace uloží novou objednávku |
+| 12 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
@@ -190,12 +196,12 @@
 |:---:|:---|:---|
 | 1 | Aplikace | Zobrazený seznam ingrediencí a u každé možnost editovat ji. |
 | 2 | Majitel | Uživatel vybere možnost Editace ingredience. |
-| 5 | Aplikace | Zobrazí se stránka s formulářem pro editaci ingredience. |
-| 6 | Majitel | Majitel provede změny a potvrdí. |
-| 7 | Aplikace | Zobrazí se seznam všech ingrediencí. |
+| 3 | Aplikace | Zobrazí se stránka s formulářem pro editaci ingredience. |
+| 4 | Majitel | Majitel provede změny a potvrdí. |
+| 5 | Aplikace | Zobrazí se seznam všech ingrediencí. |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
 |:---:|:---|:---|
-| 6a | Majitel | Vložení nevalidních údajů. | 
+| 4a | Majitel | Vložení nevalidních údajů. | 
 | | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
