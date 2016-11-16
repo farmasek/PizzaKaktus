@@ -64,6 +64,19 @@ public class UserServiceImpl implements UserService {
         return !byLogin.isEmpty();
     }
 
+    @Override
+    public boolean deleteById(int userId) {
+        boolean successfullyDeleted = true;
+        try {
+            userRepository.deleteById(userId);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            successfullyDeleted = false;
+        }
+
+        return successfullyDeleted;
+    }
+
     private String hashPassword(String passwordPlainText) {
         String salt = BCrypt.gensalt(12);
         return BCrypt.hashpw(passwordPlainText, salt);

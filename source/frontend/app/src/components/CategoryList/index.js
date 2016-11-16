@@ -12,7 +12,7 @@ class CategoryList extends Component { // eslint-disable-line react/prefer-state
   render() {
     return (
       <div className={styles.categotyList}>
-        <h1>Seznam kategorii Pizz</h1>
+        <h1>Seznam kategorii pizz</h1>
         <Table
           model={TableModel}
           selectable={false}

@@ -38,7 +38,7 @@ public class UserServiceImplTest {
                     add("EMPLOYEE");
                 }})
                 .phone("153123123")
-                .login("nickino")
+                .login("nickino3")
                 .firstName("First name")
                 .lastName("Last Name")
                 .password("Passworda")
@@ -64,7 +64,7 @@ public class UserServiceImplTest {
                     .id(userDb.getId())
                     .phone(userDb.getPhone())
                     .login(userDb.getLogin())
-                    .firstName(userDb.getFirstName()+"update")
+                    .firstName(userDb.getFirstName() + "update")
                     .lastName(userDb.getLastName())
                     .roles(new ArrayList() {{
                         add("ADMIN");
@@ -118,5 +118,47 @@ public class UserServiceImplTest {
 
         }
     }
+
+    @Test
+    public void deleteById() throws Exception {
+
+        UserDTO userToInsert = UserDTO.builder()
+                .roles(new ArrayList() {{
+                    add("ADMIN");
+                    add("EMPLOYEE");
+                }})
+                .phone("153123123")
+                .login("deletingNickTest")
+                .firstName("First name")
+                .lastName("Last Name")
+                .password("Passworda")
+                .build();
+
+        Optional<UserDb> insertedUser = userService.insert(userToInsert);
+
+        assertTrue("User insert phase", insertedUser.isPresent());
+
+        List<UserDb> all = userService.findAll();
+
+        Optional<UserDb> first = all.stream()
+                .filter(userDb -> userDb.getId() == insertedUser.get().getId())
+                .findFirst();
+
+        assertTrue("inserted user is in db", first.isPresent());
+
+        if (first.isPresent()) {
+            userService.deleteById(first.get().getId());
+
+
+            List<UserDb> allWithoutDeleted = userService.findAll();
+
+            Optional<UserDb> none = allWithoutDeleted.stream()
+                    .filter(userDb -> userDb.getId() == insertedUser.get().getId())
+                    .findFirst();
+
+            assertTrue("user deleted from database ", !none.isPresent());
+        }
+    }
+
 
 }
