@@ -1,12 +1,10 @@
 package cz.osu.pizzakaktus.repositories.models;
 
 import cz.osu.pizzakaktus.endpoints.models.IngredientDTO;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.DoubleSummaryStatistics;
 
 /**
  * Created by Farmas on 18.10.2016.
@@ -33,7 +31,7 @@ public class IngredientDb {
 
     public IngredientDb(IngredientDTO ingredient) {
         this.name = ingredient.getName();
-        this.amount = ingredient.getWeight();
+        this.amount = ingredient.getAmount();
         this.cost = ingredient.getCost();
         this.costCustom = ingredient.getCostCustom();
     }
