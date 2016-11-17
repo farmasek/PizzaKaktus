@@ -2,7 +2,7 @@
 
 | Use Case | Scénář | Popis | Složitost |
 |:--------:|:------:|:------|:------:|
-| UC3 | S2 | Editace vytvořené pizzy + aktivace/deaktivace | 20 h |
+| UC3 | S2 | Editace vytvořené pizzy, deaktivace | 20 h |
 | UC2 | S2 | Objednání pizzy z nabídky s editací | 15 h |
 | UC3 | S1 | Vložení nové pizzy do nabídky | 15 h |
 | UC6 | S2 | Zobrazení prodejnosti pizz podle druhu + řazení | 15 h |

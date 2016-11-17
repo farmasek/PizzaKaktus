@@ -1,4 +1,4 @@
-﻿## Scénáře
+## Scénáře
 
 ### UC1 &nbsp;&nbsp;  Přihlášení
 | Označení  | Název  | Časový odhad  |
@@ -19,7 +19,7 @@
 | Označení  | Název  | Časový odhad  |
 |:---:|:---|:---:|
 |  S1 | Vložení nové pizzy do nabídky  | 15 h |
-|  S2 | Editace vytvořené pizzy + aktivace/deaktivace  | 20 h | 
+|  S2 | Editace vytvořené pizzy, deaktivace  | 20 h | 
 |  S3 | Vložení nové pizzy do nabídky založené na existující pizze  | 10 h | 
 
 ### UC4 &nbsp;&nbsp; Správa objednávek

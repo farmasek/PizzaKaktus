@@ -277,7 +277,7 @@ Implementace nových požadavků do stávající architektury
 |Implementace backend UC3 S1 | Krížová, Pravda | 5 h |
 |Implementace backend UC7 S2 s testy | Baránek | 5 h|
 |Implementace frontend UC7 S2 s testy | Jaroš, Náhlý  | 20 h |
-|Rozepsání 5 scénářů | Krížová, Pravda | 3 h |
+|Rozepsání 4 scénářů | Krížová, Pravda | 3 h |
 
 
 ####Kritéria hodnocení
