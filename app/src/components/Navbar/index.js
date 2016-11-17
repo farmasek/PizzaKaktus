@@ -12,7 +12,7 @@ const Navbar = () => (
       <span>Menu majitele&nbsp;&nbsp;</span>
       <Link to="/manager/ingredients">Správa ingrediencí</Link>&nbsp;
       <Link to="/manager/users">Správa uživatelů</Link>&nbsp;
-      <Link to="/manager/category">Správa kategorií pizz</Link>&nbsp;
+      <Link to="/manager/category">Správa kategorií</Link>&nbsp;
       <Link to="/manager/pizzas">Správa pizz</Link>&nbsp;
     </Navigation>
   </div>
