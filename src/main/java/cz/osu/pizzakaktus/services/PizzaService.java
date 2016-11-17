@@ -23,10 +23,10 @@ public interface PizzaService {
     /**
      * Updates pizza data based on its ID
      *
-     * @param pizzaDb - the pizza to be updated in database
+     * @param pizzaDTO - the pizza to be updated in database
      * @return updated pizza based on its ID
      */
-    Optional<PizzaDb> update(PizzaDb pizzaDb);
+    Optional<PizzaDb> update(PizzaDTO pizzaDTO);
 
     /**
      * Returns list of all pizzas

@@ -66,7 +66,7 @@ public class PizzaController {
      * @return if successful then updated object, if not successful then error message
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public HttpEntity<?> updateUser(@RequestBody PizzaDb pizza) {
+    public HttpEntity<?> updateUser(@RequestBody PizzaDTO pizza) {
 
         Optional<PizzaDb> updatedPizza = pizzaService.update(pizza);
         return updatedPizza.isPresent() ?
