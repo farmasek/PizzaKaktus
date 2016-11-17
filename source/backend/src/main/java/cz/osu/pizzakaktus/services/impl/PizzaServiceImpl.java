@@ -38,16 +38,19 @@ public class PizzaServiceImpl implements PizzaService {
         CategoryDb categoryDb = categoryService.findById(pizzaDTO.getCategoryId());
         if (isCategoryValid(categoryDb) && (!isTitleTaken(pizzaDTO.getTitle()))) {
             PizzaDb insertedPizza = pizzaRepository.save(
-                    new PizzaDb(pizzaDTO.getTitle(), categoryDb, ingredientsById, pizzaDTO.isActive()));
+                    new PizzaDb(null, pizzaDTO.getTitle(), categoryDb, ingredientsById, pizzaDTO.isActive()));
             return Optional.of(insertedPizza);
         }
         return Optional.empty();
     }
 
     @Override
-    public Optional<PizzaDb> update(PizzaDb pizzaDb) {
+    public Optional<PizzaDb> update(PizzaDTO pizzaDTO) {
         try {
-            PizzaDb updatedPizza = pizzaRepository.save(pizzaDb);
+            List<IngredientDb> ingredientsById = ingredientService.findAllById(pizzaDTO.getIngredientsId());
+            CategoryDb categoryDb = categoryService.findById(pizzaDTO.getCategoryId());
+            PizzaDb updatedPizza = pizzaRepository.save(
+                new PizzaDb(pizzaDTO.getId(), pizzaDTO.getTitle(), categoryDb, ingredientsById, pizzaDTO.isActive()));
             return Optional.of(updatedPizza);
         } catch (Exception e) {
             return Optional.empty();

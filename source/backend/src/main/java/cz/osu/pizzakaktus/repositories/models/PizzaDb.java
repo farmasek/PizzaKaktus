@@ -23,7 +23,8 @@ public class PizzaDb {
     private List<IngredientDb> ingredients;
     private boolean active;
 
-    public PizzaDb(String title, CategoryDb categoryId, List<IngredientDb> ingredients, boolean active) {
+    public PizzaDb(Integer id, String title, CategoryDb categoryId, List<IngredientDb> ingredients, boolean active) {
+        this.id = id;
         this.title = title;
         this.categoryId = categoryId;
 //        List<IngredientDb> ingredientDb = new ArrayList<>(ingredients.size());
