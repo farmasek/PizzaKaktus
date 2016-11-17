@@ -3,23 +3,23 @@ import { Record } from 'immutable';
 export const Pizza = new Record({
   id: null,
   title: '',
-  category: null,
-  ingredients: {},
+  categoryId: null,
+  ingredientsId: {},
   active: false,
 });
 
 export const mapPizza = (pizza) => new Pizza({
   id: pizza.id,
   title: pizza.title,
-  category: pizza.category,
-  ingredients: pizza.ingredients,
+  categoryId: pizza.categoryId,
+  ingredientsId: pizza.ingredientsId,
   active: pizza.active,
 });
 
-export const mapPizzaData = (id, title, category, ingredients, active) => new Pizza({
+export const mapPizzaData = (id, title, categoryId, ingredientsId, active) => new Pizza({
   id,
   title,
-  category,
-  ingredients,
+  categoryId,
+  ingredientsId,
   active,
 });
