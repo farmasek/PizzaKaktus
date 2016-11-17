@@ -2,12 +2,12 @@ import {
   FETCH_INGREDIENT_LIST,
   INGREDIENT_CHANGE_FORM_VALUE,
 } from './constants';
-import { Record, List, fromJS } from 'immutable';
+import { Record, Map, fromJS } from 'immutable';
 
 const InitialState = new Record(
   {
     isLoading: false,
-    ingredients: new List(),
+    ingredients: new Map(),
     ingredientForm: fromJS({
       name: '',
       amount: null,
@@ -24,11 +24,13 @@ const ingredientReducer =
         return state.set('isLoading', true);
       }
       case `${FETCH_INGREDIENT_LIST}_FULFILLED`: {
-        return state.withMutations(s => s.set('ingredients', new List(action.response))
+        return state.withMutations(s => s
+          .set('ingredients', action.response)
           .set('isLoading', false));
       }
       case `${FETCH_INGREDIENT_LIST}_FAILED`: {
-        return state.withMutations(s => s.set('ingredients', new List())
+        return state.withMutations(s => s
+          .set('ingredients', new Map())
           .set('isLoading', false));
       }
       case `${INGREDIENT_CHANGE_FORM_VALUE}`: {

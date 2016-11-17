@@ -5,13 +5,12 @@ import {
   FETCH_CATEGORY_LIST,
   CATEGORY_CHANGE_FORM_VALUE,
 } from './constants';
-import { Record, List, fromJS } from 'immutable';
+import { Record, fromJS, Map } from 'immutable';
 
 const InitialState = new Record(
   {
-    // Initial State goes here!
     loading: false,
-    categories: new List(),
+    categories: new Map(),
     categoryForm: fromJS({
       title: '',
     }),
@@ -26,12 +25,12 @@ const categoryReducer =
       }
       case `${FETCH_CATEGORY_LIST}_FULFILLED`: {
         return state.withMutations(s => s
-          .set('categories', new List(action.response))
+          .set('categories', action.response)
           .set('loading', false));
       }
       case `${FETCH_CATEGORY_LIST}_FAILED`: {
         return state.withMutations(s => s
-          .set('categories', new List())
+          .set('categories', new Map())
           .set('loading', false));
       }
       case `${CATEGORY_CHANGE_FORM_VALUE}`: {

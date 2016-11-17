@@ -1,5 +1,25 @@
 .createPizza {
 
+  h1 {
+    color: #212121;
+    padding: 0.64em 0;
+    font-size: 1.28em;
+  }
+
+  .ingredientsList {
+    padding: 0;
+    margin: 0;
+
+    .ingredientItem {
+      display: block;
+      width: 25%;
+      float: left;
+    }
+  }
+
+  .err {
+    color: #de3226;
+  }
 }
 .insideNumbers{
   display: flex;

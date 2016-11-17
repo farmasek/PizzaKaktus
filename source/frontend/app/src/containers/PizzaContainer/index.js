@@ -1,60 +1,84 @@
-/**
- * Created by e-myslivost on 6.11.2016.
- */
 import React, { Component } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as PizzaActionCreators from './actions';
+import * as IngredientActionCreators from '../IngredientContainer/actions';
+import * as CategoryActionCreators from '../CategoryContainer/actions';
 import cssModules from 'react-css-modules';
 import styles from './index.module.scss';
 import * as PropTypes from 'react/lib/ReactPropTypes';
 import CreatePizza from '../../components/CreatePizza';
 import PizzaList from '../../components/PizzaList';
 
-class Pizza extends Component { // eslint-disable-line react/prefer-stateless-function
+class Pizza extends Component {
 
   componentWillMount() {
     this.props.actions.fetchPizzaList();
+    this.props.ingredientActions.fetchIngredientList();
+    this.props.categoryActions.fetchCategoryList();
   }
 
   render() {
     return (
       <div className={styles.pizza}>
-        <div className={styles.flexChild}>
-          <PizzaList pizzas={this.props.pizzas.pizzas}/>
-        </div>
-        <div className={styles.flexChild}>
-          <CreatePizza
-            editValue={this.props.actions.changeValue}
-            pizzaForm={this.props.pizzas.pizzaForm}
-            confirmForm={this.props.actions.savePizza}
-          />
-        </div>
+        <PizzaList pizzas={this.props.pizzas}
+          categories={this.props.categories}
+          ingredients={this.props.ingredients}
+          updatePizza={this.props.actions.updatePizza}
+        />
+
+        <CreatePizza
+          editValue={this.props.actions.changeValue}
+          pizzaForm={this.props.pizzaForm}
+          confirmForm={this.props.actions.savePizza}
+          categories={this.props.categories}
+          ingredients={this.props.ingredients}
+          pizzaErrors={this.props.pizzaErrors}
+          pizzaValidation={this.props.actions.pizzaValidation}
+          showSnackbar={this.props.showSnackbar}
+          handleSnackbar={this.props.actions.handleSnackbar}
+        />
       </div>
     );
   }
 }
 Pizza.propTypes = {
-  pizzas: PropTypes.object,
+  pizzas: ImmutablePropTypes.map.isRequired,
+  categories: ImmutablePropTypes.map.isRequired,
+  ingredients: ImmutablePropTypes.map.isRequired,
   actions: PropTypes.object,
+  ingredientActions: PropTypes.object,
+  categoryActions: PropTypes.object,
+  pizzaForm: PropTypes.object,
+  pizzaErrors: PropTypes.object,
+  showSnackbar: PropTypes.bool.isRequired,
 };
 
-// mapStateToProps :: {State} -> {Props}
 const mapStateToProps = (state) => ({
-  pizzas: state.pizzaContainer,
+  pizzas: state.pizzaContainer.pizzas,
+  categories: state.categoryContainer.categories,
+  ingredients: state.ingredientContainer.ingredients,
+  pizzaForm: state.pizzaContainer.pizzaForm,
+  pizzaErrors: state.pizzaContainer.pizzaErrors,
+  showSnackbar: state.pizzaContainer.showSnackbar,
 });
 
-// mapDispatchToProps :: Dispatch -> {Action}
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     PizzaActionCreators,
+    dispatch
+  ),
+  ingredientActions: bindActionCreators(
+    IngredientActionCreators,
+    dispatch
+  ),
+  categoryActions: bindActionCreators(
+    CategoryActionCreators,
     dispatch
   ),
 });
 
 const Container = cssModules(Pizza, styles);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Container);
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

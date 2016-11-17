@@ -19,7 +19,7 @@ const Main = (props) => (
 );
 
 Main.propTypes = {
-  children: React.children,
+  children: React.PropTypes.any,
 };
 
 // Map the global state to global props here.

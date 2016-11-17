@@ -4,7 +4,6 @@ import {
   USER_CREATE_NEW,
   USER_UPDATE_FIELD,
 } from './constants';
-
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
 import { fromJS } from 'immutable';
@@ -31,6 +30,7 @@ export const updateUser = (user, field, value) => {
     userMap,
   };
 };
+
 export const updateRole = (user, role) => {
   let userMap;
   let modRoles;
@@ -49,6 +49,7 @@ export const updateRole = (user, role) => {
     userMap,
   };
 };
+
 // TODO create model
 export const saveUserListEpic = (action$, store$) =>
   action$.ofType(USER_CREATE_NEW)
@@ -64,6 +65,7 @@ export const saveUserListEpic = (action$, store$) =>
             type: `${USER_CREATE_NEW}_FAILED}`,
           }))
     );
+
 // TODO better error handling
 export const updateUserEpic = (action$) =>
   action$.ofType(USER_UPDATE_FIELD)
