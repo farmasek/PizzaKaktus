@@ -98,7 +98,6 @@ class CreateUser extends Component {
   }
 
   confirmDialog() {
-    // TODO better validation
     if (this.validateState()) {
       this.props.confirmForm();
       this.setState({
@@ -193,7 +192,6 @@ class CreateUser extends Component {
       </div>
     );
   }
-
 }
 
 CreateUser.propTypes = {
@@ -204,6 +202,5 @@ CreateUser.propTypes = {
   snackbarText: PropTypes.string.isRequired,
   type: PropTypes.string,
 };
-
 
 export default cssModules(CreateUser, styles);

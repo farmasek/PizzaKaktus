@@ -3,13 +3,10 @@ import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
 import Checkbox from 'react-toolbox/lib/checkbox';
 
-
 class UserList extends Component { // eslint-disable-line react/prefer-stateless-function
 
   renderRow = (user) =>
-    <tr
-      key={user.id}
-    >
+    <tr key={user.id}>
       <td>{user.firstName}</td>
       <td>{user.lastName}</td>
       <td>{user.login}</td>
@@ -26,7 +23,7 @@ class UserList extends Component { // eslint-disable-line react/prefer-stateless
           onChange={() => this.props.updateRole(user, 'EMPLOYEE')}
         />
       </td>
-    </tr>
+    </tr>;
 
   render() {
     return (

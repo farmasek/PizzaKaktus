@@ -17,12 +17,6 @@ class User extends Component {
   render() {
     return (
       <div className={styles.user}>
-
-        <UserList
-          users={this.props.manageUser.users}
-          updateUser={this.props.actions.updateUser}
-          updateRole={this.props.actions.updateRole}
-        />
         <CreateUser
           editValue={this.props.actions.changeValue}
           userForm={this.props.manageUser.userForm}
@@ -30,6 +24,12 @@ class User extends Component {
           formTitle={"Přidat uživatele"}
           snackbarText={"Uživatel byl přidán."}
           type={"manageUsers"}
+        />
+
+        <UserList
+          users={this.props.manageUser.users}
+          updateUser={this.props.actions.updateUser}
+          updateRole={this.props.actions.updateRole}
         />
       </div>
     );
