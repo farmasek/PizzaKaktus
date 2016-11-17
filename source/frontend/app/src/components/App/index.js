@@ -9,7 +9,6 @@ import AppBar from 'react-toolbox/lib/app_bar';
 const Main = (props) => (
   <div>
     <AppBar fixed flat>
-      <a href="/home">React Toolbox Docs</a>
       <Navbar />
     </AppBar>
     <div className={styles.content}>
