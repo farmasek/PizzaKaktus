@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
 import Checkbox from 'react-toolbox/lib/checkbox';
+import {Button,IconButton} from 'react-toolbox/lib/button';
 
 class UserList extends Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -23,6 +24,12 @@ class UserList extends Component { // eslint-disable-line react/prefer-stateless
           onChange={() => this.props.updateRole(user, 'EMPLOYEE')}
         />
       </td>
+      <td>
+        <IconButton
+          onClick = {() => this.props.deleteUser(user.id)}
+          icon='delete'
+        />
+      </td>
     </tr>;
 
   render() {
@@ -38,6 +45,7 @@ class UserList extends Component { // eslint-disable-line react/prefer-stateless
             <th>Telefon</th>
             <th>Majitel</th>
             <th>Zaměstnanec</th>
+            <th>Smazat</th>
           </tr>
           </thead>
           <tbody>
@@ -55,6 +63,7 @@ UserList.propTypes = {
   users: PropTypes.object.isRequired,
   updateUser: PropTypes.func.isRequired,
   updateRole: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
 };
 
 export default cssModules(UserList, styles);

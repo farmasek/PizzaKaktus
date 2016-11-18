@@ -3,6 +3,7 @@ import {
   USER_CHANGE_FORM_VALUE,
   USER_CREATE_NEW,
   USER_UPDATE_FIELD,
+  USER_DELETE,
 } from './constants';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
@@ -16,6 +17,11 @@ export const changeValue = (input, value) => ({
   type: USER_CHANGE_FORM_VALUE,
   input,
   value,
+});
+
+export const deleteUser = (id) => ({
+  type: USER_DELETE,
+  id,
 });
 
 export const saveUser = () => ({
@@ -94,3 +100,16 @@ export const fetchUserListEpic = action$ =>
             type: `${FETCH_USER_LIST}_FAILED}`,
           }))
     );
+
+export const deleteUserEpic = action$ =>
+  action$.ofType(USER_DELETE)
+  .switchMap((action) =>
+    Observable.ajax(doIt(hosts.pk, `user/delete/${action.id}`, 'DELETE', {}))
+      .map(() => ({
+        type: FETCH_USER_LIST
+      }))
+      .catch(() =>
+        Observable.of({
+          type: `${USER_DELETE}_FAILED`,
+        }))
+  );
