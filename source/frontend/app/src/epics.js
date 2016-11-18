@@ -23,6 +23,9 @@ import {
 import {
   saveUserRegistrationEpic,
 } from './containers/RegistrationContainer/actions';
+import {
+  deleteUserEpic,
+} from './containers/UserContainer/actions';
 
 export default combineEpics(
   fetchIngredientListEpic,
@@ -36,4 +39,5 @@ export default combineEpics(
   saveUserListEpic,
   saveUserRegistrationEpic,
   updateUserEpic,
+  deleteUserEpic,
 );

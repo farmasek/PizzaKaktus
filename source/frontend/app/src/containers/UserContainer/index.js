@@ -30,6 +30,7 @@ class User extends Component {
           users={this.props.manageUser.users}
           updateUser={this.props.actions.updateUser}
           updateRole={this.props.actions.updateRole}
+          deleteUser={this.props.actions.deleteUser}
         />
       </div>
     );
