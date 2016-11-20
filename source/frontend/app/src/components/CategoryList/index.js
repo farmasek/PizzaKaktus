@@ -4,7 +4,7 @@ import cssModules from 'react-css-modules';
 import Table from 'react-toolbox/lib/table';
 
 const TableModel = {
-  name: { type: String, title: 'Název Kategorie' },
+  name: { type: String, title: 'Název kategorie' },
 };
 
 class CategoryList extends Component { // eslint-disable-line react/prefer-stateless-function
@@ -12,7 +12,7 @@ class CategoryList extends Component { // eslint-disable-line react/prefer-state
   render() {
     return (
       <div className={styles.categotyList}>
-        <h1>Seznam kategorii pizz</h1>
+        <h1>Seznam kategorií pizz</h1>
         <Table
           model={TableModel}
           selectable={false}
