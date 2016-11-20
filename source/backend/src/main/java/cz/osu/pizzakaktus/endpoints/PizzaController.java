@@ -36,7 +36,7 @@ public class PizzaController {
                 .map(pizzaDb -> PizzaDTO.builder()
                         .id(pizzaDb.getId())
                         .title(pizzaDb.getTitle())
-                        .categoryId(pizzaDb.getCategoryId().getId())
+                        .categoryId(pizzaDb.getCategory().getId())
                         .ingredientsId(pizzaDb.getIngredients().stream().map(IngredientDb::getId).collect(Collectors.toList()))
                         .active(pizzaDb.isActive())
                         .build())

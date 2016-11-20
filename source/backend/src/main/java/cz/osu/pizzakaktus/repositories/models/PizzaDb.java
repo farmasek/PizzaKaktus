@@ -18,27 +18,17 @@ public class PizzaDb {
     private Integer id;
     private String title;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private CategoryDb categoryId;
+    private CategoryDb category;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<IngredientDb> ingredients;
     private boolean active;
 
-    public PizzaDb(Integer id, String title, CategoryDb categoryId, List<IngredientDb> ingredients, boolean active) {
+    public PizzaDb(Integer id, String title, CategoryDb category, List<IngredientDb> ingredients, boolean active) {
         this.id = id;
         this.title = title;
-        this.categoryId = categoryId;
-//        List<IngredientDb> ingredientDb = new ArrayList<>(ingredients.size());
-//        ingredientDb.addAll(ingredients.stream().map(IngredientDb::new).collect(Collectors.toList()));
+        this.category = category;
         this.ingredients = ingredients;
         this.active = active;
     }
 
-//    public PizzaDb(PizzaDTO pizza) {
-//        this.title = pizza.getTitle();
-//        this.categoryId = pizza.getCategoryId();
-//        List<IngredientDb> ingredientDb = new ArrayList<>(pizza.getIngredients().size());
-//        ingredientDb.addAll(pizza.getIngredients().stream().map(IngredientDb::new).collect(Collectors.toList()));
-//        this.ingredients = ingredientDb;
-    //    this.active = pizza.getActive();
-//    }
 }
