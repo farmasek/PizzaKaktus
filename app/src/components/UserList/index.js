@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
 import Checkbox from 'react-toolbox/lib/checkbox';
-import {Button,IconButton} from 'react-toolbox/lib/button';
+import { IconButton } from 'react-toolbox/lib/button';
 
 class UserList extends Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -27,7 +27,7 @@ class UserList extends Component { // eslint-disable-line react/prefer-stateless
       <td>
         <IconButton
           onClick = {() => this.props.deleteUser(user.id)}
-          icon='delete'
+          icon="delete"
         />
       </td>
     </tr>;

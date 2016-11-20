@@ -106,7 +106,7 @@ export const deleteUserEpic = action$ =>
   .switchMap((action) =>
     Observable.ajax(doIt(hosts.pk, `user/delete/${action.id}`, 'DELETE', {}))
       .map(() => ({
-        type: FETCH_USER_LIST
+        type: FETCH_USER_LIST,
       }))
       .catch(() =>
         Observable.of({
