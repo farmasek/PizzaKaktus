@@ -114,3 +114,55 @@
 |:---:|:---|:---|
 | 4a | Majitel | Vložení nevalidních údajů. | 
 | | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
+
+#Přidáno během E4
+
+## UC1	S2	Odhlásit zaměstnance/majitele
+### Preconditions: Spuštěná aplikace, přihlášený uživatel
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | V uživatelském panelu je zobrazena možnost odhlášení . |
+| 2 | Majitel/Zaměstnanec | Uživatel zvolí odhlášení. |
+| 3 | Aplikace | Proběhne odhlášení uživatele. |
+| 4 | Aplikace | Proběhne přesměrování na hlavní stranu. |
+| 5 | Aplikace | V uživatelském panelu je možnost přihlášení. |
+
+## UC7	S3	Změna hesla
+### Preconditions: Spuštěná aplikace, přihlášený uživatel
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | V uživatelském panelu je zobrazena možnost Změna hesla . |
+| 2 | Uživatel | Uživatel zvolí změnu hesla. |
+| 3 | Aplikace | Proběhne přesměrování uživatele na stránku s formulářem pro změnu hesla. |
+| 4 | Uživatel | Uživatel zadá požadované údaje (staré heslo, nové heslo). |
+| 5 | Aplikace | Aplikace změní heslo uživatele. |
+| 5 | Aplikace | Aplikace zobrazí potvrzení o změně hesla. |
+
+## UC4	S1	Zobrazení historie objednávek, řazení dle: datum, zákazník, pizza
+### Preconditions: Spuštěná aplikace, přihlášený majitel
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | V menu pro majitele je možnost Historie objednávek. |
+| 2 | Majitel | Majitel vybere položku Historie objednávek. |
+| 3 | Aplikace | Zobrazí se stránka se seznamem všech objednávek. |
+
+### Alternative flow:
+| Krok | Actor | Reakce |
+|:---:|:---|:---|
+| 4a | Majitel | Majitel vybere řazení objednávek. | 
+|  | Aplikace | Výpis objednávek se seřadí podle kritéria vybraného majitelem. | 
+
+
+## UC4	S3	Storno objednávky
+### Preconditions: Spuštěná aplikace, přihlášený majitel, zobrazená stránka s objednávkami
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | Na stránce je seznam založených a otevřených objednávek, u založených je možnost storna. |
+| 2 | Majitel | Majitel vybere storno u vybrané objednávky. |
+| 3 | Aplikace | Aplikace provede storno objednávky. |
+| 4 | Aplikace | Aplikace zobrazí potvrzení o provedeném stornu objednávky. |
+| 5 | Aplikace | Aplikace aktualizuje stav objednávky na stránce. |
