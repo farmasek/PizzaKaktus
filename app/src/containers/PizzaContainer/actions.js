@@ -99,14 +99,8 @@ export const updatePizzaEpic = (action$) =>
     );
 
 export const copyPizza = (pizza) => {
-  const pizzaForm = new Map({
-    title: pizza.get('title'),
-    categoryId: pizza.get('categoryId'),
-    ingredientsId: pizza.get('ingredientsId'),
-    active: true,
-  });
   return {
     type: PIZZA_COPY,
-    pizzaForm,
+    pizza,
   };
 };

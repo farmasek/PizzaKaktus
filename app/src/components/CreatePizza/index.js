@@ -64,6 +64,7 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
     let valid = true;
     let titleErr = '';
     let categoryErr = '';
+    let priceErr = '';
     let ingredientsErr = '';
     const emptyErr = 'Je nutné vyplnit!';
     if (this.props.pizzaForm.get('title') === '') {
@@ -78,9 +79,14 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
       ingredientsErr = 'Pizza musí obsahovat nějaké ingredience!';
       valid = false;
     }
+    if (this.props.pizzaForm.get('price') <= 0) {
+      priceErr = 'Zadejte platnou cenu!';
+      valid = false;
+    }
     const pizzaErrors = {
       titleErr,
       categoryErr,
+      priceErr,
       ingredientsErr,
     };
     this.props.pizzaValidation(pizzaErrors);
@@ -133,11 +139,13 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
               : null
           }
           <br />
-          {
-            this.props.pizzaForm.get('ingredientsId').size > 0
-              ? <div>Cena vytvořené pizzy: { this.getPrice() } Kč (základ je 50 Kč)</div>
-              : null
-          }
+          <Input
+            type="number" label="Cena pizzy"
+            value={this.props.pizzaForm.get('price')}
+            onChange={(value) => this.handleChange('price', value)}
+            onKeyPress={(event) => this.handleConfirm(event)}
+            error={this.props.pizzaErrors.priceErr}
+          />
         </CardText>
         <CardActions>
           <Button label="Přidat" primary raised onClick={() => this.confirmDialog()} />

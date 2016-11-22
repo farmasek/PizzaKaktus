@@ -2,13 +2,12 @@ import React, { PropTypes } from 'react';
 import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Map } from 'immutable';
 import Checkbox from 'react-toolbox/lib/checkbox';
 import { IconButton } from 'react-toolbox/lib/button';
 
 class PizzaList extends React.Component {
 
-  renderRow = (pizza, price) =>
+  renderRow = (pizza) =>
     <tr key={pizza.id}>
       <td>{pizza.title}</td>
       <td>
@@ -32,7 +31,7 @@ class PizzaList extends React.Component {
         </ul>
       </td>
       <td>
-        { price }
+        { pizza.get('price') }
       </td>
       <td>
         {
@@ -52,16 +51,6 @@ class PizzaList extends React.Component {
     </tr>;
 
   render() {
-    let prices = new Map();
-    this.props.pizzas.forEach((value, key) => {
-      let pizzaPrice = 50;  // 50 Kc for work etc.
-      if (this.props.ingredients.size > 0) {
-        value.ingredientsId.map((ingredient) => {
-          pizzaPrice += this.props.ingredients.get(ingredient).get('cost');
-        });
-        prices = prices.set(key, pizzaPrice);
-      }
-    });
     return (
       <div className={styles.pizzaList}>
         <h1>Seznam pizz</h1>
@@ -78,7 +67,7 @@ class PizzaList extends React.Component {
           </thead>
           <tbody>
           { this.props.pizzas.toIndexedSeq().map(
-            (pizza) => this.renderRow(pizza, prices.get(pizza.id))) }
+            (pizza) => this.renderRow(pizza)) }
           </tbody>
         </table>
       </div>);

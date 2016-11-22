@@ -6,11 +6,13 @@ import {
   PIZZA_COPY,
 } from './constants';
 import { Record, Map, List } from 'immutable';
+import { mapPizzaForm } from '../../models/Pizza';
 
 const initialPizzaForm = new Map({
   title: '',
   categoryId: '',
   ingredientsId: new List(),
+  price: 0,
   active: true,
 });
 
@@ -23,6 +25,7 @@ const InitialState = new Record(
       titleErr: '',
       categoryErr: '',
       ingredientsErr: '',
+      priceErr: '',
     },
     showSnackbar: false,
   }
@@ -62,7 +65,7 @@ const pizzaReducer =
           .set('showSnackbar', action.value));
       }
       case PIZZA_COPY: {
-        return state.set('pizzaForm', action.pizzaForm);
+        return state.set('pizzaForm', mapPizzaForm(action.pizza));
       }
       default:
         return state;
