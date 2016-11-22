@@ -14,6 +14,17 @@ import { Snackbar } from 'react-toolbox/lib/snackbar';
 
 class CreatePizza extends Component { // eslint-disable-line react/prefer-stateless-function
 
+
+  getPrice() {
+    let price = 50; // work and stuff
+    if (this.props.pizzaForm.get('ingredientsId')) {
+      this.props.pizzaForm.get('ingredientsId').map((id) => {
+        price += this.props.ingredients.get(id).get('cost');
+      });
+    }
+    return price;
+  }
+
   handleChange = (name, value) => {
     this.setState({ ...this.state, [name]: value });
     this.props.editValue(name, value);
@@ -118,7 +129,13 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
           </ul>
           {
             this.props.pizzaErrors.ingredientsErr.length > 0
-              ? <span className={styles.err}>{ this.props.pizzaErrors.ingredientsErr }</span>
+              ? <div className={styles.err}>{ this.props.pizzaErrors.ingredientsErr }</div>
+              : null
+          }
+          <br />
+          {
+            this.props.pizzaForm.get('ingredientsId').size > 0
+              ? <div>Cena vytvořené pizzy: { this.getPrice() } Kč (základ je 50 Kč)</div>
               : null
           }
         </CardText>
