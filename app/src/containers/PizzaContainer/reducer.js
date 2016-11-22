@@ -3,6 +3,7 @@ import {
   PIZZA_CHANGE_FORM_VALUE,
   PIZZA_VALIDATION,
   PIZZA_SNACKBAR,
+  PIZZA_COPY,
 } from './constants';
 import { Record, Map, List } from 'immutable';
 
@@ -59,6 +60,9 @@ const pizzaReducer =
       case PIZZA_SNACKBAR: {
         return state.withMutations(s => s
           .set('showSnackbar', action.value));
+      }
+      case PIZZA_COPY: {
+        return state.set('pizzaForm', action.pizzaForm);
       }
       default:
         return state;

@@ -26,6 +26,7 @@ class Pizza extends Component {
           categories={this.props.categories}
           ingredients={this.props.ingredients}
           updatePizza={this.props.actions.updatePizza}
+          copyPizza={this.props.actions.copyPizza}
         />
 
         <CreatePizza

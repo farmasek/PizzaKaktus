@@ -4,3 +4,4 @@ export const PIZZA_CREATE_NEW = 'PIZZA_CREATE_NEW';
 export const PIZZA_VALIDATION = 'PIZZA_VALIDATION';
 export const PIZZA_SNACKBAR = 'PIZZA_SNACKBAR';
 export const PIZZA_UPDATE = 'PIZZA_UPDATE';
+export const PIZZA_COPY = 'PIZZA_COPY';

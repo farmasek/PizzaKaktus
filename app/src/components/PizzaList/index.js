@@ -4,6 +4,7 @@ import cssModules from 'react-css-modules';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import Checkbox from 'react-toolbox/lib/checkbox';
+import { IconButton } from 'react-toolbox/lib/button';
 
 class PizzaList extends React.Component {
 
@@ -45,6 +46,9 @@ class PizzaList extends React.Component {
             <Checkbox checked={pizza.active} disabled={!pizza.active} className={styles.disabled} />
         }
       </td>
+      <td>
+        <IconButton icon="input" onClick={() => this.props.copyPizza(pizza)} />
+      </td>
     </tr>;
 
   render() {
@@ -69,6 +73,7 @@ class PizzaList extends React.Component {
             <th>Ingredience</th>
             <th>Cena</th>
             <th>Aktivní</th>
+            <th>Kopírovat</th>
           </tr>
           </thead>
           <tbody>
@@ -85,6 +90,7 @@ PizzaList.propTypes = {
   categories: ImmutablePropTypes.map.isRequired,
   ingredients: ImmutablePropTypes.map.isRequired,
   updatePizza: PropTypes.func.isRequired,
+  copyPizza: PropTypes.func.isRequired,
 };
 
 export default cssModules(PizzaList, styles);
