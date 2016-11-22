@@ -301,26 +301,29 @@ Konzistentnost ovládácích prvků.
 ####Cíle
 
 - Realizace zachytávání chybových hlášek
-- Rozepsání dalších scénářů
-- Implementace UC3 S3
+- Rozepsání zbytku scénářů
+- Implementace UC3 S3 - vytvoření nové pizzy majitelem na základě již existující pizze
 
 ####Úkoly
 
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
-| Rozepsání dalších scénářů | Náhlý | 3h |
+| Rozepsání zbytku scénářů | Náhlý | 3h |
+| Přidání atributu cena u pizzy do class diagramu | Jaroš | 5m |
+| Upravit přidávání pizzy (vlastní cena) | Krížová | 5h |
 | Implementace zachytávání chybových hlášek na backendu | Jaroš, Náhlý | 20h |
-| Implementace frontendu UC3S3 | Krížová, Pravda | 20h |
-| Deploy strategie | Baránek | 10h |
+| Implementace frontendu UC3 S3 | Krížová, Pravda | 20h |
+| Nasadit aplikaci na externí server | Baránek | 10h |
 
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| Tým a zákazník souhlasí se scénaři | |
+| Tým souhlasí se scénaři | |
+| Zákazník souhlasí se scénaři | |
 | Zachytávání chybových hlášek je funkční | |
+| Přidávání pizzy je funkční a umožňuje zadávat majiteli vlastní cenu | |
 | Frontend UC3S3 je implementován a funkční | |
-| Zjištěny potencionální problémy pro deploy aplikace | |
-
+| Nasazená aplikace na externím serveru | |
 
 ####Lessons learned
 
