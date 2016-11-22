@@ -5,6 +5,7 @@ import {
   PIZZA_VALIDATION,
   PIZZA_SNACKBAR,
   PIZZA_UPDATE,
+  PIZZA_COPY,
 } from './constants';
 import { mapPizza } from '../../models/Pizza';
 import { doIt, hosts } from '../../network';
@@ -96,3 +97,16 @@ export const updatePizzaEpic = (action$) =>
             type: `${PIZZA_UPDATE}_FAILED`,
           }))
     );
+
+export const copyPizza = (pizza) => {
+  const pizzaForm = new Map({
+    title: pizza.get('title'),
+    categoryId: pizza.get('categoryId'),
+    ingredientsId: pizza.get('ingredientsId'),
+    active: true,
+  });
+  return {
+    type: PIZZA_COPY,
+    pizzaForm,
+  };
+};
