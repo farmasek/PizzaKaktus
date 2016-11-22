@@ -2,7 +2,11 @@
  * Created by Farmas on 21.10.2016.
  */
 export const hosts = {
+  // dev
   pk: `http://${window.location.hostname}:6080`,
+  // prod
+  // pk: `https://pizzak.herokuapp.com`
+
 };
 export const getToken = () => {
   // get token from local storrage
