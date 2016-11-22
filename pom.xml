@@ -63,6 +63,7 @@
             <artifactId>spring-restdocs-mockmvc</artifactId>
             <scope>test</scope>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
@@ -82,7 +83,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.4.1207.jre7</version>
+            <version>9.4.1212.jre7</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
