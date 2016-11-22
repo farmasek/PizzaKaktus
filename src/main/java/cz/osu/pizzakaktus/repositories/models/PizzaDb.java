@@ -21,13 +21,15 @@ public class PizzaDb {
     private CategoryDb category;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<IngredientDb> ingredients;
+    private Double price;
     private boolean active;
 
-    public PizzaDb(Integer id, String title, CategoryDb category, List<IngredientDb> ingredients, boolean active) {
+    public PizzaDb(Integer id, String title, CategoryDb category, List<IngredientDb> ingredients, Double price, boolean active) {
         this.id = id;
         this.title = title;
         this.category = category;
         this.ingredients = ingredients;
+        this.price = price;
         this.active = active;
     }
 

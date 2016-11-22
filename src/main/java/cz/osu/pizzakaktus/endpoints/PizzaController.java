@@ -38,6 +38,7 @@ public class PizzaController {
                         .title(pizzaDb.getTitle())
                         .categoryId(pizzaDb.getCategory().getId())
                         .ingredientsId(pizzaDb.getIngredients().stream().map(IngredientDb::getId).collect(Collectors.toList()))
+                        .price(pizzaDb.getPrice())
                         .active(pizzaDb.isActive())
                         .build())
                 .collect(Collectors.toList());
