@@ -274,7 +274,7 @@ Implementace nových požadavků do stávající architektury
 |:------|:----------------|:-----------------:|
 |Rozšíření dosavadního class diagramu o UC7 S2 | Jaroš | 3 h|
 |Spojení všech class diagramů | Jaroš | 3 h|
-|Implementace backend UC3 S1 | Krížová, Pravda | 5 h |
+|Implementace frontend UC3 S1 | Krížová, Pravda | 5 h |
 |Implementace backend UC7 S2 s testy | Baránek | 5 h|
 |Implementace frontend UC7 S2 s testy | Jaroš, Náhlý  | 20 h |
 |Rozepsání 4 scénářů | Krížová, Pravda | 3 h |
@@ -283,12 +283,46 @@ Implementace nových požadavků do stávající architektury
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-|Tým souhlasí s novým class diagramem |  |
-|Tým souhlasí s class diagramem UC7 S1 |  |
-|Tým souhlasí implementací vytvoření pizzy |  |
-|Tým souhlasí implementací mazání uživatele |  |
-|Zákazník souhlasí s implementací vytvoření pizzy |  |
-|Zákazník souhlasí implementací mazání uživatele |  |
-|Zákazník souhlasí s rozepsanými scénáři |  |
+|Tým souhlasí s novým class diagramem | Splněno |
+|Tým souhlasí s class diagramem UC7 S1 | Splněno |
+|Tým souhlasí implementací vytvoření pizzy | Splněno |
+|Tým souhlasí implementací mazání uživatele | Splněno |
+|Zákazník souhlasí s implementací vytvoření pizzy | Splněno |
+|Zákazník souhlasí implementací mazání uživatele | Splněno |
+|Zákazník souhlasí s rozepsanými scénáři | Splněno |
 
 ####Lessons learned
+Konzistentnost ovládácích prvků.
+
+----
+##E5
+23.11.2016 - 29.11.2016
+
+####Cíle
+
+- Realizace zachytávání chybových hlášek
+- Rozepsání dalších scénářů
+- Implementace UC3 S3
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Rozepsání dalších scénářů | Náhlý | 3h |
+| Implementace zachytávání chybových hlášek na backendu | Jaroš, Náhlý | 20h |
+| Implementace frontendu UC3S3 | Krížová, Pravda | 20h |
+| Deploy strategie | Baránek | 10h |
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| Tým a zákazník souhlasí se scénaři | |
+| Zachytávání chybových hlášek je funkční | |
+| Frontend UC3S3 je implementován a funkční | |
+| Zjištěny potencionální problémy pro deploy aplikace | |
+
+
+####Lessons learned
+
+
+
