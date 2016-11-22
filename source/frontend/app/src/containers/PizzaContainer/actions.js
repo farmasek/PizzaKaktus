@@ -98,9 +98,7 @@ export const updatePizzaEpic = (action$) =>
           }))
     );
 
-export const copyPizza = (pizza) => {
-  return {
-    type: PIZZA_COPY,
-    pizza,
-  };
-};
+export const copyPizza = (pizza) => ({
+  type: PIZZA_COPY,
+  pizza,
+});
