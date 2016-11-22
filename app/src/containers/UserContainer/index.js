@@ -10,6 +10,7 @@ import UserList from '../../components/UserList/index';
 
 class User extends Component {
 
+  
   componentWillMount() {
     this.props.actions.fetchUserList();
   }
