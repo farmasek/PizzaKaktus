@@ -22,9 +22,11 @@
 |:---:|:---|:---|
 | 1 | Aplikace | V uživatelském panelu je zobrazena možnost odhlášení . |
 | 2 | Majitel/Zaměstnanec | Uživatel zvolí odhlášení. |
-| 3 | Aplikace | Proběhne odhlášení uživatele. |
-| 4 | Aplikace | Proběhne přesměrování na hlavní stranu. |
-| 5 | Aplikace | V uživatelském panelu je možnost přihlášení. |
+| 3 | Aplikace | Aplikace ověří, že si je uživatel jistý. |
+| 4 | Majitel/Zaměstnanec | Uživatel potvrdí odhlášení. |
+| 5 | Aplikace | Proběhne odhlášení uživatele. |
+| 6 | Aplikace | Proběhne přesměrování na hlavní stranu. |
+| 7 | Aplikace | V uživatelském panelu je možnost přihlášení. |
 
 ## UC2	S1	Objednání pizzy z nabídky
 ### Preconditions: Spuštěná aplikace, přihlášený uživatel, zobrazená nabídka
@@ -156,6 +158,8 @@
 |:---:|:---|:---|
 | 4a | Majitel | Majitel vybere řazení objednávek. | 
 |  | Aplikace | Výpis objednávek se seřadí podle kritéria vybraného majitelem. | 
+| 4b | Majitel | Majitel nastaví filtrování objednávek. | 
+|  | Aplikace | Výpis objednávek vyfiltruje podle kritéria vybraného majitelem. |
 
 ## UC4	S2	Editace stavu otevřené objednávky - založená, otevřená, uzavřená
 ### Preconditions: Spuštěná aplikace, přihlášený uživatel
@@ -176,9 +180,11 @@
 |:---:|:---|:---|
 | 1 | Aplikace | Na stránce je seznam založených a otevřených objednávek, u založených je možnost storna. |
 | 2 | Majitel | Majitel vybere storno u vybrané objednávky. |
-| 3 | Aplikace | Aplikace provede storno objednávky. |
-| 4 | Aplikace | Aplikace zobrazí potvrzení o provedeném stornu objednávky. |
-| 5 | Aplikace | Aplikace aktualizuje stav objednávky na stránce. |
+| 3 | Aplikace | Aplikace ověří, že si je uživatel jistý. |
+| 4 | Majitel | Majitel potvrdí storno objednávky. |
+| 5 | Aplikace | Aplikace provede storno objednávky. |
+| 6 | Aplikace | Aplikace zobrazí potvrzení o provedeném stornu objednávky. |
+| 7 | Aplikace | Aplikace aktualizuje stav objednávky na stránce. |
 
 ## UC5	S1	Vložení nové ingredience
 ### Preconditions: Spuštěná aplikace, přihlášený uživatel
@@ -242,6 +248,6 @@
 | 1 | Aplikace | V uživatelském panelu je zobrazena možnost Změna hesla . |
 | 2 | Uživatel | Uživatel zvolí změnu hesla. |
 | 3 | Aplikace | Proběhne přesměrování uživatele na stránku s formulářem pro změnu hesla. |
-| 4 | Uživatel | Uživatel zadá požadované údaje (staré heslo, nové heslo). |
+| 4 | Uživatel | Uživatel zadá požadované údaje (staré heslo, 2x nové heslo). |
 | 5 | Aplikace | Aplikace změní heslo uživatele. |
-| 5 | Aplikace | Aplikace zobrazí potvrzení o změně hesla. |
+| 6 | Aplikace | Aplikace zobrazí potvrzení o změně hesla. |
