@@ -35,7 +35,7 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
 
   createSelectItems() {
     const items = new Array();
-    items.push({ value: '', label: 'Zvolte kategorii' });
+    items.push({ value: '', label: 'Kategorie' });
     this.props.categories.forEach((category) => {
       items.push({ value: category.get('id'), label: category.get('name') });
     });
