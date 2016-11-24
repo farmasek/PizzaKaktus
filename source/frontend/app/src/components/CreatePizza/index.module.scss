@@ -22,7 +22,13 @@
   .err {
     color: #de3226;
   }
+
 }
+
+label:not(:focus) {
+  color: #212121;
+}
+
 .insideNumbers{
   display: flex;
   div{
