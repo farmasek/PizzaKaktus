@@ -238,6 +238,36 @@
 | 4a | Majitel | Vložení nevalidních údajů. | 
 | | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
 
+## UC6	S1	Zobrazení prodejnosti pizz za období
+### Preconditions: Spuštěná aplikace, přihlášený majitel, zobrazená stránka se statistikami
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | Zobrazena statistika prodejnosti pizz za poslední měsíc. |
+| 2 | Majitel | Majitel vybere rozsah obodbí za které chce zobrazit statistiku prodejnosti pizz |
+| 3 | Aplikace | Aplikace zobrazí statistky prodejnosti pizz za vybrané období |
+
+### Alternative flow:
+| Krok | Actor | Reakce |
+|:---:|:---|:---|
+| 2a | Majitel | Vložení nevalidních údajů. | 
+| | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
+
+## UC6	S2	Zobrazení prodejnosti pizz podle druhu, + řazení
+### Preconditions: Spuštěná aplikace, přihlášený majitel, zobrazená stránka se statistikami
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | Zobrazena statistika prodejnosti pizz s možností filtrovat statistiku podle druhu pizzy. |
+| 2 | Majitel | Majitel vybere druh pizzy u které chce sledovat její prodejnost |
+| 3 | Aplikace | Aplikace zobrazí statistky prodejnosti vybrané pizzy za vybrané období |
+| 4 | Majitel | Majitel vybere atribut podle kterého chce statistiku seřadit |
+| 5 | Aplikace | Aplikace zobrazí statistky seřazené dle vybraného atributu |
+
+### Alternative flow:
+
+
+
 ## UC7	S1	Vložení nového uživatele
 ### Preconditions: Spuštěná aplikace, přihlášený majitel, zobrazená stránka pro správu uživatelů
 ### Basic flow:
