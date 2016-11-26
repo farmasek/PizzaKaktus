@@ -129,12 +129,14 @@
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
-| 1 | Aplikace | V menu pro majitele je u položky "Správa pizz" možnost "Editace existující pizzy". |
+| 1 | Aplikace | V menu pro majitele je položka "Správa pizz". |
 | 2 | Majitel | Majitel vybere tuto možnost.|
-| 3 | Aplikace | Zobrazí se stránka s formulářem pro editaci existující pizzy. |
-| 4 | Majitel | Majitel změní,upraví položky existující pizzy a potvrdí změnu. |
-| 5 | Aplikace | Uloží se změny provedené majitelem. |
-| 6 | Aplikace | Zobrazí se seznam všech pizz. |
+| 3 | Aplikace | Zobrazí se stránka se seznamem pizz a formulářem pro vytvoření nové. |
+| 4 | Majitel | Majitel u vybrané pizzy zvolí možnost editace. |
+| 5 | Aplikace | Aplikace našte pizzu do formuláře. |
+| 6 | Majitel | Majitel upraví položky načtené pizzy a potvrdí změny. |
+| 7 | Aplikace | Uloží se změny provedené majitelem. |
+| 8 | Aplikace | Aktualizuje se seznam všech pizz. |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
@@ -144,8 +146,11 @@
 
 | Krok | Actor | Reakce |
 |:---:|:---|:---|
-| 1a | Aplikace | V menu pro majitele je u položky "Správa pizz" možnost deaktivovat aktivní pizzu. |
-| | Majitel | Majitel vybere možnost pro deaktivaci, aktivní pizzy |
+| 4a | Majitel | Majitel u vybrané pizzy zvolí možnost deaktivace. |
+| | Aplikace | Aplikace ověří, že si je majitel jistý deaktivací pizzy. |
+| | Majitel | Majitel potvrdí deaktivaci pizzy. |
+| | Aplikace | Aplikace deaktivuje pizzu. |
+| | Aplikace | Aplikace u pizzy v seznamu aktualizuje její stav. |
 
 ## UC3	S3	Vložení nové pizzy do nabídky založené na existující pizze
 ### Preconditions: Spuštěná aplikace, přihlášený majitel
@@ -239,34 +244,32 @@
 | | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
 
 ## UC6	S1	Zobrazení prodejnosti pizz za období
-### Preconditions: Spuštěná aplikace, přihlášený majitel, zobrazená stránka se statistikami
+### Preconditions: Spuštěná aplikace, přihlášený majitel
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
-| 1 | Aplikace | Zobrazena statistika prodejnosti pizz za poslední měsíc. |
-| 2 | Majitel | Majitel vybere rozsah obodbí za které chce zobrazit statistiku prodejnosti pizz |
-| 3 | Aplikace | Aplikace zobrazí statistky prodejnosti pizz za vybrané období |
+| 1 | Aplikace | V menu majitele je položka "Statistiky". |
+| 2 | Majitel | Majitel vybere položku "Statistiky". |
+| 3 | Aplikace | Zobrazí se stránka s přehledem objednávek za poslední měsíc. |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
 |:---:|:---|:---|
-| 2a | Majitel | Vložení nevalidních údajů. | 
-| | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
+| 4a | Majitel | Majitel zadá rozsah obodbí, za které chce zobrazit přehled prodejnosti pizz. | 
+| | Aplikace | Aplikace aktualizuje přehled na základě kritérií. | 
 
 ## UC6	S2	Zobrazení prodejnosti pizz podle druhu, + řazení
 ### Preconditions: Spuštěná aplikace, přihlášený majitel, zobrazená stránka se statistikami
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
-| 1 | Aplikace | Zobrazena statistika prodejnosti pizz s možností filtrovat statistiku podle druhu pizzy. |
-| 2 | Majitel | Majitel vybere druh pizzy u které chce sledovat její prodejnost |
-| 3 | Aplikace | Aplikace zobrazí statistky prodejnosti vybrané pizzy za vybrané období |
-| 4 | Majitel | Majitel vybere atribut podle kterého chce statistiku seřadit |
-| 5 | Aplikace | Aplikace zobrazí statistky seřazené dle vybraného atributu |
-
-### Alternative flow:
-
-
+| 1 | Aplikace | V menu majitele je položka "Statistiky". |
+| 2 | Majitel | Majitel vybere položku "Statistiky". |
+| 3 | Aplikace | Zobrazí se stránka s přehledem objednávek za poslední měsíc. |
+| 4 | Majitel | Majitel zvolí přehled dle druhu pizzy. |
+| 5 | Aplikace | Aplikace zobrazí přehled dle druhu pizzy. |
+| 6 | Majitel | Majitel vybere atribut, podle kterého chce statistiku seřadit. |
+| 7 | Aplikace | Aplikace zobrazí přehled seřazený dle vybraného atributu. |
 
 ## UC7	S1	Vložení nového uživatele
 ### Preconditions: Spuštěná aplikace, přihlášený majitel, zobrazená stránka pro správu uživatelů
