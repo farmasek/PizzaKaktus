@@ -318,14 +318,44 @@ Konzistentnost ovládácích prvků.
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| Tým souhlasí se scénaři | |
-| Zákazník souhlasí se scénaři | |
-| Zachytávání chybových hlášek je funkční | |
-| Přidávání pizzy je funkční a umožňuje zadávat majiteli vlastní cenu | |
-| Frontend UC3S3 je implementován a funkční | |
-| Nasazená aplikace na externím serveru | |
+| Tým souhlasí se scénaři | Splněno |
+| Zákazník souhlasí se scénaři | Splněno |
+| Zachytávání chybových hlášek je funkční | Nesplněno |
+| Přidávání pizzy je funkční a umožňuje zadávat majiteli vlastní cenu | Splněno |
+| Frontend UC3S3 je implementován a funkční | Splněno |
+| Nasazená aplikace na externím serveru | Splněno |
 
 ####Lessons learned
+Nesouhlasit s frameworky při vytváření projektu
+
+----
+##E6
+30.11.2016 - 6.12.2016
+
+####Cíle
+
+- Realizace zachytávání chybových hlášek
+- Řazení a filtrování pizz v seznamu pizz
+- Otestování zasílání e-mailu (snížení rizika)
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Implementace zachytávání chybových hlášek na backendu | Jaroš, Náhlý | 20h |
+| Implementace zachytávání chybových hlášek na frontendu | Krížová, Pravda | 20h |
+| Řazení, filtrování pizz v seznamu pizz | Baránek | 10h |
+| Odeslání testovacího e-mailu z aplikace | Jaroš, Náhlý | 5h |
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| Zachytávání chybových hlášek na backendu je funkční | |
+| Zachytávání chybových hlášek na frontendu je funkční | |
+| Řazení a filtrování pizz funguje | |
+| Zákazník souhlasí s řazením a filtrováním pizz | |
+| Testovací e-mail byl úspěšně zaslán | |
 
 
+####Lessons learned
 
