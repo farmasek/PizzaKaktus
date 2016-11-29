@@ -1,4 +1,4 @@
-import { Record, Map } from 'immutable';
+import { Record, Map, fromJS } from 'immutable';
 
 export const Pizza = new Record({
   id: null,
@@ -30,7 +30,7 @@ export const mapPizzaData = (id, title, categoryId, ingredientsId, price, active
 export const mapPizzaForm = (pizza) => new Map({
   title: pizza.get('title'),
   categoryId: pizza.get('categoryId'),
-  ingredientsId: pizza.get('ingredientsId'),
+  ingredientsId: fromJS(pizza.get('ingredientsId')),
   price: pizza.get('price'),
   active: true,
 });
