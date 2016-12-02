@@ -32,7 +32,6 @@ const defaultHeader = (json) => ({
   async: true,
   crossDomain: false,
   headers: {
-
     'cache-control': 'no-cache',
     'Content-Type': `${json ?
       'application/json'
@@ -43,7 +42,6 @@ const defaultHeader = (json) => ({
   contentType: false,
   mimeType: 'multipart/form-data',
 });
-
 
 export const doIt = (host, path, methodString, body = {}, json = false) => {
   const received = {

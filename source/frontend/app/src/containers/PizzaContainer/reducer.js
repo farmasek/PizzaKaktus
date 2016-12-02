@@ -41,7 +41,9 @@ const pizzaReducer =
             .set('pizzaForm', initialPizzaForm)
             .set('loading', true));
         }
-        return state.set('loading', true);
+        return state.withMutations(s => s
+        .set('loading', true)
+        .set('pizzaForm', initialPizzaForm));
       }
       case `${FETCH_PIZZA_LIST}_FULFILLED`: {
         return state.withMutations(s => s
