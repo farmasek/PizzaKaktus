@@ -1,11 +1,9 @@
 import React, { PropTypes, Component } from 'react';
-
 import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
 import Input from 'react-toolbox/lib/input';
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
-
 
 class CreateIngredient extends Component { // eslint-disable-line react/prefer-stateless-function
 

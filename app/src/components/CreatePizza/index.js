@@ -2,6 +2,7 @@
  * Created by e-myslivost on 6.11.2016.
  */
 import React, { PropTypes, Component } from 'react';
+import ReactDOM from 'react-dom';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
@@ -11,9 +12,15 @@ import { Button } from 'react-toolbox/lib/button';
 import Dropdown from 'react-toolbox/lib/dropdown';
 import Checkbox from 'react-toolbox/lib/checkbox';
 import { Snackbar } from 'react-toolbox/lib/snackbar';
+import scrollIntoView from 'scroll-into-view';
 
 class CreatePizza extends Component { // eslint-disable-line react/prefer-stateless-function
 
+  componentDidUpdate() {
+    if (this.props.pizzaForm.get('title').length > 0) {
+      scrollIntoView(ReactDOM.findDOMNode(this.refs.pizzaForm));
+    }
+  }
 
   getPrice() {
     let price = 50; // work and stuff
@@ -101,7 +108,7 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
 
   render() {
     return (
-      <Card className={styles.createPizza}>
+      <Card className={styles.createPizza} ref="pizzaForm" >
         <CardTitle>Vytvořit pizzu</CardTitle>
         <CardText>
           <Input
