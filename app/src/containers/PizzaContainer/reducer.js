@@ -4,9 +4,11 @@ import {
   PIZZA_VALIDATION,
   PIZZA_SNACKBAR,
   PIZZA_COPY,
+  PIZZA_CREATE_NEW,
 } from './constants';
 import { Record, Map, List } from 'immutable';
 import { mapPizzaForm } from '../../models/Pizza';
+import { mapSnackbar } from '../../models/Snackbar';
 
 const initialPizzaForm = new Map({
   title: '',
@@ -16,18 +18,24 @@ const initialPizzaForm = new Map({
   active: true,
 });
 
+const initialPizzaErrors = {
+  titleErr: '',
+  categoryErr: '',
+  ingredientsErr: '',
+  priceErr: '',
+};
+
+const initialSnackbar = mapSnackbar(false, 'check_circle', 'Pizza úspěšně vytvořena');
+
 const InitialState = new Record(
   {
     loading: false,
     pizzas: new Map(),
     pizzaForm: initialPizzaForm,
-    pizzaErrors: {
-      titleErr: '',
-      categoryErr: '',
-      ingredientsErr: '',
-      priceErr: '',
-    },
-    showSnackbar: false,
+    pizzaErrors: initialPizzaErrors,
+    pizzaError: '',
+    snackbar: initialSnackbar,
+    copied: false,
   }
 );
 
@@ -35,15 +43,20 @@ const pizzaReducer =
   (state = new InitialState(), action) => {
     switch (action.type) {
       case `${FETCH_PIZZA_LIST}`: {
-        if (action.updated) {
+        if (action.created) {
+          const snackbar = initialSnackbar.set('showSnackbar', true);
           return state.withMutations(s => s
-            .set('showSnackbar', true)
-            .set('pizzaForm', initialPizzaForm)
-            .set('loading', true));
+          .set('pizzaForm', initialPizzaForm)
+          .set('pizzaErrors', initialPizzaErrors)
+          .set('snackbar', snackbar)
+          .set('pizzaError', ''));
         }
         return state.withMutations(s => s
         .set('loading', true)
-        .set('pizzaForm', initialPizzaForm));
+        .set('pizzaForm', initialPizzaForm)
+        .set('pizzaErrors', initialPizzaErrors)
+        .set('snackbar', initialSnackbar)
+        .set('pizzaError', ''));
       }
       case `${FETCH_PIZZA_LIST}_FULFILLED`: {
         return state.withMutations(s => s
@@ -56,7 +69,9 @@ const pizzaReducer =
           .set('loading', false));
       }
       case `${PIZZA_CHANGE_FORM_VALUE}`: {
-        return state.setIn(['pizzaForm', action.input], action.value);
+        return state.withMutations(s => s
+        .setIn(['pizzaForm', action.input], action.value)
+        .set('copied', false));
       }
       case PIZZA_VALIDATION: {
         return state.withMutations(s => s
@@ -64,10 +79,17 @@ const pizzaReducer =
       }
       case PIZZA_SNACKBAR: {
         return state.withMutations(s => s
-          .set('showSnackbar', action.value));
+          .setIn(['snackbar', 'showSnackbar'], false));
       }
       case PIZZA_COPY: {
-        return state.set('pizzaForm', mapPizzaForm(action.pizza));
+        return state.withMutations(s => s
+        .set('pizzaForm', mapPizzaForm(action.pizza))
+        .set('copied', true));
+      }
+      case `${PIZZA_CREATE_NEW}_FAILED}`: {
+        return state.withMutations(s => s
+        .set('pizzaError', action.pizzaError)
+        .set('snackbar', mapSnackbar(true, 'error', action.pizzaError)));
       }
       default:
         return state;

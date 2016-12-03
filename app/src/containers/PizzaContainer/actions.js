@@ -40,22 +40,28 @@ export const savePizza = () => ({
   type: PIZZA_CREATE_NEW,
 });
 
-// TODO create model
 export const savePizzaListEpic = (action$, store$) =>
   action$.ofType(PIZZA_CREATE_NEW)
-    .switchMap(() =>
-      Observable.ajax(doIt(hosts.pk, 'pizza/add', 'POST',
-        JSON.stringify(store$.getState().pizzaContainer.pizzaForm)
-        , true))
-        .map(() => ({
-          type: `${FETCH_PIZZA_LIST}`,
-          updated: true,
-        }))
-        .catch(() =>
-          Observable.of({
-            type: `${PIZZA_CREATE_NEW}_FAILED}`,
-          }))
-    );
+  .switchMap(() =>
+    Observable.ajax(doIt(
+      hosts.pk,
+      'pizza/add',
+      'POST',
+      JSON.stringify(store$.getState().pizzaContainer.pizzaForm),
+      true,
+      ),
+    )
+    .map(() => ({
+      type: `${FETCH_PIZZA_LIST}`,
+      created: true,
+    }))
+    .catch(error =>
+      Observable.of({
+        type: `${PIZZA_CREATE_NEW}_FAILED}`,
+        pizzaError: error.xhr.response,
+        showSnackbar: true,
+      }))
+  );
 
 export const fetchPizzaList = () => ({
   type: FETCH_PIZZA_LIST,
@@ -63,17 +69,17 @@ export const fetchPizzaList = () => ({
 
 export const fetchPizzaListEpic = action$ =>
   action$.ofType(FETCH_PIZZA_LIST)
-    .switchMap(() =>
-      Observable.ajax(doIt(hosts.pk, 'pizza/all-pizzas', 'GET', {}))
-        .map(({ response }) => ({
-          type: `${FETCH_PIZZA_LIST}_FULFILLED`,
-          response: arrayToMap(response),
-        }))
-        .catch(() =>
-          Observable.of({
-            type: `${FETCH_PIZZA_LIST}_FAILED}`,
-          }))
-    );
+  .switchMap(() =>
+    Observable.ajax(doIt(hosts.pk, 'pizza/all-pizzas', 'GET', {}))
+    .map(({ response }) => ({
+      type: `${FETCH_PIZZA_LIST}_FULFILLED`,
+      response: arrayToMap(response),
+    }))
+    .catch(() =>
+      Observable.of({
+        type: `${FETCH_PIZZA_LIST}_FAILED}`,
+      }))
+  );
 
 export const updatePizza = (pizza, field, value) => {
   let pizzaMap = fromJS(pizza);
@@ -86,17 +92,17 @@ export const updatePizza = (pizza, field, value) => {
 
 export const updatePizzaEpic = (action$) =>
   action$.ofType(PIZZA_UPDATE)
-    .switchMap(({ pizzaMap }) =>
-      Observable.ajax(doIt(hosts.pk, 'pizza/update', 'PUT',
-        pizzaMap, true))
-        .map(() => ({
-          type: `${FETCH_PIZZA_LIST}`,
-        }))
-        .catch(() =>
-          Observable.of({
-            type: `${PIZZA_UPDATE}_FAILED`,
-          }))
-    );
+  .switchMap(({ pizzaMap }) =>
+    Observable.ajax(doIt(hosts.pk, 'pizza/update', 'PUT',
+      pizzaMap, true))
+    .map(() => ({
+      type: `${FETCH_PIZZA_LIST}`,
+    }))
+    .catch(() =>
+      Observable.of({
+        type: `${PIZZA_UPDATE}_FAILED`,
+      }))
+  );
 
 export const copyPizza = (pizza) => ({
   type: PIZZA_COPY,
