@@ -49,8 +49,7 @@ export const savePizzaListEpic = (action$, store$) =>
       'POST',
       JSON.stringify(store$.getState().pizzaContainer.pizzaForm),
       true,
-      ),
-    )
+    ))
     .map(() => ({
       type: `${FETCH_PIZZA_LIST}`,
       created: true,

@@ -22,16 +22,6 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
     }
   }
 
-  getPrice() {
-    let price = 50; // work and stuff
-    if (this.props.pizzaForm.get('ingredientsId')) {
-      this.props.pizzaForm.get('ingredientsId').map((id) => {
-        price += this.props.ingredients.get(id).get('cost');
-      });
-    }
-    return price;
-  }
-
   handleChange = (name, value) => {
     this.props.editValue(name, value);
   };
@@ -68,33 +58,29 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
 
   validateForm() {
     let valid = true;
-    let titleErr = '';
-    let categoryErr = '';
-    let priceErr = '';
-    let ingredientsErr = '';
+    const pizzaErrors = {
+      titleErr: '',
+      categoryErr: '',
+      priceErr: '',
+      ingredientsErr: '',
+    };
     const emptyErr = 'Je nutné vyplnit!';
     if (this.props.pizzaForm.get('title') === '') {
-      titleErr = emptyErr;
+      pizzaErrors.titleErr = emptyErr;
       valid = false;
     }
     if (this.props.pizzaForm.get('categoryId') === '') {
-      categoryErr = emptyErr;
+      pizzaErrors.categoryErr = emptyErr;
       valid = false;
     }
     if (this.props.pizzaForm.get('ingredientsId').size === 0) {
-      ingredientsErr = 'Pizza musí obsahovat nějaké ingredience!';
+      pizzaErrors.ingredientsErr = 'Pizza musí obsahovat nějaké ingredience!';
       valid = false;
     }
     if (this.props.pizzaForm.get('price') <= 0) {
-      priceErr = 'Zadejte platnou cenu!';
+      pizzaErrors.priceErr = 'Zadejte platnou cenu!';
       valid = false;
     }
-    const pizzaErrors = {
-      titleErr,
-      categoryErr,
-      priceErr,
-      ingredientsErr,
-    };
     this.props.pizzaValidation(pizzaErrors);
     return valid;
   }
@@ -160,7 +146,7 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
           active={ this.props.snackbar.get('showSnackbar') }
           icon={ this.props.snackbar.get('icon') }
           label={ this.props.snackbar.get('label') }
-          action={ "Dismiss" }
+          action={ "Zavřít" }
           onClick={ () => this.props.handleSnackbar(false) }
           ref="snackbar"
           type="accept"

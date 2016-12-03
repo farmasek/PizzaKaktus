@@ -25,7 +25,7 @@ const initialPizzaErrors = {
   priceErr: '',
 };
 
-const initialSnackbar = mapSnackbar(false, 'check_circle', 'Pizza úspěšně vytvořena');
+const initialSnackbar = mapSnackbar(false, 'check_circle', 'Pizza byla úspěšně vytvořena');
 
 const InitialState = new Record(
   {
@@ -43,26 +43,20 @@ const pizzaReducer =
   (state = new InitialState(), action) => {
     switch (action.type) {
       case `${FETCH_PIZZA_LIST}`: {
-        if (action.created) {
-          const snackbar = initialSnackbar.set('showSnackbar', true);
-          return state.withMutations(s => s
-          .set('pizzaForm', initialPizzaForm)
-          .set('pizzaErrors', initialPizzaErrors)
-          .set('snackbar', snackbar)
-          .set('copied', false)
-          .set('pizzaError', ''));
-        }
+        const snackbar = action.created
+          ? initialSnackbar.set('showSnackbar', true)
+          : initialSnackbar;
         return state.withMutations(s => s
         .set('loading', true)
-        .set('pizzaForm', initialPizzaForm)
         .set('pizzaErrors', initialPizzaErrors)
-        .set('snackbar', initialSnackbar)
+        .set('snackbar', snackbar)
         .set('copied', false)
         .set('pizzaError', ''));
       }
       case `${FETCH_PIZZA_LIST}_FULFILLED`: {
         return state.withMutations(s => s
           .set('pizzas', action.response)
+          .set('pizzaForm', initialPizzaForm)
           .set('loading', false));
       }
       case `${FETCH_PIZZA_LIST}_FAILED`: {

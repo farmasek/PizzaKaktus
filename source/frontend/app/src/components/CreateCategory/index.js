@@ -2,64 +2,40 @@
  * Created by e-myslivost on 6.11.2016.
  */
 import React, { PropTypes, Component } from 'react';
-
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
 import Input from 'react-toolbox/lib/input';
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
+import { Snackbar } from 'react-toolbox/lib/snackbar';
 
+class CreateCategory extends Component {
 
-class CreateCategory extends Component { // eslint-disable-line react/prefer-stateless-function
-
-  state = {
-    name: '',
-    validation: {
-      errName: '',
-    },
-  };
-
-  handleChange = (name, value) => {
-    // Input probably cant work with props, sad.
-    this.setState({ ...this.state, [name]: value });
+  handleChange = (name, value) =>
     this.props.editValue(name, value);
-  };
+
   handleConfirm = (event) =>
     event.key === 'Enter' ? this.confirmDialog() : null;
 
-  handleErrorChange = (name, value = 'Je nutné vyplnit') =>
-    this.setState({ ...this.state, [name]: value });
-
-
   confirmDialog() {
-    // TODO better validation
-
     if (this.validateState()) {
       this.props.confirmForm();
-      this.setState({
-        name: '',
-        validation: {
-          errName: '',
-        },
-      });
     }
   }
 
   validateState() {
-    const validation = {
-      errName: '',
-    };
     let valid = true;
-    if (this.state.name === '') {
-      validation.errName = 'Je nutné vyplnit';
+    const categoryErrors = {
+      nameErr: '',
+    };
+    if (this.props.categoryForm.get('name') === '') {
+      categoryErrors.nameErr = 'Je nutné vyplnit.';
       valid = false;
-    } else {
-      validation.errName = '';
     }
-    this.setState({ validation });
+    this.props.categoryValidation(categoryErrors);
     return valid;
   }
-
 
   render() {
     return (
@@ -67,15 +43,25 @@ class CreateCategory extends Component { // eslint-disable-line react/prefer-sta
         <CardTitle>Přidat kategorii</CardTitle>
         <CardText>
           <Input
-            type="text" label="Název" value={this.state.name}
+            type="text" label="Název"
+            value={this.props.categoryForm.get('name')}
             onChange={(value) => this.handleChange('name', value)}
             onKeyPress={(event) => this.handleConfirm(event)}
-            error={this.state.validation.errName}
+            error={this.props.categoryErrors.nameErr}
           />
         </CardText>
         <CardActions>
           <Button label="Přidat" primary raised onClick={() => this.confirmDialog()} />
         </CardActions>
+        <Snackbar
+          active={ this.props.snackbar.get('showSnackbar') }
+          icon={ this.props.snackbar.get('icon') }
+          label={ this.props.snackbar.get('label') }
+          action={ "Zavřít" }
+          onClick={ () => this.props.handleSnackbar(false) }
+          ref="snackbar"
+          type="accept"
+        />
       </Card>);
   }
 }
@@ -84,6 +70,11 @@ CreateCategory.propTypes = {
   editValue: PropTypes.func.isRequired,
   confirmForm: PropTypes.func.isRequired,
   categoryForm: PropTypes.object,
+  snackbar: ImmutablePropTypes.record,
+  categoryErrors: PropTypes.object,
+  categoryError: PropTypes.string,
+  handleSnackbar: PropTypes.func.isRequired,
+  categoryValidation: PropTypes.func.isRequired,
 };
 
 export default cssModules(CreateCategory, styles);

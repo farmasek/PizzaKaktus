@@ -22,7 +22,8 @@ class Pizza extends Component {
   render() {
     return (
       <div className={styles.pizza}>
-        <PizzaList pizzas={this.props.pizzas}
+        <PizzaList
+          pizzas={this.props.pizzas}
           categories={this.props.categories}
           ingredients={this.props.ingredients}
           updatePizza={this.props.actions.updatePizza}
