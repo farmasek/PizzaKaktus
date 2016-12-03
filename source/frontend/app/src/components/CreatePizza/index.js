@@ -17,7 +17,7 @@ import scrollIntoView from 'scroll-into-view';
 class CreatePizza extends Component { // eslint-disable-line react/prefer-stateless-function
 
   componentDidUpdate() {
-    if (this.props.pizzaForm.get('title').length > 0) {
+    if (this.props.copied) {
       scrollIntoView(ReactDOM.findDOMNode(this.refs.pizzaForm));
     }
   }
@@ -33,7 +33,6 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
   }
 
   handleChange = (name, value) => {
-    this.setState({ ...this.state, [name]: value });
     this.props.editValue(name, value);
   };
 
@@ -158,11 +157,11 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
           <Button label="Přidat" primary raised onClick={() => this.confirmDialog()} />
         </CardActions>
         <Snackbar
-          active={ this.props.showSnackbar }
-          icon="check_circle"
-          label={ "Pizza úspěšně vytvořena." }
-          onTimeout={ () => this.props.handleSnackbar(false) }
-          timeout={ 3000 }
+          active={ this.props.snackbar.get('showSnackbar') }
+          icon={ this.props.snackbar.get('icon') }
+          label={ this.props.snackbar.get('label') }
+          action={ "Dismiss" }
+          onClick={ () => this.props.handleSnackbar(false) }
           ref="snackbar"
           type="accept"
         />
@@ -178,8 +177,10 @@ CreatePizza.propTypes = {
   ingredients: ImmutablePropTypes.map.isRequired,
   pizzaErrors: PropTypes.object,
   pizzaValidation: PropTypes.func.isRequired,
-  showSnackbar: PropTypes.bool.isRequired,
+  snackbar: PropTypes.bool.isRequired,
   handleSnackbar: PropTypes.func.isRequired,
+  pizzaError: PropTypes.string,
+  copied: PropTypes.bool,
 };
 
 export default cssModules(CreatePizza, styles);

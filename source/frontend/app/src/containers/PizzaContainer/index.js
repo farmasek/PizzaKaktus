@@ -37,8 +37,10 @@ class Pizza extends Component {
           ingredients={this.props.ingredients}
           pizzaErrors={this.props.pizzaErrors}
           pizzaValidation={this.props.actions.pizzaValidation}
-          showSnackbar={this.props.showSnackbar}
+          snackbar={this.props.snackbar}
           handleSnackbar={this.props.actions.handleSnackbar}
+          pizzaError={this.props.pizzaError}
+          copied={this.props.copied}
         />
       </div>
     );
@@ -53,7 +55,9 @@ Pizza.propTypes = {
   categoryActions: PropTypes.object,
   pizzaForm: PropTypes.object,
   pizzaErrors: PropTypes.object,
-  showSnackbar: PropTypes.bool.isRequired,
+  pizzaError: PropTypes.string,
+  copied: PropTypes.bool,
+  snackbar: ImmutablePropTypes.record,
 };
 
 const mapStateToProps = (state) => ({
@@ -62,7 +66,9 @@ const mapStateToProps = (state) => ({
   ingredients: state.ingredientContainer.ingredients,
   pizzaForm: state.pizzaContainer.pizzaForm,
   pizzaErrors: state.pizzaContainer.pizzaErrors,
-  showSnackbar: state.pizzaContainer.showSnackbar,
+  snackbar: state.pizzaContainer.snackbar,
+  pizzaError: state.pizzaContainer.pizzaError,
+  copied: state.pizzaContainer.copied,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,13 +1,12 @@
 package cz.osu.pizzakaktus.endpoints;
 
+import com.google.gson.Gson;
 import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import cz.osu.pizzakaktus.repositories.models.IngredientDb;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
 import cz.osu.pizzakaktus.services.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,10 +53,13 @@ public class PizzaController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addPizza(@RequestBody PizzaDTO pizza) {
         Optional<PizzaDb> insertedPizza = pizzaService.insert(pizza);
+        String obj = "Error inserting to database";
+        Gson gson = new Gson();
+        String json = gson.toJson(obj);
         return insertedPizza.isPresent() ?
                 new ResponseEntity<>(insertedPizza.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>("Error inserting into database", HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(json, HttpStatus.NOT_ACCEPTABLE);
     }
 
     /**
