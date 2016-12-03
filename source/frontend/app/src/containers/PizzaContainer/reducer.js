@@ -49,6 +49,7 @@ const pizzaReducer =
           .set('pizzaForm', initialPizzaForm)
           .set('pizzaErrors', initialPizzaErrors)
           .set('snackbar', snackbar)
+          .set('copied', false)
           .set('pizzaError', ''));
         }
         return state.withMutations(s => s
@@ -56,6 +57,7 @@ const pizzaReducer =
         .set('pizzaForm', initialPizzaForm)
         .set('pizzaErrors', initialPizzaErrors)
         .set('snackbar', initialSnackbar)
+        .set('copied', false)
         .set('pizzaError', ''));
       }
       case `${FETCH_PIZZA_LIST}_FULFILLED`: {
