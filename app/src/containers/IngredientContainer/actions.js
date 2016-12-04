@@ -2,13 +2,14 @@ import {
   FETCH_INGREDIENT_LIST,
   INGREDIENT_CHANGE_FORM_VALUE,
   INGREDIENT_CREATE_NEW,
+  INGREDIENT_VALIDATION,
+  INGREDIENT_SNACKBAR,
 } from './constants';
 import { mapIngredient } from '../../models/Ingredient';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
 import { Map } from 'immutable';
 
-// ingredientdefaultAction :: None -> {Action}
 export const fetchIngredientList = () => ({
   type: FETCH_INGREDIENT_LIST,
 });
@@ -23,7 +24,17 @@ export const saveIngredient = () => ({
   type: INGREDIENT_CREATE_NEW,
 });
 
-// TODO create model
+
+export const ingredientValidation = (ingredientErrors) => ({
+  type: INGREDIENT_VALIDATION,
+  ingredientErrors,
+});
+
+export const handleSnackbar = (value) => ({
+  type: INGREDIENT_SNACKBAR,
+  value,
+});
+
 export const saveIngredientListEpic = (action$, store$) =>
   action$.ofType(INGREDIENT_CREATE_NEW)
     .switchMap(() =>
@@ -32,10 +43,13 @@ export const saveIngredientListEpic = (action$, store$) =>
         , true))
         .map(() => ({
           type: `${FETCH_INGREDIENT_LIST}`,
+          created: true,
         }))
-        .catch(() =>
+        .catch(error =>
           Observable.of({
             type: `${INGREDIENT_CREATE_NEW}_FAILED}`,
+            ingredientError: error.xhr.response,
+            showSnackbar: true,
           }))
     );
 
@@ -55,8 +69,10 @@ export const fetchIngredientListEpic = action$ =>
           type: `${FETCH_INGREDIENT_LIST}_FULFILLED`,
           response: arrayToMap(response),
         }))
-        .catch(() =>
+        .catch(error =>
           Observable.of({
             type: `${FETCH_INGREDIENT_LIST}_FAILED}`,
+            ingredientError: error.xhr.response,
+            showSnackbar: true,
           }))
     );

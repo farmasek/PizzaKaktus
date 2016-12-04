@@ -9,7 +9,7 @@ class CategoryList extends Component { // eslint-disable-line react/prefer-state
       <td>
         {category.name}
       </td>
-    </tr>
+    </tr>;
 
   render() {
     return (

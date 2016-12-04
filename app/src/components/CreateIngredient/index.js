@@ -1,54 +1,23 @@
 import React, { PropTypes, Component } from 'react';
 import styles from './index.module.scss';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import cssModules from 'react-css-modules';
 import Input from 'react-toolbox/lib/input';
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
+import { Snackbar } from 'react-toolbox/lib/snackbar';
 
-class CreateIngredient extends Component { // eslint-disable-line react/prefer-stateless-function
-
-  state = {
-    name: '',
-    amount: '',
-    cost: '',
-    costCustom: '',
-    validation: {
-      errName: '',
-      errAmount: '',
-      errCost: '',
-      errCostCustom: '',
-    },
-  };
+class CreateIngredient extends Component {
 
   handleChange = (name, value) => {
-    // Input probably cant work with props, sad.
-    this.setState({ ...this.state, [name]: value });
     this.props.editValue(name, value);
   };
   handleConfirm = (event) =>
     event.key === 'Enter' ? this.confirmDialog() : null;
 
-  handleErrorChange = (name, value = 'Je nutné vyplnit') =>
-    this.setState({ ...this.state, [name]: value });
-
-
   confirmDialog() {
-    // TODO better validation
-
     if (this.validateState()) {
       this.props.confirmForm();
-      this.setState({
-        name: '',
-        amount: '',
-        cost: '',
-        costCustom: '',
-        validation: {
-          errName: '',
-          errAmount: '',
-          errCost: '',
-          errCostCustom: '',
-        },
-      });
     }
   }
 
@@ -60,34 +29,25 @@ class CreateIngredient extends Component { // eslint-disable-line react/prefer-s
       errCostCustom: '',
     };
     let valid = true;
-    if (this.state.name === '') {
+    if (this.props.ingredientForm.get('name') === '') {
       validation.errName = 'Je nutné vyplnit';
       valid = false;
-    } else {
-      validation.errName = '';
     }
-    if (this.state.amount === '') {
+    if (this.props.ingredientForm.get('amount') === '') {
       validation.errAmount = 'Je nutné vyplnit';
       valid = false;
-    } else {
-      validation.errAmount = '';
     }
-    if (this.state.cost === '') {
+    if (this.props.ingredientForm.get('cost') === '') {
       validation.errCost = 'Je nutné vyplnit';
       valid = false;
-    } else {
-      validation.errCost = '';
     }
-    if (this.state.costCustom === '') {
+    if (this.props.ingredientForm.get('costCustom') === '') {
       validation.errCostCustom = 'Je nutné vyplnit';
       valid = false;
-    } else {
-      validation.errCostCustom = '';
     }
-    this.setState({ validation });
+    this.props.ingredientValidation(validation);
     return valid;
   }
-
 
   render() {
     return (
@@ -95,35 +55,54 @@ class CreateIngredient extends Component { // eslint-disable-line react/prefer-s
         <CardTitle>Přidat ingredienci</CardTitle>
         <CardText>
           <Input
-            type="text" label="Jméno" value={this.state.name}
+            type="text"
+            label="Jméno"
+            value={this.props.ingredientForm.get('name')}
             onChange={(value) => this.handleChange('name', value)}
             onKeyPress={(event) => this.handleConfirm(event)}
-            error={this.state.validation.errName}
+            error={this.props.ingredientErrors.errName}
           />
           <Input
-            type="text" label="Množství" value={this.state.amount}
+            type="text"
+            label="Množství"
+            value={this.props.ingredientForm.get('amount')}
             onChange={(value) => this.handleChange('amount', value)}
             onKeyPress={(event) => this.handleConfirm(event)}
-            error={this.state.validation.errAmount}
+            error={this.props.ingredientErrors.errAmount}
           />
           <div className={styles.insideNumbers}>
             <Input
-              type="number" label="Cena jednotná" value={this.state.cost}
-              onChange={(value) => this.handleChange('cost', value)} maxLength={10}
+              type="number"
+              label="Cena"
+              value={this.props.ingredientForm.get('cost')}
+              onChange={(value) => this.handleChange('cost', value)}
+              maxLength={10}
               onKeyPress={(event) => this.handleConfirm(event)}
-              error={this.state.validation.errCost}
+              error={this.props.ingredientErrors.errCost}
             />
             <Input
-              type="number" label="Cena samostatná" value={this.state.costCustom}
-              onChange={(value) => this.handleChange('costCustom', value)} maxLength={10}
+              type="number"
+              label="Cena přídavku"
+              value={this.props.ingredientForm.get('costCustom')}
+              onChange={(value) => this.handleChange('costCustom', value)}
+              maxLength={10}
               onKeyPress={(event) => this.handleConfirm(event)}
-              error={this.state.validation.errCostCustom}
+              error={this.props.ingredientErrors.errCostCustom}
             />
           </div>
         </CardText>
         <CardActions>
           <Button label="Přidat" primary raised onClick={() => this.confirmDialog()} />
         </CardActions>
+        <Snackbar
+          active={ this.props.snackbar.get('showSnackbar') }
+          icon={ this.props.snackbar.get('icon') }
+          label={ this.props.snackbar.get('label') }
+          action={ "Zavřít" }
+          onClick={ () => this.props.handleSnackbar(false) }
+          ref="snackbar"
+          type="accept"
+        />
       </Card>);
   }
 }
@@ -132,6 +111,11 @@ CreateIngredient.propTypes = {
   editValue: PropTypes.func.isRequired,
   confirmForm: PropTypes.func.isRequired,
   ingredientForm: PropTypes.object,
+  snackbar: ImmutablePropTypes.record,
+  ingredientErrors: PropTypes.object,
+  ingredientError: PropTypes.string,
+  handleSnackbar: PropTypes.func.isRequired,
+  ingredientValidation: PropTypes.func,
 };
 
 export default cssModules(CreateIngredient, styles);

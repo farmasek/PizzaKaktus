@@ -1,3 +1,20 @@
 .ingredientList {
-  
+  border-collapse: collapse;
+  width: 100%;
+
+  .ingredientListTable {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2em;
+    .columnLeft {
+      text-align: left;
+    }
+    td {
+      padding: 0.5em 0 0.5em 0;
+    }
+    tr {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+    }
+  }
 }

@@ -75,8 +75,10 @@ export const fetchCategoryListEpic = action$ =>
       type: `${FETCH_CATEGORY_LIST}_FULFILLED`,
       response: arrayToMap(response),
     }))
-    .catch(() =>
+    .catch((error) =>
       Observable.of({
         type: `${FETCH_CATEGORY_LIST}_FAILED}`,
+        categoryError: error.xhr.response,
+        showSnackbar: true,
       }))
   );

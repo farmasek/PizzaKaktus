@@ -22,9 +22,13 @@ class Category extends Component { // eslint-disable-line react/prefer-stateless
     return (
       <div className={styles.category}>
         <div className={styles.flexChild}>
-          <CategoryList
-            categories={this.props.categories}
-          />
+          {
+            !(this.props.loading)
+              ? <CategoryList
+                categories={this.props.categories}
+              />
+              : null
+          }
         </div>
         <div className={styles.flexChild}>
           <CreateCategory
@@ -49,6 +53,7 @@ Category.propTypes = {
   categoryErrors: PropTypes.object,
   categoryError: PropTypes.string,
   categoryForm: ImmutablePropTypes.map,
+  loading: PropTypes.bool,
 };
 
 // mapStateToProps :: {State} -> {Props}
@@ -58,6 +63,7 @@ const mapStateToProps = (state) => ({
   snackbar: state.categoryContainer.snackbar,
   categoryError: state.categoryContainer.categoryError,
   categoryErrors: state.categoryContainer.categoryErrors,
+  loading: state.categoryContainer.loading,
 });
 
 // mapDispatchToProps :: Dispatch -> {Action}

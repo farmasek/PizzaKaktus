@@ -22,16 +22,19 @@ class Pizza extends Component {
   render() {
     return (
       <div className={styles.pizza}>
-        <PizzaList
-          pizzas={this.props.pizzas}
-          pagination={this.props.pagination}
-          categories={this.props.categories}
-          ingredients={this.props.ingredients}
-          updatePizza={this.props.actions.updatePizza}
-          copyPizza={this.props.actions.copyPizza}
-          changePagination={this.props.actions.changePaginationProperties}
-        />
-
+        {
+          !(this.props.loading)
+            ? <PizzaList
+              pizzas={this.props.pizzas}
+              categories={this.props.categories}
+              ingredients={this.props.ingredients}
+              updatePizza={this.props.actions.updatePizza}
+              copyPizza={this.props.actions.copyPizza}
+              pagination={this.props.pagination}
+              changePagination={this.props.actions.changePaginationProperties}
+          />
+            : null
+        }
         <CreatePizza
           editValue={this.props.actions.changeValue}
           pizzaForm={this.props.pizzaForm}
@@ -59,8 +62,9 @@ Pizza.propTypes = {
   pizzaForm: PropTypes.object,
   pizzaErrors: PropTypes.object,
   pizzaError: PropTypes.string,
-  copied: PropTypes.bool,
   snackbar: ImmutablePropTypes.record,
+  copied: PropTypes.bool,
+  loading: PropTypes.bool,
   pagination: ImmutablePropTypes.map,
 };
 
@@ -74,6 +78,7 @@ const mapStateToProps = (state) => ({
   pizzaError: state.pizzaContainer.pizzaError,
   copied: state.pizzaContainer.copied,
   pagination: state.pizzaContainer.pagination,
+  loading: state.pizzaContainer.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
