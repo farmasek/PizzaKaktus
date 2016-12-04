@@ -163,7 +163,7 @@ CreatePizza.propTypes = {
   ingredients: ImmutablePropTypes.map.isRequired,
   pizzaErrors: PropTypes.object,
   pizzaValidation: PropTypes.func.isRequired,
-  snackbar: PropTypes.bool.isRequired,
+  snackbar: PropTypes.object,
   handleSnackbar: PropTypes.func.isRequired,
   pizzaError: PropTypes.string,
   copied: PropTypes.bool,

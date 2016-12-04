@@ -10,15 +10,15 @@ class PizzaList extends React.Component {
 
   renderRow = (pizza) =>
     <tr key={pizza.id}>
-      <td>{pizza.title}</td>
-      <td>
+      <td className={styles.columnLeft} >{pizza.title}</td>
+      <td className={styles.columnLeft}>
         {
           this.props.categories.size > 0
             ? this.props.categories.get(pizza.categoryId).get('name')
             : pizza.categoryId
         }
       </td>
-      <td>
+      <td className={styles.columnLeft}>
         <ul className={styles.ingredientsList}>
           {
             this.props.ingredients.size > 0

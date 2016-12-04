@@ -1,19 +1,37 @@
 import {
   FETCH_INGREDIENT_LIST,
   INGREDIENT_CHANGE_FORM_VALUE,
+  INGREDIENT_VALIDATION,
+  INGREDIENT_SNACKBAR,
+  INGREDIENT_CREATE_NEW,
 } from './constants';
-import { Record, Map, fromJS } from 'immutable';
+import { Record, Map } from 'immutable';
+import { mapSnackbar } from '../../models/Snackbar';
+
+const initialIngredientErrors = {
+  nameErr: '',
+  amountErr: '',
+  costErr: '',
+  costCustomErr: '',
+};
+
+const initialSnackbar = mapSnackbar(false, 'check_circle', 'Ingredience byla úspěšně vytvořena.');
+
+const initialIngredientForm = new Map({
+  name: '',
+  amount: '',
+  cost: 0,
+  costCustom: 0,
+});
 
 const InitialState = new Record(
   {
     isLoading: false,
     ingredients: new Map(),
-    ingredientForm: fromJS({
-      name: '',
-      amount: null,
-      cost: null,
-      customCost: null,
-    }),
+    ingredientForm: initialIngredientForm,
+    ingredientErrors: initialIngredientErrors,
+    ingredientError: '',
+    snackbar: initialSnackbar,
   }
 );
 
@@ -21,7 +39,15 @@ const ingredientReducer =
   (state = new InitialState(), action) => {
     switch (action.type) {
       case `${FETCH_INGREDIENT_LIST}`: {
-        return state.set('isLoading', true);
+        const snackbar = action.created
+          ? initialSnackbar.set('showSnackbar', true)
+          : initialSnackbar;
+        return state.withMutations(s => s
+        .set('isLoading', true)
+        .set('ingredientErrors', initialIngredientErrors)
+        .set('snackbar', snackbar)
+        .set('ingredientForm', initialIngredientForm)
+        .set('ingredientError', ''));
       }
       case `${FETCH_INGREDIENT_LIST}_FULFILLED`: {
         return state.withMutations(s => s
@@ -31,10 +57,25 @@ const ingredientReducer =
       case `${FETCH_INGREDIENT_LIST}_FAILED`: {
         return state.withMutations(s => s
           .set('ingredients', new Map())
-          .set('isLoading', false));
+          .set('isLoading', false)
+          .set('ingredientError', action.ingredientError)
+          .set('snackbar', mapSnackbar(true, 'error', action.ingredientError)));
       }
       case `${INGREDIENT_CHANGE_FORM_VALUE}`: {
         return state.setIn(['ingredientForm', action.input], action.value);
+      }
+      case INGREDIENT_VALIDATION: {
+        return state.withMutations(s => s
+        .set('ingredientErrors', action.ingredientErrors));
+      }
+      case INGREDIENT_SNACKBAR: {
+        return state.withMutations(s => s
+        .setIn(['snackbar', 'showSnackbar'], false));
+      }
+      case `${INGREDIENT_CREATE_NEW}_FAILED`: {
+        return state.withMutations(s => s
+        .set('ingredientError', action.pizzaError)
+        .set('snackbar', mapSnackbar(true, 'error', action.pizzaError)));
       }
       default:
         return state;

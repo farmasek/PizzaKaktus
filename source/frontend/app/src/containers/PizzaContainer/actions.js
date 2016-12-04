@@ -79,10 +79,13 @@ const fetchPizzaTable = (pagination) =>
       type: `${FETCH_PIZZA_LIST}_FULFILLED`,
       response,
     }))
-    .catch(() =>
+    .catch(error =>
       Observable.of({
         type: `${FETCH_PIZZA_LIST}_FAILED}`,
-      }));
+        pizzaError: error.xhr.response,
+        showSnackbar: true,
+      })
+    );
 
 export const fetchPizzaListEpic = (action$, store) =>
   action$.ofType(FETCH_PIZZA_LIST)
@@ -107,17 +110,19 @@ export const updatePizza = (pizza, field, value) => {
 
 export const updatePizzaEpic = (action$) =>
   action$.ofType(PIZZA_UPDATE)
-    .switchMap(({ pizzaMap }) =>
-      Observable.ajax(doIt(hosts.pk, 'pizza/update', 'PUT',
-        pizzaMap, true))
-        .map(() => ({
-          type: `${FETCH_PIZZA_LIST}`,
-        }))
-        .catch(() =>
-          Observable.of({
-            type: `${PIZZA_UPDATE}_FAILED`,
-          }))
-    );
+  .switchMap(({ pizzaMap }) =>
+    Observable.ajax(doIt(hosts.pk, 'pizza/update', 'PUT',
+      pizzaMap, true))
+    .map(() => ({
+      type: `${FETCH_PIZZA_LIST}`,
+    }))
+    .catch((error) =>
+      Observable.of({
+        type: `${PIZZA_UPDATE}_FAILED`,
+        pizzaError: error.xhr.response,
+        showSnackbar: true,
+      }))
+  );
 
 export const copyPizza = (pizza) => ({
   type: PIZZA_COPY,
