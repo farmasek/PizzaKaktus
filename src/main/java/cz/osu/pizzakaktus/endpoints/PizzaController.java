@@ -1,12 +1,17 @@
 package cz.osu.pizzakaktus.endpoints;
 
 import com.google.gson.Gson;
+import cz.osu.pizzakaktus.endpoints.mappers.MapToDTO;
 import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import cz.osu.pizzakaktus.repositories.models.IngredientDb;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
 import cz.osu.pizzakaktus.services.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +27,8 @@ import java.util.stream.Collectors;
 public class PizzaController {
     @Autowired
     PizzaService pizzaService;
+    @Autowired
+    MapToDTO mapToDTO;
 
     /**
      * Return all pizzas
@@ -29,19 +36,11 @@ public class PizzaController {
      * @return Json list of all pizzas
      */
     @RequestMapping(value = "/all-pizzas", method = RequestMethod.GET)
-    public HttpEntity<?> findAllPizzas() {
-        List<PizzaDb> allPizzas = pizzaService.findAll();
-        List<PizzaDTO> collect = allPizzas.stream()
-                .map(pizzaDb -> PizzaDTO.builder()
-                        .id(pizzaDb.getId())
-                        .title(pizzaDb.getTitle())
-                        .categoryId(pizzaDb.getCategory().getId())
-                        .ingredientsId(pizzaDb.getIngredients().stream().map(IngredientDb::getId).collect(Collectors.toList()))
-                        .price(pizzaDb.getPrice())
-                        .active(pizzaDb.isActive())
-                        .build())
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(collect, HttpStatus.OK);
+    public HttpEntity<?> findAllPizzas(@RequestParam(value = "filterBy", required = false)
+                                               String filterBy, Pageable pageable) {
+        Page<PizzaDb> allPizzas = pizzaService.findAll(pageable, filterBy);
+        Page<PizzaDTO> pizzaDTOs = allPizzas.map(pizzaDb -> mapToDTO.mapPizza(pizzaDb));
+        return new ResponseEntity<>(pizzaDTOs, HttpStatus.OK);
     }
 
     /**
@@ -53,13 +52,10 @@ public class PizzaController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addPizza(@RequestBody PizzaDTO pizza) {
         Optional<PizzaDb> insertedPizza = pizzaService.insert(pizza);
-        String obj = "Error inserting to database";
-        Gson gson = new Gson();
-        String json = gson.toJson(obj);
         return insertedPizza.isPresent() ?
                 new ResponseEntity<>(insertedPizza.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(json, HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>("Error inserting to database", HttpStatus.NOT_ACCEPTABLE);
     }
 
     /**

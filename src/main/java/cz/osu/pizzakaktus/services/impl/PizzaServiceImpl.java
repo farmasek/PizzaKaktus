@@ -7,12 +7,16 @@ import cz.osu.pizzakaktus.repositories.PizzaRepository;
 import cz.osu.pizzakaktus.repositories.models.CategoryDb;
 import cz.osu.pizzakaktus.repositories.models.IngredientDb;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
+import cz.osu.pizzakaktus.repositories.models.QPizzaDb;
 import cz.osu.pizzakaktus.services.CategoryService;
 import cz.osu.pizzakaktus.services.IngredientService;
 import cz.osu.pizzakaktus.services.PizzaService;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +54,7 @@ public class PizzaServiceImpl implements PizzaService {
             List<IngredientDb> ingredientsById = ingredientService.findAllById(pizzaDTO.getIngredientsId());
             CategoryDb categoryDb = categoryService.findById(pizzaDTO.getCategoryId());
             PizzaDb updatedPizza = pizzaRepository.save(
-                new PizzaDb(pizzaDTO.getId(), pizzaDTO.getTitle(), categoryDb, ingredientsById, pizzaDTO.getPrice(), pizzaDTO.isActive()));
+                    new PizzaDb(pizzaDTO.getId(), pizzaDTO.getTitle(), categoryDb, ingredientsById, pizzaDTO.getPrice(), pizzaDTO.isActive()));
             return Optional.of(updatedPizza);
         } catch (Exception e) {
             return Optional.empty();
@@ -61,6 +65,11 @@ public class PizzaServiceImpl implements PizzaService {
     public List<PizzaDb> findAll() {
         Iterable<PizzaDb> pizzasList = pizzaRepository.findAll();
         return Lists.newArrayList(pizzasList);
+    }
+
+    @Override
+    public Page<PizzaDb> findAll(Pageable pageable, String filterBy) {
+        return pizzaRepository.findAll(QPizzaDb.pizzaDb.title.containsIgnoreCase(filterBy), pageable);
     }
 
     @Override
