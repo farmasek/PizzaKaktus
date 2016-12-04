@@ -24,10 +24,12 @@ class Pizza extends Component {
       <div className={styles.pizza}>
         <PizzaList
           pizzas={this.props.pizzas}
+          pagination={this.props.pagination}
           categories={this.props.categories}
           ingredients={this.props.ingredients}
           updatePizza={this.props.actions.updatePizza}
           copyPizza={this.props.actions.copyPizza}
+          changePagination={this.props.actions.changePaginationProperties}
         />
 
         <CreatePizza
@@ -59,6 +61,7 @@ Pizza.propTypes = {
   pizzaError: PropTypes.string,
   copied: PropTypes.bool,
   snackbar: ImmutablePropTypes.record,
+  pagination: ImmutablePropTypes.map,
 };
 
 const mapStateToProps = (state) => ({
@@ -70,6 +73,7 @@ const mapStateToProps = (state) => ({
   snackbar: state.pizzaContainer.snackbar,
   pizzaError: state.pizzaContainer.pizzaError,
   copied: state.pizzaContainer.copied,
+  pagination: state.pizzaContainer.pagination,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -3,6 +3,8 @@ package cz.osu.pizzakaktus.services;
 import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import cz.osu.pizzakaktus.repositories.models.CategoryDb;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +36,13 @@ public interface PizzaService {
      * @return List of pizzas
      */
     List<PizzaDb> findAll();
+
+    /**
+     * Returns list of all pizzas with pagination and filtered
+     *
+     * @return List of pizzas
+     */
+    Page<PizzaDb> findAll(Pageable pageable, String filterBy);
 
     boolean isCategoryValid(CategoryDb categoryDb);
 

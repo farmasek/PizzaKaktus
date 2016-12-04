@@ -2,6 +2,7 @@ package cz.osu.pizzakaktus.repositories.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.List;
 

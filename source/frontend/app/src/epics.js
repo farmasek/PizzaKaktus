@@ -14,6 +14,7 @@ import {
   fetchPizzaListEpic,
   savePizzaListEpic,
   updatePizzaEpic,
+  fetchPizzaAfterPaginationChange,
 } from './containers/PizzaContainer/actions';
 import {
   fetchUserListEpic,
@@ -40,4 +41,5 @@ export default combineEpics(
   saveUserRegistrationEpic,
   updateUserEpic,
   deleteUserEpic,
+  fetchPizzaAfterPaginationChange,
 );
