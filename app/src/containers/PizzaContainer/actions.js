@@ -6,11 +6,11 @@ import {
   PIZZA_SNACKBAR,
   PIZZA_UPDATE,
   PIZZA_COPY,
+  PIZZA_PAG_PROPERTIES,
 } from './constants';
-import { mapPizza } from '../../models/Pizza';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
-import { Map, fromJS } from 'immutable';
+import { fromJS } from 'immutable';
 
 export const pizzaValidation = (pizzaErrors) => ({
   type: PIZZA_VALIDATION,
@@ -21,14 +21,6 @@ export const handleSnackbar = (value) => ({
   type: PIZZA_SNACKBAR,
   value,
 });
-
-function arrayToMap(array) {
-  let mapa = new Map();
-  array.map((value) => {
-    mapa = mapa.set(value.id, mapPizza(value));
-  });
-  return mapa;
-}
 
 export const changeValue = (input, value) => ({
   type: PIZZA_CHANGE_FORM_VALUE,
@@ -42,43 +34,67 @@ export const savePizza = () => ({
 
 export const savePizzaListEpic = (action$, store$) =>
   action$.ofType(PIZZA_CREATE_NEW)
-  .switchMap(() =>
-    Observable.ajax(doIt(
-      hosts.pk,
-      'pizza/add',
-      'POST',
-      JSON.stringify(store$.getState().pizzaContainer.pizzaForm),
-      true,
-    ))
-    .map(() => ({
-      type: `${FETCH_PIZZA_LIST}`,
-      created: true,
-    }))
-    .catch(error =>
-      Observable.of({
-        type: `${PIZZA_CREATE_NEW}_FAILED}`,
-        pizzaError: error.xhr.response,
-        showSnackbar: true,
-      }))
-  );
+    .switchMap(() =>
+      Observable.ajax(doIt(
+        hosts.pk,
+        'pizza/add',
+        'POST',
+        JSON.stringify(store$.getState().pizzaContainer.pizzaForm),
+        true,
+      ))
+        .map(() => ({
+          type: `${FETCH_PIZZA_LIST}`,
+          created: true,
+        }))
+        .catch(error =>
+          Observable.of({
+            type: `${PIZZA_CREATE_NEW}_FAILED}`,
+            pizzaError: error.xhr.response,
+            showSnackbar: true,
+          }))
+    );
 
 export const fetchPizzaList = () => ({
   type: FETCH_PIZZA_LIST,
 });
+export const changePaginationProperties = (paginationType, value) => ({
+  type: PIZZA_PAG_PROPERTIES,
+  paginationType,
+  value,
+});
 
-export const fetchPizzaListEpic = action$ =>
-  action$.ofType(FETCH_PIZZA_LIST)
-  .switchMap(() =>
-    Observable.ajax(doIt(hosts.pk, 'pizza/all-pizzas', 'GET', {}))
+const fetchPizzaTable = (pagination) =>
+  Observable.ajax(doIt(hosts.pk, `pizza/all-pizzas?page=${
+    pagination.get('number')
+    }&size=${
+    pagination.get('size')
+    }&sort=${
+    pagination.get('sortBy')
+    },${
+    pagination.get('sortDir')
+    }&filterBy=${
+    pagination.get('filterBy')
+    }`, 'GET', {}))
     .map(({ response }) => ({
       type: `${FETCH_PIZZA_LIST}_FULFILLED`,
-      response: arrayToMap(response),
+      response,
     }))
     .catch(() =>
       Observable.of({
         type: `${FETCH_PIZZA_LIST}_FAILED}`,
-      }))
-  );
+      }));
+
+export const fetchPizzaListEpic = (action$, store) =>
+  action$.ofType(FETCH_PIZZA_LIST)
+    .map(() => store.getState().pizzaContainer.get('pagination'))
+    .switchMap((pagination) => fetchPizzaTable(pagination)
+    );
+export const fetchPizzaAfterPaginationChange = (action$, store) =>
+  action$.ofType(PIZZA_PAG_PROPERTIES)
+    .debounceTime(250)
+    .map(() => store.getState().pizzaContainer.get('pagination'))
+    .switchMap((pagination) => fetchPizzaTable(pagination)
+    );
 
 export const updatePizza = (pizza, field, value) => {
   let pizzaMap = fromJS(pizza);
@@ -91,17 +107,17 @@ export const updatePizza = (pizza, field, value) => {
 
 export const updatePizzaEpic = (action$) =>
   action$.ofType(PIZZA_UPDATE)
-  .switchMap(({ pizzaMap }) =>
-    Observable.ajax(doIt(hosts.pk, 'pizza/update', 'PUT',
-      pizzaMap, true))
-    .map(() => ({
-      type: `${FETCH_PIZZA_LIST}`,
-    }))
-    .catch(() =>
-      Observable.of({
-        type: `${PIZZA_UPDATE}_FAILED`,
-      }))
-  );
+    .switchMap(({ pizzaMap }) =>
+      Observable.ajax(doIt(hosts.pk, 'pizza/update', 'PUT',
+        pizzaMap, true))
+        .map(() => ({
+          type: `${FETCH_PIZZA_LIST}`,
+        }))
+        .catch(() =>
+          Observable.of({
+            type: `${PIZZA_UPDATE}_FAILED`,
+          }))
+    );
 
 export const copyPizza = (pizza) => ({
   type: PIZZA_COPY,
