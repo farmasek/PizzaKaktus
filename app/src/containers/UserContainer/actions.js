@@ -4,10 +4,22 @@ import {
   USER_CREATE_NEW,
   USER_UPDATE_FIELD,
   USER_DELETE,
+  USER_SNACKBAR,
+  USER_VALIDATION,
 } from './constants';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
 import { fromJS } from 'immutable';
+
+export const userValidation = (userErrors) => ({
+  type: USER_VALIDATION,
+  userErrors,
+});
+
+export const handleSnackbar = (value) => ({
+  type: USER_SNACKBAR,
+  value,
+});
 
 export const fetchUserList = () => ({
   type: FETCH_USER_LIST,
@@ -56,23 +68,26 @@ export const updateRole = (user, role) => {
   };
 };
 
-// TODO create model
 export const saveUserListEpic = (action$, store$) =>
   action$.ofType(USER_CREATE_NEW)
     .switchMap(() =>
-      Observable.ajax(doIt(hosts.pk, 'user/add', 'POST',
-        JSON.stringify(store$.getState().userContainer.userForm)
-        , true))
+      Observable.ajax(doIt(
+        hosts.pk,
+        'user/add',
+        'POST',
+        JSON.stringify(store$.getState().userContainer.userForm),
+        true))
         .map(() => ({
           type: `${FETCH_USER_LIST}`,
+          created: true,
         }))
-        .catch(() =>
+        .catch(error =>
           Observable.of({
-            type: `${USER_CREATE_NEW}_FAILED}`,
+            type: `${USER_CREATE_NEW}_FAILED`,
+            userError: error.xhr.response,
           }))
     );
 
-// TODO better error handling
 export const updateUserEpic = (action$) =>
   action$.ofType(USER_UPDATE_FIELD)
     .switchMap(({ userMap }) =>
@@ -81,9 +96,10 @@ export const updateUserEpic = (action$) =>
         .map(() => ({
           type: `${FETCH_USER_LIST}`,
         }))
-        .catch(() =>
+        .catch(error =>
           Observable.of({
-            type: `Noop, failed fetch`,
+            type: `${USER_UPDATE_FIELD}_FAILED`,
+            userError: error.xhr.response,
           }))
     );
 
@@ -95,9 +111,10 @@ export const fetchUserListEpic = action$ =>
           type: `${FETCH_USER_LIST}_FULFILLED`,
           response,
         }))
-        .catch(() =>
+        .catch(error =>
           Observable.of({
-            type: `${FETCH_USER_LIST}_FAILED}`,
+            type: `${FETCH_USER_LIST}_FAILED`,
+            userError: error.xhr.response,
           }))
     );
 
@@ -108,8 +125,9 @@ export const deleteUserEpic = action$ =>
       .map(() => ({
         type: FETCH_USER_LIST,
       }))
-      .catch(() =>
+      .catch(error =>
         Observable.of({
           type: `${USER_DELETE}_FAILED`,
+          userError: error.xhr.response,
         }))
   );

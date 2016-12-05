@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cssModules from 'react-css-modules';
@@ -19,19 +20,24 @@ class User extends Component {
       <div className={styles.user}>
         <CreateUser
           editValue={this.props.actions.changeValue}
-          userForm={this.props.manageUser.userForm}
+          userForm={this.props.userForm}
           confirmForm={this.props.actions.saveUser}
-          formTitle={"Přidat uživatele"}
-          snackbarText={"Uživatel byl přidán."}
-          type={"manageUsers"}
+          userErrors={this.props.userErrors}
+          userValidation={this.props.actions.userValidation}
+          snackbar={this.props.snackbar}
+          handleSnackbar={this.props.actions.handleSnackbar}
+          userError={this.props.userError}
         />
-
-        <UserList
-          users={this.props.manageUser.users}
-          updateUser={this.props.actions.updateUser}
-          updateRole={this.props.actions.updateRole}
-          deleteUser={this.props.actions.deleteUser}
-        />
+        {
+          !(this.props.loading)
+            ? <UserList
+              users={this.props.users}
+              updateUser={this.props.actions.updateUser}
+              updateRole={this.props.actions.updateRole}
+              deleteUser={this.props.actions.deleteUser}
+            />
+            : null
+        }
       </div>
     );
   }
@@ -39,13 +45,23 @@ class User extends Component {
 }
 
 User.propTypes = {
-  manageUser: PropTypes.object,
   actions: PropTypes.object,
+  userForm: PropTypes.object,
+  userErrors: PropTypes.object,
+  userError: PropTypes.string,
+  snackbar: ImmutablePropTypes.record,
+  users: ImmutablePropTypes.list,
+  loading: PropTypes.bool,
 };
 
 // mapStateToProps :: {State} -> {Props}
 const mapStateToProps = (state) => ({
-  manageUser: state.userContainer,
+  userForm: state.userContainer.userForm,
+  userErrors: state.userContainer.userErrors,
+  userError: state.userContainer.userError,
+  snackbar: state.userContainer.snackbar,
+  users: state.userContainer.users,
+  loading: state.userContainer.loading,
 });
 
 // mapDispatchToProps :: Dispatch -> {Action}

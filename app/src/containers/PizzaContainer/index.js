@@ -32,7 +32,7 @@ class Pizza extends Component {
               copyPizza={this.props.actions.copyPizza}
               pagination={this.props.pagination}
               changePagination={this.props.actions.changePaginationProperties}
-          />
+            />
             : null
         }
         <CreatePizza
