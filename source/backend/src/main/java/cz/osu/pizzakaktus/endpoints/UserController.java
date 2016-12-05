@@ -1,5 +1,6 @@
 package cz.osu.pizzakaktus.endpoints;
 
+import com.google.gson.Gson;
 import cz.osu.pizzakaktus.endpoints.models.UserDTO;
 import cz.osu.pizzakaktus.repositories.models.Role;
 import cz.osu.pizzakaktus.repositories.models.UserDb;
@@ -60,10 +61,13 @@ public class UserController {
     public HttpEntity<?> addUser(@RequestBody UserDTO user) {
 
         Optional<UserDb> insertedUser = userService.insert(user);
+        String obj = "Error inserting to database.";
+        Gson gson = new Gson();
+        String json = gson.toJson(obj);
         return insertedUser.isPresent() ?
                 new ResponseEntity<>(insertedUser.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>("Error inserting to database", HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(json, HttpStatus.NOT_ACCEPTABLE);
     }
 
     /**

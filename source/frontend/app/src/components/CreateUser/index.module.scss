@@ -1,13 +1,24 @@
 .createUser {
-
-}
-
-.regBody {
   display: flex;
   div {
     width: 50%;
     div {
       width: 90%;
     }
+  }
+
+  h1 {
+    color: #212121;
+    padding: 0.64em 0;
+    font-size: 1.28em;
+    font-weight: normal;
+  }
+
+  .err {
+    color: #de3226;
+  }
+
+  .roleCheckbox {
+    width: 21px;
   }
 }

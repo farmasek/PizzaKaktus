@@ -29,6 +29,15 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
   handleConfirm = (event) =>
     event.key === 'Enter' ? this.confirmDialog() : null;
 
+  handleIngredientsChange = (ingredient, value) => {
+    const ingredients = value
+      ? this.props.pizzaForm.get('ingredientsId').push(ingredient)
+      : this.props.pizzaForm.get('ingredientsId').delete(
+      this.props.pizzaForm.get('ingredientsId').indexOf(ingredient)
+    );
+    this.props.editValue('ingredientsId', ingredients);
+  };
+
   createSelectItems() {
     const items = new Array();
     items.push({ value: '', label: 'Kategorie' });
@@ -45,15 +54,6 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
         { value.name }
       </li>
     );
-  };
-
-  handleIngredientsChange = (ingredient, value) => {
-    const ingredients = value
-      ? this.props.pizzaForm.get('ingredientsId').push(ingredient)
-      : this.props.pizzaForm.get('ingredientsId').delete(
-        this.props.pizzaForm.get('ingredientsId').indexOf(ingredient)
-      );
-    this.props.editValue('ingredientsId', ingredients);
   };
 
   validateForm() {

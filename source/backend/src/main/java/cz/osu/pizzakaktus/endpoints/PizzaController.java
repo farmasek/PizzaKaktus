@@ -52,10 +52,13 @@ public class PizzaController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addPizza(@RequestBody PizzaDTO pizza) {
         Optional<PizzaDb> insertedPizza = pizzaService.insert(pizza);
+        String obj = "Error inserting to database.";
+        Gson gson = new Gson();
+        String json = gson.toJson(obj);
         return insertedPizza.isPresent() ?
                 new ResponseEntity<>(insertedPizza.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>("Error inserting to database", HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(json, HttpStatus.NOT_ACCEPTABLE);
     }
 
     /**

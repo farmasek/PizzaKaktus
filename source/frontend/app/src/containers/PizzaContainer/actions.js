@@ -48,9 +48,8 @@ export const savePizzaListEpic = (action$, store$) =>
         }))
         .catch(error =>
           Observable.of({
-            type: `${PIZZA_CREATE_NEW}_FAILED}`,
+            type: `${PIZZA_CREATE_NEW}_FAILED`,
             pizzaError: error.xhr.response,
-            showSnackbar: true,
           }))
     );
 
@@ -81,9 +80,8 @@ const fetchPizzaTable = (pagination) =>
     }))
     .catch(error =>
       Observable.of({
-        type: `${FETCH_PIZZA_LIST}_FAILED}`,
+        type: `${FETCH_PIZZA_LIST}_FAILED`,
         pizzaError: error.xhr.response,
-        showSnackbar: true,
       })
     );
 
@@ -92,6 +90,7 @@ export const fetchPizzaListEpic = (action$, store) =>
     .map(() => store.getState().pizzaContainer.get('pagination'))
     .switchMap((pagination) => fetchPizzaTable(pagination)
     );
+
 export const fetchPizzaAfterPaginationChange = (action$, store) =>
   action$.ofType(PIZZA_PAG_PROPERTIES)
     .debounceTime(250)
@@ -120,7 +119,6 @@ export const updatePizzaEpic = (action$) =>
       Observable.of({
         type: `${PIZZA_UPDATE}_FAILED`,
         pizzaError: error.xhr.response,
-        showSnackbar: true,
       }))
   );
 
