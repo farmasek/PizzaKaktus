@@ -1,10 +1,13 @@
 package cz.osu.pizzakaktus.repositories.models;
 
 import cz.osu.pizzakaktus.endpoints.models.UserDTO;
+import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import lombok.*;
 import lombok.experimental.Wither;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.persistence.*;
+import java.net.ConnectException;
 import java.util.Set;
 
 /**

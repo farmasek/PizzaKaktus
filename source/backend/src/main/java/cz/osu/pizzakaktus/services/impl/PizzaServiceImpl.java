@@ -9,6 +9,7 @@ import cz.osu.pizzakaktus.repositories.models.IngredientDb;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
 import cz.osu.pizzakaktus.repositories.models.QPizzaDb;
 import cz.osu.pizzakaktus.services.CategoryService;
+import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import cz.osu.pizzakaktus.services.IngredientService;
 import cz.osu.pizzakaktus.services.PizzaService;
 import org.assertj.core.util.Lists;
@@ -37,7 +38,7 @@ public class PizzaServiceImpl implements PizzaService {
     CategoryService categoryService;
 
     @Override
-    public Optional<PizzaDb> insert(PizzaDTO pizzaDTO) {
+    public Optional<PizzaDb> insert(PizzaDTO pizzaDTO) throws DatabaseException {
         List<IngredientDb> ingredientsById = ingredientService.findAllById(pizzaDTO.getIngredientsId());
         CategoryDb categoryDb = categoryService.findById(pizzaDTO.getCategoryId());
         if (isCategoryValid(categoryDb) && (!isTitleTaken(pizzaDTO.getTitle()))) {
@@ -49,7 +50,7 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public Optional<PizzaDb> update(PizzaDTO pizzaDTO) {
+    public Optional<PizzaDb> update(PizzaDTO pizzaDTO) throws DatabaseException {
         try {
             List<IngredientDb> ingredientsById = ingredientService.findAllById(pizzaDTO.getIngredientsId());
             CategoryDb categoryDb = categoryService.findById(pizzaDTO.getCategoryId());
@@ -62,7 +63,7 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public List<PizzaDb> findAll() {
+    public List<PizzaDb> findAll() throws DatabaseException{
         Iterable<PizzaDb> pizzasList = pizzaRepository.findAll();
         return Lists.newArrayList(pizzasList);
     }
@@ -73,12 +74,12 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public boolean isCategoryValid(CategoryDb categoryDb) {
+    public boolean isCategoryValid(CategoryDb categoryDb)throws DatabaseException {
         return !(categoryDb == null);
     }
 
     @Override
-    public boolean isTitleTaken(String title) {
+    public boolean isTitleTaken(String title)throws DatabaseException {
         boolean isActive = false;
         List<PizzaDb> foundByTitle = pizzaRepository.findByTitle(title);
         if (foundByTitle.isEmpty()) {

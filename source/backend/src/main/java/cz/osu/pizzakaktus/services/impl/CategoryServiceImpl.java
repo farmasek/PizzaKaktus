@@ -4,6 +4,7 @@ import cz.osu.pizzakaktus.endpoints.models.CategoryDTO;
 import cz.osu.pizzakaktus.repositories.CategoryRepository;
 import cz.osu.pizzakaktus.repositories.models.CategoryDb;
 import cz.osu.pizzakaktus.services.CategoryService;
+import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,24 +22,24 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryRepository categoryRepository;
 
     @Override
-    public Optional<CategoryDb> insert(CategoryDTO categoryDTO) {
+    public Optional<CategoryDb> insert(CategoryDTO categoryDTO)throws DatabaseException {
         CategoryDb savedObject = categoryRepository.save(new CategoryDb(categoryDTO));
         return Optional.of(savedObject);
     }
 
     @Override
-    public List<CategoryDb> findAll() {
+    public List<CategoryDb> findAll()throws DatabaseException {
         Iterable<CategoryDb> all = categoryRepository.findAll();
         return Lists.newArrayList(all);
     }
 
     @Override
-    public CategoryDb findById(Integer id) {
+    public CategoryDb findById(Integer id)throws DatabaseException {
         return categoryRepository.findById(id);
     }
 
     @Override
-    public List<CategoryDb> findAllById(List<Integer> ids) {
+    public List<CategoryDb> findAllById(List<Integer> ids)throws DatabaseException {
         Iterable<CategoryDb> all = categoryRepository.findAll(ids);
         return Lists.newArrayList(all);
     }

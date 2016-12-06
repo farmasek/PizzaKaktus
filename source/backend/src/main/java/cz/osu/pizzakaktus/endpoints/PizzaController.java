@@ -5,6 +5,7 @@ import cz.osu.pizzakaktus.endpoints.mappers.MapToDTO;
 import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import cz.osu.pizzakaktus.repositories.models.IngredientDb;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
+import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import cz.osu.pizzakaktus.services.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,14 +52,17 @@ public class PizzaController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addPizza(@RequestBody PizzaDTO pizza) {
-        Optional<PizzaDb> insertedPizza = pizzaService.insert(pizza);
-        String obj = "Error inserting to database.";
-        Gson gson = new Gson();
-        String json = gson.toJson(obj);
+        Optional<PizzaDb> insertedPizza = null;
+        String error = "";
+        try {
+            insertedPizza = pizzaService.insert(pizza);
+        } catch (DatabaseException e) {
+           error = e.getMessage();
+        }
         return insertedPizza.isPresent() ?
                 new ResponseEntity<>(insertedPizza.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(json, HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
     }
 
     /**
@@ -70,11 +74,17 @@ public class PizzaController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public HttpEntity<?> updateUser(@RequestBody PizzaDTO pizza) {
 
-        Optional<PizzaDb> updatedPizza = pizzaService.update(pizza);
+        Optional<PizzaDb> updatedPizza = null;
+        String error = "";
+        try {
+            updatedPizza = pizzaService.update(pizza);
+        } catch (DatabaseException e) {
+            error = e.getMessage();
+        }
         return updatedPizza.isPresent() ?
                 new ResponseEntity<>(updatedPizza.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>("Error updating in database", HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
     }
 
 }
