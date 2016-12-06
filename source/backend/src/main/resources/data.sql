@@ -1,5 +1,5 @@
-insert into role (id,role) VALUES (0,'ADMIN');
-insert into role (id,role) VALUES (1,'EMPLOYEE');
+insert into role (id,role) VALUES (0,'ADMIN') on conflict (id) do nothing;
+insert into role (id,role) VALUES (1,'EMPLOYEE') on conflict (id) do nothing;
 --
 -- INSERT INTO ingredient_db (`amount`, `cost`, `cost_custom`, `name`) VALUES ("10 g", 5.00, 10.00, "tomatový základ");
 -- INSERT INTO ingredient_db (`amount`, `cost`, `cost_custom`, `name`) VALUES ("10 g", 8.00, 15.00, "smetanový základ");
