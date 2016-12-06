@@ -5,4 +5,5 @@ export ManageCategoryPage from './ManageCategoryPage/index';
 export ManageUsersPage from './ManageUsersPage/index';
 export NotFoundPage from './NotFoundPage/index';
 export LandingPage from './LandingPage/index';
-export RegistrationPage from './RegistrationPage/index';
+export ShoppingCartPage from './ShoppingCartPage/index';
+export MenuPage from './MenuPage/index';

@@ -22,9 +22,6 @@ import {
   updateUserEpic,
 } from './containers/UserContainer/actions';
 import {
-  saveUserRegistrationEpic,
-} from './containers/RegistrationContainer/actions';
-import {
   deleteUserEpic,
 } from './containers/UserContainer/actions';
 
@@ -38,7 +35,6 @@ export default combineEpics(
   saveCategoryListEpic,
   fetchUserListEpic,
   saveUserListEpic,
-  saveUserRegistrationEpic,
   updateUserEpic,
   deleteUserEpic,
   fetchPizzaAfterPaginationChange,

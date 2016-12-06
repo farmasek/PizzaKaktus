@@ -3,12 +3,14 @@ import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
 import Navigation from 'react-toolbox/lib/navigation';
 import { Link } from 'react-router';
+import ShoppingCartMenu from '../ShoppingCartMenu/index';
 
 const Navbar = () => (
   <div>
     <Navigation type="horizontal">
       <span>Menu uživatele&nbsp;&nbsp;</span>
-      <Link to="/registration">Registrace</Link><br />
+      <Link to="/menu">Menu</Link>&nbsp;
+      <ShoppingCartMenu />
       <span>Menu majitele&nbsp;&nbsp;</span>
       <Link to="/manager/ingredients">Správa ingrediencí</Link>&nbsp;
       <Link to="/manager/users">Správa uživatelů</Link>&nbsp;
