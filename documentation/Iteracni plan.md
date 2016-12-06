@@ -365,7 +365,7 @@ Nesouhlasit s frameworky při vytváření projektu
 ####Cíle
 
 - Realizace zachytávání chybových hlášek (backend)
-- Implementace objednávání 
+- Implementace objednávání bez upravených pizz
 - Implementace košíku
 - Implementace automatického doplňování údajů při objednávání
 
