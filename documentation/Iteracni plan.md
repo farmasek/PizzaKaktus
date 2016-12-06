@@ -350,12 +350,44 @@ Nesouhlasit s frameworky při vytváření projektu
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| Zachytávání chybových hlášek na backendu je funkční | |
-| Zachytávání chybových hlášek na frontendu je funkční | |
-| Řazení a filtrování pizz funguje | |
-| Zákazník souhlasí s řazením a filtrováním pizz | |
-| Testovací e-mail byl úspěšně zaslán | |
-
+| Zachytávání chybových hlášek na backendu je funkční | Nesplněno |
+| Zachytávání chybových hlášek na frontendu je funkční | Splněno |
+| Řazení a filtrování pizz funguje | Splněno |
+| Zákazník souhlasí s řazením a filtrováním pizz | Splněno |
+| Testovací e-mail byl úspěšně zaslán | Splněno |
 
 ####Lessons learned
 
+----
+##E7
+6.12.2016 - 13.12.2016
+
+####Cíle
+
+- Realizace zachytávání chybových hlášek (backend)
+- Implementace objednávání 
+- Implementace košíku
+- Implementace automatického doplňování údajů při objednávání
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Úprava scénářů dle požadavků zákazníka | Náhlý | 17h |
+| Implementace zachytávání chybových hlášek na backendu | Jaroš, Náhlý | 10h |
+| Implementace objednávky - backend | Jaroš, Náhlý | 30h |
+| Implementace objednávky - frontend | Krížová, Pravda | 15h |
+| Předvyplnění údajů v objednávce na základě e-mailu | Baránek | 6h |
+| Košík - frontend | Krížová, Pravda | 10h |
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| Zákazník souhlasí s upravenými scénaři | |
+| Hlášky jsou zachytávány na backendu a posílány na frontend |  |
+| Objednávání je implementováno (backend) |  |
+| Objednávání je implementováno (frontend) |  |
+| Předvyplňování je funkční |  |
+| Košík je implementován a funkční |  |
+
+####Lessons learned
