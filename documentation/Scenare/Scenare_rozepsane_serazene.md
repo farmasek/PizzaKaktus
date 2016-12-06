@@ -57,13 +57,14 @@
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
-| 1 | Aplikace | Zobrazený list pizz s tlačítkem přidání do košíku, tlačítkem pro editaci. |
-| 2 | Uživatel | Uživatel klikne na tlačítko editace u dané pizzy. |
-| 3 | Aplikace | Zobrazí se formulář pro úpravu ingrediencí vybrané pizzy. |
-| 4 | Uživatel | Uživatel provede úpravy. |
-| 5 | Uživatel | Po navolení ingrediencí uživatel přidá pizzu do košíku. |
-| 6 | Aplikace | Pizza se přidá do košíku. |
-| 7 | Uživatel | Uživatel přejde do košíku. |
+| 1 | Aplikace | Zobrazený list pizz s tlačítkem přidání do košíku. |
+| 2 | Uživatel | Uživatel klikne na tlačítko přidat do košíku. |
+| 3 | Aplikace | Pizza se přidá do košíku. |
+| 4 | Uživatel | Uživatel přejde do košíku. |
+| 5 | Uživatel | Uživatel klikne na tlačítko editovat vybranou pizzu. |
+| 6 | Aplikace | Zobrazí se formulář pro úpravu ingrediencí vybrané pizzy.  |
+| 7 | Uživatel | Uživatel provede úpravy. |
+| 8 | Uživatel | Po navolení ingrediencí uživatel potvrdi změny v upravené pizze. |
 | 8 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
 | 9 | Uživatel | Vyplní údaje a potvrdí objednávku. |
 | 10 | Aplikace | Aplikace uloží novou objednávku. |
