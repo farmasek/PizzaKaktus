@@ -91,12 +91,13 @@
 | 4 | Uživatel | Uživatel vytvoří pizzu. |
 | 5 | Uživatel | Po navolení ingrediencí uživatel klikne na tlačítko pro přidání do košíku. |
 | 6 | Aplikace | Pizza se přidá do košíku. |
-| 7 | Uživatel | Uživatel přejde do košíku. |
-| 8 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
-| 9 | Uživatel | Vyplní údaje a potvrdí objednávku. |
-| 10 | Aplikace | Aplikace uloží novou objednávku. |
-| 11 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou. |
-| 12 | Aplikace | Aplikace pošle uživateli informační email. |
+| 7 | Aplikace | Uloží se údaje o vytovřené pizze do prohlížeče |
+| 8 | Uživatel | Uživatel přejde do košíku. |
+| 9 | Aplikace | Zobrazí se stránka s košíkem uživatele a formulářem pro vyplnění údajů. |
+| 10 | Uživatel | Vyplní údaje a potvrdí objednávku. |
+| 11 | Aplikace | Aplikace uloží novou objednávku. |
+| 12 | Aplikace | Zobrazí se stránka s potvrzenou objednávkou. |
+| 13 | Aplikace | Aplikace pošle uživateli informační email. |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
@@ -115,7 +116,7 @@
 | 1 | Aplikace | V menu pro majitele je u položky "Správa pizz" možnost "Vložení nové pizzy do nabídky". |
 | 2 | Majitel | Majitel vybere tuto možnost.|
 | 3 | Aplikace | Zobrazí se stránka s formulářem pro vytvoření nové pizzy. |
-| 4 | Majitel | Majitel zadá název, kategorii a ingredience pro novou pizzu a potvrdí. |
+| 4 | Majitel | Majitel zadá název, kategorii, ingredience, cenu a aktivaci pro novou pizzu a potvrdí. |
 | 5 | Aplikace | Uloží se nová pizza. |
 | 6 | Aplikace | Zobrazí se seznam všech pizz. |
 
@@ -187,17 +188,17 @@
 |:---:|:---|:---|
 | 4a | Majitel | Majitel vybere řazení objednávek. | 
 |  | Aplikace | Výpis objednávek se seřadí podle kritéria vybraného majitelem. | 
-| 4b | Majitel | Majitel nastaví filtrování objednávek. | 
+| 4b | Majitel | Majitel nastaví filtrování objednávek podle datumu, emailu zákaznika a stavu objednávky. | 
 |  | Aplikace | Výpis objednávek vyfiltruje podle kritéria vybraného majitelem. |
 
-## UC4	S2	Editace stavu otevřené objednávky - založená, otevřená, uzavřená
+## UC4	S2	Editace stavu otevřené objednávky - založená, otevřená, uzavřená, skartovaná
 ### Preconditions: Spuštěná aplikace, přihlášený uživatel
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
 | 1 | Aplikace | V menu pro majitele/zaměstnance je položka pro zobrazení stavů objednávek. |
 | 2 | Majitel/Zaměstnanec | Uživatel klikne na položku menu. |
-| 3 | Aplikace | Zobrazí se stránka s výčtem založených a otevřených objednávek. U každé objednávky je uveden stav. Stav lze změnit na základě aktuálního stavu - ze založené na otevřenou nebo z otevřené na uzavřenou. Na stránce je tlačítko pro potvrzení změn. |
+| 3 | Aplikace | Zobrazí se stránka s výčtem založených a otevřených objednávek. U každé objednávky je uveden stav. Stav lze změnit na základě aktuálního stavu - ze založené na otevřenou nebo z otevřené na uzavřenou, nebo z otevřené,uzavřené na skartovanou. Na stránce je tlačítko pro potvrzení změn. |
 | 4 | Majitel/Zaměstnanec | Uživatel provede změny a potvrdí uložení. |
 | 5 | Aplikace | V výpisu objednávek se změní stavy podle zadání uživatele. |
 | 6 | Aplikace | Do logu se přidají zápisy o změnách - kdo, kdy a co změnil. |
@@ -213,7 +214,8 @@
 | 4 | Majitel | Majitel potvrdí storno objednávky. |
 | 5 | Aplikace | Aplikace provede storno objednávky. |
 | 6 | Aplikace | Aplikace zobrazí potvrzení o provedeném stornu objednávky. |
-| 7 | Aplikace | Aplikace aktualizuje stav objednávky na stránce. |
+| 7 | Aplikace | Aplikace uloží záznam do logu. |
+| 8 | Aplikace | Aplikace aktualizuje stav objednávky na stránce. |
 
 ## UC5	S1	Vložení nové ingredience
 ### Preconditions: Spuštěná aplikace, přihlášený uživatel
@@ -224,8 +226,9 @@
 | 2 | Majitel | Uživatel vybere možnost Vložení ingredience. |
 | 3 | Aplikace | Zobrazí se stránka s formulářem pro vložení nové ingredience - název, množství, cena, spolu s tlačíkem pro odeslání formuláře. |
 | 4 | Majitel | Uživatel vyplní formulář a odešle jej. |
-| 5 | Aplikace | Uloží se nová ingredience. |
-| 6 | Aplikace | Zobrazí se seznam všech ingrediencí. |
+| 5 | Aplikace | Aplikace zkontroluje konzistenci názvu ingredience s již existujícími ingrediencemi. |
+| 6 | Aplikace | Uloží se nová ingredience. |
+| 7 | Aplikace | Zobrazí se seznam všech ingrediencí. |
 
 ## UC5	S2	Editace ingredience
 ### Preconditions: Spuštěná aplikace, přihlášený majitel, zobrazená stránka s ingrediencemi
@@ -236,7 +239,8 @@
 | 2 | Majitel | Uživatel vybere možnost Editace ingredience. |
 | 3 | Aplikace | Zobrazí se stránka s formulářem pro editaci ingredience. |
 | 4 | Majitel | Majitel provede změny a potvrdí. |
-| 5 | Aplikace | Zobrazí se seznam všech ingrediencí. |
+| 5 | Aplikace | Aplikace zkontroluje konzistenci provedených změn ingredience s již existujícími ingrediencemi. |
+| 6 | Aplikace | Zobrazí se seznam všech ingrediencí. |
 
 ### Alternative flow:
 | Krok | Actor | Reakce |
@@ -266,10 +270,10 @@
 |:---:|:---|:---|
 | 1 | Aplikace | V menu majitele je položka "Statistiky". |
 | 2 | Majitel | Majitel vybere položku "Statistiky". |
-| 3 | Aplikace | Zobrazí se stránka s přehledem objednávek za poslední měsíc. |
+| 3 | Aplikace | Zobrazí se stránka s přehledem objednávek. |
 | 4 | Majitel | Majitel zvolí přehled dle druhu pizzy. |
 | 5 | Aplikace | Aplikace zobrazí přehled dle druhu pizzy. |
-| 6 | Majitel | Majitel vybere atribut, podle kterého chce statistiku seřadit. |
+| 6 | Majitel | Majitel vybere atribut, podle kterého chce statistiku seřadit. Z: Datum, cena, název, typ, e-mail zákazníka |
 | 7 | Aplikace | Aplikace zobrazí přehled seřazený dle vybraného atributu. |
 
 ## UC7	S1	Vložení nového uživatele
@@ -279,8 +283,9 @@
 |:---:|:---|:---|
 | 1 | Aplikace | Na stránce je seznam všech uživatelů a formulář pro vložení nového uživatele. |
 | 2 | Majitel | Majitel vyplní formulář a odešle jej. |
-| 3 | Aplikace | Na stránce se na chvíli zobrazí potvzrení o vložení nového uživatele. |
-| 4 | Aplikace | Na stránce se aktualizuje seznam uživatelů a vyprázdní formulář. |
+| 3 | Aplikace | Aplikace zkontroluje konzistenci zadaných úpdajů s již existujícími. |
+| 4 | Aplikace | Na stránce se na chvíli zobrazí potvzrení o vložení nového uživatele. |
+| 5 | Aplikace | Na stránce se aktualizuje seznam uživatelů a vyprázdní formulář. |
 ### Alternative flow:
 | Krok | Actor | Reakce |
 |:---:|:---|:---| 
@@ -294,7 +299,7 @@
 |:---:|:---|:---|
 | 1 | Aplikace | Na stránce je seznam všech uživatelů. |
 | 2 | Majitel | Majitel zvolí uživatele, kterého chce smazat a potvrdí. |
-| 3 | Aplikace | Na stránce se aktualizuje seznam uživatelů. |
+| 3 | Aplikace | Aplikace deaktivuje zvoleného uživatele, jeho záznam však ponechá pro zpětnou kontrolu. |
 | 4 | Aplikace | Na stránce se zobrazí potvrzení smazání uživatele. |
 
 ## UC7	S3	Změna hesla
