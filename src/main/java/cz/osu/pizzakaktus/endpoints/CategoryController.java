@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import cz.osu.pizzakaktus.endpoints.models.CategoryDTO;
 import cz.osu.pizzakaktus.repositories.models.CategoryDb;
 import cz.osu.pizzakaktus.services.CategoryService;
+import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -32,8 +33,23 @@ public class CategoryController {
      */
     @RequestMapping(value = "/all-categories", method = RequestMethod.GET)
     public HttpEntity<?> findAllCategories() {
-        List<CategoryDb> allCategories = categoryService.findAll();
-        return new ResponseEntity<>(new Gson().toJson(allCategories), HttpStatus.OK);
+        List<CategoryDb> allCategories = null;
+        String error = "";
+
+        try {
+            allCategories = categoryService.findAll();
+        } catch (DatabaseException e) {
+            error = e.getMessage();
+        }
+
+        if(allCategories.isEmpty())
+        {
+            return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+        }
+        else
+        {
+            return new ResponseEntity<>(new Gson().toJson(allCategories), HttpStatus.OK);
+        }
     }
 
     /**
@@ -44,10 +60,17 @@ public class CategoryController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addCategory(@RequestBody CategoryDTO category) {
-        Optional<CategoryDb> insertedCategory = categoryService.insert(category);
+        Optional<CategoryDb> insertedCategory = null;
+        String error = "";
+
+        try {
+            insertedCategory = categoryService.insert(category);
+        } catch (DatabaseException e) {
+            error = e.getMessage();
+        }
         return insertedCategory.isPresent() ?
                 new ResponseEntity<>(insertedCategory.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>("Error inserting to database", HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
     }
 }

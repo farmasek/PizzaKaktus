@@ -5,6 +5,7 @@ import cz.osu.pizzakaktus.repositories.RoleRepository;
 import cz.osu.pizzakaktus.repositories.UserRepository;
 import cz.osu.pizzakaktus.repositories.models.Role;
 import cz.osu.pizzakaktus.repositories.models.UserDb;
+import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import cz.osu.pizzakaktus.services.UserService;
 import org.assertj.core.util.Lists;
 import org.mindrot.jbcrypt.BCrypt;
@@ -29,10 +30,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     RoleRepository roleRepository;
 
+
     @Override
-    public Optional<UserDb> insert(UserDTO userDTO) {
-        if (isLoginTaken(userDTO.getLogin()))
+    public Optional<UserDb> insert(UserDTO userDTO)throws DatabaseException {
+        if (isLoginTaken(userDTO.getLogin())) {
+            System.err.println("Login is Taken");
             return Optional.empty();
+        }
         else {
             UserDb userWithRoles = addRolesToUser(userDTO);
             UserDb insertedUser = userRepository.save(userWithRoles);
@@ -42,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Optional<UserDb> update(UserDTO userDTO) {
+    public Optional<UserDb> update(UserDTO userDTO) throws DatabaseException {
         try {
             UserDb userDb = addRolesToUser(userDTO);
             UserDb updatedUser = userRepository.save(userDb);
@@ -53,19 +57,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDb> findAll() {
+    public List<UserDb> findAll() throws DatabaseException {
         Iterable<UserDb> usersList = userRepository.findAll();
         return Lists.newArrayList(usersList);
     }
 
     @Override
-    public boolean isLoginTaken(String login) {
+    public boolean isLoginTaken(String login) throws DatabaseException {
         List<UserDb> byLogin = userRepository.findByLogin(login);
         return !byLogin.isEmpty();
     }
 
     @Override
-    public boolean deleteById(int userId) {
+    public boolean deleteById(int userId) throws DatabaseException {
         boolean successfullyDeleted = true;
         try {
             userRepository.deleteById(userId);
@@ -76,6 +80,7 @@ public class UserServiceImpl implements UserService {
 
         return successfullyDeleted;
     }
+
 
     private String hashPassword(String passwordPlainText) {
         String salt = BCrypt.gensalt(12);
@@ -89,7 +94,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    private UserDb addRolesToUser(UserDTO userDTO) {
+    private UserDb addRolesToUser(UserDTO userDTO) throws DatabaseException {
         Set<Role> roleStream = userDTO.getRoles().stream().map(role -> roleRepository.findByRole(role)).collect(Collectors.toSet());
         UserDb userToInsert = UserDb.builder()
                 .id(userDTO.getId())
@@ -102,5 +107,7 @@ public class UserServiceImpl implements UserService {
                 .build();
         return userToInsert;
     }
+
+
 
 }

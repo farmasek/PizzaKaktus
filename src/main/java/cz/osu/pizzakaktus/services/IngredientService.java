@@ -1,6 +1,7 @@
 package cz.osu.pizzakaktus.services;
 
 import cz.osu.pizzakaktus.repositories.models.IngredientDb;
+import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,19 +17,19 @@ public interface IngredientService {
      * @param ingredientDb - ingredient to be inserted in database
      * @return inserted ingredient
      */
-    Optional<IngredientDb> insert(IngredientDb ingredientDb);
+    Optional<IngredientDb> insert(IngredientDb ingredientDb)throws DatabaseException;
 
     /**
      * Returns all ingredients in database
      *
      * @return list of ingredients
      */
-    List<IngredientDb> findAll();
+    List<IngredientDb> findAll()throws DatabaseException;
 
     /**
      * Returns all ingredients in database by ID
      *
      * @return list of ingredients
      */
-    List<IngredientDb> findAllById(List<Integer> ids);
+    List<IngredientDb> findAllById(List<Integer> ids)throws DatabaseException;
 }

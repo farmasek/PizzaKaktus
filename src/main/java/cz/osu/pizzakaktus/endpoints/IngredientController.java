@@ -3,6 +3,7 @@ package cz.osu.pizzakaktus.endpoints;
 import com.google.gson.Gson;
 import cz.osu.pizzakaktus.endpoints.models.IngredientDTO;
 import cz.osu.pizzakaktus.repositories.models.IngredientDb;
+import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import cz.osu.pizzakaktus.services.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -31,8 +32,22 @@ public class IngredientController {
      */
     @RequestMapping(value = "/all-ingredients", method = RequestMethod.GET)
     public HttpEntity<?> findAllIngredients() {
-        List<IngredientDb> allIngredients = ingredientService.findAll();
-        return new ResponseEntity<>(new Gson().toJson(allIngredients), HttpStatus.OK);
+        List<IngredientDb> allIngredients = null;
+        String error = "";
+        try {
+            allIngredients = ingredientService.findAll();
+        } catch (DatabaseException e) {
+            error = e.getMessage();
+        }
+
+        if(allIngredients.isEmpty())
+        {
+            return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+        }
+        else
+        {
+            return new ResponseEntity<>(new Gson().toJson(allIngredients), HttpStatus.OK);
+        }
     }
 
     /**
@@ -44,11 +59,18 @@ public class IngredientController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addIngredient(@RequestBody IngredientDTO ingredient) {
         //TODO implement ingredient validation
-        Optional<IngredientDb> insert = ingredientService.insert(new IngredientDb(ingredient));
+        Optional<IngredientDb> insert = null;
+        String error = "";
+
+        try {
+            insert = ingredientService.insert(new IngredientDb(ingredient));
+        } catch (DatabaseException e) {
+            error = e.getMessage();
+        }
         return insert.isPresent() ?
                 new ResponseEntity<>(insert.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>("Error inserting to database", HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(error , HttpStatus.NOT_ACCEPTABLE);
     }
 
 }
