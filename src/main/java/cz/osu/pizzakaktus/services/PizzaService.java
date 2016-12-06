@@ -46,7 +46,6 @@ public interface PizzaService {
      */
     Page<PizzaDb> findAll(Pageable pageable, String filterBy);
 
-    boolean isCategoryValid(CategoryDb categoryDb);
 
     boolean isTitleTaken(String title)throws DatabaseException;
 }
