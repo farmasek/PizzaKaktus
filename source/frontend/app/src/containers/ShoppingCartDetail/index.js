@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cssModules from 'react-css-modules';
@@ -26,7 +26,6 @@ class ShoppingCartDetail extends Component {
 ShoppingCartDetail.propTypes = {
 };
 
-// mapStateToProps :: {State} -> {Props}
 const mapStateToProps = (state) => ({
 });
 

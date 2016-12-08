@@ -53,13 +53,14 @@ export const savePizzaListEpic = (action$, store$) =>
           }))
     );
 
-export const fetchPizzaList = () => ({
-  type: FETCH_PIZZA_LIST,
-});
 export const changePaginationProperties = (paginationType, value) => ({
   type: PIZZA_PAG_PROPERTIES,
   paginationType,
   value,
+});
+
+export const fetchPizzaList = () => ({
+  type: FETCH_PIZZA_LIST,
 });
 
 const fetchPizzaTable = (pagination) =>

@@ -47,9 +47,8 @@ export const saveIngredientListEpic = (action$, store$) =>
         }))
         .catch(error =>
           Observable.of({
-            type: `${INGREDIENT_CREATE_NEW}_FAILED}`,
+            type: `${INGREDIENT_CREATE_NEW}_FAILED`,
             ingredientError: error.xhr.response,
-            showSnackbar: true,
           }))
     );
 
@@ -71,8 +70,7 @@ export const fetchIngredientListEpic = action$ =>
         }))
         .catch(error =>
           Observable.of({
-            type: `${FETCH_INGREDIENT_LIST}_FAILED}`,
+            type: `${FETCH_INGREDIENT_LIST}_FAILED`,
             ingredientError: error.xhr.response,
-            showSnackbar: true,
           }))
     );
