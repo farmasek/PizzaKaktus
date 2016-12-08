@@ -69,7 +69,7 @@ const categoryReducer =
         return state.withMutations(s => s
         .setIn(['snackbar', 'showSnackbar'], false));
       }
-      case `${CATEGORY_CREATE_NEW}_FAILED}`: {
+      case `${CATEGORY_CREATE_NEW}_FAILED`: {
         return state.withMutations(s => s
         .set('categoryError', action.categoryError)
         .set('snackbar', mapSnackbar(true, 'error', action.categoryError)));

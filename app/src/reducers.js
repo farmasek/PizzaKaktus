@@ -8,6 +8,7 @@ import ingredientContainer from 'containers/IngredientContainer/reducer';
 import pizzaContainer from 'containers/PizzaContainer/reducer';
 import categoryContainer from 'containers/CategoryContainer/reducer';
 import userContainer from 'containers/UserContainer/reducer';
+import menuContainer from 'containers/MenuContainer/reducer';
 
 const rootReducer = combineReducers({
   // Apply all of the reducers here.
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   pizzaContainer,
   categoryContainer,
   userContainer,
+  menuContainer,
   routing: routerReducer,
   form: formReducer,
 });

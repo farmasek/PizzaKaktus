@@ -1,3 +1,50 @@
-.menuList {
+.menuListTable {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2em;
+
+  .columnLeft {
+    text-align: left;
+  }
+
+  .titleColumn {
+    width: 25%;
+  }
+
+  .ingredientsColumn {
+    width: 50%;
+  }
+
+  .smallColumn {
+    width: 12.5%;
+  }
+
+  td {
+    padding: 0.2em 0 0.2em 0;
+  }
+
+  tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+  }
+
+  .ingredientsList {
+    padding: 0;
+    margin: 0;
+
+    .ingredient {
+      display: inline;
+
+      &:after {
+        content: ", ";
+      }
+
+      &:last-of-type:after {
+        content: "";
+      }
+
+    }
+
+  }
 
 }

@@ -53,9 +53,8 @@ export const saveCategoryListEpic = (action$, store$) =>
     }))
     .catch(error =>
       Observable.of({
-        type: `${CATEGORY_CREATE_NEW}_FAILED}`,
+        type: `${CATEGORY_CREATE_NEW}_FAILED`,
         categoryError: error.xhr.response,
-        showSnackbar: true,
       }))
   );
 
@@ -77,8 +76,7 @@ export const fetchCategoryListEpic = action$ =>
     }))
     .catch((error) =>
       Observable.of({
-        type: `${FETCH_CATEGORY_LIST}_FAILED}`,
+        type: `${FETCH_CATEGORY_LIST}_FAILED`,
         categoryError: error.xhr.response,
-        showSnackbar: true,
       }))
   );

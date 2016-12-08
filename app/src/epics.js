@@ -24,6 +24,9 @@ import {
 import {
   deleteUserEpic,
 } from './containers/UserContainer/actions';
+import {
+  fetchMenuEpic,
+} from './containers/MenuContainer/actions';
 
 export default combineEpics(
   fetchIngredientListEpic,
@@ -38,4 +41,5 @@ export default combineEpics(
   updateUserEpic,
   deleteUserEpic,
   fetchPizzaAfterPaginationChange,
+  fetchMenuEpic,
 );
