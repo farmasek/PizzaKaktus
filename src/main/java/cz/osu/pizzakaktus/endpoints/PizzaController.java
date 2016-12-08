@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,6 +43,23 @@ public class PizzaController {
         Page<PizzaDb> allPizzas = pizzaService.findAll(pageable, filterBy);
         Page<PizzaDTO> pizzaDTOs = allPizzas.map(pizzaDb -> mapToDTO.mapPizza(pizzaDb));
         return new ResponseEntity<>(pizzaDTOs, HttpStatus.OK);
+    }
+
+    /**
+     * Return all active pizzas
+     *
+     * @return Json list of all active pizzas
+     */
+    @RequestMapping(value = "/active-pizzas", method = RequestMethod.GET)
+    public HttpEntity<?> findActivePizzas() {
+        try {
+            List<PizzaDb> activePizzasDb = pizzaService.findActive();
+            List<PizzaDTO> activePizzasDTO = new ArrayList<>();
+            activePizzasDb.forEach(pizzaDb -> activePizzasDTO.add(mapToDTO.mapPizza(pizzaDb)));
+            return new ResponseEntity<>(activePizzasDTO, HttpStatus.OK);
+        } catch (DatabaseException e) {
+            return new ResponseEntity<>(new Gson().toJson(e.getMessage()), HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
     /**

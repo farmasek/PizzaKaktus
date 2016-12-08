@@ -46,6 +46,13 @@ public interface PizzaService {
      */
     Page<PizzaDb> findAll(Pageable pageable, String filterBy);
 
+    /**
+     * Returns list of all active pizzas
+     *
+     * @return List of active pizzas
+     */
+    List<PizzaDb> findActive() throws DatabaseException;
+
 
     boolean isTitleTaken(String title)throws DatabaseException;
 }

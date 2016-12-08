@@ -26,4 +26,6 @@ public interface PizzaRepository extends PagingAndSortingRepository<PizzaDb, Lon
 
     List<PizzaDb> findByTitle(String title);
 
+    List<PizzaDb> findByActive(boolean active);
+
 }

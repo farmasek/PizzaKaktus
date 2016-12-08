@@ -74,6 +74,12 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
+    public List<PizzaDb> findActive() throws DatabaseException {
+        Iterable<PizzaDb> pizzasList = pizzaRepository.findByActive(true);
+        return Lists.newArrayList(pizzasList);
+    }
+
+    @Override
     public boolean isCategoryValid(CategoryDb categoryDb)throws DatabaseException {
         return !(categoryDb == null);
     }
