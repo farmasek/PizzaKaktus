@@ -46,7 +46,7 @@ Ingredient.propTypes = {
   ingredientForm: PropTypes.object,
   actions: PropTypes.object,
   isLoading: PropTypes.bool,
-  snackbar: ImmutablePropTypes.record,
+  snackbar: ImmutablePropTypes.record.isRequired,
   ingredientErrors: PropTypes.object,
   ingredientError: PropTypes.string,
 };

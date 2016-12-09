@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import styles from './index.module.scss';
@@ -29,6 +29,10 @@ class Menu extends Component {
             menu={this.getPizzasFromCategory(category.get('name'))}
             categories={this.props.categories}
             ingredients={this.props.ingredients}
+            addToCart={this.props.addToCart}
+            fetchCart={this.props.fetchCart}
+            snackbar={this.props.snackbar}
+            handleSnackbar={this.props.handleSnackbar}
           />
         </div>);
       }
@@ -47,6 +51,10 @@ Menu.propTypes = {
   menu: ImmutablePropTypes.list.isRequired,
   categories: ImmutablePropTypes.map.isRequired,
   ingredients: ImmutablePropTypes.map.isRequired,
+  addToCart: PropTypes.func.isRequired,
+  fetchCart: PropTypes.func.isRequired,
+  snackbar: ImmutablePropTypes.record.isRequired,
+  handleSnackbar: PropTypes.func.isRequired,
 };
 
 export default cssModules(Menu, styles);

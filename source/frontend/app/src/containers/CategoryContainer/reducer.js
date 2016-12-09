@@ -67,7 +67,7 @@ const categoryReducer =
       }
       case CATEGORY_SNACKBAR: {
         return state.withMutations(s => s
-        .setIn(['snackbar', 'showSnackbar'], false));
+        .setIn(['snackbar', 'showSnackbar'], action.value));
       }
       case `${CATEGORY_CREATE_NEW}_FAILED`: {
         return state.withMutations(s => s

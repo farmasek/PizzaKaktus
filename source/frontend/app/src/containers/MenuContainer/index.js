@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cssModules from 'react-css-modules';
 import styles from './index.module.scss';
-import * as ShoppingCartActions from './actions';
+import * as MenuActions from './actions';
 import * as IngredientActions from '../IngredientContainer/actions';
 import * as CategoryActions from '../CategoryContainer/actions';
+import * as ShoppingCartActions from '../ShoppingCartDetail/actions';
 import Menu from '../../components/Menu';
 
 class MenuContainer extends Component {
@@ -24,6 +25,10 @@ class MenuContainer extends Component {
           menu={this.props.menu}
           categories={this.props.categories}
           ingredients={this.props.ingredients}
+          addToCart={(pizza) => this.props.shoppingCartActions.addToShoppingCart(pizza)}
+          fetchCart={this.props.shoppingCartActions.fetchShoppingCart}
+          snackbar={this.props.snackbar}
+          handleSnackbar={this.props.shoppingCartActions.handleSnackbar}
         />
       </div>
     );
@@ -37,6 +42,8 @@ MenuContainer.propTypes = {
   actions: PropTypes.object,
   ingredientsActions: PropTypes.object,
   categoryActions: PropTypes.object,
+  shoppingCartActions: PropTypes.object,
+  snackbar: ImmutablePropTypes.record.isRequired,
 };
 
 // mapStateToProps :: {State} -> {Props}
@@ -44,12 +51,13 @@ const mapStateToProps = (state) => ({
   menu: state.menuContainer.menu,
   categories: state.categoryContainer.categories,
   ingredients: state.ingredientContainer.ingredients,
+  snackbar: state.shoppingCartContainer.snackbar,
 });
 
 // mapDispatchToProps :: Dispatch -> {Action}
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
-    ShoppingCartActions,
+    MenuActions,
     dispatch
   ),
   ingredientsActions: bindActionCreators(
@@ -58,6 +66,10 @@ const mapDispatchToProps = (dispatch) => ({
   ),
   categoryActions: bindActionCreators(
     CategoryActions,
+    dispatch
+  ),
+  shoppingCartActions: bindActionCreators(
+    ShoppingCartActions,
     dispatch
   ),
 });

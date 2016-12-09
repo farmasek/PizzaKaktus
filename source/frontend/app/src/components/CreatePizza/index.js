@@ -119,7 +119,7 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
                     checked={this.props.pizzaForm
                       .get('ingredientsId').includes(ingredient.get('id'))}
                     label={ingredient.get('name')}
-                    onChange={this.handleIngredientsChange.bind(this, ingredient.get('id'))}
+                    onChange={() => this.handleIngredientsChange(ingredient.get('id'))}
                   />
                 }
               </li>
@@ -163,7 +163,7 @@ CreatePizza.propTypes = {
   ingredients: ImmutablePropTypes.map.isRequired,
   pizzaErrors: PropTypes.object,
   pizzaValidation: PropTypes.func.isRequired,
-  snackbar: PropTypes.object,
+  snackbar: ImmutablePropTypes.record.isRequired,
   handleSnackbar: PropTypes.func.isRequired,
   pizzaError: PropTypes.string,
   copied: PropTypes.bool,
