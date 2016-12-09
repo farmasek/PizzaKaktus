@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +33,7 @@ public class IngredientController {
      */
     @RequestMapping(value = "/all-ingredients", method = RequestMethod.GET)
     public HttpEntity<?> findAllIngredients() {
-        List<IngredientDb> allIngredients = null;
+        List<IngredientDb> allIngredients = new ArrayList();
         String error = "";
         try {
             allIngredients = ingredientService.findAll();
@@ -59,7 +60,7 @@ public class IngredientController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addIngredient(@RequestBody IngredientDTO ingredient) {
         //TODO implement ingredient validation
-        Optional<IngredientDb> insert = null;
+        Optional<IngredientDb> insert = Optional.empty();
         String error = "";
 
         try {

@@ -70,7 +70,7 @@ public class PizzaController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addPizza(@RequestBody PizzaDTO pizza) {
-        Optional<PizzaDb> insertedPizza = null;
+        Optional<PizzaDb> insertedPizza = Optional.empty();
         String error = "";
         try {
             insertedPizza = pizzaService.insert(pizza);
@@ -92,7 +92,7 @@ public class PizzaController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public HttpEntity<?> updateUser(@RequestBody PizzaDTO pizza) {
 
-        Optional<PizzaDb> updatedPizza = null;
+        Optional<PizzaDb> updatedPizza = Optional.empty();
         String error = "";
         try {
             updatedPizza = pizzaService.update(pizza);

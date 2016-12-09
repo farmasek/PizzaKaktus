@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.ConnectException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,7 +38,7 @@ public class UserController {
      */
     @RequestMapping(value = "/all-users", method = RequestMethod.GET)
     public HttpEntity<?> findAllUsers() {
-        List<UserDb> allUsers = null;
+        List<UserDb> allUsers = new ArrayList();
         String error = "";
         try {
             allUsers = userService.findAll();
@@ -75,7 +76,7 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addUser(@RequestBody UserDTO user) throws DatabaseException {
 
-        Optional<UserDb> insertedUser = null;
+        Optional<UserDb> insertedUser = Optional.empty();
         String error = "";
         try {
             insertedUser = userService.insert(user);
@@ -97,7 +98,7 @@ public class UserController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public HttpEntity<?> updateUser(@RequestBody UserDTO user) {
 
-        Optional<UserDb> insertedUser = null;
+        Optional<UserDb> insertedUser = Optional.empty();
         String error = "";
         try {
             insertedUser = userService.update(user);
