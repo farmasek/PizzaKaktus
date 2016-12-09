@@ -111,7 +111,7 @@ CreateIngredient.propTypes = {
   editValue: PropTypes.func.isRequired,
   confirmForm: PropTypes.func.isRequired,
   ingredientForm: PropTypes.object,
-  snackbar: ImmutablePropTypes.record,
+  snackbar: ImmutablePropTypes.record.isRequired,
   ingredientErrors: PropTypes.object,
   ingredientError: PropTypes.string,
   handleSnackbar: PropTypes.func.isRequired,

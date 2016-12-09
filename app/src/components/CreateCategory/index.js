@@ -70,7 +70,7 @@ CreateCategory.propTypes = {
   editValue: PropTypes.func.isRequired,
   confirmForm: PropTypes.func.isRequired,
   categoryForm: PropTypes.object,
-  snackbar: ImmutablePropTypes.record,
+  snackbar: ImmutablePropTypes.record.isRequired,
   categoryErrors: PropTypes.object,
   categoryError: PropTypes.string,
   handleSnackbar: PropTypes.func.isRequired,

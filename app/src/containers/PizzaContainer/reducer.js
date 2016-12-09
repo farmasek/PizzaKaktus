@@ -108,7 +108,7 @@ const pizzaReducer =
       }
       case PIZZA_SNACKBAR: {
         return state.withMutations(s => s
-          .setIn(['snackbar', 'showSnackbar'], false));
+          .setIn(['snackbar', 'showSnackbar'], action.value));
       }
       case PIZZA_COPY: {
         return state.withMutations(s => s

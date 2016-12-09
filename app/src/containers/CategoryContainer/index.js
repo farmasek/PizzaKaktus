@@ -49,7 +49,7 @@ class Category extends Component { // eslint-disable-line react/prefer-stateless
 Category.propTypes = {
   categories: PropTypes.object,
   actions: PropTypes.object,
-  snackbar: ImmutablePropTypes.record,
+  snackbar: ImmutablePropTypes.record.isRequired,
   categoryErrors: PropTypes.object,
   categoryError: PropTypes.string,
   categoryForm: ImmutablePropTypes.map,

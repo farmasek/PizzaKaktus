@@ -1,18 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import styles from './index.module.scss';
+import { List } from 'immutable';
 import cssModules from 'react-css-modules';
-import { IconButton } from 'react-toolbox/lib/button';
+import styles from './index.module.scss';
 import { Snackbar } from 'react-toolbox/lib/snackbar';
+import { IconButton } from 'react-toolbox/lib/button';
 
-class MenuList extends Component {
+class ShoppingCartList extends Component {
 
-  componentWillMount() {
-    this.props.fetchCart();
-  }
-
-  renderRow = (pizza) =>
-    <tr key={pizza.id}>
+  getTableRow = (pizza, index) =>
+    <tr key={index}>
       <td className={`${styles.columnLeft} ${styles.titleColumn}`}>{pizza.title}</td>
       <td className={`${styles.columnLeft} ${styles.ingredientsColumn}`}>
         <ul className={styles.ingredientsList}>
@@ -32,28 +29,31 @@ class MenuList extends Component {
       </td>
       <td className={styles.smallColumn}>
         <IconButton
-          icon="add_shopping_cart"
-          onClick={() => this.props.addToCart(pizza)}
+          icon="remove_shopping_cart"
+          onClick={() => this.props.removeFromCart(pizza)}
         />
       </td>
     </tr>;
 
   render() {
-    const { menu } = this.props;
+    let tableRows = new List();
+    this.props.shoppingCart.map((pizza, index) => {
+      tableRows = tableRows.push(this.getTableRow(pizza, index));
+    });
     return (
       <div>
-        <table className={styles.menuListTable}>
+        <table className={styles.shoppingCartTable}>
           <thead>
           <tr>
             <th className={`${styles.columnLeft} ${styles.titleColumn}`}>Název</th>
             <th className={`${styles.columnLeft} ${styles.ingredientsColumn}`}>Ingredience</th>
             <th className={styles.smallColumn}>Cena</th>
-            <th className={styles.smallColumn}>Vložit do košíku</th>
+            <th className={styles.smallColumn}>Odebrat z košíku</th>
           </tr>
           </thead>
           <tbody>
           {
-            menu.map(menuItem => this.renderRow(menuItem))
+            tableRows.map(row => row)
           }
           </tbody>
         </table>
@@ -71,14 +71,12 @@ class MenuList extends Component {
   }
 }
 
-MenuList.propTypes = {
-  menu: ImmutablePropTypes.list,
-  categories: ImmutablePropTypes.map.isRequired,
+ShoppingCartList.propTypes = {
+  shoppingCart: PropTypes.array.isRequired,
   ingredients: ImmutablePropTypes.map.isRequired,
-  addToCart: PropTypes.func.isRequired,
-  fetchCart: PropTypes.func.isRequired,
+  removeFromCart: PropTypes.func.isRequired,
   snackbar: ImmutablePropTypes.record.isRequired,
   handleSnackbar: PropTypes.func.isRequired,
 };
 
-export default cssModules(MenuList, styles);
+export default cssModules(ShoppingCartList, styles);

@@ -62,7 +62,7 @@ Pizza.propTypes = {
   pizzaForm: PropTypes.object,
   pizzaErrors: PropTypes.object,
   pizzaError: PropTypes.string,
-  snackbar: ImmutablePropTypes.record,
+  snackbar: ImmutablePropTypes.record.isRequired,
   copied: PropTypes.bool,
   loading: PropTypes.bool,
   pagination: ImmutablePropTypes.map,

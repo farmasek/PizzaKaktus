@@ -70,7 +70,7 @@ const ingredientReducer =
       }
       case INGREDIENT_SNACKBAR: {
         return state.withMutations(s => s
-        .setIn(['snackbar', 'showSnackbar'], false));
+        .setIn(['snackbar', 'showSnackbar'], action.value));
       }
       case `${INGREDIENT_CREATE_NEW}_FAILED`: {
         return state.withMutations(s => s
