@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class CategoryController {
      */
     @RequestMapping(value = "/all-categories", method = RequestMethod.GET)
     public HttpEntity<?> findAllCategories() {
-        List<CategoryDb> allCategories = null;
+        List<CategoryDb> allCategories = new ArrayList();
         String error = "";
 
         try {
@@ -60,7 +61,7 @@ public class CategoryController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public HttpEntity<?> addCategory(@RequestBody CategoryDTO category) {
-        Optional<CategoryDb> insertedCategory = null;
+        Optional<CategoryDb> insertedCategory = Optional.empty();
         String error = "";
 
         try {
