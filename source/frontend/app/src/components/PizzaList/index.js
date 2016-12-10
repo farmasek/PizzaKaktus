@@ -40,7 +40,7 @@ class PizzaList extends React.Component {
             ?
             <Checkbox
               checked={pizza.active}
-              onChange={() => this.props.updatePizza(pizza, 'active', false)}
+              onChange={() => this.props.handleDialog(true, pizza)}
             />
             :
             <Checkbox checked={pizza.active} disabled={!pizza.active} className={styles.disabled}/>
@@ -140,6 +140,7 @@ PizzaList.propTypes = {
   updatePizza: PropTypes.func.isRequired,
   copyPizza: PropTypes.func.isRequired,
   changePagination: PropTypes.func.isRequired,
+  handleDialog: PropTypes.func.isRequired,
 };
 
 export default cssModules(PizzaList, styles);

@@ -6,6 +6,7 @@ import {
   USER_DELETE,
   USER_SNACKBAR,
   USER_VALIDATION,
+  USER_DIALOG,
 } from './constants';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
@@ -131,3 +132,13 @@ export const deleteUserEpic = action$ =>
           userError: error.xhr.response,
         }))
   );
+
+export const handleDialog = (showDialog, id, firstName, lastName) => ({
+  type: USER_DIALOG,
+  dialog: {
+    showDialog,
+    id,
+    firstName,
+    lastName,
+  },
+});

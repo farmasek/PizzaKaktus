@@ -7,6 +7,7 @@ import {
   PIZZA_UPDATE,
   PIZZA_COPY,
   PIZZA_PAG_PROPERTIES,
+  PIZZA_DIALOG,
 } from './constants';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
@@ -126,4 +127,12 @@ export const updatePizzaEpic = (action$) =>
 export const copyPizza = (pizza) => ({
   type: PIZZA_COPY,
   pizza,
+});
+
+export const handleDialog = (showDialog, pizza) => ({
+  type: PIZZA_DIALOG,
+  dialog: {
+    showDialog,
+    pizza,
+  }
 });

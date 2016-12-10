@@ -6,6 +6,7 @@ import {
   USER_UPDATE_FIELD,
   USER_DELETE,
   USER_VALIDATION,
+  USER_DIALOG,
 } from './constants';
 import { Record, List, Map } from 'immutable';
 import { mapSnackbar } from '../../models/Snackbar';
@@ -28,6 +29,13 @@ const initialUserErrors = {
   phoneErr: '',
 };
 
+export const initialDialog = {
+  showDialog: false,
+  id: null,
+  firstName: '',
+  lastName: '',
+};
+
 const initialSnackbar = mapSnackbar(false, 'check_circle', 'Uživatel byl úspěšně vytvořen.');
 
 const InitialState = new Record(
@@ -38,6 +46,7 @@ const InitialState = new Record(
     userErrors: initialUserErrors,
     userError: '',
     snackbar: initialSnackbar,
+    dialog: initialDialog,
   }
 );
 
@@ -52,6 +61,7 @@ const userReducer =
         .set('loading', true)
         .set('userErrors', initialUserErrors)
         .set('snackbar', snackbar)
+        .set('dialog', initialDialog)
         .set('userForm', initialUserForm)
         .set('userError', ''));
       }
@@ -88,10 +98,16 @@ const userReducer =
         .set('userError', action.userError)
         .set('snackbar', mapSnackbar(true, 'error', action.userError)));
       }
+      case USER_DELETE: {
+        return state.set('dialog', false);
+      }
       case `${USER_DELETE}_FAILED`: {
         return state.withMutations(s => s
         .set('userError', action.userError)
         .set('snackbar', mapSnackbar(true, 'error', action.userError)));
+      }
+      case USER_DIALOG: {
+        return state.set('dialog', action.dialog);
       }
       default:
         return state;
