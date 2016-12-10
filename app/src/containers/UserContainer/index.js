@@ -54,7 +54,8 @@ class User extends Component {
           onOverlayClick={() => this.props.actions.handleDialog(false, null, '', '')}
           title={'Smazání uživatele'}
         >
-          <p>Opravdu chcete smazat uživatele {`${dialog.firstName} ${dialog.lastName}`}?</p>
+          <p>Opravdu chcete smazat uživatele {`${dialog.firstName} ${dialog.lastName}`}?
+            Tato akce je nevratná.</p>
         </Dialog>
       </div>
     );

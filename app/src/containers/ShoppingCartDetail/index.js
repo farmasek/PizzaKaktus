@@ -8,6 +8,7 @@ import * as ShoppingCartActions from './actions';
 import * as IngredientActions from '../IngredientContainer/actions';
 import { Button } from 'react-toolbox/lib/button';
 import ShoppingCartList from '../../components/ShoppingCartList/index';
+import Dialog from 'react-toolbox/lib/dialog';
 
 class ShoppingCartDetail extends Component {
 
@@ -30,7 +31,24 @@ class ShoppingCartDetail extends Component {
                 snackbar={this.props.snackbar}
                 handleSnackbar={this.props.actions.handleSnackbar}
               />
-              <Button primary label={"Objednat"} />
+              <Button label={"Vysypat košík"} onClick={() =>
+                this.props.actions.handleDialog(true)}
+              />
+              <Button primary label={"Objednat"}/>
+              <Dialog
+                actions={[
+                  { label: 'Zrušit', onClick: () =>
+                    this.props.actions.handleDialog(false) },
+                  { label: 'Potvrdit', onClick: () =>
+                    this.props.actions.emptyShoppingCart() },
+                ]}
+                active={this.props.dialog.showDialog}
+                onEscKeyDown={() => this.props.actions.handleDialog(false)}
+                onOverlayClick={() => this.props.actions.handleDialog(false)}
+                title={'Vysypat košík'}
+              >
+                <p>Opravdu chcete vysypat košík? Tato akce je nevratná.</p>
+              </Dialog>
             </div>
             : <span>Košík je prázdný.</span>
         }
@@ -45,12 +63,14 @@ ShoppingCartDetail.propTypes = {
   ingredientsActions: PropTypes.object,
   actions: PropTypes.object,
   snackbar: ImmutablePropTypes.record.isRequired,
+  dialog: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
   shoppingCart: state.shoppingCartContainer.shoppingCart,
   ingredients: state.ingredientContainer.ingredients,
   snackbar: state.shoppingCartContainer.snackbar,
+  dialog: state.shoppingCartContainer.dialog,
 });
 
 // mapDispatchToProps :: Dispatch -> {Action}

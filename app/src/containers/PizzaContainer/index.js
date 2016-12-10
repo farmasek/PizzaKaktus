@@ -64,7 +64,8 @@ class Pizza extends Component {
           onOverlayClick={() => this.props.actions.handleDialog(false, initialPizzaForm)}
           title={'Deaktivace pizzy'}
         >
-          <p>Opravdu chcete deaktivovat pizzu s názvem {`${dialog.pizza.get('title')}`}?</p>
+          <p>Opravdu chcete deaktivovat pizzu s názvem {`${dialog.pizza.get('title')}`}?
+            Tato akce je nevratná.</p>
         </Dialog>
       </div>
     );
