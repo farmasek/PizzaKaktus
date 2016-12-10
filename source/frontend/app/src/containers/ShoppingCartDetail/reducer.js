@@ -3,6 +3,8 @@ import {
   FETCH_SHOPPING_CART,
   REMOVE_FROM_SHOPPING_CART,
   SHOPPING_CART_SNACKBAR,
+  EMPTY_SHOPPING_CART,
+  SHOPPING_CART_DIALOG,
 } from './constants';
 import { Record } from 'immutable';
 import { mapSnackbar } from '../../models/Snackbar';
@@ -12,6 +14,9 @@ const initialSnackbar = mapSnackbar(false, '', '');
 const InitialState = new Record({
   shoppingCart: new Array(),
   snackbar: initialSnackbar,
+  dialog: {
+    showDialog: false,
+  },
 });
 
 const shoppingCartReducer =
@@ -23,6 +28,7 @@ const shoppingCartReducer =
         return state.withMutations(s => s
           .set('shoppingCart', localShoppingCart)
           .set('snackbar', initialSnackbar)
+          .set('dialog', { showDialog: false })
         );
       }
       case ADD_TO_SHOPPING_CART: {
@@ -47,6 +53,13 @@ const shoppingCartReducer =
       case SHOPPING_CART_SNACKBAR: {
         return state.withMutations(s => s
         .setIn(['snackbar', 'showSnackbar'], action.value));
+      }
+      case EMPTY_SHOPPING_CART: {
+        localStorage.setItem('shoppingCart', JSON.stringify(new Array()));
+        return state.set('shoppingCart', new Array());
+      }
+      case SHOPPING_CART_DIALOG: {
+        return state.set('dialog', action.dialog);
       }
       default:
         return state;

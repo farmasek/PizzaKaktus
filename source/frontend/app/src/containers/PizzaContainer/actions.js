@@ -134,5 +134,5 @@ export const handleDialog = (showDialog, pizza) => ({
   dialog: {
     showDialog,
     pizza,
-  }
+  },
 });

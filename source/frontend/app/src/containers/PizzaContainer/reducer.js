@@ -30,7 +30,10 @@ const initialPizzaErrors = {
 
 const initialSnackbar = mapSnackbar(false, 'check_circle', 'Pizza byla úspěšně vytvořena.');
 
-const initialDialog = {showDialog: false, pizza: initialPizzaForm,};
+const initialDialog = {
+  showDialog: false,
+  pizza: initialPizzaForm,
+};
 
 const InitialState = new Record(
   {
@@ -76,21 +79,21 @@ const pizzaReducer =
         let pizzas = new Map();
         content.map(pizza => pizzas = pizzas.set(pizza.id, mapPizza(pizza)));
         return state.withMutations(s => s
-          .setIn(['pagination', 'totalPages'], totalPages)
-          .setIn(['pagination', 'totalElements'], totalElements)
-          .setIn(['pagination', 'size'], size)
-          .setIn(['pagination', 'number'], number)
-          .setIn(['pagination', 'sortDir'], direction)
-          .setIn(['pagination', 'sortBy'], property)
-          .set('pizzas', pizzas)
-          .set('loading', false));
+        .setIn(['pagination', 'totalPages'], totalPages)
+        .setIn(['pagination', 'totalElements'], totalElements)
+        .setIn(['pagination', 'size'], size)
+        .setIn(['pagination', 'number'], number)
+        .setIn(['pagination', 'sortDir'], direction)
+        .setIn(['pagination', 'sortBy'], property)
+        .set('pizzas', pizzas)
+        .set('loading', false));
       }
       case `${FETCH_PIZZA_LIST}_FAILED`: {
         return state.withMutations(s => s
-          .set('pizzas', new Map())
-          .set('loading', false)
-          .set('pizzaError', action.pizzaError)
-          .set('snackbar', mapSnackbar(true, 'error', action.pizzaError)));
+        .set('pizzas', new Map())
+        .set('loading', false)
+        .set('pizzaError', action.pizzaError)
+        .set('snackbar', mapSnackbar(true, 'error', action.pizzaError)));
       }
       case `${PIZZA_PAG_PROPERTIES}`: {
         let sortDir = state.getIn(['pagination', 'sortDir']);
@@ -104,26 +107,26 @@ const pizzaReducer =
       }
       case `${PIZZA_CHANGE_FORM_VALUE}`: {
         return state.withMutations(s => s
-          .setIn(['pizzaForm', action.input], action.value)
-          .set('copied', false));
+        .setIn(['pizzaForm', action.input], action.value)
+        .set('copied', false));
       }
       case PIZZA_VALIDATION: {
         return state.withMutations(s => s
-          .set('pizzaErrors', action.pizzaErrors));
+        .set('pizzaErrors', action.pizzaErrors));
       }
       case PIZZA_SNACKBAR: {
         return state.withMutations(s => s
-          .setIn(['snackbar', 'showSnackbar'], action.value));
+        .setIn(['snackbar', 'showSnackbar'], action.value));
       }
       case PIZZA_COPY: {
         return state.withMutations(s => s
-          .set('pizzaForm', mapPizzaForm(action.pizza))
-          .set('copied', true));
+        .set('pizzaForm', mapPizzaForm(action.pizza))
+        .set('copied', true));
       }
       case `${PIZZA_CREATE_NEW}_FAILED`: {
         return state.withMutations(s => s
-          .set('pizzaError', action.pizzaError)
-          .set('snackbar', mapSnackbar(true, 'error', action.pizzaError)));
+        .set('pizzaError', action.pizzaError)
+        .set('snackbar', mapSnackbar(true, 'error', action.pizzaError)));
       }
       case `${PIZZA_UPDATE}_FAILED`: {
         return state.withMutations(s => s

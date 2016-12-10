@@ -3,6 +3,8 @@ import {
   FETCH_SHOPPING_CART,
   REMOVE_FROM_SHOPPING_CART,
   SHOPPING_CART_SNACKBAR,
+  EMPTY_SHOPPING_CART,
+  SHOPPING_CART_DIALOG,
 } from './constants';
 
 export const fetchShoppingCart = () => ({
@@ -22,4 +24,15 @@ export const removeFromShoppingCart = (pizza) => ({
 export const handleSnackbar = (value) => ({
   type: SHOPPING_CART_SNACKBAR,
   value,
+});
+
+export const emptyShoppingCart = () => ({
+  type: EMPTY_SHOPPING_CART,
+});
+
+export const handleDialog = (showDialog) => ({
+  type: SHOPPING_CART_DIALOG,
+  dialog: {
+    showDialog,
+  },
 });
