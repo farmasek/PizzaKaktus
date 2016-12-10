@@ -7,12 +7,13 @@ import {
   PIZZA_CREATE_NEW,
   PIZZA_PAG_PROPERTIES,
   PIZZA_UPDATE,
+  PIZZA_DIALOG,
 } from './constants';
 import { Record, Map, List, fromJS } from 'immutable';
 import { mapPizzaForm, mapPizza } from '../../models/Pizza';
 import { mapSnackbar } from '../../models/Snackbar';
 
-const initialPizzaForm = new Map({
+export const initialPizzaForm = new Map({
   title: '',
   categoryId: '',
   ingredientsId: new List(),
@@ -29,6 +30,8 @@ const initialPizzaErrors = {
 
 const initialSnackbar = mapSnackbar(false, 'check_circle', 'Pizza byla úspěšně vytvořena.');
 
+const initialDialog = {showDialog: false, pizza: initialPizzaForm,};
+
 const InitialState = new Record(
   {
     loading: false,
@@ -38,6 +41,7 @@ const InitialState = new Record(
     pizzaError: '',
     snackbar: initialSnackbar,
     copied: false,
+    dialog: initialDialog,
     pagination: fromJS({
       totalPages: 0,
       totalElements: 0,
@@ -61,6 +65,7 @@ const pizzaReducer =
         .set('loading', true)
         .set('pizzaErrors', initialPizzaErrors)
         .set('snackbar', snackbar)
+        .set('dialog', initialDialog)
         .set('copied', false)
         .set('pizzaForm', initialPizzaForm)
         .set('pizzaError', ''));
@@ -124,6 +129,9 @@ const pizzaReducer =
         return state.withMutations(s => s
         .set('pizzaError', action.pizzaError)
         .set('snackbar', mapSnackbar(true, 'error', action.pizzaError)));
+      }
+      case PIZZA_DIALOG: {
+        return state.set('dialog', action.dialog);
       }
       default:
         return state;

@@ -5,3 +5,4 @@ export const USER_UPDATE_FIELD = 'USER_UPDATE_FIELD';
 export const USER_DELETE = 'USER_DELETE';
 export const USER_VALIDATION = 'USER_VALIDATION';
 export const USER_SNACKBAR = 'USER_SNACKBAR';
+export const USER_DIALOG = 'USER_DIALOG';

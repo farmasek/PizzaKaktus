@@ -10,6 +10,8 @@ import styles from './index.module.scss';
 import * as PropTypes from 'react/lib/ReactPropTypes';
 import CreatePizza from '../../components/CreatePizza';
 import PizzaList from '../../components/PizzaList';
+import Dialog from 'react-toolbox/lib/dialog';
+import { initialPizzaForm } from './reducer';
 
 class Pizza extends Component {
 
@@ -20,6 +22,7 @@ class Pizza extends Component {
   }
 
   render() {
+    const dialog = this.props.dialog;
     return (
       <div className={styles.pizza}>
         {
@@ -32,6 +35,7 @@ class Pizza extends Component {
               copyPizza={this.props.actions.copyPizza}
               pagination={this.props.pagination}
               changePagination={this.props.actions.changePaginationProperties}
+              handleDialog={this.props.actions.handleDialog}
             />
             : null
         }
@@ -48,6 +52,20 @@ class Pizza extends Component {
           pizzaError={this.props.pizzaError}
           copied={this.props.copied}
         />
+        <Dialog
+          actions={[
+            { label: 'Zrušit', onClick: () =>
+              this.props.actions.handleDialog(false, initialPizzaForm) },
+            { label: 'Potvrdit', onClick: () =>
+              this.props.actions.updatePizza(dialog.pizza, 'active', false) },
+          ]}
+          active={dialog.showDialog}
+          onEscKeyDown={() => this.props.actions.handleDialog(false, initialPizzaForm)}
+          onOverlayClick={() => this.props.actions.handleDialog(false, initialPizzaForm)}
+          title={'Deaktivace pizzy'}
+        >
+          <p>Opravdu chcete deaktivovat pizzu s názvem {`${dialog.pizza.get('title')}`}?</p>
+        </Dialog>
       </div>
     );
   }
@@ -66,6 +84,7 @@ Pizza.propTypes = {
   copied: PropTypes.bool,
   loading: PropTypes.bool,
   pagination: ImmutablePropTypes.map,
+  dialog: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
@@ -79,6 +98,7 @@ const mapStateToProps = (state) => ({
   copied: state.pizzaContainer.copied,
   pagination: state.pizzaContainer.pagination,
   loading: state.pizzaContainer.loading,
+  dialog: state.pizzaContainer.dialog,
 });
 
 const mapDispatchToProps = (dispatch) => ({

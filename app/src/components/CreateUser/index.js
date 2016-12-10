@@ -127,7 +127,7 @@ class CreateUser extends Component {
                     checked={this.props.userForm
                     .get('roles').includes(role.value)}
                     label={role.label}
-                    onChange={() => this.handleRolesChange(`${role.value}`)}
+                    onChange={(checked) => this.handleRolesChange(`${role.value}`, checked)}
                     className={styles.roleCheckbox}
                   />
                 )

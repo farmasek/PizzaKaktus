@@ -4,7 +4,7 @@ import cssModules from 'react-css-modules';
 import Checkbox from 'react-toolbox/lib/checkbox';
 import { IconButton } from 'react-toolbox/lib/button';
 
-class UserList extends Component { // eslint-disable-line react/prefer-stateless-function
+class UserList extends Component {
 
   renderRow = (user) =>
     <tr key={user.id}>
@@ -26,7 +26,7 @@ class UserList extends Component { // eslint-disable-line react/prefer-stateless
       </td>
       <td>
         <IconButton
-          onClick = {() => this.props.deleteUser(user.id)}
+          onClick = {() => this.props.handleDialog(true, user.id, user.firstName, user.lastName)}
           icon="delete"
         />
       </td>
@@ -64,6 +64,8 @@ UserList.propTypes = {
   updateUser: PropTypes.func.isRequired,
   updateRole: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
+  dialog: PropTypes.bool.isRequired,
+  handleDialog: PropTypes.func.isRequired,
 };
 
 export default cssModules(UserList, styles);
