@@ -93,7 +93,9 @@ const pizzaReducer =
         .set('pizzas', new Map())
         .set('loading', false)
         .set('pizzaError', action.pizzaError)
-        .set('snackbar', mapSnackbar(true, 'error', action.pizzaError)));
+        .set('snackbar', mapSnackbar(action.pizzaError.length > 0 ? true : false,
+          'error', action.pizzaError))
+        );
       }
       case `${PIZZA_PAG_PROPERTIES}`: {
         let sortDir = state.getIn(['pagination', 'sortDir']);
@@ -126,12 +128,14 @@ const pizzaReducer =
       case `${PIZZA_CREATE_NEW}_FAILED`: {
         return state.withMutations(s => s
         .set('pizzaError', action.pizzaError)
-        .set('snackbar', mapSnackbar(true, 'error', action.pizzaError)));
+        .set('snackbar', mapSnackbar(action.pizzaError.length > 0 ? true : false,
+          'error', action.pizzaError)));
       }
       case `${PIZZA_UPDATE}_FAILED`: {
         return state.withMutations(s => s
         .set('pizzaError', action.pizzaError)
-        .set('snackbar', mapSnackbar(true, 'error', action.pizzaError)));
+        .set('snackbar', mapSnackbar(action.pizzaError.length > 0 ? true : false,
+          'error', action.pizzaError)));
       }
       case PIZZA_DIALOG: {
         return state.set('dialog', action.dialog);

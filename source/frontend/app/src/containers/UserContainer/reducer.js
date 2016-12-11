@@ -75,7 +75,8 @@ const userReducer =
           .set('users', new List())
           .set('loading', false)
           .set('userError', action.userError)
-          .set('snackbar', mapSnackbar(true, 'error', action.userError)));
+          .set('snackbar', mapSnackbar(action.userError.length > 0 ? true : false,
+            'error', action.userError)));
       }
       case `${USER_CHANGE_FORM_VALUE}`: {
         return state.setIn(['userForm', action.input], action.value);
@@ -91,12 +92,14 @@ const userReducer =
       case `${USER_CREATE_NEW}_FAILED`: {
         return state.withMutations(s => s
         .set('userError', action.userError)
-        .set('snackbar', mapSnackbar(true, 'error', action.userError)));
+        .set('snackbar', mapSnackbar(action.userError.length > 0 ? true : false,
+          'error', action.userError)));
       }
       case `${USER_UPDATE_FIELD}_FAILED`: {
         return state.withMutations(s => s
         .set('userError', action.userError)
-        .set('snackbar', mapSnackbar(true, 'error', action.userError)));
+        .set('snackbar', mapSnackbar(action.userError.length > 0 ? true : false,
+          'error', action.userError)));
       }
       case USER_DELETE: {
         return state.set('dialog', false);
@@ -104,7 +107,8 @@ const userReducer =
       case `${USER_DELETE}_FAILED`: {
         return state.withMutations(s => s
         .set('userError', action.userError)
-        .set('snackbar', mapSnackbar(true, 'error', action.userError)));
+        .set('snackbar', mapSnackbar(action.userError.length > 0 ? true : false,
+          'error', action.userError)));
       }
       case USER_DIALOG: {
         return state.set('dialog', action.dialog);

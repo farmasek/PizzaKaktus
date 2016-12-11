@@ -58,6 +58,7 @@ class PizzaList extends React.Component {
       numbers.push(<span
         className={i === selectedPage ? styles.paginationSelected : styles.paginationNormal}
         onClick={() => this.props.changePagination('number', i)}
+        key={i}
       >
         {i + 1}
         </span>);
@@ -124,7 +125,8 @@ class PizzaList extends React.Component {
             onChange={(val) => this.props.changePagination('size', val)}
           />
           {
-            pagination.get('totalPages') > 0 ? this.renderNumberLine(pagination.get('totalPages')) :
+            pagination.get('totalPages') > 0
+              ? this.renderNumberLine(pagination.get('totalPages')) :
               pagination.get('totalPages')
           }
         </div>

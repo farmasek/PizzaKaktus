@@ -59,7 +59,8 @@ const ingredientReducer =
           .set('ingredients', new Map())
           .set('isLoading', false)
           .set('ingredientError', action.ingredientError)
-          .set('snackbar', mapSnackbar(true, 'error', action.ingredientError)));
+          .set('snackbar', mapSnackbar(action.ingredientError.length > 0 ? true : false,
+            'error', action.ingredientError)));
       }
       case `${INGREDIENT_CHANGE_FORM_VALUE}`: {
         return state.setIn(['ingredientForm', action.input], action.value);
@@ -74,8 +75,9 @@ const ingredientReducer =
       }
       case `${INGREDIENT_CREATE_NEW}_FAILED`: {
         return state.withMutations(s => s
-        .set('ingredientError', action.pizzaError)
-        .set('snackbar', mapSnackbar(true, 'error', action.pizzaError)));
+        .set('ingredientError', action.ingredientError)
+        .set('snackbar', mapSnackbar(action.ingredientError.length > 0 ? true : false,
+          'error', action.ingredientError)));
       }
       default:
         return state;

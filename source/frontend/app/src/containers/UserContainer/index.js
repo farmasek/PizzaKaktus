@@ -71,7 +71,7 @@ User.propTypes = {
   snackbar: ImmutablePropTypes.record,
   users: ImmutablePropTypes.list,
   loading: PropTypes.bool,
-  dialog: PropTypes.bool.isRequired,
+  dialog: PropTypes.object.isRequired,
 };
 
 // mapStateToProps :: {State} -> {Props}
