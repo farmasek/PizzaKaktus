@@ -43,7 +43,7 @@ public class IngredientController {
 
         if(allIngredients.isEmpty())
         {
-            return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
         }
         else
         {
@@ -71,7 +71,7 @@ public class IngredientController {
         return insert.isPresent() ?
                 new ResponseEntity<>(insert.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(error , HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
     }
 
 }
