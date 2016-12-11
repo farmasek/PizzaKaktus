@@ -22,8 +22,17 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Optional<IngredientDb> insert(IngredientDb ingredientDb) throws DatabaseException {
-        IngredientDb savedObject = ingredientRepository.save(ingredientDb);
-        return Optional.of(savedObject);
+        IngredientDb found = ingredientRepository.findByName(ingredientDb.getName());
+
+        if(found == null)
+        {
+            IngredientDb savedObject = ingredientRepository.save(ingredientDb);
+            return Optional.of(savedObject);
+        }
+        else
+        {
+            throw new DatabaseException("Ingredience s názvem " + ingredientDb.getName() + " již existuje.");
+        }
     }
 
     @Override

@@ -46,7 +46,10 @@ public class PizzaServiceImpl implements PizzaService {
                     new PizzaDb(null, pizzaDTO.getTitle(), categoryDb, ingredientsById, pizzaDTO.getPrice(), pizzaDTO.isActive()));
             return Optional.of(insertedPizza);
         }
-        return Optional.empty();
+        else
+        {
+            throw new DatabaseException("Pizza s nazvem " + pizzaDTO.getTitle() + " již existuje.");
+        }
     }
 
     @Override
