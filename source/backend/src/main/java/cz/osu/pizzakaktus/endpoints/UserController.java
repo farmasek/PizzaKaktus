@@ -59,7 +59,7 @@ public class UserController {
 
         if(collect.isEmpty())
         {
-            return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
         }
         else
         {
@@ -86,7 +86,7 @@ public class UserController {
         return insertedUser.isPresent() ?
                 new ResponseEntity<>(insertedUser.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(error , HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new Gson().toJson(error) , HttpStatus.NOT_ACCEPTABLE);
     }
 
     /**
@@ -108,7 +108,7 @@ public class UserController {
         return insertedUser.isPresent() ?
                 new ResponseEntity<>(insertedUser.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
     }
     /**
      * Delete user in database
@@ -129,7 +129,7 @@ public class UserController {
         return successfullyDeleted ?
                 new ResponseEntity<>("Successfully deleted user", HttpStatus.OK)
                 :
-                new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
     }
 
     //TODO use validator

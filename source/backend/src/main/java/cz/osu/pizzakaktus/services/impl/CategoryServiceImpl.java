@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -23,8 +24,18 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Optional<CategoryDb> insert(CategoryDTO categoryDTO)throws DatabaseException {
-        CategoryDb savedObject = categoryRepository.save(new CategoryDb(categoryDTO));
-        return Optional.of(savedObject);
+
+        CategoryDb found = categoryRepository.findByName(new CategoryDb(categoryDTO).getName());
+
+        if(found == null)
+        {
+            CategoryDb savedObject = categoryRepository.save(new CategoryDb(categoryDTO));
+            return Optional.of(savedObject);
+        }
+        else
+        {
+            throw new DatabaseException("Kategorie " + found.getName() + " již existuje.");
+        }
     }
 
     @Override

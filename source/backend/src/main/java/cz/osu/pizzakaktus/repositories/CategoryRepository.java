@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface CategoryRepository extends CrudRepository<CategoryDb, Integer> {
     CategoryDb findById(Integer Id);
+    CategoryDb findByName(String name);
 }

@@ -45,7 +45,7 @@ public class CategoryController {
 
         if(allCategories.isEmpty())
         {
-            return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
         }
         else
         {
@@ -72,6 +72,6 @@ public class CategoryController {
         return insertedCategory.isPresent() ?
                 new ResponseEntity<>(insertedCategory.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
     }
 }
