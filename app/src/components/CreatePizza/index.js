@@ -119,7 +119,8 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
                     checked={this.props.pizzaForm
                       .get('ingredientsId').includes(ingredient.get('id'))}
                     label={ingredient.get('name')}
-                    onChange={(checked) => this.handleIngredientsChange(ingredient.get('id'), checked)}
+                    onChange={(checked) =>
+                      this.handleIngredientsChange(ingredient.get('id'), checked)}
                   />
                 }
               </li>

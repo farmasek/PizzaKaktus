@@ -56,7 +56,8 @@ const categoryReducer =
           .set('categories', new Map())
           .set('loading', false)
           .set('categoryError', action.categoryError)
-          .set('snackbar', mapSnackbar(true, 'error', action.categoryError)));
+          .set('snackbar', mapSnackbar(action.categoryError.length > 0 ? true : false,
+            'error', action.categoryError)));
       }
       case `${CATEGORY_CHANGE_FORM_VALUE}`: {
         return state.setIn(['categoryForm', action.input], action.value);
@@ -72,7 +73,8 @@ const categoryReducer =
       case `${CATEGORY_CREATE_NEW}_FAILED`: {
         return state.withMutations(s => s
         .set('categoryError', action.categoryError)
-        .set('snackbar', mapSnackbar(true, 'error', action.categoryError)));
+        .set('snackbar', mapSnackbar(action.categoryError.length > 0 ? true : false,
+          'error', action.categoryError)));
       }
       default:
         return state;

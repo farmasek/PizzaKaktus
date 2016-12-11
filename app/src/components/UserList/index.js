@@ -64,7 +64,7 @@ UserList.propTypes = {
   updateUser: PropTypes.func.isRequired,
   updateRole: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
-  dialog: PropTypes.bool.isRequired,
+  dialog: PropTypes.object.isRequired,
   handleDialog: PropTypes.func.isRequired,
 };
 
