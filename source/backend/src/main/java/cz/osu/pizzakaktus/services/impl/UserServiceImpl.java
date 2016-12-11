@@ -34,8 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<UserDb> insert(UserDTO userDTO)throws DatabaseException {
         if (isLoginTaken(userDTO.getLogin())) {
-            System.err.println("Login is Taken");
-            return Optional.empty();
+            throw new DatabaseException("Login " + userDTO.getLogin() + " již existuje.");
         }
         else {
             UserDb userWithRoles = addRolesToUser(userDTO);
