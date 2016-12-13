@@ -1,4 +1,5 @@
 /* Assemble all components for export */
+export CustomerForm from './CustomerForm';
 export IngredientList from './IngredientList';
 export CreateIngredient from './CreateIngredient';
 export CreatePizza from './CreatePizza';

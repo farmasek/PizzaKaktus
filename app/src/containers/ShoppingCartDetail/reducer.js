@@ -5,10 +5,12 @@ import {
   SHOPPING_CART_SNACKBAR,
   EMPTY_SHOPPING_CART,
   SHOPPING_CART_DIALOG,
+  CART_CUSTOMER_EDIT,
+  CART_CUSTOMER_ERROR_EDIT,
 } from './constants';
 import { Record } from 'immutable';
 import { mapSnackbar } from '../../models/Snackbar';
-
+import { Customer } from '../../models/Customer';
 const initialSnackbar = mapSnackbar(false, '', '');
 
 const InitialState = new Record({
@@ -17,6 +19,8 @@ const InitialState = new Record({
   dialog: {
     showDialog: false,
   },
+  customer: new Customer(),
+  customerError: new Customer(),
 });
 
 const shoppingCartReducer =
@@ -52,7 +56,7 @@ const shoppingCartReducer =
       }
       case SHOPPING_CART_SNACKBAR: {
         return state.withMutations(s => s
-        .setIn(['snackbar', 'showSnackbar'], action.value));
+          .setIn(['snackbar', 'showSnackbar'], action.value));
       }
       case EMPTY_SHOPPING_CART: {
         localStorage.setItem('shoppingCart', JSON.stringify(new Array()));
@@ -60,6 +64,15 @@ const shoppingCartReducer =
       }
       case SHOPPING_CART_DIALOG: {
         return state.set('dialog', action.dialog);
+      }
+      case CART_CUSTOMER_EDIT: {
+        return state.setIn(['customer', action.field], action.value);
+      }
+      case CART_CUSTOMER_ERROR_EDIT: {
+        if (action.field === 'resetator') {
+          return state.set('customerError', new Customer());
+        }
+        return state.setIn(['customerError', action.field], action.value);
       }
       default:
         return state;
