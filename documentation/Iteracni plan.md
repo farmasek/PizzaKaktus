@@ -383,11 +383,40 @@ Nesouhlasit s frameworky při vytváření projektu
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| Zákazník souhlasí s upravenými scénaři | |
-| Hlášky jsou zachytávány na backendu a posílány na frontend |  |
+| Zákazník souhlasí s upravenými scénaři | Splněno |
+| Hlášky jsou zachytávány na backendu a posílány na frontend | Splněno |
+| Objednávání je implementováno (backend) | Nesplněno |
+| Objednávání je implementováno (frontend) | Nesplněno |
+| Předvyplňování je funkční | Nesplněno |
+| Košík je implementován a funkční | Splněno |
+
+####Lessons learned
+Nepoužívat shit-git-client.
+
+----
+##E8
+13.12.2016 - 20.12.2016
+
+####Cíle
+
+- Implementace objednávání bez upravených pizz
+- Implementace automatického doplňování údajů při objednávání
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Implementace objednávky - backend | Jaroš, Náhlý | 25h |
+| Implementace objednávky - frontend | Krížová, Pravda | 15h |
+| Předvyplnění údajů v objednávce na základě e-mailu | Baránek | 6h |
+| Stack of snacks - zobrazování více hlášek | Baránek | 8h |
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
 | Objednávání je implementováno (backend) |  |
 | Objednávání je implementováno (frontend) |  |
 | Předvyplňování je funkční |  |
-| Košík je implementován a funkční |  |
+| Frontend zobrazuje více hlášek | |
 
 ####Lessons learned
