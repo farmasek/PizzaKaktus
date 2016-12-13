@@ -9,6 +9,7 @@ import * as IngredientActions from '../IngredientContainer/actions';
 import { Button } from 'react-toolbox/lib/button';
 import ShoppingCartList from '../../components/ShoppingCartList/index';
 import Dialog from 'react-toolbox/lib/dialog';
+import CustomerForm from '../../components/CustomerForm';
 
 class ShoppingCartDetail extends Component {
 
@@ -31,16 +32,27 @@ class ShoppingCartDetail extends Component {
                 snackbar={this.props.snackbar}
                 handleSnackbar={this.props.actions.handleSnackbar}
               />
+              <CustomerForm
+                editCustomerField={this.props.actions.editCustomerField}
+                editCustomerErrorField={this.props.actions.editCustomerErrorField}
+                customerError={this.props.customerError}
+                customer={this.props.customer}
+              />
+
               <Button label={"Vysypat košík"} onClick={() =>
                 this.props.actions.handleDialog(true)}
               />
               <Button primary label={"Objednat"}/>
               <Dialog
                 actions={[
-                  { label: 'Zrušit', onClick: () =>
-                    this.props.actions.handleDialog(false) },
-                  { label: 'Potvrdit', onClick: () =>
-                    this.props.actions.emptyShoppingCart() },
+                  {
+                    label: 'Zrušit', onClick: () =>
+                    this.props.actions.handleDialog(false),
+                  },
+                  {
+                    label: 'Potvrdit', onClick: () =>
+                    this.props.actions.emptyShoppingCart(),
+                  },
                 ]}
                 active={this.props.dialog.showDialog}
                 onEscKeyDown={() => this.props.actions.handleDialog(false)}
@@ -64,6 +76,8 @@ ShoppingCartDetail.propTypes = {
   actions: PropTypes.object,
   snackbar: ImmutablePropTypes.record.isRequired,
   dialog: PropTypes.object,
+  customer: PropTypes.any,
+  customerError: PropTypes.any,
 };
 
 const mapStateToProps = (state) => ({
@@ -71,6 +85,8 @@ const mapStateToProps = (state) => ({
   ingredients: state.ingredientContainer.ingredients,
   snackbar: state.shoppingCartContainer.snackbar,
   dialog: state.shoppingCartContainer.dialog,
+  customer: state.shoppingCartContainer.customer,
+  customerError: state.shoppingCartContainer.customerError,
 });
 
 // mapDispatchToProps :: Dispatch -> {Action}

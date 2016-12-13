@@ -5,8 +5,20 @@ import {
   SHOPPING_CART_SNACKBAR,
   EMPTY_SHOPPING_CART,
   SHOPPING_CART_DIALOG,
+  CART_CUSTOMER_EDIT,
+  CART_CUSTOMER_ERROR_EDIT,
 } from './constants';
 
+export const editCustomerField = (field, value) => ({
+  type: CART_CUSTOMER_EDIT,
+  field,
+  value,
+});
+export const editCustomerErrorField = (field, value) => ({
+  type: CART_CUSTOMER_ERROR_EDIT,
+  field,
+  value,
+});
 export const fetchShoppingCart = () => ({
   type: FETCH_SHOPPING_CART,
 });
