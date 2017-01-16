@@ -30,9 +30,7 @@ class User extends Component {
           handleSnackbar={this.props.actions.handleSnackbar}
           userError={this.props.userError}
         />
-        {
-          !(this.props.loading)
-            ? <UserList
+         <UserList
               users={this.props.users}
               updateUser={this.props.actions.updateUser}
               updateRole={this.props.actions.updateRole}
@@ -40,8 +38,6 @@ class User extends Component {
               dialog={this.props.dialog}
               handleDialog={this.props.actions.handleDialog}
             />
-            : null
-        }
         <Dialog
           actions={[
             { label: 'Zrušit', onClick: () =>
