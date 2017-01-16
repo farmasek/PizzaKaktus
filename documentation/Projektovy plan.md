@@ -26,6 +26,14 @@ Projektový plán pro projekt PizzaKaktus
 </tr>
 <tr>
 <td align="left"></td>
+<td align="left">I2</td>
+<td align="left">Diagram architektury a nasazení, aktualizace stavů, rozepsání kritických scénářů
+</td>
+<td align="left">11.10.-18.10.
+</td>
+</tr>
+<tr>
+<td align="left"></td>
 <td align="left">LCO</td>
 <td align="left"></td>
 <td align="left">Říjen 2016</td>
@@ -39,14 +47,56 @@ Projektový plán pro projekt PizzaKaktus
 <tr>
 <td align="left"></td>
 <td align="left">E1</td>
-<td align="left">doplní se..</td>
-<td align="left"></td>
+<td align="left">Postupné řešení rizik, tvorba UML diagramů
+</td>
+<td align="left">26.10.-1.11</td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">E2</td>
-<td align="left">doplní se..</td>
+<td align="left">Implementace UC3S1, úprava implementace rolí a hesel uživatelů
+</td>
+<td align="left">1.11.-8.11.</td>
+</tr>
+<tr>
 <td align="left"></td>
+<td align="left">E3</td>
+<td align="left">Implementace UC3S1, implementace testů
+</td>
+<td align="left">9.11.-15.11</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">E4</td>
+<td align="left">Implementace UC3S1, UC7S2 s testy
+</td>
+<td align="left">16.11.-22.11</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">E5</td>
+<td align="left">Implementace zachytávání chybových hlášek, deploy aplikace na externí server, frontend UC3S3
+</td>
+<td align="left">23.11.-29.11</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">E6</td>
+<td align="left">Zachytávání chybových hlášek, odeslání testovacího e-mailu, řazení/filtrování pizz </td>
+<td align="left">30.11.-6.12</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">E7</td>
+<td align="left">Implementace objednávky, košík-frontend</td>
+<td align="left">7.12.-13.12</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">E8</td>
+<td align="left">Implementace objednávky, předvyplnění údajů v objednávce
+</td>
+<td align="left">14.12.-20.12</td>
 </tr>
 <tr>
 <td align="left"></td>
