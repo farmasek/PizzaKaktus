@@ -19,8 +19,8 @@ import java.util.List;
  * Created by Mish.k.a on 3. 11. 2016.
  */
 @Repository
-public interface PizzaRepository extends PagingAndSortingRepository<PizzaDb, Long>, QueryDslPredicateExecutor<PizzaDb> {
-    List<PizzaDb> findById(Long Id);
+public interface PizzaRepository extends PagingAndSortingRepository<PizzaDb, Integer>, QueryDslPredicateExecutor<PizzaDb> {
+    List<PizzaDb> findById(int Id);
 
     List<PizzaDb> findByCategoryId(Integer categoryId);
 

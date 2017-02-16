@@ -1,9 +1,11 @@
 package cz.osu.pizzakaktus.repositories.models;
 
 import cz.osu.pizzakaktus.endpoints.models.CustomerDTO;
+import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
 import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Getter
+@Setter
 public class OrderDb
 {
     @Id
@@ -21,16 +24,19 @@ public class OrderDb
     private Integer id;
     @Column
     @ElementCollection(targetClass=Integer.class)
-    private List<Integer> pizzas;
+    private List<Integer> pizzasId;
     //private List<PizzaDb> pizzas;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private CustomerDb customerDb;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private OrderStatus orderStatus;
+    private CustomerDb customer;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, targetEntity = OrderStatus.class)
+    private String orderStatus;
+    private boolean isActive;
 
-    public OrderDb(List<Integer> pizzas, CustomerDb customerDb, OrderStatus orderStatus) {
-        this.pizzas = pizzas;
-        this.customerDb = customerDb;
+    public OrderDb(List<Integer> pizzas, CustomerDb customerDb, String orderStatus)
+    {
+        this.pizzasId = pizzas;
+        this.customer = customerDb;
         this.orderStatus = orderStatus;
+        this.isActive = true;
     }
 }
