@@ -106,7 +106,7 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public List<PizzaDb> findById(int id) throws DatabaseException
+    public List<PizzaDb> findById(Integer id) throws DatabaseException
     {
         List<PizzaDb> pizza = pizzaRepository.findById(id);
         return pizza;
@@ -137,9 +137,12 @@ public class PizzaServiceImpl implements PizzaService {
 
         for (int i = 0; i < pizzasIDs.size(); i++)
         {
-            int id = pizzasIDs.get(i);
+            Integer id = pizzasIDs.get(i);
             pizzas.addAll(findById(id));
         }
+
+        PizzaDb pizTest = pizzas.get(0);
+        System.out.println(pizTest.getTitle());
 
         // testovaci mail
         orderAcceptedMail("justtestingpizza@gmail.com", makeOrderMailBody(customer, pizzas));
@@ -152,13 +155,13 @@ public class PizzaServiceImpl implements PizzaService {
         String orderedPizzas = "";
         for (int i = 0; i < pizzas.size(); i++)
         {
-            orderedPizzas += "- " + pizzas.get(i).getTitle() + "\n";
+            orderedPizzas += "- " + pizzas.get(i).getTitle() + " " + (int)Math.round(pizzas.get(i).getPrice()) + "kč\n";
         }
 
         int totalCost = countTotalPizzasCost(pizzas);
 
         String mailBody =  "Dobrý den " + customer.getName() + " " + customer.getSurname() + ". Vaše objednávka byla přijata.\n\n" +
-        "Vaše objednávka zahrnuje tyto položky: \n" + orderedPizzas + "\n\nCelková cena činí: " + totalCost + ".\n\nS přáním pěkného dne, tým PizzaKaktus.";
+        "Vaše objednávka zahrnuje tyto položky: \n" + orderedPizzas + "\nCelková cena činí: " + totalCost + "kč\n\nS přáním pěkného dne, tým PizzaKaktus.";
 
         return mailBody;
     }

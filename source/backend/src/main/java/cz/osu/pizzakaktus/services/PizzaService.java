@@ -78,7 +78,7 @@ public interface PizzaService {
      * @param Long - id of pizza to be found in db
      * @return list (exactly 1, because ID is fucking unique) of pizzas found by ID
      */
-     List<PizzaDb> findById(int id) throws DatabaseException;
+     List<PizzaDb> findById(Integer id) throws DatabaseException;
 
     /**
      * Returns total cost of pizzas in list
