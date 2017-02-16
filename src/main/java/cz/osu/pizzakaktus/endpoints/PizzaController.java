@@ -2,6 +2,7 @@ package cz.osu.pizzakaktus.endpoints;
 
 import com.google.gson.Gson;
 import cz.osu.pizzakaktus.endpoints.mappers.MapToDTO;
+import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
 import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import cz.osu.pizzakaktus.repositories.models.IngredientDb;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
@@ -43,6 +44,20 @@ public class PizzaController {
         Page<PizzaDb> allPizzas = pizzaService.findAll(pageable, filterBy);
         Page<PizzaDTO> pizzaDTOs = allPizzas.map(pizzaDb -> mapToDTO.mapPizza(pizzaDb));
         return new ResponseEntity<>(pizzaDTOs, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/send-order", method = RequestMethod.POST)
+    public HttpEntity<?> sendOrder(@RequestBody OrderDTO order)
+    {
+        try
+        {
+            pizzaService.createOrder(order);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (DatabaseException e)
+        {
+            return new ResponseEntity<>(new Gson().toJson(e.getMessage()), HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
     /**

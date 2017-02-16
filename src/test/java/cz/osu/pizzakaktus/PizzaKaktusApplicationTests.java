@@ -47,7 +47,7 @@ public class PizzaKaktusApplicationTests {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("pizzakaktus@kaktus.cz"));
 			message.setRecipients(Message.RecipientType.TO,
-			InternetAddress.parse("gaulus@seznam.cz"));
+			InternetAddress.parse("justtestingpizza@gmail.com"));
 			message.setSubject("Order Accepted");
 			message.setText("Order Accepted");
 

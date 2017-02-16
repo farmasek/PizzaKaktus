@@ -1,5 +1,7 @@
 package cz.osu.pizzakaktus.endpoints.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +18,9 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDTO
 {
-    private List<Integer> pizzas;
+    @JsonProperty("pizzasId")
+    private List<Integer> pizzasId;
+
+    @JsonProperty("customer")
     private CustomerDTO customer;
 }

@@ -21,6 +21,8 @@ public class OrderStatus
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    // Bude nejspíš třeba upravit podle db diagramu nebo něco
     @Column(unique = true)
     private String Order;
 }
