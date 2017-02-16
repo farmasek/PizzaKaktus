@@ -20,9 +20,13 @@ import java.util.List;
  */
 @Repository
 public interface PizzaRepository extends PagingAndSortingRepository<PizzaDb, Integer>, QueryDslPredicateExecutor<PizzaDb> {
-    List<PizzaDb> findById(int Id);
+    //List<PizzaDb> findById(Integer id);
 
-    List<PizzaDb> findByCategoryId(Integer categoryId);
+    List<PizzaDb> findById(Integer id);
+
+    //List<PizzaDb> findById(Long id);
+
+    List<PizzaDb> findAll();
 
     List<PizzaDb> findByTitle(String title);
 

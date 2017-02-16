@@ -18,9 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDTO
 {
-    @JsonProperty("pizzasId")
     private List<Integer> pizzasId;
-
-    @JsonProperty("customer")
     private CustomerDTO customer;
 }
