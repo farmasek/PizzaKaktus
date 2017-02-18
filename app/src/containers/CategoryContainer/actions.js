@@ -8,7 +8,10 @@ import {
   CATEGORY_SNACKBAR,
   CATEGORY_VALIDATION,
 } from './constants';
-import { doIt, hosts } from '../../network';
+import {
+  doIt,
+  hosts
+} from '../../network';
 import { Observable } from 'rxjs';
 import { Map } from 'immutable';
 import { mapCategory } from '../../models/Category';
@@ -39,24 +42,32 @@ export const saveCategory = () => ({
 
 export const saveCategoryListEpic = (action$, store$) =>
   action$.ofType(CATEGORY_CREATE_NEW)
-  .switchMap(() =>
-    Observable.ajax(doIt(
-      hosts.pk,
-      'category/add',
-      'POST',
-      JSON.stringify(store$.getState().categoryContainer.categoryForm),
-      true
-    ))
-    .map(() => ({
-      type: `${FETCH_CATEGORY_LIST}`,
-      created: true,
-    }))
-    .catch(error =>
-      Observable.of({
-        type: `${CATEGORY_CREATE_NEW}_FAILED`,
-        categoryError: error.xhr.response,
-      }))
-  );
+    .switchMap(() =>
+      Observable.ajax(doIt(
+        hosts.pk,
+        'category/add',
+        'POST',
+        JSON.stringify(store$.getState().categoryContainer.categoryForm),
+        true
+      ))
+        .switchMap(() => ([
+          {
+            type: `${FETCH_CATEGORY_LIST}`,
+            created: true,
+          }, {
+            type: `NOTIF_ADD`,
+            notification: {
+              message: 'Přidána kategorie',
+              dismissAfter: 3000,
+            },
+          }
+        ]))
+        .catch(error =>
+          Observable.of({
+            type: `${CATEGORY_CREATE_NEW}_FAILED`,
+            categoryError: error.xhr.response,
+          }))
+    );
 
 function arrayToMap(array) {
   let mapa = new Map();
@@ -68,15 +79,15 @@ function arrayToMap(array) {
 
 export const fetchCategoryListEpic = action$ =>
   action$.ofType(FETCH_CATEGORY_LIST)
-  .switchMap(() =>
-    Observable.ajax(doIt(hosts.pk, 'category/all-categories', 'GET', {}))
-    .map(({ response }) => ({
-      type: `${FETCH_CATEGORY_LIST}_FULFILLED`,
-      response: arrayToMap(response),
-    }))
-    .catch((error) =>
-      Observable.of({
-        type: `${FETCH_CATEGORY_LIST}_FAILED`,
-        categoryError: error.xhr.response,
-      }))
-  );
+    .switchMap(() =>
+      Observable.ajax(doIt(hosts.pk, 'category/all-categories', 'GET', {}))
+        .map(({ response }) => ({
+          type: `${FETCH_CATEGORY_LIST}_FULFILLED`,
+          response: arrayToMap(response),
+        }))
+        .catch((error) =>
+          Observable.of({
+            type: `${FETCH_CATEGORY_LIST}_FAILED`,
+            categoryError: error.xhr.response,
+          }))
+    );

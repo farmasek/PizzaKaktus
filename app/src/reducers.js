@@ -10,6 +10,7 @@ import categoryContainer from 'containers/CategoryContainer/reducer';
 import userContainer from 'containers/UserContainer/reducer';
 import menuContainer from 'containers/MenuContainer/reducer';
 import shoppingCartContainer from 'containers/ShoppingCartDetail/reducer';
+import notificationReducer from './components/App/reducer';
 
 const rootReducer = combineReducers({
   // Apply all of the reducers here.
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   userContainer,
   menuContainer,
   shoppingCartContainer,
+  notificationReducer,
   routing: routerReducer,
   form: formReducer,
 });

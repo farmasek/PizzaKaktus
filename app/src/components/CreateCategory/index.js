@@ -8,7 +8,6 @@ import cssModules from 'react-css-modules';
 import Input from 'react-toolbox/lib/input';
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
-import { Snackbar } from 'react-toolbox/lib/snackbar';
 
 class CreateCategory extends Component {
 
@@ -53,15 +52,7 @@ class CreateCategory extends Component {
         <CardActions>
           <Button label="Přidat" primary raised onClick={() => this.confirmDialog()} />
         </CardActions>
-        <Snackbar
-          active={ this.props.snackbar.get('showSnackbar') }
-          icon={ this.props.snackbar.get('icon') }
-          label={ this.props.snackbar.get('label') }
-          action={ "Zavřít" }
-          onClick={ () => this.props.handleSnackbar(false) }
-          ref="snackbar"
-          type="accept"
-        />
+
       </Card>);
   }
 }
@@ -70,10 +61,8 @@ CreateCategory.propTypes = {
   editValue: PropTypes.func.isRequired,
   confirmForm: PropTypes.func.isRequired,
   categoryForm: PropTypes.object,
-  snackbar: ImmutablePropTypes.record.isRequired,
   categoryErrors: PropTypes.object,
   categoryError: PropTypes.string,
-  handleSnackbar: PropTypes.func.isRequired,
   categoryValidation: PropTypes.func.isRequired,
 };
 
