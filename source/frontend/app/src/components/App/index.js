@@ -5,11 +5,16 @@ import * as actionCreators from './actions';
 import { Navbar } from 'components';
 import styles from './index.module.scss';
 import AppBar from 'react-toolbox/lib/app_bar';
+import { NotificationStack } from 'react-notification';
 
 const Main = (props) => (
   <div>
     <AppBar fixed flat>
       <Navbar />
+      <NotificationStack
+        notifications={props.notifications.toArray()}
+        onDismiss={(element) => props.actions.removeNotification(element)}
+      />
     </AppBar>
     <div className={styles.content}>
       {React.cloneElement(props.children, props)}
@@ -25,8 +30,7 @@ Main.propTypes = {
 // See: https://egghead.io/lessons/javascript-redux-generating-containers-with-connect-from-react-redux-visibletodolist
 // mapStateToProps :: {State} -> {Action}
 const mapStateToProps = (state) => ({
-  messages: state.messages,
-  errors: state.errors,
+  notifications: state.notificationReducer.get('notifications'),
 });
 
 // Map the dispatch and bind the action creators.
