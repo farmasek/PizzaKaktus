@@ -26,24 +26,26 @@ class User extends Component {
           confirmForm={this.props.actions.saveUser}
           userErrors={this.props.userErrors}
           userValidation={this.props.actions.userValidation}
-          snackbar={this.props.snackbar}
-          handleSnackbar={this.props.actions.handleSnackbar}
           userError={this.props.userError}
         />
-         <UserList
-              users={this.props.users}
-              updateUser={this.props.actions.updateUser}
-              updateRole={this.props.actions.updateRole}
-              deleteUser={this.props.actions.deleteUser}
-              dialog={this.props.dialog}
-              handleDialog={this.props.actions.handleDialog}
-            />
+        <UserList
+          users={this.props.users}
+          updateUser={this.props.actions.updateUser}
+          updateRole={this.props.actions.updateRole}
+          deleteUser={this.props.actions.deleteUser}
+          dialog={this.props.dialog}
+          handleDialog={this.props.actions.handleDialog}
+        />
         <Dialog
           actions={[
-            { label: 'Zrušit', onClick: () =>
-              this.props.actions.handleDialog(false, null, '', '') },
-            { label: 'Potvrdit', onClick: () =>
-              this.props.actions.deleteUser(dialog.id) },
+            {
+              label: 'Zrušit', onClick: () =>
+              this.props.actions.handleDialog(false, null, '', ''),
+            },
+            {
+              label: 'Potvrdit', onClick: () =>
+              this.props.actions.deleteUser(dialog.id),
+            },
           ]}
           active={dialog.showDialog}
           onEscKeyDown={() => this.props.actions.handleDialog(false, null, '', '')}
@@ -64,7 +66,6 @@ User.propTypes = {
   userForm: PropTypes.object,
   userErrors: PropTypes.object,
   userError: PropTypes.string,
-  snackbar: ImmutablePropTypes.record,
   users: ImmutablePropTypes.list,
   loading: PropTypes.bool,
   dialog: PropTypes.object.isRequired,
@@ -75,7 +76,6 @@ const mapStateToProps = (state) => ({
   userForm: state.userContainer.userForm,
   userErrors: state.userContainer.userErrors,
   userError: state.userContainer.userError,
-  snackbar: state.userContainer.snackbar,
   users: state.userContainer.users,
   loading: state.userContainer.loading,
   dialog: state.userContainer.dialog,

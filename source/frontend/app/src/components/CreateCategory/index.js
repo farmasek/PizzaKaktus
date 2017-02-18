@@ -2,7 +2,6 @@
  * Created by e-myslivost on 6.11.2016.
  */
 import React, { PropTypes, Component } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
 import Input from 'react-toolbox/lib/input';

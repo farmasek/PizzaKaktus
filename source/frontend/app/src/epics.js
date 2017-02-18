@@ -27,6 +27,10 @@ import {
 import {
   fetchMenuEpic,
 } from './containers/MenuContainer/actions';
+import {
+  showAddedNotification,
+  showRemovePizzaNotification,
+} from './containers/ShoppingCartDetail/actions';
 
 export default combineEpics(
   fetchIngredientListEpic,
@@ -42,4 +46,6 @@ export default combineEpics(
   deleteUserEpic,
   fetchPizzaAfterPaginationChange,
   fetchMenuEpic,
+  showAddedNotification,
+  showRemovePizzaNotification
 );

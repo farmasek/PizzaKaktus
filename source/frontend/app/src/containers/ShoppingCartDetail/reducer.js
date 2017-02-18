@@ -2,20 +2,16 @@ import {
   ADD_TO_SHOPPING_CART,
   FETCH_SHOPPING_CART,
   REMOVE_FROM_SHOPPING_CART,
-  SHOPPING_CART_SNACKBAR,
   EMPTY_SHOPPING_CART,
   SHOPPING_CART_DIALOG,
   CART_CUSTOMER_EDIT,
   CART_CUSTOMER_ERROR_EDIT,
 } from './constants';
 import { Record } from 'immutable';
-import { mapSnackbar } from '../../models/Snackbar';
 import { Customer } from '../../models/Customer';
-const initialSnackbar = mapSnackbar(false, '', '');
 
 const InitialState = new Record({
-  shoppingCart: new Array(),
-  snackbar: initialSnackbar,
+  shoppingCart: [],
   dialog: {
     showDialog: false,
   },
@@ -28,10 +24,9 @@ const shoppingCartReducer =
     switch (action.type) {
       case FETCH_SHOPPING_CART: {
         const localShoppingCart = JSON.parse(localStorage.getItem('shoppingCart'))
-          || new Array();
+          || [];
         return state.withMutations(s => s
           .set('shoppingCart', localShoppingCart)
-          .set('snackbar', initialSnackbar)
           .set('dialog', { showDialog: false })
         );
       }
@@ -41,7 +36,6 @@ const shoppingCartReducer =
         localStorage.setItem('shoppingCart', JSON.stringify(shoppingCartWithAdded));
         return state.withMutations(s => s
           .set('shoppingCart', shoppingCartWithAdded)
-          .set('snackbar', mapSnackbar(true, 'info', 'Pizza byla úspěšně přidána do košíku.'))
         );
       }
       case REMOVE_FROM_SHOPPING_CART: {
@@ -51,16 +45,12 @@ const shoppingCartReducer =
         localStorage.setItem('shoppingCart', JSON.stringify(shoppingCartWithRemoved));
         return state.withMutations(s => s
           .set('shoppingCart', shoppingCartWithRemoved)
-          .set('snackbar', mapSnackbar(true, 'info', 'Pizza byla úspěšně odebrána z košíku.'))
         );
       }
-      case SHOPPING_CART_SNACKBAR: {
-        return state.withMutations(s => s
-          .setIn(['snackbar', 'showSnackbar'], action.value));
-      }
+
       case EMPTY_SHOPPING_CART: {
-        localStorage.setItem('shoppingCart', JSON.stringify(new Array()));
-        return state.set('shoppingCart', new Array());
+        localStorage.setItem('shoppingCart', JSON.stringify([]));
+        return state.set('shoppingCart', []);
       }
       case SHOPPING_CART_DIALOG: {
         return state.set('dialog', action.dialog);

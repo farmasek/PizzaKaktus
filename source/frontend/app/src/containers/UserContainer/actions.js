@@ -4,7 +4,6 @@ import {
   USER_CREATE_NEW,
   USER_UPDATE_FIELD,
   USER_DELETE,
-  USER_SNACKBAR,
   USER_VALIDATION,
   USER_DIALOG,
 } from './constants';
@@ -15,11 +14,6 @@ import { fromJS } from 'immutable';
 export const userValidation = (userErrors) => ({
   type: USER_VALIDATION,
   userErrors,
-});
-
-export const handleSnackbar = (value) => ({
-  type: USER_SNACKBAR,
-  value,
 });
 
 export const fetchUserList = () => ({
@@ -78,14 +72,23 @@ export const saveUserListEpic = (action$, store$) =>
         'POST',
         JSON.stringify(store$.getState().userContainer.userForm),
         true))
-        .map(() => ({
+        .switchMap(() => [{
           type: `${FETCH_USER_LIST}`,
           created: true,
-        }))
+        },
+          {
+            type: `NOTIF_ADD`,
+            notification: {
+              message: 'Uživatel vytvořen',
+            },
+          }])
         .catch(error =>
           Observable.of({
-            type: `${USER_CREATE_NEW}_FAILED`,
-            userError: error.xhr.response,
+            type: `NOTIF_ADD`,
+            notification: {
+              message: error.xhr.response,
+              barStyle: { color: '#e57373' },
+            },
           }))
     );
 
@@ -94,13 +97,22 @@ export const updateUserEpic = (action$) =>
     .switchMap(({ userMap }) =>
       Observable.ajax(doIt(hosts.pk, 'user/update', 'PUT',
         userMap, true))
-        .map(() => ({
+        .switchMap(() => [{
           type: `${FETCH_USER_LIST}`,
-        }))
+        }, {
+          type: `NOTIF_ADD`,
+          notification: {
+            message: 'Uživatel upraven',
+          },
+        },
+        ])
         .catch(error =>
           Observable.of({
-            type: `${USER_UPDATE_FIELD}_FAILED`,
-            userError: error.xhr.response,
+            type: `NOTIF_ADD`,
+            notification: {
+              message: error.xhr.response,
+              barStyle: { color: '#e57373' },
+            },
           }))
     );
 
@@ -114,24 +126,36 @@ export const fetchUserListEpic = action$ =>
         }))
         .catch(error =>
           Observable.of({
-            type: `${FETCH_USER_LIST}_FAILED`,
-            userError: error.xhr.response,
+            type: `NOTIF_ADD`,
+            notification: {
+              message: error.xhr.response,
+              barStyle: { color: '#e57373' },
+            },
           }))
     );
 
 export const deleteUserEpic = action$ =>
   action$.ofType(USER_DELETE)
-  .switchMap((action) =>
-    Observable.ajax(doIt(hosts.pk, `user/delete/${action.id}`, 'DELETE', {}))
-      .map(() => ({
-        type: FETCH_USER_LIST,
-      }))
-      .catch(error =>
-        Observable.of({
-          type: `${USER_DELETE}_FAILED`,
-          userError: error.xhr.response,
-        }))
-  );
+    .switchMap((action) =>
+      Observable.ajax(doIt(hosts.pk, `user/delete/${action.id}`, 'DELETE', {}))
+        .switchMap(() => [{
+          type: FETCH_USER_LIST,
+        },
+          {
+            type: `NOTIF_ADD`,
+            notification: {
+              message: 'Uživatel odstraněn',
+            },
+          }])
+        .catch(error =>
+          Observable.of({
+            type: `NOTIF_ADD`,
+            notification: {
+              message: error.xhr.response,
+              barStyle: { color: '#e57373' },
+            },
+          }))
+    );
 
 export const handleDialog = (showDialog, id, firstName, lastName) => ({
   type: USER_DIALOG,

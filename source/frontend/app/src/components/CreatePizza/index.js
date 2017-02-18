@@ -11,7 +11,6 @@ import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
 import Dropdown from 'react-toolbox/lib/dropdown';
 import Checkbox from 'react-toolbox/lib/checkbox';
-import { Snackbar } from 'react-toolbox/lib/snackbar';
 import scrollIntoView from 'scroll-into-view';
 
 class CreatePizza extends Component { // eslint-disable-line react/prefer-stateless-function
@@ -93,7 +92,7 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
 
   render() {
     return (
-      <Card className={styles.createPizza} ref="pizzaForm" >
+      <Card className={styles.createPizza} ref="pizzaForm">
         <CardTitle>Vytvořit pizzu</CardTitle>
         <CardText>
           <Input
@@ -141,17 +140,8 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
           />
         </CardText>
         <CardActions>
-          <Button label="Přidat" primary raised onClick={() => this.confirmDialog()} />
+          <Button label="Přidat" primary raised onClick={() => this.confirmDialog()}/>
         </CardActions>
-        <Snackbar
-          active={ this.props.snackbar.get('showSnackbar') }
-          icon={ this.props.snackbar.get('icon') }
-          label={ this.props.snackbar.get('label') }
-          action={ "Zavřít" }
-          onClick={ () => this.props.handleSnackbar(false) }
-          ref="snackbar"
-          type="accept"
-        />
       </Card>);
   }
 }
@@ -164,8 +154,6 @@ CreatePizza.propTypes = {
   ingredients: ImmutablePropTypes.map.isRequired,
   pizzaErrors: PropTypes.object,
   pizzaValidation: PropTypes.func.isRequired,
-  snackbar: ImmutablePropTypes.record.isRequired,
-  handleSnackbar: PropTypes.func.isRequired,
   pizzaError: PropTypes.string,
   copied: PropTypes.bool,
 };

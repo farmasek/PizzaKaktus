@@ -35,7 +35,6 @@ class Category extends Component { // eslint-disable-line react/prefer-stateless
             editValue={this.props.actions.changeValue}
             categoryForm={this.props.categoryForm}
             confirmForm={this.props.actions.saveCategory}
-            snackbar={this.props.snackbar}
             categoryError={this.props.categoryError}
             categoryErrors={this.props.categoryErrors}
             categoryValidation={this.props.actions.categoryValidation}

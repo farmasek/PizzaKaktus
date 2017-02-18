@@ -10,7 +10,7 @@ import {
 } from './constants';
 import {
   doIt,
-  hosts
+  hosts,
 } from '../../network';
 import { Observable } from 'rxjs';
 import { Map } from 'immutable';
@@ -58,17 +58,19 @@ export const saveCategoryListEpic = (action$, store$) =>
             type: `NOTIF_ADD`,
             notification: {
               message: 'Přidána kategorie',
-              dismissAfter: 3000,
             },
-          }
+          },
         ]))
         .catch(error =>
           Observable.of({
-            type: `${CATEGORY_CREATE_NEW}_FAILED`,
-            categoryError: error.xhr.response,
+            type: `NOTIF_ADD`,
+            notification: {
+              message: error.xhr.response,
+              barStyle: { color: '#e57373' },
+            },
           }))
     );
-
+// wut wut ?
 function arrayToMap(array) {
   let mapa = new Map();
   array.map((value) => {
@@ -86,8 +88,15 @@ export const fetchCategoryListEpic = action$ =>
           response: arrayToMap(response),
         }))
         .catch((error) =>
-          Observable.of({
-            type: `${FETCH_CATEGORY_LIST}_FAILED`,
-            categoryError: error.xhr.response,
-          }))
+          Observable.concat(
+            Observable.of({
+              type: `${FETCH_CATEGORY_LIST}_FAILED`,
+            }),
+            Observable.of({
+              type: `NOTIF_ADD`,
+              notification: {
+                message: error.xhr.response,
+                barStyle: { color: '#e57373' },
+              },
+            })))
     );
