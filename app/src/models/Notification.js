@@ -5,6 +5,7 @@ export const cNotification = {
   key: 'key',
   action: 'action',
   dismissAfter: 'dismissAfter',
+  barStyle: 'barStyle',
 };
 
 export const Notification = () => fromJS({
@@ -14,10 +15,12 @@ export const Notification = () => fromJS({
   [cNotification.dismissAfter]: 3400,
 });
 
-export const mapSrcToNotificationWithKey = ({ message, action, dismissAfter }, key) =>
-  fromJS({
-    message,
-    key,
-    action,
-    dismissAfter,
-  });
+export const mapSrcToNotificationWithKey =
+  ({ message, action, dismissAfter = 3000, barStyle }, key) =>
+    fromJS({
+      message,
+      key,
+      action,
+      dismissAfter,
+      barStyle,
+    });

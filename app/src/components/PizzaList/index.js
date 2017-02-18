@@ -72,6 +72,26 @@ class PizzaList extends React.Component {
     return (
       <div className={styles.pizzaList}>
         <h1>Seznam pizz</h1>
+
+        <div className={styles.paginationLane}>
+          <Input
+            className={styles.sortName}
+            label="filtr"
+            type="text" value={pagination.get('filterBy')}
+            onChange={(val) => this.props.changePagination('filterBy', val)}
+          />
+          <Input
+            className={styles.sortSize}
+            label="počet"
+            type="number" value={pagination.get('size')}
+            onChange={(val) => this.props.changePagination('size', val)}
+          />
+          {
+            pagination.get('totalPages') > 0
+              ? this.renderNumberLine(pagination.get('totalPages')) :
+              pagination.get('totalPages')
+          }
+        </div>
         <table className={styles.pizzaListTable}>
           <thead>
           <tr>
@@ -110,26 +130,6 @@ class PizzaList extends React.Component {
             (pizza) => this.renderRow(pizza)) }
           </tbody>
         </table>
-
-        <div className={styles.paginationLane}>
-          <Input
-            className={styles.sortName}
-            label="filtr"
-            type="text" value={pagination.get('filterBy')}
-            onChange={(val) => this.props.changePagination('filterBy', val)}
-          />
-          <Input
-            className={styles.sortSize}
-            label="počet"
-            type="number" value={pagination.get('size')}
-            onChange={(val) => this.props.changePagination('size', val)}
-          />
-          {
-            pagination.get('totalPages') > 0
-              ? this.renderNumberLine(pagination.get('totalPages')) :
-              pagination.get('totalPages')
-          }
-        </div>
       </div>);
   }
 }

@@ -1,12 +1,10 @@
 import React, { PropTypes, Component } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
 import Input from 'react-toolbox/lib/input';
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
 import { Checkbox } from 'react-toolbox/lib/checkbox';
-import { Snackbar } from 'react-toolbox/lib/snackbar';
 
 const roles = [
   { value: 'ADMIN', label: 'Majitel' },
@@ -142,15 +140,7 @@ class CreateUser extends Component {
           <CardActions>
             <Button label="Přidat" primary raised onClick={ () => this.confirmDialog() }/>
           </CardActions>
-          <Snackbar
-            active={ this.props.snackbar.get('showSnackbar') }
-            icon={ this.props.snackbar.get('icon') }
-            label={ this.props.snackbar.get('label') }
-            action={ "Zavřít" }
-            onClick={ () => this.props.handleSnackbar(false) }
-            ref="snackbar"
-            type="accept"
-          />
+
         </Card>
       </div>
     );
@@ -163,8 +153,6 @@ CreateUser.propTypes = {
   userForm: PropTypes.object,
   userErrors: PropTypes.object,
   userError: PropTypes.string,
-  snackbar: ImmutablePropTypes.record,
-  handleSnackbar: PropTypes.func.isRequired,
   userValidation: PropTypes.func.isRequired,
 };
 

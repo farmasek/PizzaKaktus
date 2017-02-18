@@ -41,17 +41,27 @@ export const saveIngredientListEpic = (action$, store$) =>
       Observable.ajax(doIt(hosts.pk, 'ingredient/add', 'POST',
         JSON.stringify(store$.getState().ingredientContainer.ingredientForm)
         , true))
-        .map(() => ({
+        .switchMap(() => [{
           type: `${FETCH_INGREDIENT_LIST}`,
           created: true,
-        }))
+        },
+          {
+            type: `NOTIF_ADD`,
+            notification: {
+              message: 'Ingredience vytvořena',
+            },
+          }])
         .catch(error =>
           Observable.of({
-            type: `${INGREDIENT_CREATE_NEW}_FAILED`,
-            ingredientError: error.xhr.response,
+            type: `NOTIF_ADD`,
+            notification: {
+              message: error.xhr.response,
+              barStyle: { color: '#e57373' },
+            },
           }))
     );
 
+// wut wut
 function arrayToMap(array) {
   let mapa = new Map();
   array.map((value) => {
@@ -70,7 +80,10 @@ export const fetchIngredientListEpic = action$ =>
         }))
         .catch(error =>
           Observable.of({
-            type: `${FETCH_INGREDIENT_LIST}_FAILED`,
-            ingredientError: error.xhr.response,
+            type: `NOTIF_ADD`,
+            notification: {
+              message: error.xhr.response,
+              barStyle: { color: 'red' },
+            },
           }))
     );

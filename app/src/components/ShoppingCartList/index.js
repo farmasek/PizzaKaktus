@@ -3,7 +3,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import cssModules from 'react-css-modules';
 import styles from './index.module.scss';
-import { Snackbar } from 'react-toolbox/lib/snackbar';
 import { IconButton } from 'react-toolbox/lib/button';
 
 class ShoppingCartList extends Component {
@@ -57,15 +56,6 @@ class ShoppingCartList extends Component {
           }
           </tbody>
         </table>
-        <Snackbar
-          active={ this.props.snackbar.get('showSnackbar') }
-          icon={ this.props.snackbar.get('icon') }
-          label={ this.props.snackbar.get('label') }
-          action={ "Zavřít" }
-          onClick={ () => this.props.handleSnackbar(false) }
-          ref="snackbar"
-          type="accept"
-        />
       </div>
     );
   }
@@ -75,8 +65,6 @@ ShoppingCartList.propTypes = {
   shoppingCart: PropTypes.array.isRequired,
   ingredients: ImmutablePropTypes.map.isRequired,
   removeFromCart: PropTypes.func.isRequired,
-  snackbar: ImmutablePropTypes.record.isRequired,
-  handleSnackbar: PropTypes.func.isRequired,
 };
 
 export default cssModules(ShoppingCartList, styles);

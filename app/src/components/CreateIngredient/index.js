@@ -1,11 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import styles from './index.module.scss';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import cssModules from 'react-css-modules';
 import Input from 'react-toolbox/lib/input';
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
-import { Snackbar } from 'react-toolbox/lib/snackbar';
 
 class CreateIngredient extends Component {
 
@@ -94,15 +92,6 @@ class CreateIngredient extends Component {
         <CardActions>
           <Button label="Přidat" primary raised onClick={() => this.confirmDialog()} />
         </CardActions>
-        <Snackbar
-          active={ this.props.snackbar.get('showSnackbar') }
-          icon={ this.props.snackbar.get('icon') }
-          label={ this.props.snackbar.get('label') }
-          action={ "Zavřít" }
-          onClick={ () => this.props.handleSnackbar(false) }
-          ref="snackbar"
-          type="accept"
-        />
       </Card>);
   }
 }
@@ -111,10 +100,7 @@ CreateIngredient.propTypes = {
   editValue: PropTypes.func.isRequired,
   confirmForm: PropTypes.func.isRequired,
   ingredientForm: PropTypes.object,
-  snackbar: ImmutablePropTypes.record.isRequired,
   ingredientErrors: PropTypes.object,
-  ingredientError: PropTypes.string,
-  handleSnackbar: PropTypes.func.isRequired,
   ingredientValidation: PropTypes.func,
 };
 

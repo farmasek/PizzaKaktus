@@ -47,8 +47,6 @@ class Pizza extends Component {
           ingredients={this.props.ingredients}
           pizzaErrors={this.props.pizzaErrors}
           pizzaValidation={this.props.actions.pizzaValidation}
-          snackbar={this.props.snackbar}
-          handleSnackbar={this.props.actions.handleSnackbar}
           pizzaError={this.props.pizzaError}
           copied={this.props.copied}
         />
@@ -81,7 +79,6 @@ Pizza.propTypes = {
   pizzaForm: PropTypes.object,
   pizzaErrors: PropTypes.object,
   pizzaError: PropTypes.string,
-  snackbar: ImmutablePropTypes.record.isRequired,
   copied: PropTypes.bool,
   loading: PropTypes.bool,
   pagination: ImmutablePropTypes.map,
@@ -94,7 +91,6 @@ const mapStateToProps = (state) => ({
   ingredients: state.ingredientContainer.ingredients,
   pizzaForm: state.pizzaContainer.pizzaForm,
   pizzaErrors: state.pizzaContainer.pizzaErrors,
-  snackbar: state.pizzaContainer.snackbar,
   pizzaError: state.pizzaContainer.pizzaError,
   copied: state.pizzaContainer.copied,
   pagination: state.pizzaContainer.pagination,

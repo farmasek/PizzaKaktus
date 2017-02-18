@@ -6,6 +6,7 @@ import { Navbar } from 'components';
 import styles from './index.module.scss';
 import AppBar from 'react-toolbox/lib/app_bar';
 import { NotificationStack } from 'react-notification';
+import * as ImmutablePropTypes from 'react-immutable-proptypes';
 
 const Main = (props) => (
   <div>
@@ -24,6 +25,7 @@ const Main = (props) => (
 
 Main.propTypes = {
   children: React.PropTypes.any,
+  notifications: ImmutablePropTypes.orderedSet,
 };
 
 // Map the global state to global props here.

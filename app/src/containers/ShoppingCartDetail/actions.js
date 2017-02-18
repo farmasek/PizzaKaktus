@@ -2,7 +2,6 @@ import {
   ADD_TO_SHOPPING_CART,
   FETCH_SHOPPING_CART,
   REMOVE_FROM_SHOPPING_CART,
-  SHOPPING_CART_SNACKBAR,
   EMPTY_SHOPPING_CART,
   SHOPPING_CART_DIALOG,
   CART_CUSTOMER_EDIT,
@@ -33,11 +32,6 @@ export const removeFromShoppingCart = (pizza) => ({
   pizza,
 });
 
-export const handleSnackbar = (value) => ({
-  type: SHOPPING_CART_SNACKBAR,
-  value,
-});
-
 export const emptyShoppingCart = () => ({
   type: EMPTY_SHOPPING_CART,
 });
@@ -48,3 +42,20 @@ export const handleDialog = (showDialog) => ({
     showDialog,
   },
 });
+
+export const showAddedNotification = (action) =>
+  action.ofType(ADD_TO_SHOPPING_CART)
+    .map(() => ({
+      type: `NOTIF_ADD`,
+      notification: {
+        message: 'Pizza přidána do košíku',
+      },
+    }));
+export const showRemovePizzaNotification = (action) =>
+  action.ofType(REMOVE_FROM_SHOPPING_CART)
+    .map(() => ({
+      type: `NOTIF_ADD`,
+      notification: {
+        message: 'Pizza byla odebrána z košíku',
+      },
+    }));

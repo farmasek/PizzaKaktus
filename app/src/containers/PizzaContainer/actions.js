@@ -43,14 +43,24 @@ export const savePizzaListEpic = (action$, store$) =>
         JSON.stringify(store$.getState().pizzaContainer.pizzaForm),
         true,
       ))
-        .map(() => ({
+        .switchMap(() => [{
           type: `${FETCH_PIZZA_LIST}`,
           created: true,
-        }))
+        },
+          {
+            type: `NOTIF_ADD`,
+            notification: {
+              message: 'Pizza vytvořena',
+            },
+          },
+        ])
         .catch(error =>
           Observable.of({
-            type: `${PIZZA_CREATE_NEW}_FAILED`,
-            pizzaError: error.xhr.response,
+            type: `NOTIF_ADD`,
+            notification: {
+              message: error.xhr.response,
+              barStyle: { color: '#e57373' },
+            },
           }))
     );
 
@@ -82,8 +92,11 @@ const fetchPizzaTable = (pagination) =>
     }))
     .catch(error =>
       Observable.of({
-        type: `${FETCH_PIZZA_LIST}_FAILED`,
-        pizzaError: error.xhr.response,
+        type: `NOTIF_ADD`,
+        notification: {
+          message: error.xhr.response,
+          barStyle: { color: '#e57373' },
+        },
       })
     );
 
@@ -111,18 +124,28 @@ export const updatePizza = (pizza, field, value) => {
 
 export const updatePizzaEpic = (action$) =>
   action$.ofType(PIZZA_UPDATE)
-  .switchMap(({ pizzaMap }) =>
-    Observable.ajax(doIt(hosts.pk, 'pizza/update', 'PUT',
-      pizzaMap, true))
-    .map(() => ({
-      type: `${FETCH_PIZZA_LIST}`,
-    }))
-    .catch((error) =>
-      Observable.of({
-        type: `${PIZZA_UPDATE}_FAILED`,
-        pizzaError: error.xhr.response,
-      }))
-  );
+    .switchMap(({ pizzaMap }) =>
+      Observable.ajax(doIt(hosts.pk, 'pizza/update', 'PUT',
+        pizzaMap, true))
+        .switchMap(() => ([{
+          type: `${FETCH_PIZZA_LIST}`,
+        },
+          {
+            type: `NOTIF_ADD`,
+            notification: {
+              message: 'Pizza byla upravena',
+            },
+          },
+        ]))
+        .catch((error) =>
+          Observable.of({
+            type: `NOTIF_ADD`,
+            notification: {
+              message: error.xhr.response,
+              barStyle: { color: '#e57373' },
+            },
+          }))
+    );
 
 export const copyPizza = (pizza) => ({
   type: PIZZA_COPY,

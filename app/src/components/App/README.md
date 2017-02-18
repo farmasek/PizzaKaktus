@@ -1,8 +1,14 @@
-## App Component
-Top level Application component that sits above other components.
+## How to use notification in application
 
-### Props
+In action dispatch after fetch or whenever you can call action of type :
 
-| Prop          | Type     | Default     | Possible Values   
-| ------------- | -------- | ----------- | ---------------------------------------------
-| **children** | Element   |             | Any children react components
+```
+{
+  type: `NOTIF_ADD`,
+  notification: {
+    message: 'Přidána kategorie',
+    dismissAfter: 3000,
+    barStyle:{color:'red'} // optional parameter for displaying errors
+  },
+}
+```
