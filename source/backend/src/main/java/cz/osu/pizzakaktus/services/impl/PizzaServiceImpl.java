@@ -142,8 +142,9 @@ public class PizzaServiceImpl implements PizzaService {
         }
 
         // testovaci mail
-        orderAcceptedMail("justtestingpizza@gmail.com", makeOrderMailBody(customer, pizzas));
-        //orderAcceptedMail(customer.getEmail(), makeOrderMailBody(customer, pizzas)); konkretni zakaznik
+        //orderAcceptedMail("justtestingpizza@gmail.com", makeOrderMailBody(customer, pizzas));
+        // konkretni zakaznik
+        orderAcceptedMail(customer.getEmail(), makeOrderMailBody(customer, pizzas));
     }
 
     @Override

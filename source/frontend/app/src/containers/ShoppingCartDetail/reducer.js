@@ -50,7 +50,11 @@ const shoppingCartReducer =
 
       case EMPTY_SHOPPING_CART: {
         localStorage.setItem('shoppingCart', JSON.stringify([]));
-        return state.set('shoppingCart', []);
+        return state.withMutations(s => s
+          .set('shoppingCart', [])
+          .set('customer', new Customer())
+          .set('customerError', new Customer())
+        );
       }
       case SHOPPING_CART_DIALOG: {
         return state.set('dialog', action.dialog);

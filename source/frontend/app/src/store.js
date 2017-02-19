@@ -2,7 +2,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import { browserHistory } from 'react-router';
-import createLogger from 'redux-logger';
+// import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise-middleware';
 import rootReducer from './reducers';
 
@@ -20,10 +20,10 @@ const initialState = {
 /* Commonly used middlewares and enhancers */
 /* See: http://redux.js.org/docs/advanced/Middleware.html*/
 const epicMiddleware = createEpicMiddleware(rootEpics);
-const loggerMiddleware = createLogger();
+// const loggerMiddleware = createLogger();
 const middlewares = [thunk,
   promiseMiddleware(),
-  loggerMiddleware,
+  // loggerMiddleware,
   epicMiddleware,
 ];
 
