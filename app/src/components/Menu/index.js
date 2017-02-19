@@ -31,8 +31,6 @@ class Menu extends Component {
             ingredients={this.props.ingredients}
             addToCart={this.props.addToCart}
             fetchCart={this.props.fetchCart}
-            snackbar={this.props.snackbar}
-            handleSnackbar={this.props.handleSnackbar}
           />
         </div>);
       }
@@ -53,8 +51,6 @@ Menu.propTypes = {
   ingredients: ImmutablePropTypes.map.isRequired,
   addToCart: PropTypes.func.isRequired,
   fetchCart: PropTypes.func.isRequired,
-  snackbar: ImmutablePropTypes.record.isRequired,
-  handleSnackbar: PropTypes.func.isRequired,
 };
 
 export default cssModules(Menu, styles);

@@ -29,8 +29,6 @@ class ShoppingCartDetail extends Component {
                 shoppingCart={this.props.shoppingCart}
                 ingredients={this.props.ingredients}
                 removeFromCart={(pizza) => this.props.actions.removeFromShoppingCart(pizza)}
-                snackbar={this.props.snackbar}
-                handleSnackbar={this.props.actions.handleSnackbar}
               />
               <CustomerForm
                 editCustomerField={this.props.actions.editCustomerField}
@@ -42,7 +40,9 @@ class ShoppingCartDetail extends Component {
               <Button label={"Vysypat košík"} onClick={() =>
                 this.props.actions.handleDialog(true)}
               />
-              <Button primary label={"Objednat"}/>
+              <Button primary label={"Objednat"} onClick={() =>
+                this.props.actions.sendOrder(this.props.shoppingCart, this.props.customer)}
+              />
               <Dialog
                 actions={[
                   {
@@ -74,7 +74,6 @@ ShoppingCartDetail.propTypes = {
   ingredients: ImmutablePropTypes.map.isRequired,
   ingredientsActions: PropTypes.object,
   actions: PropTypes.object,
-  snackbar: ImmutablePropTypes.record.isRequired,
   dialog: PropTypes.object,
   customer: PropTypes.any,
   customerError: PropTypes.any,
@@ -83,7 +82,6 @@ ShoppingCartDetail.propTypes = {
 const mapStateToProps = (state) => ({
   shoppingCart: state.shoppingCartContainer.shoppingCart,
   ingredients: state.ingredientContainer.ingredients,
-  snackbar: state.shoppingCartContainer.snackbar,
   dialog: state.shoppingCartContainer.dialog,
   customer: state.shoppingCartContainer.customer,
   customerError: state.shoppingCartContainer.customerError,

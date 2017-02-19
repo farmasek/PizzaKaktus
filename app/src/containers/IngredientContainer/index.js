@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import { bindActionCreators } from 'redux';
 import * as IngredientActionCreators from './actions';
 import cssModules from 'react-css-modules';
@@ -32,8 +31,6 @@ class Ingredient extends Component {
             confirmForm={this.props.actions.saveIngredient}
             ingredientErrors={this.props.ingredientErrors}
             ingredientValidation={this.props.actions.ingredientValidation}
-            snackbar={this.props.snackbar}
-            handleSnackbar={this.props.actions.handleSnackbar}
             ingredientError={this.props.ingredientError}
           />
         </div>
@@ -46,7 +43,6 @@ Ingredient.propTypes = {
   ingredientForm: PropTypes.object,
   actions: PropTypes.object,
   isLoading: PropTypes.bool,
-  snackbar: ImmutablePropTypes.record.isRequired,
   ingredientErrors: PropTypes.object,
   ingredientError: PropTypes.string,
 };
@@ -56,7 +52,6 @@ const mapStateToProps = (state) => ({
   isLoading: state.ingredientContainer.isLoading,
   ingredientForm: state.ingredientContainer.ingredientForm,
   ingredientError: state.ingredientContainer.ingredientError,
-  snackbar: state.ingredientContainer.snackbar,
   ingredientErrors: state.ingredientContainer.ingredientErrors,
 });
 
