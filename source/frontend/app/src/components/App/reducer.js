@@ -25,6 +25,9 @@ const notificationReducer =
         return state.set('notifications', newNotification);
       }
       case 'NOTIF_ADD': {
+        if (!action.notification.message) {
+          return state;
+        }
         const oldNotif = state.get('notifications');
         const newNotification =
           oldNotif.add(mapSrcToNotificationWithKey(action.notification, state.get('count')).toJS());
