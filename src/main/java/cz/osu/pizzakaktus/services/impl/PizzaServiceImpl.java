@@ -141,9 +141,6 @@ public class PizzaServiceImpl implements PizzaService {
             pizzas.addAll(findById(id));
         }
 
-        PizzaDb pizTest = pizzas.get(0);
-        System.out.println(pizTest.getTitle());
-
         // testovaci mail
         orderAcceptedMail("justtestingpizza@gmail.com", makeOrderMailBody(customer, pizzas));
         //orderAcceptedMail(customer.getEmail(), makeOrderMailBody(customer, pizzas)); konkretni zakaznik

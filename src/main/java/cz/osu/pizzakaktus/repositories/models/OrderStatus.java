@@ -14,15 +14,14 @@ import javax.persistence.*;
 public class OrderStatus
 {
     public static String CREATED = "CREATED";
-    public static String OPEN = "OPEN";
+    public static String OPENED = "OPENED";
     public static String CLOSED = "CLOSED";
-    public static String CANCELED = "CANCELED";
+    public static String CANCELLED = "CANCELLED";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    // Bude nejspíš třeba upravit podle db diagramu nebo něco
     @Column(unique = true)
     private String Order;
 }
