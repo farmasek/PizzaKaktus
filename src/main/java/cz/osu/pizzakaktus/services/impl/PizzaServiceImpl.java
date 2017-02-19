@@ -4,6 +4,7 @@ import cz.osu.pizzakaktus.endpoints.models.CategoryDTO;
 import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
 import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import cz.osu.pizzakaktus.repositories.IngredientRepository;
+import cz.osu.pizzakaktus.repositories.OrderRepository;
 import cz.osu.pizzakaktus.repositories.PizzaRepository;
 import cz.osu.pizzakaktus.repositories.models.*;
 import cz.osu.pizzakaktus.services.CategoryService;
@@ -21,6 +22,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import static java.lang.Math.toIntExact;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +41,8 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Autowired
     CategoryService categoryService;
+    @Autowired
+    OrderRepository orderRepository;
 
     @Override
     public Optional<PizzaDb> insert(PizzaDTO pizzaDTO) throws DatabaseException {
@@ -48,9 +52,7 @@ public class PizzaServiceImpl implements PizzaService {
             PizzaDb insertedPizza = pizzaRepository.save(
                     new PizzaDb(null, pizzaDTO.getTitle(), categoryDb, ingredientsById, pizzaDTO.getPrice(), pizzaDTO.isActive()));
             return Optional.of(insertedPizza);
-        }
-        else
-        {
+        } else {
             throw new DatabaseException("Pizza s nazvem " + pizzaDTO.getTitle() + " již existuje.");
         }
     }
@@ -69,7 +71,7 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public List<PizzaDb> findAll() throws DatabaseException{
+    public List<PizzaDb> findAll() throws DatabaseException {
         Iterable<PizzaDb> pizzasList = pizzaRepository.findAll();
         return Lists.newArrayList(pizzasList);
     }
@@ -86,12 +88,12 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public boolean isCategoryValid(CategoryDb categoryDb)throws DatabaseException {
+    public boolean isCategoryValid(CategoryDb categoryDb) throws DatabaseException {
         return !(categoryDb == null);
     }
 
     @Override
-    public boolean isTitleTaken(String title)throws DatabaseException {
+    public boolean isTitleTaken(String title) throws DatabaseException {
         boolean isActive = false;
         List<PizzaDb> foundByTitle = pizzaRepository.findByTitle(title);
         if (foundByTitle.isEmpty()) {
@@ -106,20 +108,17 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public List<PizzaDb> findById(Integer id) throws DatabaseException
-    {
+    public List<PizzaDb> findById(Integer id) throws DatabaseException {
         List<PizzaDb> pizza = pizzaRepository.findById(id);
         return pizza;
     }
 
     @Override
-    public int countTotalPizzasCost(List<PizzaDb> pizzas) throws DatabaseException
-    {
+    public int countTotalPizzasCost(List<PizzaDb> pizzas) throws DatabaseException {
         PizzaDb pizza;
         int totalCost = 0;
 
-        for(int i = 0; i < pizzas.size(); i++)
-        {
+        for (int i = 0; i < pizzas.size(); i++) {
             pizza = pizzas.get(i);
             totalCost += pizza.getPrice();
         }
@@ -127,20 +126,19 @@ public class PizzaServiceImpl implements PizzaService {
         return totalCost;
     }
 
+    //TODO Order stuff should handle Order service
     @Override
-    public void createOrder(OrderDTO order) throws DatabaseException
-    {
+    public void createOrder(OrderDTO order) throws DatabaseException {
         CustomerDb customer = new CustomerDb(order.getCustomer());
         OrderDb orderDb = new OrderDb(order.getPizzasId(), customer, OrderStatus.CREATED);
         List<PizzaDb> pizzas = new ArrayList<>();
         List<Integer> pizzasIDs = orderDb.getPizzasId();
 
-        for (int i = 0; i < pizzasIDs.size(); i++)
-        {
-            Integer id = pizzasIDs.get(i);
+        for (Integer id : pizzasIDs) {
             pizzas.addAll(findById(id));
         }
 
+        OrderDb savedOrder = orderRepository.save(orderDb);
         // testovaci mail
         //orderAcceptedMail("justtestingpizza@gmail.com", makeOrderMailBody(customer, pizzas));
         // konkretni zakaznik
@@ -148,26 +146,25 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public String makeOrderMailBody(CustomerDb customer, List<PizzaDb> pizzas) throws DatabaseException
-    {
+    public String makeOrderMailBody(CustomerDb customer, List<PizzaDb> pizzas) throws DatabaseException {
         String orderedPizzas = "";
-        for (int i = 0; i < pizzas.size(); i++)
-        {
-            orderedPizzas += "- " + pizzas.get(i).getTitle() + " " + (int)Math.round(pizzas.get(i).getPrice()) + "kč\n";
+        for (int i = 0; i < pizzas.size(); i++) {
+            orderedPizzas += "- " + pizzas.get(i).getTitle() + " " + (int) Math.round(pizzas.get(i).getPrice()) + "kč\n";
         }
 
         int totalCost = countTotalPizzasCost(pizzas);
 
-        String mailBody =  "Dobrý den " + customer.getName() + " " + customer.getSurname() + ". Vaše objednávka byla přijata.\n\n" +
-        "Vaše objednávka zahrnuje tyto položky: \n" + orderedPizzas + "\nCelková cena činí: " + totalCost + "kč\n\nS přáním pěkného dne, tým PizzaKaktus.";
+        String mailBody = "Dobrý den " + customer.getName() + " " + customer.getSurname() + ". Vaše objednávka byla přijata.\n\n" +
+                "Vaše objednávka zahrnuje tyto položky: \n" + orderedPizzas + "\nCelková cena činí: " + totalCost + "kč\n\nS přáním pěkného dne, tým PizzaKaktus.";
 
         return mailBody;
     }
 
+
+    //TODO probably should handle Order service
     @Override
     //public void orderAcceptedMail(String recipient, String subject, String text)
-    public void orderAcceptedMail(String recipient, String mailBody)
-    {
+    public void orderAcceptedMail(String recipient, String mailBody) {
         final String username = "justtestingpizza@gmail.com";
         final String password = "pizzakaktus";
 
@@ -195,8 +192,7 @@ public class PizzaServiceImpl implements PizzaService {
 
             System.out.println("Order accepted mail sent.");
 
-        } catch (MessagingException e)
-        {
+        } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }
