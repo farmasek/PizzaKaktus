@@ -13,7 +13,17 @@ export const Customer = new Record({
   zip: '',
 });
 
-export const mapCustomer = (id, name, surname, email, city, street, zip) => new Customer({
+export const mapCustomer = (src) => new Customer({
+  id: src.id,
+  name: src.name,
+  surname: src.surname,
+  email: src.email,
+  city: src.city,
+  street: src.street,
+  zip: src.zip,
+});
+
+export const mapCustomerData = (id, name, surname, email, city, street, zip) => new Customer({
   id,
   name,
   surname,

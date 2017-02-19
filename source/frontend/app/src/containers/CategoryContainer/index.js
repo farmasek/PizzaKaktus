@@ -38,7 +38,6 @@ class Category extends Component { // eslint-disable-line react/prefer-stateless
             categoryError={this.props.categoryError}
             categoryErrors={this.props.categoryErrors}
             categoryValidation={this.props.actions.categoryValidation}
-            handleSnackbar={this.props.actions.handleSnackbar}
           />
         </div>
       </div>
@@ -48,7 +47,6 @@ class Category extends Component { // eslint-disable-line react/prefer-stateless
 Category.propTypes = {
   categories: PropTypes.object,
   actions: PropTypes.object,
-  snackbar: ImmutablePropTypes.record.isRequired,
   categoryErrors: PropTypes.object,
   categoryError: PropTypes.string,
   categoryForm: ImmutablePropTypes.map,
@@ -59,7 +57,6 @@ Category.propTypes = {
 const mapStateToProps = (state) => ({
   categories: state.categoryContainer.categories,
   categoryForm: state.categoryContainer.categoryForm,
-  snackbar: state.categoryContainer.snackbar,
   categoryError: state.categoryContainer.categoryError,
   categoryErrors: state.categoryContainer.categoryErrors,
   loading: state.categoryContainer.loading,

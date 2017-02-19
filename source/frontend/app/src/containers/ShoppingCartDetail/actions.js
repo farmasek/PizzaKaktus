@@ -6,7 +6,11 @@ import {
   SHOPPING_CART_DIALOG,
   CART_CUSTOMER_EDIT,
   CART_CUSTOMER_ERROR_EDIT,
+  SEND_ORDER,
 } from './constants';
+import { mapOrderDTO } from '../../models/OrderDTO';
+import { doIt, hosts } from '../../network';
+import { Observable } from 'rxjs';
 
 export const editCustomerField = (field, value) => ({
   type: CART_CUSTOMER_EDIT,
@@ -42,6 +46,38 @@ export const handleDialog = (showDialog) => ({
     showDialog,
   },
 });
+
+export const sendOrder = (pizzasId, customer) => ({
+  type: SEND_ORDER,
+  pizzasId,
+  customer,
+});
+
+export const sendOrderEpic = (action$) =>
+  action$.ofType(SEND_ORDER)
+  .switchMap((action) =>
+    Observable.ajax(doIt(
+      hosts.pk,
+      'pizza/send-order',
+      'POST',
+      JSON.stringify(mapOrderDTO(action.pizzasId, action.customer)),
+      true,
+    ))
+    .map(() => ({
+      type: `NOTIF_ADD`,
+      notification: {
+        message: 'Objednávka odeslána',
+      },
+    }))
+    .catch(error =>
+      Observable.of({
+        type: `NOTIF_ADD`,
+        notification: {
+          message: error.xhr.response.message,
+          barStyle: { color: '#e57373' },
+        },
+      }))
+  );
 
 export const showAddedNotification = (action) =>
   action.ofType(ADD_TO_SHOPPING_CART)

@@ -27,8 +27,6 @@ class MenuContainer extends Component {
           ingredients={this.props.ingredients}
           addToCart={(pizza) => this.props.shoppingCartActions.addToShoppingCart(pizza)}
           fetchCart={this.props.shoppingCartActions.fetchShoppingCart}
-          snackbar={this.props.snackbar}
-          handleSnackbar={this.props.shoppingCartActions.handleSnackbar}
         />
       </div>
     );
@@ -43,7 +41,6 @@ MenuContainer.propTypes = {
   ingredientsActions: PropTypes.object,
   categoryActions: PropTypes.object,
   shoppingCartActions: PropTypes.object,
-  snackbar: ImmutablePropTypes.record.isRequired,
 };
 
 // mapStateToProps :: {State} -> {Props}
@@ -51,7 +48,6 @@ const mapStateToProps = (state) => ({
   menu: state.menuContainer.menu,
   categories: state.categoryContainer.categories,
   ingredients: state.ingredientContainer.ingredients,
-  snackbar: state.shoppingCartContainer.snackbar,
 });
 
 // mapDispatchToProps :: Dispatch -> {Action}
