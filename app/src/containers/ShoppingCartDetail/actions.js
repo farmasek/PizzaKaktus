@@ -63,12 +63,17 @@ export const sendOrderEpic = (action$) =>
       JSON.stringify(mapOrderDTO(action.pizzasId, action.customer)),
       true,
     ))
-    .map(() => ({
-      type: `NOTIF_ADD`,
-      notification: {
-        message: 'Objednávka odeslána',
+    .switchMap(() => ([
+      {
+        type: EMPTY_SHOPPING_CART,
       },
-    }))
+      {
+        type: `NOTIF_ADD`,
+        notification: {
+          message: 'Objednávka odeslána',
+        },
+      },
+    ]))
     .catch(error =>
       Observable.of({
         type: `NOTIF_ADD`,
@@ -87,6 +92,7 @@ export const showAddedNotification = (action) =>
         message: 'Pizza přidána do košíku',
       },
     }));
+
 export const showRemovePizzaNotification = (action) =>
   action.ofType(REMOVE_FROM_SHOPPING_CART)
     .map(() => ({
