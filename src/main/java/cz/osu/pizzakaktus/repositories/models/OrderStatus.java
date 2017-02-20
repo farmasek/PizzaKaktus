@@ -23,5 +23,5 @@ public class OrderStatus
     private Integer id;
 
     @Column(unique = true)
-    private String Order;
+    private String status;
 }
