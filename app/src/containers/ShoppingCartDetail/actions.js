@@ -58,7 +58,7 @@ export const sendOrderEpic = (action$) =>
   .switchMap((action) =>
     Observable.ajax(doIt(
       hosts.pk,
-      'pizza/send-order',
+      'order/create-order',
       'POST',
       JSON.stringify(mapOrderDTO(action.pizzasId, action.customer)),
       true,
