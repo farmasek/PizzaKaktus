@@ -46,19 +46,7 @@ public class PizzaController {
         return new ResponseEntity<>(pizzaDTOs, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/send-order", method = RequestMethod.POST)
-    public HttpEntity<?> sendOrder(@RequestBody OrderDTO order)
-    {
-        try
-        {
-            pizzaService.createOrder(order);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        catch (DatabaseException e)
-        {
-            return new ResponseEntity<>(new Gson().toJson(e.getMessage()), HttpStatus.NOT_ACCEPTABLE);
-        }
-    }
+
 
     /**
      * Return all active pizzas

@@ -9,7 +9,6 @@ import java.util.Optional;
 /**
  * Created by baranvoj on 2/19/2017.
  */
-//TODO implement interface
 public interface CustomerService {
     /**
      * Saves customer to db, if user already exist it will update him by unique email
@@ -27,5 +26,11 @@ public interface CustomerService {
      */
     Optional<CustomerDb> findExistingCustomerByEmail(String email);
 
-
+    /**
+     * Update existing customer
+     *
+     * @param customer - customer to be updated
+     * @return - Optional of customerDB from database
+     */
+    Optional<CustomerDb> updateCustomer(CustomerDb customer);
 }
