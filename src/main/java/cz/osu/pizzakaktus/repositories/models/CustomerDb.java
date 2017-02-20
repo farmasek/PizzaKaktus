@@ -3,6 +3,7 @@ package cz.osu.pizzakaktus.repositories.models;
 import cz.osu.pizzakaktus.endpoints.models.CustomerDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,5 +44,10 @@ public class CustomerDb
         this.city = customerDTO.getCity();
         this.street = customerDTO.getStreet();
         this.psc = customerDTO.getPsc();
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
     }
 }
