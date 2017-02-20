@@ -7,12 +7,14 @@ import cz.osu.pizzakaktus.services.CustomerService;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import cz.osu.pizzakaktus.services.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 /**
  * Created by Vojta on 20.2.2017.
  */
+@Service
 public class CustomerServiceImpl implements CustomerService
 {
     @Autowired

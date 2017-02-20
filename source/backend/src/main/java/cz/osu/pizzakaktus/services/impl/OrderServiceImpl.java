@@ -9,6 +9,7 @@ import cz.osu.pizzakaktus.services.*;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
+import org.springframework.stereotype.Service;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -21,7 +22,7 @@ import java.util.Properties;
 /**
  * Created by Vojta on 20.2.2017.
  */
-
+@Service
 public class OrderServiceImpl implements OrderService
 {
     @Autowired
