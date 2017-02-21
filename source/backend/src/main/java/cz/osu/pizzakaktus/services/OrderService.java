@@ -56,5 +56,5 @@ public interface OrderService
      * @param OrderDb - order to be inserted
      * @return OrderDb - inserted order
      */
-    Optional<OrderDb> insert(OrderDb orderDb) throws DatabaseException;
+    Optional<OrderDb> insertOrderToDatabase(OrderDb orderDb) throws DatabaseException;
 }

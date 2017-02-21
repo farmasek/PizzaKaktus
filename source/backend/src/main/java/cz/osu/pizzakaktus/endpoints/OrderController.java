@@ -2,6 +2,7 @@ package cz.osu.pizzakaktus.endpoints;
 
 import com.google.gson.Gson;
 import cz.osu.pizzakaktus.endpoints.mappers.MapToDTO;
+import cz.osu.pizzakaktus.endpoints.models.ErrorDTO;
 import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
 import cz.osu.pizzakaktus.repositories.models.OrderDb;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
@@ -22,8 +23,7 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 @RequestMapping("/order")
-public class OrderController
-{
+public class OrderController {
     @Autowired
     OrderService orderService;
 
@@ -33,16 +33,13 @@ public class OrderController
      * @return Json of accepted order
      */
     @RequestMapping(value = "/create-order", method = RequestMethod.POST)
-    public HttpEntity<?> sendOrder(@RequestBody OrderDTO order)
-    {
-        try
-        {
+    public HttpEntity<?> sendOrder(@RequestBody OrderDTO order) {
+        try {
             OrderDb insertedOrder = orderService.createOrder(order);
             return new ResponseEntity<>(new OrderDTO(insertedOrder), HttpStatus.OK);
-        }
-        catch (DatabaseException e)
-        {
-            return new ResponseEntity<>(new Gson().toJson(e.getMessage()), HttpStatus.NOT_ACCEPTABLE);
+        } catch (DatabaseException e) {
+            //TODO Send ErrorDTO in every Response error
+            return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 }

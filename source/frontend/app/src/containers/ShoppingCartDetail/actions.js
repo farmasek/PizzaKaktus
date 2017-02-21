@@ -9,7 +9,10 @@ import {
   SEND_ORDER,
 } from './constants';
 import { mapOrderDTO } from '../../models/OrderDTO';
-import { doIt, hosts } from '../../network';
+import {
+  doIt,
+  hosts
+} from '../../network';
 import { Observable } from 'rxjs';
 
 export const editCustomerField = (field, value) => ({
@@ -55,34 +58,34 @@ export const sendOrder = (pizzasId, customer) => ({
 
 export const sendOrderEpic = (action$) =>
   action$.ofType(SEND_ORDER)
-  .switchMap((action) =>
-    Observable.ajax(doIt(
-      hosts.pk,
-      'order/create-order',
-      'POST',
-      JSON.stringify(mapOrderDTO(action.pizzasId, action.customer)),
-      true,
-    ))
-    .switchMap(() => ([
-      {
-        type: EMPTY_SHOPPING_CART,
-      },
-      {
-        type: `NOTIF_ADD`,
-        notification: {
-          message: 'Objednávka odeslána',
-        },
-      },
-    ]))
-    .catch(error =>
-      Observable.of({
-        type: `NOTIF_ADD`,
-        notification: {
-          message: error.xhr.response.message,
-          barStyle: { color: '#e57373' },
-        },
-      }))
-  );
+    .switchMap((action) =>
+      Observable.ajax(doIt(
+        hosts.pk,
+        'order/create-order',
+        'POST',
+        JSON.stringify(mapOrderDTO(action.pizzasId, action.customer)),
+        true,
+      ))
+        .switchMap(() => ([
+          {
+            type: EMPTY_SHOPPING_CART,
+          },
+          {
+            type: `NOTIF_ADD`,
+            notification: {
+              message: 'Objednávka odeslána',
+            },
+          },
+        ]))
+        .catch(error =>
+          Observable.of({
+            type: `NOTIF_ADD`,
+            notification: {
+              message: error.xhr.response ? error.xhr.response.message : 'Nečekaná chyba',
+              barStyle: { color: '#e57373' },
+            },
+          }))
+    );
 
 export const showAddedNotification = (action) =>
   action.ofType(ADD_TO_SHOPPING_CART)

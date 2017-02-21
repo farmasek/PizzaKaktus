@@ -20,7 +20,7 @@ public class CustomerDTO
     private String email;
     private String city;
     private String street;
-    private String psc;
+    private String zip;
 
     public CustomerDTO(CustomerDb customerDb)
     {
@@ -29,6 +29,6 @@ public class CustomerDTO
         this.email = customerDb.getEmail();
         this.city = customerDb.getCity();
         this.street = customerDb.getStreet();
-        this.psc = customerDb.getPsc();
+        this.zip = customerDb.getZip();
     }
 }

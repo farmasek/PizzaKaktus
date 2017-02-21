@@ -15,8 +15,7 @@ import java.util.Optional;
  * Created by Vojta on 20.2.2017.
  */
 @Service
-public class CustomerServiceImpl implements CustomerService
-{
+public class CustomerServiceImpl implements CustomerService {
     @Autowired
     OrderRepository orderRepository;
 
@@ -24,31 +23,26 @@ public class CustomerServiceImpl implements CustomerService
     CustomerRepository customerRepository;
 
     @Override
-    public CustomerDb saveCustomer(CustomerDb customerDb) throws DatabaseException
-    {
-        if(findExistingCustomerByEmail(customerDb.getEmail()).isPresent())
-        {
+    public CustomerDb saveCustomer(CustomerDb customerDb) throws DatabaseException {
+
+        if (findExistingCustomerByEmail(customerDb.getEmail()).isPresent()) {
             // Aktualizuje zakaznika
             Optional<CustomerDb> customer = findExistingCustomerByEmail(customerDb.getEmail());
             customerDb.setId(customer.get().getId());
             return customerRepository.save(customerDb);
-        }
-        else
-        {
+        } else {
             // Vytvori noveho zakaznika
             return customerRepository.save(customerDb);
         }
     }
 
     @Override
-    public Optional<CustomerDb> findExistingCustomerByEmail(String email)
-    {
-        return Optional.of(customerRepository.findByEmail(email));
+    public Optional<CustomerDb> findExistingCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
     }
 
     @Override
-    public Optional<CustomerDb> updateCustomer(CustomerDb customer)
-    {
-       return Optional.of(customerRepository.save(customer));
+    public Optional<CustomerDb> updateCustomer(CustomerDb customer) {
+        return Optional.of(customerRepository.save(customer));
     }
 }

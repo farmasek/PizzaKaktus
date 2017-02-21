@@ -28,7 +28,7 @@ public class OrderDb
     //private List<PizzaDb> pizzas;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CustomerDb customer;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, targetEntity = OrderStatus.class)
+//    @ManyToOne(optional = false, fetch = FetchType.LAZY, targetEntity = OrderStatus.class)
     private String orderStatus;
     private boolean isActive;
 

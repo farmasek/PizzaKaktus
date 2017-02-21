@@ -1,14 +1,11 @@
 package cz.osu.pizzakaktus.services.impl;
 
 import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
-import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import cz.osu.pizzakaktus.repositories.OrderRepository;
-import cz.osu.pizzakaktus.repositories.PizzaRepository;
 import cz.osu.pizzakaktus.repositories.models.*;
 import cz.osu.pizzakaktus.services.*;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.*;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
@@ -23,8 +20,7 @@ import java.util.Properties;
  * Created by Vojta on 20.2.2017.
  */
 @Service
-public class OrderServiceImpl implements OrderService
-{
+public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderRepository orderRepository;
 
@@ -61,12 +57,16 @@ public class OrderServiceImpl implements OrderService
         CustomerDb insertedCustomer = customerService.saveCustomer(customer);
 
         orderDb.setCustomer(insertedCustomer);
-        Optional<OrderDb> insertedOrder = insert(orderDb);
+        Optional<OrderDb> insertedOrder = insertOrderToDatabase(orderDb);
 
         // testovaci mail
         //orderAcceptedMail("justtestingpizza@gmail.com", makeOrderMailBody(customer, pizzas));
         // konkretni zakaznik
-        orderAcceptedMail(customer.getEmail(), makeOrderMailBody(customer, pizzas));
+        try {
+            orderAcceptedMail(customer.getEmail(), makeOrderMailBody(customer, pizzas));
+        } catch (Exception e) {
+            throw new DatabaseException("Nekorektní email adresa");
+        }
 
         return insertedOrder.get();
     }
@@ -121,11 +121,15 @@ public class OrderServiceImpl implements OrderService
         }
     }
 
+    //TODO throw exceptions with custom messages
     @Override
-    public Optional<OrderDb> insert(OrderDb orderDb) throws DatabaseException
-    {
-        OrderDb insertedOrder = orderRepository.save(orderDb);
+    public Optional<OrderDb> insertOrderToDatabase(OrderDb orderDb) throws DatabaseException {
+        try {
+            OrderDb insertedOrder = orderRepository.save(orderDb);
 
-        return Optional.of(insertedOrder);
+            return Optional.of(insertedOrder);
+        } catch (Exception e) {
+            throw new DatabaseException("Chyba vložení do databáze");
+        }
     }
 }
