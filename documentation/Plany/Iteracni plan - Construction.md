@@ -38,7 +38,7 @@
 - Implementace automatického doplňování údajů při objednávání
 - Oprava implementace mazání/deaktivace uživatele UC7 S2
 - Implementace změny hesla UC7 S3
-- Implementace přehledu objednávek UC4 S4
+- Implementace historie objednávek UC4 S1
 
 ####Úkoly
 
@@ -53,7 +53,7 @@
 | Implementace UC7 S3 | Náhlý | 20h |
 | Refactoring chybových hlášek na backendu | Jaroš | 5h |
 | Refactoring order statusu u objednávky | Jaroš | 1h |
-| Implementace UC4 S4 | Krížová | 20h |
+| Implementace historie objednávek UC4 S1 | Krížová | 20h |
 
 ####Kritéria hodnocení
 | Úkol | Stav |
@@ -70,7 +70,7 @@
 | Zákazník souhlasí s implementací UC7 S3 |  |
 | Chybové hlášky jsou refactorovány |  |
 | Order status je refactorován |  |
-| Přehled objednávek UC4 S4 je funkční |  |
-| Zákazník souhlasí s implementací UC4 S4 |  |
+| Historie objednávek UC4 S1 je funkční |  |
+| Zákazník souhlasí s implementací UC4 S1 |  |
 
 ####Lessons learned
