@@ -1,5 +1,7 @@
 package cz.osu.pizzakaktus.services.Exceptions;
 
+import lombok.*;
+
 /**
  * Created by e-myslivost on 29.11.2016.
  */

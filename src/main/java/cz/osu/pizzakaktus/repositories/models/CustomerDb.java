@@ -26,15 +26,15 @@ public class CustomerDb
     private String email;
     private String city;
     private String street;
-    private String psc;
+    private String zip;
 
-    public CustomerDb(String name ,String surname, String email, String city, String street, String psc) {
+    public CustomerDb(String name ,String surname, String email, String city, String street, String zip) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.city = city;
         this.street = street;
-        this.psc = psc;
+        this.zip = zip;
     }
 
     public CustomerDb(CustomerDTO customerDTO) {
@@ -43,7 +43,7 @@ public class CustomerDb
         this.email = customerDTO.getEmail();
         this.city = customerDTO.getCity();
         this.street = customerDTO.getStreet();
-        this.psc = customerDTO.getPsc();
+        this.zip = customerDTO.getZip();
     }
 
     public void setId(int id)

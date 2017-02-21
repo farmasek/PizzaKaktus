@@ -23,7 +23,7 @@ public class PizzaKaktusApplication {
 //    public CommandLineRunner demo(IngredientRepository repository) {
 //        return (args) -> {
 //            // save a couple of customers
-//            ingredientService.insert(new IngredientDb("Jacklul", 5, 6.5, 7.0));
+//            ingredientService.insertOrderToDatabase(new IngredientDb("Jacklul", 5, 6.5, 7.0));
 //            repository.save(new IngredientDb("Rektkek", 16, 15.0,12.9));
 //        };
 //    }

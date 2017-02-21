@@ -136,7 +136,7 @@ public class UserServiceImplTest {
 
         Optional<UserDb> insertedUser = userService.insert(userToInsert);
 
-        assertTrue("User insert phase", insertedUser.isPresent());
+        assertTrue("User insertOrderToDatabase phase", insertedUser.isPresent());
 
         List<UserDb> all = userService.findAll();
 

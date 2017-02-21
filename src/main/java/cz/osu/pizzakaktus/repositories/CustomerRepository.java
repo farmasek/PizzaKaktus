@@ -6,6 +6,8 @@ import cz.osu.pizzakaktus.repositories.models.IngredientDb;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * Created by Vojta on 20.2.2017.
  */
@@ -13,5 +15,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerRepository extends CrudRepository<CustomerDb, Integer>
 {
-    CustomerDb findByEmail(String email);
+    Optional<CustomerDb> findByEmail(String email);
 }
