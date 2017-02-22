@@ -17,26 +17,21 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class OrderDb
-{
+public class OrderDb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column
     @ElementCollection(targetClass=Integer.class)
-    private List<Integer> pizzasId;
-    //private List<PizzaDb> pizzas;
+    private List<Integer> pizzasIds;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CustomerDb customer;
 //    @ManyToOne(optional = false, fetch = FetchType.LAZY, targetEntity = OrderStatus.class)
     private String orderStatus;
-    private boolean isActive;
 
-    public OrderDb(List<Integer> pizzas, CustomerDb customerDb, String orderStatus)
-    {
-        this.pizzasId = pizzas;
+    public OrderDb(List<Integer> pizzasIds, CustomerDb customerDb, String orderStatus) {
+        this.pizzasIds = pizzasIds;
         this.customer = customerDb;
         this.orderStatus = orderStatus;
-        this.isActive = true;
     }
 }

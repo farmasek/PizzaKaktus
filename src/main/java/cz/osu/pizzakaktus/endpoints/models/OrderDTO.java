@@ -20,13 +20,12 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDTO
 {
-    private List<Integer> pizzasId;
+    private List<Integer> pizzasIds;
     private CustomerDTO customer;
     private String orderStatus;
 
-    public OrderDTO(OrderDb orderDb)
-    {
-        this.pizzasId = orderDb.getPizzasId();
+    public OrderDTO(OrderDb orderDb) {
+        this.pizzasIds = orderDb.getPizzasIds();
         this.customer = new CustomerDTO(orderDb.getCustomer());
         this.orderStatus = orderDb.getOrderStatus();
     }

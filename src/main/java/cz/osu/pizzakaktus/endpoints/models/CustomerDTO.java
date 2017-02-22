@@ -13,20 +13,20 @@ import lombok.Setter;
 @Setter
 @Builder
 @AllArgsConstructor
-public class CustomerDTO
-{
+public class CustomerDTO {
     private String name;
     private String surname;
     private String email;
+    private String phone;
     private String city;
     private String street;
     private String zip;
 
-    public CustomerDTO(CustomerDb customerDb)
-    {
+    public CustomerDTO(CustomerDb customerDb) {
         this.name = customerDb.getName();
         this.surname = customerDb.getSurname();
         this.email = customerDb.getEmail();
+        this.phone = customerDb.getPhone();
         this.city = customerDb.getCity();
         this.street = customerDb.getStreet();
         this.zip = customerDb.getZip();
