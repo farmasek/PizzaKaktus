@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import cz.osu.pizzakaktus.repositories.models.CustomerDb;
 import cz.osu.pizzakaktus.repositories.models.OrderDb;
+import cz.osu.pizzakaktus.repositories.models.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class OrderDTO
 {
     private List<Integer> pizzasIds;
     private CustomerDTO customer;
-    private String orderStatus;
+    private OrderStatus orderStatus;
 
     public OrderDTO(OrderDb orderDb) {
         this.pizzasIds = orderDb.getPizzasIds();

@@ -29,7 +29,7 @@ public class CustomerDb
     private String street;
     private String zip;
 
-    public CustomerDb(String name ,String surname, String email, String phone, String city, String street, String zip) {
+    public CustomerDb(String name, String surname, String email, String phone, String city, String street, String zip) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -49,8 +49,7 @@ public class CustomerDb
         this.zip = customerDTO.getZip();
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 }
