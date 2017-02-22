@@ -26,10 +26,10 @@ public class OrderDb {
     private List<Integer> pizzasIds;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CustomerDb customer;
-//    @ManyToOne(optional = false, fetch = FetchType.LAZY, targetEntity = OrderStatus.class)
-    private String orderStatus;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private OrderStatus orderStatus;
 
-    public OrderDb(List<Integer> pizzasIds, CustomerDb customerDb, String orderStatus) {
+    public OrderDb(List<Integer> pizzasIds, CustomerDb customerDb, OrderStatus orderStatus) {
         this.pizzasIds = pizzasIds;
         this.customer = customerDb;
         this.orderStatus = orderStatus;
