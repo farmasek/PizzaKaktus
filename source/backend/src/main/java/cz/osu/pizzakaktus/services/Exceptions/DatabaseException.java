@@ -11,7 +11,7 @@ public class DatabaseException extends Exception {
     public DatabaseException(String errMessage)
     {
         super(errMessage);
-        System.out.println("chyba dtb");
+        System.out.println("Chyba databáze.");
     }
 
 }

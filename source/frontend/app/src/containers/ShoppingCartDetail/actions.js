@@ -8,10 +8,10 @@ import {
   CART_CUSTOMER_ERROR_EDIT,
   SEND_ORDER,
 } from './constants';
-import { mapOrderDTO } from '../../models/OrderDTO';
+import { mapOrderData } from '../../models/Order';
 import {
   doIt,
-  hosts
+  hosts,
 } from '../../network';
 import { Observable } from 'rxjs';
 
@@ -20,11 +20,13 @@ export const editCustomerField = (field, value) => ({
   field,
   value,
 });
+
 export const editCustomerErrorField = (field, value) => ({
   type: CART_CUSTOMER_ERROR_EDIT,
   field,
   value,
 });
+
 export const fetchShoppingCart = () => ({
   type: FETCH_SHOPPING_CART,
 });
@@ -52,7 +54,7 @@ export const handleDialog = (showDialog) => ({
 
 export const sendOrder = (pizzasId, customer) => ({
   type: SEND_ORDER,
-  pizzasId,
+  pizzasIds,
   customer,
 });
 
@@ -63,7 +65,7 @@ export const sendOrderEpic = (action$) =>
         hosts.pk,
         'order/create-order',
         'POST',
-        JSON.stringify(mapOrderDTO(action.pizzasId, action.customer)),
+        JSON.stringify(mapOrderData(action.pizzasIds, action.customer)),
         true,
       ))
         .switchMap(() => ([
@@ -73,7 +75,7 @@ export const sendOrderEpic = (action$) =>
           {
             type: `NOTIF_ADD`,
             notification: {
-              message: 'Objednávka odeslána',
+              message: 'Objednávka odeslána.',
             },
           },
         ]))
@@ -81,7 +83,7 @@ export const sendOrderEpic = (action$) =>
           Observable.of({
             type: `NOTIF_ADD`,
             notification: {
-              message: error.xhr.response ? error.xhr.response.message : 'Nečekaná chyba',
+              message: error.xhr.response ? error.xhr.response.message : 'Nečekaná chyba.',
               barStyle: { color: '#e57373' },
             },
           }))
@@ -92,7 +94,7 @@ export const showAddedNotification = (action) =>
     .map(() => ({
       type: `NOTIF_ADD`,
       notification: {
-        message: 'Pizza přidána do košíku',
+        message: 'Pizza přidána do košíku.',
       },
     }));
 
@@ -101,6 +103,6 @@ export const showRemovePizzaNotification = (action) =>
     .map(() => ({
       type: `NOTIF_ADD`,
       notification: {
-        message: 'Pizza byla odebrána z košíku',
+        message: 'Pizza byla odebrána z košíku.',
       },
     }));

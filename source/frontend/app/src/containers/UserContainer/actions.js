@@ -79,7 +79,7 @@ export const saveUserListEpic = (action$, store$) =>
           {
             type: `NOTIF_ADD`,
             notification: {
-              message: 'Uživatel vytvořen',
+              message: 'Uživatel vytvořen.',
             },
           }])
         .catch(error =>
@@ -144,7 +144,7 @@ export const deleteUserEpic = action$ =>
           {
             type: `NOTIF_ADD`,
             notification: {
-              message: 'Uživatel odstraněn',
+              message: 'Uživatel odstraněn.',
             },
           }])
         .catch(error =>

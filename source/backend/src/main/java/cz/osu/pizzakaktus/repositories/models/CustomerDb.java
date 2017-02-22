@@ -24,14 +24,16 @@ public class CustomerDb
     private String name;
     private String surname;
     private String email;
+    private String phone;
     private String city;
     private String street;
     private String zip;
 
-    public CustomerDb(String name ,String surname, String email, String city, String street, String zip) {
+    public CustomerDb(String name ,String surname, String email, String phone, String city, String street, String zip) {
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.phone = phone;
         this.city = city;
         this.street = street;
         this.zip = zip;
@@ -41,6 +43,7 @@ public class CustomerDb
         this.surname = customerDTO.getSurname();
         this.name = customerDTO.getName();
         this.email = customerDTO.getEmail();
+        this.phone = customerDTO.getPhone();
         this.city = customerDTO.getCity();
         this.street = customerDTO.getStreet();
         this.zip = customerDTO.getZip();

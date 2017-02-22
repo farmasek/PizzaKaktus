@@ -33,6 +33,10 @@ class ShoppingCartDetail extends Component {
       this.props.actions.editCustomerErrorField('email', 'Je nutné vyplnit');
       valid = false;
     }
+    if (this.props.customer.get('phone') === '') {
+      this.props.actions.editCustomerErrorField('phone', 'Je nutné vyplnit');
+      valid = false;
+    }
     if (this.props.customer.get('city') === '') {
       this.props.actions.editCustomerErrorField('city', 'Je nutné vyplnit');
       valid = false;
