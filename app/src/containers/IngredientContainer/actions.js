@@ -48,7 +48,7 @@ export const saveIngredientListEpic = (action$, store$) =>
           {
             type: `NOTIF_ADD`,
             notification: {
-              message: 'Ingredience vytvořena',
+              message: 'Ingredience vytvořena.',
             },
           }])
         .catch(error =>

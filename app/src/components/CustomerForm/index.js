@@ -41,6 +41,14 @@ class CustomerForm extends Component { // eslint-disable-line react/prefer-state
           />
           <Input
             type="text"
+            label="Telefon"
+            value={this.props.customer.get('phone')}
+            onChange={(value) => this.handleChange('phone', value)}
+            onKeyPress={(event) => this.props.handleConfirm(event)}
+            error={this.props.customerError.get('phone')}
+          />
+          <Input
+            type="text"
             label="Ulice"
             value={this.props.customer.get('street')}
             onChange={(value) => this.handleChange('street', value)}

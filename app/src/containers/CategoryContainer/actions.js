@@ -57,7 +57,7 @@ export const saveCategoryListEpic = (action$, store$) =>
           }, {
             type: `NOTIF_ADD`,
             notification: {
-              message: 'Přidána kategorie',
+              message: 'Přidána kategorie.',
             },
           },
         ]))

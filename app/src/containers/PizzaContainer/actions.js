@@ -50,7 +50,7 @@ export const savePizzaListEpic = (action$, store$) =>
           {
             type: `NOTIF_ADD`,
             notification: {
-              message: 'Pizza vytvořena',
+              message: 'Pizza vytvořena.',
             },
           },
         ])
@@ -133,7 +133,7 @@ export const updatePizzaEpic = (action$) =>
           {
             type: `NOTIF_ADD`,
             notification: {
-              message: 'Pizza byla upravena',
+              message: 'Pizza byla upravena.',
             },
           },
         ]))
