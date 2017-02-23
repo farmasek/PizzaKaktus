@@ -48,7 +48,7 @@ public interface PizzaService {
      *
      * @return List of pizzas
      */
-    Page<PizzaDb> findAll(Pageable pageable, String filterBy);
+    Page<PizzaDb> findAll(Pageable pageable, String filterBy) throws DatabaseException;
 
     /**
      * Returns list of all active pizzas

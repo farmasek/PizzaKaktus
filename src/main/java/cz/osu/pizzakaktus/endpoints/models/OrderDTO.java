@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -19,10 +20,14 @@ public class OrderDTO  {
     private List<Integer> pizzasIds;
     private CustomerDTO customer;
     private String orderStatus;
+    private Timestamp creationDate;
+    private Timestamp updateDate;
 
     public OrderDTO(OrderDb orderDb) {
         this.pizzasIds = orderDb.getPizzasIds();
         this.customer = new CustomerDTO(orderDb.getCustomer());
         this.orderStatus = orderDb.getOrderStatus().getStatus();
+        this.creationDate = orderDb.getCreationDate();
+        this.updateDate = orderDb.getUpdateDate();
     }
 }

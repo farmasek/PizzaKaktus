@@ -46,9 +46,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDb createOrder(OrderDTO order) throws DatabaseException {
         CustomerDb customer = new CustomerDb(order.getCustomer());
-        OrderDb orderDb = new OrderDb(order.getPizzasId(), customer, OrderStatus.CREATED);
+        OrderDb orderDb = new OrderDb(order.getPizzasIds(), customer, new OrderStatus(),
+                                      order.getCreationDate(), order.getUpdateDate());
         List<PizzaDb> pizzas = new ArrayList<>();
-        List<Integer> pizzasIDs = orderDb.getPizzasId();
+        List<Integer> pizzasIDs = orderDb.getPizzasIds();
 
         for (Integer id : pizzasIDs) {
             pizzas.addAll(pizzaService.findById(id));
@@ -65,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             orderAcceptedMail(customer.getEmail(), makeOrderMailBody(customer, pizzas));
         } catch (Exception e) {
-            throw new DatabaseException("Nekorektní email adresa");
+            throw new DatabaseException("Nekorektní emailová adresa.");
         }
 
         return insertedOrder.get();
@@ -129,7 +130,7 @@ public class OrderServiceImpl implements OrderService {
 
             return Optional.of(insertedOrder);
         } catch (Exception e) {
-            throw new DatabaseException("Chyba vložení do databáze");
+            throw new DatabaseException("Objednávku nebylo možno uložit.");
         }
     }
 }

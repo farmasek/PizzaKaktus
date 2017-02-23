@@ -53,7 +53,7 @@ public class PizzaServiceImpl implements PizzaService {
                     new PizzaDb(null, pizzaDTO.getTitle(), categoryDb, ingredientsById, pizzaDTO.getPrice(), pizzaDTO.isActive()));
             return Optional.of(insertedPizza);
         } else {
-            throw new DatabaseException("Pizza s nazvem " + pizzaDTO.getTitle() + " již existuje.");
+            throw new DatabaseException("Pizza s názvem " + pizzaDTO.getTitle() + " již existuje.");
         }
     }
 
@@ -65,26 +65,50 @@ public class PizzaServiceImpl implements PizzaService {
             PizzaDb updatedPizza = pizzaRepository.save(
                     new PizzaDb(pizzaDTO.getId(), pizzaDTO.getTitle(), categoryDb, ingredientsById, pizzaDTO.getPrice(), pizzaDTO.isActive()));
             return Optional.of(updatedPizza);
-        } catch (Exception e) {
-            return Optional.empty();
+        } catch (DatabaseException e) {
+            throw new DatabaseException("Nebylo možné aktualizovat pizzu s názvem " + pizzaDTO.getTitle() + ".");
         }
     }
 
     @Override
     public List<PizzaDb> findAll() throws DatabaseException {
-        Iterable<PizzaDb> pizzasList = pizzaRepository.findAll();
-        return Lists.newArrayList(pizzasList);
+        Iterable<PizzaDb> pizzas = pizzaRepository.findAll();
+        ArrayList<PizzaDb> listPizzas = Lists.newArrayList(pizzas);
+        if(listPizzas.isEmpty())
+        {
+            throw new DatabaseException("Nebylo možné najít všechny pizzy.");
+        }
+        else
+        {
+            return listPizzas;
+        }
     }
 
     @Override
-    public Page<PizzaDb> findAll(Pageable pageable, String filterBy) {
-        return pizzaRepository.findAll(QPizzaDb.pizzaDb.title.containsIgnoreCase(filterBy), pageable);
+    public Page<PizzaDb> findAll(Pageable pageable, String filterBy) throws DatabaseException{
+        Page<PizzaDb> pizzasPage = pizzaRepository.findAll(QPizzaDb.pizzaDb.title.containsIgnoreCase(filterBy), pageable);
+        if(pizzasPage.getSize() == 0)
+        {
+            throw new DatabaseException("Nebylo možné najít pizzy podle filtru " + filterBy + ".");
+        }
+        else
+        {
+            return pizzasPage;
+        }
     }
 
     @Override
     public List<PizzaDb> findActive() throws DatabaseException {
-        Iterable<PizzaDb> pizzasList = pizzaRepository.findByActive(true);
-        return Lists.newArrayList(pizzasList);
+        Iterable<PizzaDb> pizzas = pizzaRepository.findByActive(true);
+        ArrayList<PizzaDb> listPizzas =  Lists.newArrayList(pizzas);
+        if(listPizzas.isEmpty())
+        {
+            throw new DatabaseException("Nebylo možné najít aktivní pizzy.");
+        }
+        else
+        {
+            return listPizzas;
+        }
     }
 
     @Override
@@ -110,7 +134,13 @@ public class PizzaServiceImpl implements PizzaService {
     @Override
     public List<PizzaDb> findById(Integer id) throws DatabaseException {
         List<PizzaDb> pizza = pizzaRepository.findById(id);
-        return pizza;
+        if(pizza.isEmpty())
+        {
+            throw new DatabaseException("Nebylo možné najít pizzu podle id " + id + ".");
+        }
+        else
+        {
+            return pizza;
+        }
     }
-
 }

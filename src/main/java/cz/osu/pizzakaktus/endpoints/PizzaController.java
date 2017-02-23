@@ -2,6 +2,7 @@ package cz.osu.pizzakaktus.endpoints;
 
 import com.google.gson.Gson;
 import cz.osu.pizzakaktus.endpoints.mappers.MapToDTO;
+import cz.osu.pizzakaktus.endpoints.models.ErrorDTO;
 import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
 import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import cz.osu.pizzakaktus.repositories.models.IngredientDb;
@@ -41,12 +42,15 @@ public class PizzaController {
     @RequestMapping(value = "/all-pizzas", method = RequestMethod.GET)
     public HttpEntity<?> findAllPizzas(@RequestParam(value = "filterBy", required = false)
                                                String filterBy, Pageable pageable) {
-        Page<PizzaDb> allPizzas = pizzaService.findAll(pageable, filterBy);
-        Page<PizzaDTO> pizzaDTOs = allPizzas.map(pizzaDb -> mapToDTO.mapPizza(pizzaDb));
-        return new ResponseEntity<>(pizzaDTOs, HttpStatus.OK);
+        Page<PizzaDb> allPizzas = null;
+        try {
+            allPizzas = pizzaService.findAll(pageable, filterBy);
+            Page<PizzaDTO> pizzaDTOs = allPizzas.map(pizzaDb -> mapToDTO.mapPizza(pizzaDb));
+            return new ResponseEntity<>(pizzaDTOs, HttpStatus.OK);
+        } catch (DatabaseException e) {
+            return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
     }
-
-
 
     /**
      * Return all active pizzas
@@ -61,7 +65,7 @@ public class PizzaController {
             activePizzasDb.forEach(pizzaDb -> activePizzasDTO.add(mapToDTO.mapPizza(pizzaDb)));
             return new ResponseEntity<>(activePizzasDTO, HttpStatus.OK);
         } catch (DatabaseException e) {
-            return new ResponseEntity<>(new Gson().toJson(e.getMessage()), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -83,7 +87,7 @@ public class PizzaController {
         return insertedPizza.isPresent() ?
                 new ResponseEntity<>(insertedPizza.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
     }
 
     /**
@@ -105,7 +109,7 @@ public class PizzaController {
         return updatedPizza.isPresent() ?
                 new ResponseEntity<>(updatedPizza.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
     }
 
 }

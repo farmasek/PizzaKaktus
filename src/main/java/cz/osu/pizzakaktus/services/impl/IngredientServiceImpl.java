@@ -8,6 +8,7 @@ import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,12 +39,28 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public List<IngredientDb> findAll() throws DatabaseException{
         Iterable<IngredientDb> all = ingredientRepository.findAll();
-        return Lists.newArrayList(all);
+        ArrayList<IngredientDb> listAll = Lists.newArrayList(all);
+        if(listAll.isEmpty())
+        {
+            throw new DatabaseException("Nebylo možné najít všechny ingredience.");
+        }
+        else
+        {
+            return listAll;
+        }
     }
 
     @Override
     public List<IngredientDb> findAllById(List<Integer> ids)throws DatabaseException {
         Iterable<IngredientDb> all = ingredientRepository.findAll(ids);
-        return Lists.newArrayList(all);
+        ArrayList<IngredientDb> listAll = Lists.newArrayList(all);
+        if(listAll.isEmpty())
+        {
+            throw new DatabaseException("Nebylo možné najít všechny ingredience dle zadaných ID.");
+        }
+        else
+        {
+            return listAll;
+        }
     }
 }

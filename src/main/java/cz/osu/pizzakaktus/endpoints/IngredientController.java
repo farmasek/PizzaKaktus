@@ -1,6 +1,7 @@
 package cz.osu.pizzakaktus.endpoints;
 
 import com.google.gson.Gson;
+import cz.osu.pizzakaktus.endpoints.models.ErrorDTO;
 import cz.osu.pizzakaktus.endpoints.models.IngredientDTO;
 import cz.osu.pizzakaktus.repositories.models.IngredientDb;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
@@ -43,11 +44,11 @@ public class IngredientController {
 
         if(allIngredients.isEmpty())
         {
-            return new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
         }
         else
         {
-            return new ResponseEntity<>(new Gson().toJson(allIngredients), HttpStatus.OK);
+            return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.OK);
         }
     }
 
@@ -71,7 +72,7 @@ public class IngredientController {
         return insert.isPresent() ?
                 new ResponseEntity<>(insert.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
     }
 
 }

@@ -2,6 +2,7 @@ package cz.osu.pizzakaktus.endpoints;
 
 import com.google.gson.Gson;
 import cz.osu.pizzakaktus.endpoints.models.CategoryDTO;
+import cz.osu.pizzakaktus.endpoints.models.ErrorDTO;
 import cz.osu.pizzakaktus.repositories.models.CategoryDb;
 import cz.osu.pizzakaktus.services.CategoryService;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
@@ -45,7 +46,7 @@ public class CategoryController {
 
         if(allCategories.isEmpty())
         {
-            return new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
         }
         else
         {
@@ -72,6 +73,6 @@ public class CategoryController {
         return insertedCategory.isPresent() ?
                 new ResponseEntity<>(insertedCategory.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
     }
 }

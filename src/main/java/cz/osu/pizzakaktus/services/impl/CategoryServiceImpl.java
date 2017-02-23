@@ -9,6 +9,8 @@ import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -41,17 +43,41 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryDb> findAll()throws DatabaseException {
         Iterable<CategoryDb> all = categoryRepository.findAll();
-        return Lists.newArrayList(all);
+        ArrayList<CategoryDb> listAll = Lists.newArrayList(all);
+        if(listAll.isEmpty())
+        {
+            throw new DatabaseException("Nebylo možné najít všechny kategorie.");
+        }
+        else
+        {
+            return listAll;
+        }
     }
 
     @Override
     public CategoryDb findById(Integer id)throws DatabaseException {
-        return categoryRepository.findById(id);
+        CategoryDb category = categoryRepository.findById(id);
+        if(category != null)
+        {
+            return category;
+        }
+        else
+        {
+            throw new DatabaseException("Nebylo možné nalézt kategorii s id " + id + ".");
+        }
     }
 
     @Override
     public List<CategoryDb> findAllById(List<Integer> ids)throws DatabaseException {
         Iterable<CategoryDb> all = categoryRepository.findAll(ids);
-        return Lists.newArrayList(all);
+        ArrayList<CategoryDb> listAll = Lists.newArrayList(all);
+        if(listAll.isEmpty())
+        {
+            throw new DatabaseException("Nebylo možné nalézt kategorie podle zadaných id.");
+        }
+        else
+        {
+            return listAll;
+        }
     }
 }
