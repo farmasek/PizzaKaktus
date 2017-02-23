@@ -13,10 +13,10 @@ export const mapOrder = src => new Order({
   customer: src.customer,
 });
 
-export const mapOrderData = (pizzasId, customer) => {
+export const mapOrderData = (pizzasIds, customer) => {
   let ids = new List();
-  for (let i = 0; i < pizzasId.length; i++) {
-    ids = ids.push(pizzasId[i].id);
+  for (let i = 0; i < pizzasIds.length; i++) {
+    ids = ids.push(pizzasIds[i].id);
   }
   return new Order({
     id: '',
