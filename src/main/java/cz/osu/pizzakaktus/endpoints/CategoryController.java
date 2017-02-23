@@ -44,12 +44,9 @@ public class CategoryController {
             error = e.getMessage();
         }
 
-        if(allCategories.isEmpty())
-        {
+        if(allCategories.isEmpty()) {
             return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
-        }
-        else
-        {
+        } else {
             return new ResponseEntity<>(new Gson().toJson(allCategories), HttpStatus.OK);
         }
     }
@@ -70,9 +67,8 @@ public class CategoryController {
         } catch (DatabaseException e) {
             error = e.getMessage();
         }
-        return insertedCategory.isPresent() ?
-                new ResponseEntity<>(insertedCategory.get(), HttpStatus.OK)
-                :
-                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
+        return insertedCategory.isPresent()
+                ? new ResponseEntity<>(insertedCategory.get(), HttpStatus.OK)
+                : new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
 }

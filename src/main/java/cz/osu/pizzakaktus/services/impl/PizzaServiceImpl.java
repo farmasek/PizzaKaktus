@@ -1,10 +1,6 @@
 package cz.osu.pizzakaktus.services.impl;
 
-import cz.osu.pizzakaktus.endpoints.models.CategoryDTO;
-import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
 import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
-import cz.osu.pizzakaktus.repositories.IngredientRepository;
-import cz.osu.pizzakaktus.repositories.OrderRepository;
 import cz.osu.pizzakaktus.repositories.PizzaRepository;
 import cz.osu.pizzakaktus.repositories.models.*;
 import cz.osu.pizzakaktus.services.CategoryService;
@@ -17,16 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
-import static java.lang.Math.toIntExact;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Properties;
 
 /**
  * Created by Mish.k.a on 3. 11. 2016.
@@ -41,8 +30,6 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Autowired
     CategoryService categoryService;
-    @Autowired
-    OrderRepository orderRepository;
 
     @Override
     public Optional<PizzaDb> insert(PizzaDTO pizzaDTO) throws DatabaseException {
@@ -74,12 +61,9 @@ public class PizzaServiceImpl implements PizzaService {
     public List<PizzaDb> findAll() throws DatabaseException {
         Iterable<PizzaDb> pizzas = pizzaRepository.findAll();
         ArrayList<PizzaDb> listPizzas = Lists.newArrayList(pizzas);
-        if(listPizzas.isEmpty())
-        {
+        if(listPizzas.isEmpty()) {
             throw new DatabaseException("Nebylo možné najít všechny pizzy.");
-        }
-        else
-        {
+        } else {
             return listPizzas;
         }
     }
@@ -87,12 +71,9 @@ public class PizzaServiceImpl implements PizzaService {
     @Override
     public Page<PizzaDb> findAll(Pageable pageable, String filterBy) throws DatabaseException{
         Page<PizzaDb> pizzasPage = pizzaRepository.findAll(QPizzaDb.pizzaDb.title.containsIgnoreCase(filterBy), pageable);
-        if(pizzasPage.getSize() == 0)
-        {
+        if(pizzasPage.getSize() == 0) {
             throw new DatabaseException("Nebylo možné najít pizzy podle filtru " + filterBy + ".");
-        }
-        else
-        {
+        } else {
             return pizzasPage;
         }
     }
@@ -101,12 +82,9 @@ public class PizzaServiceImpl implements PizzaService {
     public List<PizzaDb> findActive() throws DatabaseException {
         Iterable<PizzaDb> pizzas = pizzaRepository.findByActive(true);
         ArrayList<PizzaDb> listPizzas =  Lists.newArrayList(pizzas);
-        if(listPizzas.isEmpty())
-        {
+        if(listPizzas.isEmpty()) {
             throw new DatabaseException("Nebylo možné najít aktivní pizzy.");
-        }
-        else
-        {
+        } else {
             return listPizzas;
         }
     }
@@ -134,12 +112,9 @@ public class PizzaServiceImpl implements PizzaService {
     @Override
     public List<PizzaDb> findById(Integer id) throws DatabaseException {
         List<PizzaDb> pizza = pizzaRepository.findById(id);
-        if(pizza.isEmpty())
-        {
+        if(pizza.isEmpty()) {
             throw new DatabaseException("Nebylo možné najít pizzu podle id " + id + ".");
-        }
-        else
-        {
+        } else {
             return pizza;
         }
     }
