@@ -29,13 +29,10 @@ public class CategoryServiceImpl implements CategoryService {
 
         CategoryDb found = categoryRepository.findByName(new CategoryDb(categoryDTO).getName());
 
-        if(found == null)
-        {
+        if(found == null) {
             CategoryDb savedObject = categoryRepository.save(new CategoryDb(categoryDTO));
             return Optional.of(savedObject);
-        }
-        else
-        {
+        } else {
             throw new DatabaseException("Kategorie " + found.getName() + " již existuje.");
         }
     }
@@ -44,12 +41,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryDb> findAll()throws DatabaseException {
         Iterable<CategoryDb> all = categoryRepository.findAll();
         ArrayList<CategoryDb> listAll = Lists.newArrayList(all);
-        if(listAll.isEmpty())
-        {
+        if(listAll.isEmpty()) {
             throw new DatabaseException("Nebylo možné najít všechny kategorie.");
-        }
-        else
-        {
+        } else {
             return listAll;
         }
     }
@@ -57,12 +51,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDb findById(Integer id)throws DatabaseException {
         CategoryDb category = categoryRepository.findById(id);
-        if(category != null)
-        {
+        if(category != null) {
             return category;
-        }
-        else
-        {
+        } else {
             throw new DatabaseException("Nebylo možné nalézt kategorii s id " + id + ".");
         }
     }
@@ -71,12 +62,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryDb> findAllById(List<Integer> ids)throws DatabaseException {
         Iterable<CategoryDb> all = categoryRepository.findAll(ids);
         ArrayList<CategoryDb> listAll = Lists.newArrayList(all);
-        if(listAll.isEmpty())
-        {
+        if(listAll.isEmpty()) {
             throw new DatabaseException("Nebylo možné nalézt kategorie podle zadaných id.");
-        }
-        else
-        {
+        } else {
             return listAll;
         }
     }

@@ -1,6 +1,11 @@
 insert into role (id, role) VALUES (0,'ADMIN') on conflict (id) do nothing;
 insert into role (id, role) VALUES (1,'EMPLOYEE') on conflict (id) do nothing;
 
+insert into order_status (id, status) VALUES (1,'CREATED') on conflict (id) do nothing;
+insert into order_status (id, status) VALUES (2,'OPENED') on conflict (id) do nothing;
+insert into order_status (id, status) VALUES (3,'CLOSED') on conflict (id) do nothing;
+insert into order_status (id, status) VALUES (4,'CANCELLED') on conflict (id) do nothing;
+
 INSERT INTO ingredient_db (id, amount, cost, cost_custom, name) VALUES (1, '10 g', 5.00, 10.00, 'tomatový základ') on conflict (id) do nothing;
 INSERT INTO ingredient_db (id, amount, cost, cost_custom, name) VALUES (2, '10 g', 8.00, 15.00, 'smetanový základ') on conflict (id) do nothing;
 INSERT INTO ingredient_db (id, amount, cost, cost_custom, name) VALUES (3, '25 g', 15.00, 20.00, 'šunka') on conflict (id) do nothing;

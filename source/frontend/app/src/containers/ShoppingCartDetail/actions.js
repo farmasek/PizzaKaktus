@@ -52,7 +52,7 @@ export const handleDialog = (showDialog) => ({
   },
 });
 
-export const sendOrder = (pizzasId, customer) => ({
+export const sendOrder = (pizzasIds, customer) => ({
   type: SEND_ORDER,
   pizzasIds,
   customer,
