@@ -1,6 +1,7 @@
 package cz.osu.pizzakaktus.endpoints;
 
 import com.google.gson.Gson;
+import cz.osu.pizzakaktus.endpoints.models.ErrorDTO;
 import cz.osu.pizzakaktus.endpoints.models.UserDTO;
 import cz.osu.pizzakaktus.repositories.models.Role;
 import cz.osu.pizzakaktus.repositories.models.UserDb;
@@ -43,7 +44,7 @@ public class UserController {
         try {
             allUsers = userService.findAll();
         } catch (DatabaseException e) {
-            error = e.getMessage();
+            error = "Nebylo možné najít všechny uživatele.";
         }
 
         List<UserDTO> collect = allUsers.stream()
@@ -59,7 +60,7 @@ public class UserController {
 
         if(collect.isEmpty())
         {
-            return new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
         }
         else
         {
@@ -81,12 +82,12 @@ public class UserController {
         try {
             insertedUser = userService.insert(user);
         } catch (Exception e) {
-            error = e.getMessage();
+            error = "Nebylo možné přidat uživatele.";
         }
         return insertedUser.isPresent() ?
                 new ResponseEntity<>(insertedUser.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new Gson().toJson(error) , HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error) , HttpStatus.NOT_ACCEPTABLE);
     }
 
     /**
@@ -103,12 +104,12 @@ public class UserController {
         try {
             insertedUser = userService.update(user);
         } catch (DatabaseException e) {
-            error = e.getMessage();
+            error = "Nebylo možné aktualizovat uživatele.";
         }
         return insertedUser.isPresent() ?
                 new ResponseEntity<>(insertedUser.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
     }
     /**
      * Delete user in database
@@ -124,12 +125,12 @@ public class UserController {
         try {
             successfullyDeleted = userService.deleteById(userId);
         } catch (DatabaseException e) {
-            error = e.getMessage();
+            error = "Nebylo možné odstranit uživatele.";
         }
         return successfullyDeleted ?
                 new ResponseEntity<>("Successfully deleted user", HttpStatus.OK)
                 :
-                new ResponseEntity<>(new Gson().toJson(error), HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
     }
 
     //TODO use validator

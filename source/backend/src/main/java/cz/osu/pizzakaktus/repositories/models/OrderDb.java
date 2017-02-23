@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -22,16 +23,21 @@ public class OrderDb {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column
-    @ElementCollection(targetClass=Integer.class)
+    @ElementCollection(targetClass = Integer.class)
     private List<Integer> pizzasIds;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CustomerDb customer;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private OrderStatus orderStatus;
+    private Timestamp creationDate;
+    private Timestamp updateDate;
 
-    public OrderDb(List<Integer> pizzasIds, CustomerDb customerDb, OrderStatus orderStatus) {
+    public OrderDb(List<Integer> pizzasIds, CustomerDb customerDb, OrderStatus orderStatus,
+                   Timestamp creationDate, Timestamp updateDate) {
         this.pizzasIds = pizzasIds;
         this.customer = customerDb;
         this.orderStatus = orderStatus;
+        this.creationDate = creationDate;
+        this.updateDate = updateDate;
     }
 }

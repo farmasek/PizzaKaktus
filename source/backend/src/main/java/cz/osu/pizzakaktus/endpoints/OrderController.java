@@ -38,7 +38,6 @@ public class OrderController {
             OrderDb insertedOrder = orderService.createOrder(order);
             return new ResponseEntity<>(new OrderDTO(insertedOrder), HttpStatus.OK);
         } catch (DatabaseException e) {
-            //TODO Send ErrorDTO in every Response error
             return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
