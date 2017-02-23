@@ -20,14 +20,14 @@ public class OrderDTO  {
     private List<Integer> pizzasIds;
     private CustomerDTO customer;
     private String orderStatus;
-    private Timestamp creationDate;
-    private Timestamp updateDate;
+    private Timestamp dateCreated;
+    private Timestamp dateModified;
 
     public OrderDTO(OrderDb orderDb) {
         this.pizzasIds = orderDb.getPizzasIds();
         this.customer = new CustomerDTO(orderDb.getCustomer());
         this.orderStatus = orderDb.getOrderStatus().getStatus();
-        this.creationDate = orderDb.getCreationDate();
-        this.updateDate = orderDb.getUpdateDate();
+        this.dateCreated = orderDb.getDateCreated();
+        this.dateModified = orderDb.getDateModified();
     }
 }

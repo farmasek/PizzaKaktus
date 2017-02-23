@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDb createOrder(OrderDTO order) throws DatabaseException {
         CustomerDb customer = new CustomerDb(order.getCustomer());
         OrderDb orderDb = new OrderDb(order.getPizzasIds(), customer, new OrderStatus(),
-                                      order.getCreationDate(), order.getUpdateDate());
+                                      order.getDateCreated(), order.getDateModified());
         List<PizzaDb> pizzas = new ArrayList<>();
         List<Integer> pizzasIDs = orderDb.getPizzasIds();
 

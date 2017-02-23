@@ -1,8 +1,5 @@
 package cz.osu.pizzakaktus.repositories.models;
 
-import cz.osu.pizzakaktus.endpoints.models.CustomerDTO;
-import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
-import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,15 +26,15 @@ public class OrderDb {
     private CustomerDb customer;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private OrderStatus orderStatus;
-    private Timestamp creationDate;
-    private Timestamp updateDate;
+    private Timestamp dateCreated;
+    private Timestamp dateModified;
 
     public OrderDb(List<Integer> pizzasIds, CustomerDb customerDb, OrderStatus orderStatus,
-                   Timestamp creationDate, Timestamp updateDate) {
+                   Timestamp dateCreated, Timestamp dateModified) {
         this.pizzasIds = pizzasIds;
         this.customer = customerDb;
         this.orderStatus = orderStatus;
-        this.creationDate = creationDate;
-        this.updateDate = updateDate;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
     }
 }
