@@ -22,17 +22,24 @@ public class IngredientServiceImpl implements IngredientService {
     IngredientRepository ingredientRepository;
 
     @Override
+    // Hokus pokus triple exception
     public Optional<IngredientDb> insert(IngredientDb ingredientDb) throws DatabaseException {
-        IngredientDb found = ingredientRepository.findByName(ingredientDb.getName());
 
-        if(found == null)
-        {
-            IngredientDb savedObject = ingredientRepository.save(ingredientDb);
-            return Optional.of(savedObject);
+        try{
+            IngredientDb found = ingredientRepository.findByName(ingredientDb.getName());
+            if(found == null)
+            {
+                IngredientDb savedObject = ingredientRepository.save(ingredientDb);
+                return Optional.of(savedObject);
+            }
+            else
+            {
+                throw new DatabaseException("Ingredience s názvem " + ingredientDb.getName() + " již existuje.");
+            }
         }
-        else
+        catch(DatabaseException ex)
         {
-            throw new DatabaseException("Ingredience s názvem " + ingredientDb.getName() + " již existuje.");
+            throw ex;
         }
     }
 

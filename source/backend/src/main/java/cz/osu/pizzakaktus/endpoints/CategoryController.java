@@ -46,7 +46,7 @@ public class CategoryController {
 
         if(allCategories.isEmpty())
         {
-            return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
         }
         else
         {
@@ -73,6 +73,6 @@ public class CategoryController {
         return insertedCategory.isPresent() ?
                 new ResponseEntity<>(insertedCategory.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
 }
