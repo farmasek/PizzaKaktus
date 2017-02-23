@@ -44,11 +44,11 @@ public class IngredientController {
 
         if(allIngredients.isEmpty())
         {
-            return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
         }
         else
         {
-            return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.OK);
+            return new ResponseEntity<>(new Gson().toJson(allIngredients), HttpStatus.OK);
         }
     }
 
@@ -72,7 +72,7 @@ public class IngredientController {
         return insert.isPresent() ?
                 new ResponseEntity<>(insert.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
 
 }

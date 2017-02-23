@@ -87,7 +87,7 @@ public class PizzaController {
         return insertedPizza.isPresent() ?
                 new ResponseEntity<>(insertedPizza.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -109,7 +109,7 @@ public class PizzaController {
         return updatedPizza.isPresent() ?
                 new ResponseEntity<>(updatedPizza.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
 
 }

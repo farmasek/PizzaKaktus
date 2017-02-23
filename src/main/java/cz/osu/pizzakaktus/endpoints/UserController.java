@@ -43,28 +43,20 @@ public class UserController {
         String error = "";
         try {
             allUsers = userService.findAll();
+            List<UserDTO> collect = allUsers.stream()
+                    .map(userDb -> UserDTO.builder()
+                            .id(userDb.getId())
+                            .firstName(userDb.getFirstName())
+                            .lastName(userDb.getLastName())
+                            .login(userDb.getLogin())
+                            .phone(userDb.getPhone())
+                            .roles(userDb.getRoles().stream().map(Role::getRole).collect(Collectors.toList()))
+                            .build())
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(collect, HttpStatus.OK);
         } catch (DatabaseException e) {
             error = "Nebylo možné najít všechny uživatele.";
-        }
-
-        List<UserDTO> collect = allUsers.stream()
-                .map(userDb -> UserDTO.builder()
-                        .id(userDb.getId())
-                        .firstName(userDb.getFirstName())
-                        .lastName(userDb.getLastName())
-                        .login(userDb.getLogin())
-                        .phone(userDb.getPhone())
-                        .roles(userDb.getRoles().stream().map(Role::getRole).collect(Collectors.toList()))
-                        .build())
-                .collect(Collectors.toList());
-
-        if(collect.isEmpty())
-        {
-            return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
-        }
-        else
-        {
-            return new ResponseEntity<>(collect, HttpStatus.OK);
+            return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -87,7 +79,7 @@ public class UserController {
         return insertedUser.isPresent() ?
                 new ResponseEntity<>(insertedUser.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new ErrorDTO(error) , HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error) , HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -109,7 +101,7 @@ public class UserController {
         return insertedUser.isPresent() ?
                 new ResponseEntity<>(insertedUser.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
     /**
      * Delete user in database
@@ -130,7 +122,7 @@ public class UserController {
         return successfullyDeleted ?
                 new ResponseEntity<>("Successfully deleted user", HttpStatus.OK)
                 :
-                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.NOT_ACCEPTABLE);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
 
     //TODO use validator
