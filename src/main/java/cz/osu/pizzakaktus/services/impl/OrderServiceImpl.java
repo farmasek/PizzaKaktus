@@ -113,7 +113,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void sendEmail(CustomerDb customer, List<PizzaDb> pizzas) throws DatabaseException {
-        String useExternal = System.getProperty("use-external-email");
+        String useExternal = System.getenv("use-external-email");
         if (useExternal != null && useExternal.equals("true")) {
             String send = this.Send("Objednávka přijata", makeOrderMailBody(customer, pizzas), customer.getEmail());
             System.out.println(send);
@@ -124,7 +124,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private String Send(String subject, String body, String to) throws DatabaseException {
-        String emailApiKey = System.getProperty("email-api");
+        String emailApiKey = System.getenv("email-api");
         if (emailApiKey == null) {
             throw new DatabaseException("Chyba při kontaktování email serveru");
         }
