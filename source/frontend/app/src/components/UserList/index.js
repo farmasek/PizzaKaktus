@@ -25,13 +25,13 @@ class UserList extends Component {
         />
       </td>
       <td>
-            <Checkbox
-              checked={user.active ? user.active === true : false}
-              onChange={() => this.props.updateUser(user, 'action', false)}
-            />
+        <Checkbox
+          checked={user.active ? user.active === true : false}
+          onChange={() => this.props.updateUser(user, 'action', false)}
+        />
       </td>
       <td>
-        <IconButton
+      <IconButton
           onClick = {() => this.props.handleDialog(true, user.id, user.firstName, user.lastName)}
           icon="delete"
         />
