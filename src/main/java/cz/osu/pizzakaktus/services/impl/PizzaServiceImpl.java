@@ -69,7 +69,7 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public Page<PizzaDb> findAll(Pageable pageable, String filterBy) throws DatabaseException{
+    public Page<PizzaDb> findAll(Pageable pageable, String filterBy) throws DatabaseException {
         Page<PizzaDb> pizzasPage = pizzaRepository.findAll(QPizzaDb.pizzaDb.title.containsIgnoreCase(filterBy), pageable);
         if(pizzasPage.getSize() == 0) {
             throw new DatabaseException("Nebylo možné najít pizzy podle filtru " + filterBy + ".");

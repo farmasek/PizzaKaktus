@@ -7,6 +7,8 @@ import cz.osu.pizzakaktus.repositories.models.*;
 import cz.osu.pizzakaktus.services.*;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
@@ -36,6 +38,27 @@ public class OrderServiceImpl implements OrderService {
     CustomerService customerService;
 
     @Override
+    public Page<OrderDb> findAll(Pageable pageable, String filterAttribute, String filterPhrase,
+                                 Timestamp filterStartDate, Timestamp filterEndDate) throws DatabaseException {
+        Page<OrderDb> orderPage = orderRepository.findAll(
+                QOrderDb.orderDb.orderStatus.status.containsIgnoreCase(filterPhrase)
+                        .or(QOrderDb.orderDb.customer.email.containsIgnoreCase(filterPhrase))
+                        .and(
+                            QOrderDb.orderDb.dateCreated.between(filterStartDate, filterEndDate)
+                            .or(QOrderDb.orderDb.dateModified.between(filterStartDate, filterEndDate))
+                        )
+                , pageable);
+        if (orderPage.getSize() == 0) {
+            if (filterPhrase.isEmpty()) {
+                throw new DatabaseException("Nebylo možné najít objednávky.");
+            }
+            throw new DatabaseException("Nebylo možné najít objednávky podle vybraného filtru s frází " + filterPhrase + ".");
+        } else {
+            return orderPage;
+        }
+    }
+
+    @Override
     public int countTotalPizzasCost(List<PizzaDb> pizzas) throws DatabaseException {
         PizzaDb pizza;
         int totalCost = 0;
@@ -56,7 +79,7 @@ public class OrderServiceImpl implements OrderService {
         Timestamp dateCreated = new Timestamp(now);
         Timestamp dateModified = new Timestamp(now);
         OrderDb orderDb = new OrderDb(order.getPizzasIds(), customer, orderStatus,
-                                      dateCreated, dateModified);
+                dateCreated, dateModified);
         List<PizzaDb> pizzas = new ArrayList<>();
         List<Integer> pizzasIDs = orderDb.getPizzasIds();
 
@@ -104,7 +127,7 @@ public class OrderServiceImpl implements OrderService {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "465");
-        props.put("mail.smtp.starttls.enable","true");
+        props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
