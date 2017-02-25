@@ -36,11 +36,11 @@ export const saveUser = () => ({
 });
 
 export const updateUser = (user, field, value) => {
-  let userMap = fromJS(user);
-  userMap = userMap.set(field, value);
+  user[field] = value;
+  console.log(user);
   return {
     type: USER_UPDATE_FIELD,
-    userMap,
+    userMap: user,
   };
 };
 

@@ -27,7 +27,7 @@ class UserList extends Component {
       <td>
         <Checkbox
           checked={user.active ? user.active === true : false}
-          onChange={() => this.props.updateUser(user, 'action', false)}
+          onChange={() => this.props.updateUser(user, 'active', false)}
         />
       </td>
       <td>
