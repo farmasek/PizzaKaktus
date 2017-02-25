@@ -5,8 +5,11 @@ import cz.osu.pizzakaktus.repositories.models.CustomerDb;
 import cz.osu.pizzakaktus.repositories.models.OrderDb;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import javax.xml.crypto.Data;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +19,13 @@ import java.util.Optional;
 
 public interface OrderService
 {
+    /**
+     * Returns list of all orders with pagination and filtered
+     *
+     * @return List of orders
+     */
+    Page<OrderDb> findAll(Pageable pageable, String filterAttribute, String filterPhrase,
+                          Timestamp filterStartDate, Timestamp filterEndDate) throws DatabaseException;
     /**
      * Returns newly made order
      *

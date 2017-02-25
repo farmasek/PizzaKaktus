@@ -68,7 +68,9 @@ class PizzaList extends React.Component {
 
   render() {
     const pagination = this.props.pagination;
-    const arrow = pagination.get('sortDir') === 'ASC' ? '↑' : '↓';
+    const arrow = pagination.get('sortDir') === 'ASC'
+      ? <i className={`${styles.sortIcon} material-icons`}>arrow_upward</i>
+      : <i className={`${styles.sortIcon} material-icons`}>arrow_downward</i>;
     return (
       <div className={styles.pizzaList}>
         <h1>Seznam pizz</h1>

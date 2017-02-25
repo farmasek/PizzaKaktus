@@ -17,17 +17,10 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class OrderDTO  {
+    private Integer id;
     private List<Integer> pizzasIds;
     private CustomerDTO customer;
     private String orderStatus;
     private Timestamp dateCreated;
     private Timestamp dateModified;
-
-    public OrderDTO(OrderDb orderDb) {
-        this.pizzasIds = orderDb.getPizzasIds();
-        this.customer = new CustomerDTO(orderDb.getCustomer());
-        this.orderStatus = orderDb.getOrderStatus().getStatus();
-        this.dateCreated = orderDb.getDateCreated();
-        this.dateModified = orderDb.getDateModified();
-    }
 }

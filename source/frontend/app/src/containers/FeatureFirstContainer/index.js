@@ -23,17 +23,17 @@ export class FeatureFirstContainer extends Component {
   }
 
   render() {
-    const {
+    /* const {
       isLoading,
-    } = this.props;
+    } = this.props; */
     return (
       <div className={styles.container}>
-        {isLoading ?
+        {/* isLoading ?
           <h1>LOADING...</h1>
           :
-          <div>
+          <div> */
             <h1>Hello from FeatureFirstContainer</h1>
-          </div>
+          /* </div> */
         }
       </div>
     );
@@ -47,7 +47,7 @@ FeatureFirstContainer.propTypes = {
 
 // mapStateToProps :: {State} -> {Action}
 const mapStateToProps = (state) => ({
-  isLoading: state.isLoading,
+  isLoading: state.featureComponent.isLoading,
 });
 
 // mapDispatchToProps :: Dispatch Func -> {Actions}

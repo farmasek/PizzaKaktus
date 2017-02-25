@@ -16,9 +16,10 @@ const routes = (
       <Route path="/" component={App}>
 
         <IndexRoute component={Pages.LandingPage} />
-        <Route path="/manager/ingredients" component={Pages.ManageIngredientsPage} />
-        <Route path="/manager/pizzas" component={Pages.ManagePizzasPage} />
         <Route path="/manager/category" component={Pages.ManageCategoryPage} />
+        <Route path="/manager/ingredients" component={Pages.ManageIngredientsPage} />
+        <Route path="/manager/orders/history" component={Pages.ManageOrdersPage} />
+        <Route path="/manager/pizzas" component={Pages.ManagePizzasPage} />
         <Route path="/manager/users" component={Pages.ManageUsersPage} />
 
         <Route path="/cart" component={Pages.ShoppingCartPage} />

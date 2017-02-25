@@ -7,3 +7,4 @@ export NotFoundPage from './NotFoundPage/index';
 export LandingPage from './LandingPage/index';
 export ShoppingCartPage from './ShoppingCartPage/index';
 export MenuPage from './MenuPage/index';
+export ManageOrdersPage from './ManageOrdersPage/index';

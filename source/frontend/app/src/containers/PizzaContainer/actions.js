@@ -3,7 +3,6 @@ import {
   PIZZA_CHANGE_FORM_VALUE,
   PIZZA_CREATE_NEW,
   PIZZA_VALIDATION,
-  PIZZA_SNACKBAR,
   PIZZA_UPDATE,
   PIZZA_COPY,
   PIZZA_PAG_PROPERTIES,
@@ -16,11 +15,6 @@ import { fromJS } from 'immutable';
 export const pizzaValidation = (pizzaErrors) => ({
   type: PIZZA_VALIDATION,
   pizzaErrors,
-});
-
-export const handleSnackbar = (value) => ({
-  type: PIZZA_SNACKBAR,
-  value,
 });
 
 export const changeValue = (input, value) => ({

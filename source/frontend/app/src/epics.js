@@ -17,6 +17,10 @@ import {
   fetchPizzaAfterPaginationChange,
 } from './containers/PizzaContainer/actions';
 import {
+  fetchOrderListEpic,
+  fetchOrdersAfterPaginationChange,
+} from './containers/OrderContainer/actions';
+import {
   fetchUserListEpic,
   saveUserListEpic,
   updateUserEpic,
@@ -50,4 +54,6 @@ export default combineEpics(
   showAddedNotification,
   showRemovePizzaNotification,
   sendOrderEpic,
+  fetchOrderListEpic,
+  fetchOrdersAfterPaginationChange,
 );
