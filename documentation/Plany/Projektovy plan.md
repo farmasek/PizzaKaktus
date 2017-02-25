@@ -173,14 +173,14 @@ Projektový plán pro projekt PizzaKaktus
 <tr>
 <td align="left">Transition</td>
 <td align="left">T0</td>
-<td align="left">25.4. - 2.5.2017</td>
 <td align="left"></td>
+<td align="left">25.4. - 2.5.2017</td>
 </tr>
 <tr>
-<td align="left">Transition</td>
-<td align="left">T1</td>
-<td align="left">2.5. - 9.5.2017</td>
 <td align="left"></td>
+<td align="left">T1</td>
+<td align="left"></td>
+<td align="left">2.5. - 9.5.2017</td>
 </tr>
 <tr>
 <td align="left"></td>
