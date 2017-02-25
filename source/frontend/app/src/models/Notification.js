@@ -18,7 +18,7 @@ export const Notification = () => fromJS({
 export const mapSrcToNotificationWithKey =
   ({ message, action, dismissAfter = 3000, barStyle }, key) =>
     fromJS({
-      message,
+      message: message.message || message,
       key,
       action,
       dismissAfter,
