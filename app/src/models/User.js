@@ -7,6 +7,7 @@ export const User = new Record({
   login: '',
   roles: {},
   phone: '',
+  active: true,
 });
 
 export const mapUser = (user) => new User({
@@ -16,13 +17,15 @@ export const mapUser = (user) => new User({
   login: user.login,
   roles: user.roles,
   phone: user.phone,
+  active: user.active,
 });
 
-export const mapUserData = (firstName, lastName, passwordHash, login, roles, phone) => new User({
+export const mapUserData = (firstName, lastName, passwordHash, login, roles, phone,active) => new User({
   firstName,
   lastName,
   passwordHash,
   login,
   roles,
   phone,
+  active,
 });

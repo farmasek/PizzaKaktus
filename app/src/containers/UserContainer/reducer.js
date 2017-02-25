@@ -14,6 +14,7 @@ const initialUserForm = new Map({
   login: '',
   roles: new List(),
   phone: '',
+  active: true,
 });
 
 const initialUserErrors = {
