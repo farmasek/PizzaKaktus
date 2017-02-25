@@ -107,13 +107,13 @@ Projektový plán pro projekt PizzaKaktus
 <tr>
 <td align="left">Construction</td>
 <td align="left">C0</td>
-<td align="left">doplní se..</td>
-<td align="left"></td>
+<td align="left">Implementace objednávání bez upravených pizz, automatické doplňování údajů</td>
+<td align="left">14.2. - 21.2.2017</td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">C1</td>
-<td align="left">doplní se..</td>
+<td align="left">21.2. - 28.2.2017</td>
 <td align="left"></td>
 </tr>
 <tr>
