@@ -35,6 +35,13 @@ public interface OrderService
      OrderDb createOrder(OrderDTO order) throws DatabaseException;
 
     /**
+     * Send email depending on environments.
+     * @param Customer - recipient of email used for extraction of name, surname and other parameters
+     * @param List<PizzaDb> - list of ordered pizzas
+     * @throws DatabaseException
+     */
+     void sendEmail(CustomerDb customer, List<PizzaDb> pizzas) throws DatabaseException;
+    /**
      * Returns total cost of pizzas in list
      *
      * @param List - list of pizzas for which it counts total cost
@@ -49,7 +56,7 @@ public interface OrderService
      * @param String - text/body of email
      * @return void
      */
-    void orderAcceptedMail(String recipient, String text);
+    void orderAcceptedMail(String recipient, String text) throws DatabaseException;
 
     /**
      * Returns String - body of email

@@ -14,6 +14,13 @@ import org.springframework.stereotype.Service;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.xml.crypto.Data;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +32,7 @@ import java.util.Properties;
  */
 @Service
 public class OrderServiceImpl implements OrderService {
+    private static final String ORDER_EMAIL_ADRESS = "justtestingpizza@gmail.com";
     @Autowired
     OrderRepository orderRepository;
 
@@ -44,8 +52,8 @@ public class OrderServiceImpl implements OrderService {
                 QOrderDb.orderDb.orderStatus.status.containsIgnoreCase(filterPhrase)
                         .or(QOrderDb.orderDb.customer.email.containsIgnoreCase(filterPhrase))
                         .and(
-                            QOrderDb.orderDb.dateCreated.between(filterStartDate, filterEndDate)
-                            .or(QOrderDb.orderDb.dateModified.between(filterStartDate, filterEndDate))
+                                QOrderDb.orderDb.dateCreated.between(filterStartDate, filterEndDate)
+                                        .or(QOrderDb.orderDb.dateModified.between(filterStartDate, filterEndDate))
                         )
                 , pageable);
         if (orderPage.getSize() == 0) {
@@ -96,12 +104,54 @@ public class OrderServiceImpl implements OrderService {
         //orderAcceptedMail("justtestingpizza@gmail.com", makeOrderMailBody(customer, pizzas));
         // konkretni zakaznik
         try {
-            orderAcceptedMail(customer.getEmail(), makeOrderMailBody(customer, pizzas));
-        } catch (Exception e) {
-            throw new DatabaseException("Nastala chyba při odesílání emailu.");
+            sendEmail(customer, pizzas);
+        } catch (DatabaseException e) {
+            throw e;
         }
-
         return insertedOrder.get();
+    }
+
+    @Override
+    public void sendEmail(CustomerDb customer, List<PizzaDb> pizzas) throws DatabaseException {
+        String useExternal = System.getProperty("use-external-email");
+        if (useExternal != null && useExternal.equals("true")) {
+            String send = this.Send("Objednávka přijata", makeOrderMailBody(customer, pizzas), customer.getEmail());
+            System.out.println(send);
+        } else {
+            orderAcceptedMail(customer.getEmail(), makeOrderMailBody(customer, pizzas));
+
+        }
+    }
+
+    private String Send(String subject, String body, String to) throws DatabaseException {
+        String emailApiKey = System.getProperty("email-api");
+        if (emailApiKey == null) {
+            throw new DatabaseException("Chyba při kontaktování email serveru");
+        }
+        try {
+            String encoding = "UTF-8";
+            String data = "apikey=" + URLEncoder.encode(emailApiKey, encoding);
+            data += "&from=" + URLEncoder.encode(ORDER_EMAIL_ADRESS, encoding);
+            data += "&fromName=" + URLEncoder.encode("Pizza kaktus team", encoding);
+            data += "&subject=" + URLEncoder.encode(subject, encoding);
+            data += "&bodyHtml=" + URLEncoder.encode(body, encoding);
+            data += "&to=" + URLEncoder.encode(to, encoding);
+            data += "&isTransactional=" + URLEncoder.encode("true", encoding);
+
+            URL url = new URL("https://api.elasticemail.com/v2/email/send");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String result = rd.readLine();
+            wr.close();
+            rd.close();
+            return result;
+        } catch (Exception e) {
+            throw new DatabaseException("Chyba při zasílání emailu, je emailová adresa správná?");
+        }
     }
 
     @Override
@@ -120,26 +170,26 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void orderAcceptedMail(String recipient, String mailBody) {
-        final String username = "justtestingpizza@gmail.com";
-        final String password = "pizzakaktus";
-
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "465");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.socketFactory.fallback", "false");
-
-        Session session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
+    public void orderAcceptedMail(String recipient, String mailBody) throws DatabaseException {
         try {
+            final String password = "pizzakaktus";
+
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.port", "465");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.socketFactory.fallback", "false");
+
+            Session session = Session.getDefaultInstance(props,
+                    new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(ORDER_EMAIL_ADRESS, password);
+                        }
+                    });
+
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("pizzakaktus@kaktus.cz"));
             message.setRecipients(Message.RecipientType.TO,
@@ -151,8 +201,8 @@ public class OrderServiceImpl implements OrderService {
 
             System.out.println("Order accepted mail sent.");
 
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new DatabaseException("Chyba pri posíláni emailu z lokálního serveru");
         }
     }
 

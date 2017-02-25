@@ -12,9 +12,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.*;
 
 /**
  * Created by baranvoj on 19.10.2016.
@@ -42,12 +46,9 @@ public class IngredientController {
             error = e.getMessage();
         }
 
-        if(allIngredients.isEmpty())
-        {
+        if (allIngredients.isEmpty()) {
             return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
-        }
-        else
-        {
+        } else {
             return new ResponseEntity<>(new Gson().toJson(allIngredients), HttpStatus.OK);
         }
     }
@@ -63,7 +64,6 @@ public class IngredientController {
         //TODO implement ingredient validation
         Optional<IngredientDb> insert = Optional.empty();
         String error = "";
-
         try {
             insert = ingredientService.insert(new IngredientDb(ingredient));
         } catch (DatabaseException e) {
@@ -75,4 +75,6 @@ public class IngredientController {
                 new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
 
+
 }
+
