@@ -26,7 +26,7 @@ class Pizza extends Component {
     return (
       <div className={styles.pizza}>
         {
-          !(this.props.loading)
+          this.props.pizzas
             ? <PizzaList
               pizzas={this.props.pizzas}
               categories={this.props.categories}
@@ -37,7 +37,7 @@ class Pizza extends Component {
               changePagination={this.props.actions.changePaginationProperties}
               handleDialog={this.props.actions.handleDialog}
             />
-            : null
+            : <span>Žádné pizzy k zobrazení.</span>
         }
         <CreatePizza
           editValue={this.props.actions.changeValue}

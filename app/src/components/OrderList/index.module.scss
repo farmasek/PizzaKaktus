@@ -1,9 +1,8 @@
-
-.pizzaList {
+.orderList {
   border-collapse: collapse;
   width: 100%;
 
-  .pizzaListTable {
+  .orderListTable {
     border-collapse: collapse;
     width: 100%;
     text-align: center;
@@ -15,42 +14,31 @@
 
     td {
       padding: 0.2em 0 0.2em 0;
+      min-width: 75px;
     }
 
     tr {
       border-bottom: 1px solid rgba(0, 0, 0, 0.14);
-    }
-  }
-
-  .disabled {
-    cursor: not-allowed;
-
-    & * {
-      cursor: not-allowed;
-    }
-  }
-
-  .ingredientsList {
-    padding: 0;
-    margin: 0;
-
-    .ingredient {
-      display: inline;
-
-      &:after {
-        content: ", ";
-      }
-
-      &:last-of-type:after {
-        content: "";
-      }
+      height: 2.5em;
     }
 
+    th {
+      line-height: 2.1em;
+    }
   }
 
 }
-.tableHeaderSortable{
+
+.tableHeaderSortable {
   cursor: pointer;
+
+  &.dateColumn {
+    width: 180px;
+  }
+
+  &.orderStatusColumn {
+    width: 100px;
+  }
 }
 
 .paginationLane {
@@ -83,4 +71,25 @@
 
 .paginationNormal {
   @extend .paginationBase;
+}
+
+.filterIcon {
+  height: 1.1em;
+  position: relative;
+  top: 0.2em;
+  left: 0.25em;
+}
+
+.sortIcon {
+  font-size: 1.4em;
+  position: relative;
+  top: 0.2em;
+}
+
+.disabled {
+  cursor: not-allowed;
+
+  & * {
+    cursor: not-allowed;
+  }
 }
