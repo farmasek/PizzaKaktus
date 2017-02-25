@@ -113,20 +113,38 @@ Projektový plán pro projekt PizzaKaktus
 <tr>
 <td align="left"></td>
 <td align="left">C1</td>
+<td align="left">Oprava UC7 S2, Implementace změny hesla, Implementace historie objednávek,  dopsání projektového plánu</td>
 <td align="left">21.2. - 28.2.2017</td>
-<td align="left"></td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">C2</td>
 <td align="left">doplní se..</td>
-<td align="left"></td>
+<td align="left">28.2. - 7.3.2017</td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">C3</td>
 <td align="left">doplní se..</td>
+<td align="left">7.3. - 14.3.2017</td>
+</tr>
+<tr>
 <td align="left"></td>
+<td align="left">C4</td>
+<td align="left">doplní se..</td>
+<td align="left">14.3. - 21.3.2017</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">C5</td>
+<td align="left">doplní se..</td>
+<td align="left">21.3. - 28.3.2017</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">C6</td>
+<td align="left">doplní se..</td>
+<td align="left">28.3. - 4.4.2017</td>
 </tr>
 <tr>
 <td align="left"></td>
