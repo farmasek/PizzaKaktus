@@ -22,4 +22,5 @@ public class UserDTO {
     private String login;
     private List<String> roles;
     private String phone;
+    private boolean active;
 }

@@ -15,6 +15,7 @@ public class PizzaKaktusApplication {
     IngredientService ingredientService;
 
     public static void main(String[] args) {
+
         SpringApplication.run(PizzaKaktusApplication.class, args);
 
     }

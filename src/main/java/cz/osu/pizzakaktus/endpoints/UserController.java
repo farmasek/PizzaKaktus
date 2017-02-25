@@ -50,6 +50,7 @@ public class UserController {
                             .lastName(userDb.getLastName())
                             .login(userDb.getLogin())
                             .phone(userDb.getPhone())
+                            .active(userDb.isActive())
                             .roles(userDb.getRoles().stream().map(Role::getRole).collect(Collectors.toList()))
                             .build())
                     .collect(Collectors.toList());
