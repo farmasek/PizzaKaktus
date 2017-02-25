@@ -44,6 +44,7 @@ export const updateUser = (user, field, value) => {
   };
 };
 
+
 export const updateRole = (user, role) => {
   let userMap;
   let modRoles;

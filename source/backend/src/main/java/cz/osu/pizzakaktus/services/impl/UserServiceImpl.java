@@ -102,6 +102,7 @@ public class UserServiceImpl implements UserService {
                 .login(userDTO.getLogin())
                 .roles(roleStream)
                 .phone(userDTO.getPhone())
+                .active(userDTO.isActive())
                 .passwordHash(hashPassword(userDTO.getPassword()))
                 .build();
         return userToInsert;

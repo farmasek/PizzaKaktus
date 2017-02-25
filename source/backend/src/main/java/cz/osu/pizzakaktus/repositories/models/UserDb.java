@@ -31,15 +31,18 @@ public class UserDb {
     @ManyToMany(cascade = {CascadeType.MERGE})
     private Set<Role> roles;
     private String phone;
+    private boolean active ;
 
 
-    public UserDb(String firstName, String lastName, String passwordHash, String login, Set<Role> roles, String phone) {
+    public UserDb(String firstName, String lastName, String passwordHash, String login, Set<Role> roles, String phone,boolean active) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.passwordHash = passwordHash;
         this.login = login;
         this.roles = roles;
         this.phone = phone;
+        this.active = active;
+
     }
 
 //    public UserDb(UserDTO user)    {
