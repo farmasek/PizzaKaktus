@@ -58,7 +58,7 @@ export const sendOrder = (pizzasIds, customer) => ({
   customer,
 });
 
-export const sendOrderEpic = (action$) =>
+export const prefillByEmailEpic = (action$) =>
   action$.ofType(SEND_ORDER)
     .switchMap((action) =>
       Observable.ajax(doIt(
@@ -86,6 +86,30 @@ export const sendOrderEpic = (action$) =>
               message: error.xhr.response ? error.xhr.response.message : 'Nečekaná chyba.',
               barStyle: { color: '#e57373' },
             },
+          }))
+    );
+
+export const sendOrderEpic = (action$, store) =>
+  action$.ofType(CART_CUSTOMER_EDIT)
+    .filter(() => store.getState().shoppingCartContainer.customer.get('preFill'))
+    .filter(({ field }) => field === 'preFill' || 'email')
+    .switchMap(() =>
+      Observable.ajax(doIt(
+        hosts.pk,
+        `customer/by-email?email=${store.getState().shoppingCartContainer.customer.get('email')}`,
+        'GET',
+        {},
+        false,
+      ))
+        .switchMap(({ response }) => ([
+          {
+            type: `${CART_CUSTOMER_EDIT}_prefill`,
+            response,
+          },
+        ]))
+        .catch(() =>
+          Observable.of({
+            type: `NOOP_user_not_found`,
           }))
     );
 

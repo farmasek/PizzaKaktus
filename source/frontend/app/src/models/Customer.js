@@ -12,6 +12,7 @@ export const Customer = new Record({
   city: '',
   street: '',
   zip: '',
+  preFill: false,
 });
 
 export const mapCustomer = (src) => new Customer({
@@ -23,6 +24,7 @@ export const mapCustomer = (src) => new Customer({
   city: src.city,
   street: src.street,
   zip: src.zip,
+  preFill: true,
 });
 
 export const mapCustomerData = (id, name, surname, email, phone, city, street, zip) =>
@@ -35,4 +37,5 @@ export const mapCustomerData = (id, name, surname, email, phone, city, street, z
     city,
     street,
     zip,
+    preFill: false,
   });

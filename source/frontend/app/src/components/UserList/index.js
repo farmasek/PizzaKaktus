@@ -1,4 +1,7 @@
-import React, { PropTypes, Component } from 'react';
+import React, {
+  PropTypes,
+  Component,
+} from 'react';
 import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
 import Checkbox from 'react-toolbox/lib/checkbox';
@@ -31,8 +34,8 @@ class UserList extends Component {
         />
       </td>
       <td>
-      <IconButton
-          onClick = {() => this.props.handleDialog(true, user.id, user.firstName, user.lastName)}
+        <IconButton
+          onClick={() => this.props.handleDialog(true, user.id, user.firstName, user.lastName)}
           icon="delete"
         />
       </td>

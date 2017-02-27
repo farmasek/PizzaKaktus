@@ -35,6 +35,7 @@ import {
   showAddedNotification,
   showRemovePizzaNotification,
   sendOrderEpic,
+  prefillByEmailEpic,
 } from './containers/ShoppingCartDetail/actions';
 
 export default combineEpics(
@@ -56,4 +57,5 @@ export default combineEpics(
   sendOrderEpic,
   fetchOrderListEpic,
   fetchOrdersAfterPaginationChange,
+  prefillByEmailEpic,
 );

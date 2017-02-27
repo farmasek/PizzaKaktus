@@ -7,7 +7,10 @@ import {
   USER_VALIDATION,
   USER_DIALOG,
 } from './constants';
-import { doIt, hosts } from '../../network';
+import {
+  doIt,
+  hosts,
+} from '../../network';
 import { Observable } from 'rxjs';
 import { fromJS } from 'immutable';
 
@@ -35,9 +38,9 @@ export const saveUser = () => ({
   type: USER_CREATE_NEW,
 });
 
-export const updateUser = (user, field, value) => {
+export const updateUser = (usero, field, value) => {
+  const user = usero;
   user[field] = value;
-  console.log(user);
   return {
     type: USER_UPDATE_FIELD,
     userMap: user,
@@ -73,16 +76,18 @@ export const saveUserListEpic = (action$, store$) =>
         'POST',
         JSON.stringify(store$.getState().userContainer.userForm),
         true))
-        .switchMap(() => [{
-          type: `${FETCH_USER_LIST}`,
-          created: true,
-        },
+        .switchMap(() => [
+          {
+            type: `${FETCH_USER_LIST}`,
+            created: true,
+          },
           {
             type: `NOTIF_ADD`,
             notification: {
               message: 'Uživatel vytvořen.',
             },
-          }])
+          },
+        ])
         .catch(error =>
           Observable.of({
             type: `NOTIF_ADD`,
@@ -98,14 +103,15 @@ export const updateUserEpic = (action$) =>
     .switchMap(({ userMap }) =>
       Observable.ajax(doIt(hosts.pk, 'user/update', 'PUT',
         userMap, true))
-        .switchMap(() => [{
-          type: `${FETCH_USER_LIST}`,
-        }, {
-          type: `NOTIF_ADD`,
-          notification: {
-            message: 'Uživatel upraven',
+        .switchMap(() => [
+          {
+            type: `${FETCH_USER_LIST}`,
+          }, {
+            type: `NOTIF_ADD`,
+            notification: {
+              message: 'Uživatel upraven',
+            },
           },
-        },
         ])
         .catch(error =>
           Observable.of({
@@ -139,15 +145,17 @@ export const deleteUserEpic = action$ =>
   action$.ofType(USER_DELETE)
     .switchMap((action) =>
       Observable.ajax(doIt(hosts.pk, `user/delete/${action.id}`, 'DELETE', {}))
-        .switchMap(() => [{
-          type: FETCH_USER_LIST,
-        },
+        .switchMap(() => [
+          {
+            type: FETCH_USER_LIST,
+          },
           {
             type: `NOTIF_ADD`,
             notification: {
               message: 'Uživatel odstraněn.',
             },
-          }])
+          },
+        ])
         .catch(error =>
           Observable.of({
             type: `NOTIF_ADD`,
