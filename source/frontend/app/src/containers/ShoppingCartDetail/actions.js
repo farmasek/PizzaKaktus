@@ -83,7 +83,9 @@ export const prefillByEmailEpic = (action$) =>
           Observable.of({
             type: `NOTIF_ADD`,
             notification: {
-              message: error.xhr.response ? error.xhr.response.message : 'Nečekaná chyba.',
+              message: error.xhr.response
+                ? error.xhr.response.message
+                : 'Nastala neočekávaná chyba.',
               barStyle: { color: '#e57373' },
             },
           }))
