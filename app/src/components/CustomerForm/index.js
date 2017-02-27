@@ -34,7 +34,7 @@ class CustomerForm extends Component { // eslint-disable-line react/prefer-state
               error={this.props.customerError.get('email')}
             />
             <Checkbox
-              label="Předvyplnit na zakladě emailu"
+              label="Předvyplnit na základě emailu"
               checked={preFill}
               onChange={() => this.handleChange('preFill', !preFill)}
             />

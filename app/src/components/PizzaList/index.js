@@ -78,7 +78,7 @@ class PizzaList extends React.Component {
         <div className={styles.paginationLane}>
           <Input
             className={styles.sortName}
-            label="filtr"
+            label="Filtr"
             type="text" value={pagination.get('filterBy')}
             onChange={(val) => this.props.changePagination('filterBy', val)}
           />
