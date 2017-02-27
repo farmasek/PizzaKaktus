@@ -8,7 +8,10 @@ import {
   CART_CUSTOMER_ERROR_EDIT,
 } from './constants';
 import { Record } from 'immutable';
-import { Customer } from '../../models/Customer';
+import {
+  Customer,
+  mapCustomer,
+} from '../../models/Customer';
 
 const InitialState = new Record({
   shoppingCart: [],
@@ -61,6 +64,9 @@ const shoppingCartReducer =
       }
       case CART_CUSTOMER_EDIT: {
         return state.setIn(['customer', action.field], action.value);
+      }
+      case `${CART_CUSTOMER_EDIT}_prefill`: {
+        return state.set('customer', mapCustomer(action.response));
       }
       case CART_CUSTOMER_ERROR_EDIT: {
         if (action.field === 'resetator') {
