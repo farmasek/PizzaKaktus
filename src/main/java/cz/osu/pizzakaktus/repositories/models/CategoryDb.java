@@ -15,6 +15,7 @@ public class CategoryDb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(unique = true, length = 30)
     private String name;
 
     public CategoryDb(String name) {

@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by e-myslivost on 6.12.2016.
@@ -21,12 +18,19 @@ public class CustomerDb
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(length = 50)
     private String name;
+    @Column(length = 50)
     private String surname;
+    @Column(length = 50)
     private String email;
+    @Column(length = 20)
     private String phone;
+    @Column(length = 30)
     private String city;
+    @Column(length = 40)
     private String street;
+    @Column(length = 10)
     private String zip;
 
     public CustomerDb(String name, String surname, String email, String phone, String city, String street, String zip) {

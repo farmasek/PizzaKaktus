@@ -17,7 +17,9 @@ public class IngredientDb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(length = 50)
     private String name;
+    @Column(length = 20)
     private String amount;
     private Double cost;
     private Double costCustom;

@@ -20,7 +20,7 @@ public class OrderStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(unique = true)
+    @Column(unique = true, length = 20)
     private String status;
 
     public OrderStatus() {
