@@ -23,13 +23,17 @@ public class UserDb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(length = 50)
     private String firstName;
+    @Column(length = 50)
     private String lastName;
-    @Column(updatable = false)
+    @Column(updatable = false, length = 50)
     private String passwordHash;
+    @Column(length = 30)
     private String login;
     @ManyToMany(cascade = {CascadeType.MERGE})
     private Set<Role> roles;
+    @Column(length = 20)
     private String phone;
     private boolean active ;
 
