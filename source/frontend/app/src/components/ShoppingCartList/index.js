@@ -34,13 +34,23 @@ class ShoppingCartList extends Component {
       </td>
     </tr>;
 
+  getTotalPrice = () => {
+    let total = 0;
+    this.props.shoppingCart.map((pizza) => {
+      total += pizza.price;
+    });
+    return total;
+  };
+
   render() {
     let tableRows = new List();
     this.props.shoppingCart.map((pizza, index) => {
       tableRows = tableRows.push(this.getTableRow(pizza, index));
     });
+    const totalPrice = this.getTotalPrice();
     return (
-      <div>
+      <div className={styles.shoppingCartList}>
+        <h1>Košík</h1>
         <table className={styles.shoppingCartTable}>
           <thead>
           <tr>
@@ -56,6 +66,7 @@ class ShoppingCartList extends Component {
           }
           </tbody>
         </table>
+        <h2>Celková cena: { totalPrice } Kč</h2>
       </div>
     );
   }

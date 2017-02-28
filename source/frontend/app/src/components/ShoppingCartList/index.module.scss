@@ -1,50 +1,65 @@
-.shoppingCartTable {
-  border-collapse: collapse;
-  width: 100%;
-  text-align: center;
-  margin-bottom: 2em;
+.shoppingCartList {
 
-  .columnLeft {
-    text-align: left;
-  }
+  .shoppingCartTable {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2em;
 
-  .titleColumn {
-    width: 25%;
-  }
+    .columnLeft {
+      text-align: left;
+    }
 
-  .ingredientsColumn {
-    width: 50%;
-  }
+    .titleColumn {
+      width: 25%;
+    }
 
-  .smallColumn {
-    width: 12.5%;
-  }
+    .ingredientsColumn {
+      width: 50%;
+    }
 
-  td {
-    padding: 0.2em 0 0.2em 0;
-  }
+    .smallColumn {
+      width: 12.5%;
+    }
 
-  tr {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.14);
-  }
+    td {
+      padding: 0.2em 0 0.2em 0;
+    }
 
-  .ingredientsList {
-    padding: 0;
-    margin: 0;
+    tr {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+    }
 
-    .ingredient {
-      display: inline;
+    .ingredientsList {
+      padding: 0;
+      margin: 0;
 
-      &:after {
-        content: ", ";
-      }
+      .ingredient {
+        display: inline;
 
-      &:last-of-type:after {
-        content: "";
+        &:after {
+          content: ", ";
+        }
+
+        &:last-of-type:after {
+          content: "";
+        }
+
       }
 
     }
 
+  }
+
+  h1 {
+    font-size: 1.3em;
+    margin-bottom: 1.3em;
+  }
+
+  h2 {
+    padding: 0 0 1em;
+    text-align: right;
+    font-size: 1.3em;
   }
 
 }

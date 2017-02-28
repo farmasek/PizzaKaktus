@@ -3,6 +3,7 @@ import cssModules from 'react-css-modules';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Input from 'react-toolbox/lib/input';
 import DatePicker from 'react-toolbox/lib/date_picker';
+import TimePicker from 'react-toolbox/lib/time_picker';
 import * as styles from './index.module.scss';
 
 const localeCS = {
@@ -81,6 +82,13 @@ class OrderList extends Component {
             value={pagination.get('startDate').toDate()}
             inputFormat={(value) => this.formatDate(value)}
             locale={localeCS}
+            style={{ width: '100px' }}
+          />
+          <TimePicker
+            label=""
+            onChange={(val) => this.props.changeTime('startDate', val)}
+            value={pagination.get('startDate').toDate()}
+            style={{ width: '100px' }}
           />
           <DatePicker
             label="Do"
@@ -88,6 +96,13 @@ class OrderList extends Component {
             value={pagination.get('endDate').toDate()}
             inputFormat={(value) => this.formatDate(value)}
             locale={localeCS}
+            style={{ width: '100px' }}
+          />
+          <TimePicker
+            label=""
+            onChange={(val) => this.props.changeTime('endDate', val)}
+            value={pagination.get('endDate').toDate()}
+            style={{ width: '100px' }}
           />
           <Input
             className={styles.sortSize}
@@ -155,6 +170,7 @@ OrderList.propTypes = {
   pizzas: ImmutablePropTypes.map.isRequired,
   pagination: ImmutablePropTypes.map.isRequired,
   changePagination: PropTypes.func.isRequired,
+  changeTime: PropTypes.func.isRequired,
 };
 
 export default cssModules(OrderList, styles);

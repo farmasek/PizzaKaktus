@@ -17,7 +17,7 @@ public class PizzaDb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(length = 25)
+    @Column(length = 50)
     private String title;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CategoryDb category;
