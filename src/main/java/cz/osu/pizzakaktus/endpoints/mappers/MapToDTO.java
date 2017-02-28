@@ -3,10 +3,8 @@ package cz.osu.pizzakaktus.endpoints.mappers;
 import cz.osu.pizzakaktus.endpoints.models.CustomerDTO;
 import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
 import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
-import cz.osu.pizzakaktus.repositories.models.CustomerDb;
-import cz.osu.pizzakaktus.repositories.models.IngredientDb;
-import cz.osu.pizzakaktus.repositories.models.OrderDb;
-import cz.osu.pizzakaktus.repositories.models.PizzaDb;
+import cz.osu.pizzakaktus.endpoints.models.UserDTO;
+import cz.osu.pizzakaktus.repositories.models.*;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
@@ -50,6 +48,19 @@ public class MapToDTO {
                 .street(customerDb.getStreet())
                 .city(customerDb.getCity())
                 .zip(customerDb.getZip())
+                .build();
+    }
+
+    public UserDTO mapUser(UserDb userDb) {
+        return UserDTO.builder()
+                .active(userDb.isActive())
+                .firstName(userDb.getFirstName())
+                .lastName(userDb.getLastName())
+                .login(userDb.getLogin())
+                .id(userDb.getId())
+                .phone(userDb.getPhone())
+                .password(userDb.getPasswordHash())
+                .roles(userDb.getRoles().stream().map(Role::getRole).collect(Collectors.toList()))
                 .build();
     }
 
