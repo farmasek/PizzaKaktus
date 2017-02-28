@@ -59,18 +59,48 @@
 | Úkol | Stav |
 |:---|:----|
 | Předvyplňování emailu je funkční | Splněno |
-| Zákazník souhlasí s implementací předvyplňování emailu |  |
+| Zákazník souhlasí s implementací předvyplňování emailu | Splněno |
 | Na serveru funguje odesílání emailů | Splněno |
 | Class diagram je aktualizován | Splněno |
 | DB diagram je aktualizován | Splněno |
 | Projektový plán je aktualizován | Splněno |
 | Deaktivace uživatele UC7 S2 je funkční | Splněno |
-| Zákazník souhlasí s implementací UC7 S2 |  |
+| Zákazník souhlasí s implementací UC7 S2 | Splněno |
 | Změna hesla UC7 S3 je funkční | Nesplněno |
 | Zákazník souhlasí s implementací UC7 S3 | Nesplněno |
 | Chybové hlášky jsou refactorovány | Splněno |
 | Order status je refactorován | Splněno |
 | Historie objednávek UC4 S1 je funkční | Splněno |
-| Zákazník souhlasí s implementací UC4 S1 |  |
+| Zákazník souhlasí s implementací UC4 S1 | Splněno |
+
+####Lessons learned
+
+---
+##C2
+28.2.2017 - 7.3.2017
+
+####Cíle
+
+- Implementace přihlášení a odhlášení UC1S1 a UC1S2
+- Implementace změny hesla UC1S3
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Implementace UC1S1 frontend | Krížová | 10h |
+| Implementace UC1S1 backend | Náhlý, Jaroš | 20h |
+| Implementace UC1S2 frontend | Krížová | 10h |
+| Implementace UC1S2 backend | Náhlý, Jaroš | 20h |
+| Zpracovat připomínky zákazníka | Baránek | 5h |
+| Implementace UC1S3 frontend | Baránek | 5h |
+| Implementace UC1S3 backend | Náhlý | 5h |
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| UC1S1 je funkční |  |  |
+| UC1S2 je funkční |  |  |
+| UC1S3 je funkční |  |  |
 
 ####Lessons learned
