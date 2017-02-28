@@ -100,7 +100,10 @@
 | Úkol | Stav |
 |:---|:----|
 | UC1S1 je funkční |  |  |
+| Zákazník souhlasí s implementací UC1S1 |  |  |
 | UC1S2 je funkční |  |  |
+| Zákazník souhlasí s implementací UC1S2 |  |  |
 | UC1S3 je funkční |  |  |
+| Zákazník souhlasí s implementací UC1S3 |  |  |
 
 ####Lessons learned
