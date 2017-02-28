@@ -19,6 +19,7 @@ import {
 import {
   fetchOrderListEpic,
   fetchOrdersAfterPaginationChange,
+  changeTimePaginationEpic,
 } from './containers/OrderContainer/actions';
 import {
   fetchUserListEpic,
@@ -58,4 +59,5 @@ export default combineEpics(
   fetchOrderListEpic,
   fetchOrdersAfterPaginationChange,
   prefillByEmailEpic,
+  changeTimePaginationEpic,
 );

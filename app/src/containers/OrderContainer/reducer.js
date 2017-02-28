@@ -2,6 +2,7 @@ import moment from 'moment';
 import {
   ORDER_PAG_PROPERTIES,
   FETCH_ORDER_LIST,
+  ORDER_PAG_TIME,
 } from './constants';
 import { Record, Map, fromJS } from 'immutable';
 import { mapOrder } from '../../models/Order';
@@ -12,14 +13,14 @@ const InitialState = new Record({
   pagination: fromJS({
     totalPages: 0,
     totalElements: 0,
-    size: 10,
+    size: 7,
     number: 0,
     sortDir: 'ASC',
     sortBy: 'id',
     filterAttribute: '',
     filterPhrase: '',
-    startDate: moment().subtract(1, 'M').startOf('day'),
-    endDate: moment().endOf('day'),
+    startDate: moment().subtract(1, 'M'),
+    endDate: moment(),
   }),
 });
 
@@ -58,15 +59,32 @@ const orderReducer = (state = new InitialState(), action) => {
       }
       let value = action.value;
       if (action.paginationType === 'startDate') {
-        value = moment(value).startOf('day');
+        value = moment(value);
       }
       if (action.paginationType === 'endDate') {
-        value = moment(value).endOf('day');
+        value = moment(value);
       }
       return state.withMutations(s => s
         .setIn(['pagination', action.paginationType], value)
         .setIn(['pagination', 'sortDir'], sortDir)
       );
+    }
+    case ORDER_PAG_TIME: {
+      const field = action.field;
+      const value = moment(action.value);
+      let final;
+      if (field === 'startDate') {
+        const current = state.getIn(['pagination', 'startDate']);
+        const hour = value.get('hour');
+        const minute = value.get('minute');
+        final = current.set({ hour, minute });
+        return state.setIn(['pagination', 'startDate'], final);
+      }
+      const current = state.getIn(['pagination', 'endDate']);
+      const hour = value.get('hour');
+      const minute = value.get('minute');
+      final = current.set({ hour, minute });
+      return state.setIn(['pagination', 'endDate'], final);
     }
     default:
       return state;

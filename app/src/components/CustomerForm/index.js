@@ -55,7 +55,8 @@ class CustomerForm extends Component { // eslint-disable-line react/prefer-state
               onChange={(value) => this.handleChange('surname', value)}
               onKeyPress={(event) => this.props.handleConfirm(event)}
               error={this.props.customerError.get('surname')}
-            /></div>
+            />
+          </div>
           <div className={styles.orderRow}>
             <Input
               type="text"
@@ -67,14 +68,22 @@ class CustomerForm extends Component { // eslint-disable-line react/prefer-state
             />
             <Input
               type="text"
+              label="Ulice"
+              value={this.props.customer.get('street')}
+              onChange={(value) => this.handleChange('street', value)}
+              onKeyPress={(event) => this.props.handleConfirm(event)}
+              error={this.props.customerError.get('street')}
+            />
+          </div>
+          <div className={styles.orderRow}>
+            <Input
+              type="text"
               label="Město"
               value={this.props.customer.get('city')}
               onChange={(value) => this.handleChange('city', value)}
               onKeyPress={(event) => this.props.handleConfirm(event)}
               error={this.props.customerError.get('city')}
             />
-          </div>
-          <div className={styles.orderRow}>
             <Input
               type="text"
               label="PSČ"
@@ -82,14 +91,6 @@ class CustomerForm extends Component { // eslint-disable-line react/prefer-state
               onChange={(value) => this.handleChange('zip', value)}
               onKeyPress={(event) => this.props.handleConfirm(event)}
               error={this.props.customerError.get('zip')}
-            />
-            <Input
-              type="text"
-              label="Ulice"
-              value={this.props.customer.get('street')}
-              onChange={(value) => this.handleChange('street', value)}
-              onKeyPress={(event) => this.props.handleConfirm(event)}
-              error={this.props.customerError.get('street')}
             />
           </div>
 

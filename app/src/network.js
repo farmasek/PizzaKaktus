@@ -25,7 +25,7 @@ export const removeToken = () => {
   window.localStorage.removeItem('token');
 };
 export const setToken = (token) => {
-  window.localStorage.setItem('token', "Hello" + token);
+  window.localStorage.setItem('token', token);
 };
 
 const defaultHeader = (json) => ({

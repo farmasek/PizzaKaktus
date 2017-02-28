@@ -1,6 +1,7 @@
 import {
   FETCH_ORDER_LIST,
   ORDER_PAG_PROPERTIES,
+  ORDER_PAG_TIME,
 } from './constants';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
@@ -59,3 +60,21 @@ export const changePaginationProperties = (paginationType, value) => ({
   paginationType,
   value,
 });
+
+export const changeTime = (field, value) => ({
+  type: ORDER_PAG_TIME,
+  field,
+  value,
+});
+
+export const changeTimePaginationEpic = (action$, store) =>
+  action$.ofType(ORDER_PAG_TIME)
+  .map((action) => {
+    const paginationType = action.field;
+    const value = store.getState().orderContainer.getIn(['pagination', paginationType]);
+    return {
+      type: ORDER_PAG_PROPERTIES,
+      paginationType,
+      value,
+    };
+  });

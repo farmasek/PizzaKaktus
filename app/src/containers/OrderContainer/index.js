@@ -24,6 +24,7 @@ class OrderContainer extends Component {
           pizzas={this.props.pizzas}
           pagination={this.props.pagination}
           changePagination={this.props.actions.changePaginationProperties}
+          changeTime={this.props.actions.changeTime}
         />
       </div>
     );
