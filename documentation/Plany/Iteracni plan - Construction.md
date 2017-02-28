@@ -58,19 +58,19 @@
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| Předvyplňování emailu je funkční |  |
+| Předvyplňování emailu je funkční | Splněno |
 | Zákazník souhlasí s implementací předvyplňování emailu |  |
-| Na serveru funguje odesílání emailů |  |
-| Class diagram je aktualizován |  |
-| DB diagram je aktualizován |  |
-| Projektový plán je aktualizován |  |
-| Deaktivace uživatele UC7 S2 je funkční |  |
+| Na serveru funguje odesílání emailů | Splněno |
+| Class diagram je aktualizován | Splněno |
+| DB diagram je aktualizován | Splněno |
+| Projektový plán je aktualizován | Splněno |
+| Deaktivace uživatele UC7 S2 je funkční | Splněno |
 | Zákazník souhlasí s implementací UC7 S2 |  |
-| Změna hesla UC7 S3 je funkční |  |
-| Zákazník souhlasí s implementací UC7 S3 |  |
-| Chybové hlášky jsou refactorovány |  |
-| Order status je refactorován |  |
-| Historie objednávek UC4 S1 je funkční |  |
+| Změna hesla UC7 S3 je funkční | Nesplněno |
+| Zákazník souhlasí s implementací UC7 S3 | Nesplněno |
+| Chybové hlášky jsou refactorovány | Splněno |
+| Order status je refactorován | Splněno |
+| Historie objednávek UC4 S1 je funkční | Splněno |
 | Zákazník souhlasí s implementací UC4 S1 |  |
 
 ####Lessons learned
