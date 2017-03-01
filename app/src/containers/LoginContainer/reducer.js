@@ -24,4 +24,4 @@ const loginReducer =
     }
   };
 
-  export default loginReducer;
+export default loginReducer;
