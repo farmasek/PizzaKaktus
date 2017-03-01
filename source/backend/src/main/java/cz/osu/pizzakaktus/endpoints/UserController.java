@@ -2,6 +2,7 @@ package cz.osu.pizzakaktus.endpoints;
 
 import com.google.gson.Gson;
 import cz.osu.pizzakaktus.endpoints.models.ErrorDTO;
+import cz.osu.pizzakaktus.endpoints.models.UserChangePwDTO;
 import cz.osu.pizzakaktus.endpoints.models.UserDTO;
 import cz.osu.pizzakaktus.repositories.models.Role;
 import cz.osu.pizzakaktus.repositories.models.UserDb;
@@ -125,6 +126,28 @@ public class UserController {
                 :
                 new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
+    /**
+     * Update  user pw in database
+     *
+     * @param user - Json of user
+     * @return if successful then updated object, if not successful then error message
+     */
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public HttpEntity<?> changePassword(@RequestBody UserChangePwDTO user) {
+
+        boolean succesfullyChanged = false;
+        String error = "";
+        try {
+            succesfullyChanged = userService.changePassword(user.getId(), user.getUserOldPassword(), user.getUserNewPassword());
+        } catch (DatabaseException e) {
+            error = "Nebylo možné změnit heslo.";
+        }
+        return succesfullyChanged ?
+                new ResponseEntity<>(user.getId(), HttpStatus.OK)
+                :
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
+    }
+
 
     //TODO use validator
     private boolean isUserValid(UserDTO user) {

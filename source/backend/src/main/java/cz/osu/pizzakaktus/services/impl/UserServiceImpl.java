@@ -1,5 +1,6 @@
 package cz.osu.pizzakaktus.services.impl;
 
+import cz.osu.pizzakaktus.endpoints.mappers.MapToDTO;
 import cz.osu.pizzakaktus.endpoints.models.UserDTO;
 import cz.osu.pizzakaktus.repositories.RoleRepository;
 import cz.osu.pizzakaktus.repositories.UserRepository;
@@ -78,6 +79,29 @@ public class UserServiceImpl implements UserService {
         }
 
         return successfullyDeleted;
+    }
+
+    @Override
+    public boolean changePassword(int userId, String userOldPassword, String userNewPassword) throws DatabaseException {
+        boolean succesfullyChanged = false;
+        try {
+            List<UserDb> byId = userRepository.findById(userId);
+            UserDb user = byId.get(0);
+
+            MapToDTO m = new MapToDTO();
+            UserDTO u = m.mapUser(user);
+            String actualPw = u.getPassword();
+            if(actualPw.equals(userOldPassword))
+            {
+                u.setPassword(userNewPassword);
+                update(u);
+                succesfullyChanged = true;
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            succesfullyChanged = false;
+        }
+        return succesfullyChanged;
     }
 
 
