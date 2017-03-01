@@ -44,6 +44,14 @@ public interface UserService {
      */
     boolean deleteById(int userId) throws DatabaseException;
 
+    /**
+     * Change user pw in database
+     * @param userDTO - user to be changed pw
+     * @param userOldPassword - old pw of user to be changed
+     * @param userNewPassword - new pw of user to be changed
+     * @return - true if successful, false if failed
+     */
+    boolean changePassword(int userId,String userOldPassword,String userNewPassword) throws DatabaseException;
 
 
 }
