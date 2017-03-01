@@ -1,12 +1,13 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actionCreators from './actions';
 import { Navbar } from 'components';
-import styles from './index.module.scss';
 import AppBar from 'react-toolbox/lib/app_bar';
 import { NotificationStack } from 'react-notification';
 import * as ImmutablePropTypes from 'react-immutable-proptypes';
+import * as actionCreators from './actions';
+import * as styles from './index.module.scss';
+import LoginContainer from '../../containers/LoginContainer/index';
 
 const Main = (props) => (
   <div>
@@ -16,6 +17,7 @@ const Main = (props) => (
         notifications={props.notifications.toArray()}
         onDismiss={(element) => props.actions.removeNotification(element)}
       />
+      <LoginContainer />
     </AppBar>
     <div className={styles.content}>
       {React.cloneElement(props.children, props)}
