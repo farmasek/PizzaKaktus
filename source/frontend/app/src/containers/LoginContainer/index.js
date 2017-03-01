@@ -10,20 +10,20 @@ import * as styles from './index.module.scss';
 class LoginContainer extends React.Component {
 
   actions = [
-    { label: "Cancel", onClick: () => this.props.actions.toggleDialog() },
-    { label: "Save", onClick: () => this.props.actions.toggleDialog() },
+    { label: 'Cancel', onClick: () => this.props.actions.toggleDialog() },
+    { label: 'Save', onClick: () => this.props.actions.toggleDialog() },
   ];
 
   render() {
     return (
       <div className={styles.loginBtn}>
-        <Button label='Přihlásit se' onClick={() => this.props.actions.toggleDialog()} />
+        <Button label="Přihlásit se" onClick={() => this.props.actions.toggleDialog()} />
         <Dialog
           actions={this.actions}
           active={this.props.dialogState}
           onEscKeyDown={() => this.props.actions.toggleDialog()}
           onOverlayClick={() => this.props.actions.toggleDialog()}
-          title='Přihlášení'
+          title="Přihlášení"
         >
           <p>Here you can add arbitrary content. Components like Pickers are using dialogs now.</p>
         </Dialog>
@@ -33,8 +33,8 @@ class LoginContainer extends React.Component {
 
 }
 
-LoginContainer.proptypes = {
-  actions: PropTypes.object.isRequired,
+LoginContainer.propTypes = {
+  actions: PropTypes.object,
   dialogState: PropTypes.bool.isRequired,
 };
 
@@ -49,4 +49,7 @@ const mapDispatchToProps = (dispatch) => ({
   ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(cssModules(LoginContainer, styles));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(cssModules(LoginContainer, styles));
