@@ -79,7 +79,6 @@ module.exports = {
     data: '@import "app/styles/_config.scss";',
     includePaths: [path.resolve(ROOT_PATH, 'app/src/')]
   },
-
   resolve: {
     extensions: ['', '.scss', '.css', '.js', '.json'],
     modulesDirectories: [
@@ -89,8 +88,6 @@ module.exports = {
     alias: {
       components: path.resolve(ROOT_PATH, 'app/src/components'),
       containers: path.resolve(ROOT_PATH, 'app/src/containers'),
-      taiComponents: path.resolve(ROOT_PATH, 'app/src/tai/components'),
-      taiContainers: path.resolve(ROOT_PATH, 'app/src/tai/containers'),
       pages: path.resolve(ROOT_PATH, 'app/src/pages')
     },
   },

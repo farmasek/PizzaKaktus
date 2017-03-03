@@ -20,15 +20,13 @@ const initialIngredientForm = new Map({
   costCustom: 0,
 });
 
-const InitialState = new Record(
-  {
-    isLoading: false,
-    ingredients: new Map(),
-    ingredientForm: initialIngredientForm,
-    ingredientErrors: initialIngredientErrors,
-    ingredientError: '',
-  }
-);
+const InitialState = new Record({
+  isLoading: false,
+  ingredients: new Map(),
+  ingredientForm: initialIngredientForm,
+  ingredientErrors: initialIngredientErrors,
+  ingredientError: '',
+});
 
 const ingredientReducer =
   (state = new InitialState(), action) => {

@@ -4,9 +4,20 @@ import { Provider } from 'react-redux';
 import store, { history } from './store';
 /* eslint-disable */
 import App from 'components/App';
-import * as Pages from 'pages';
+import * as Pages from './pages';
+import { isAuthorized } from './network';
 /* eslint-enable */
 
+/*
+const requireAuth = (nextState, replace) => {
+  if (!isAuthorized()) {
+    replace({
+      pathname: '/',
+      state: { nextPathname: nextState.location.pathname },
+    });
+  }
+};
+*/
 const routes = (
   <Provider store={store}>
     <Router
