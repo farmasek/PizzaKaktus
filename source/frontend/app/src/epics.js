@@ -38,6 +38,10 @@ import {
   sendOrderEpic,
   prefillByEmailEpic,
 } from './containers/ShoppingCartDetail/actions';
+import {
+  loginEpic,
+  logoutEpic,
+} from './containers/LoginContainer/actions';
 
 export default combineEpics(
   fetchIngredientListEpic,
@@ -60,4 +64,6 @@ export default combineEpics(
   fetchOrdersAfterPaginationChange,
   prefillByEmailEpic,
   changeTimePaginationEpic,
+  loginEpic,
+  logoutEpic,
 );

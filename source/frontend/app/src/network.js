@@ -8,24 +8,29 @@ export const hosts = {
   // pk: `https://pizzak.herokuapp.com`
 
 };
+
 export const getToken = () => {
-  // get token from local storrage
   try {
-    return (window.localStorage.getItem('token'));
+    const tokenStr = (window.localStorage.getItem('token'));
+    const token = JSON.parse(tokenStr);
+    return token;
   } catch (ex) {
     return null;
   }
 };
+
 export const isAuthorized = () => {
-  // Authorization rules
-  return true;
+  const token = getToken();
+  // Auth rules
+  return token && token;
 };
 
 export const removeToken = () => {
   window.localStorage.removeItem('token');
 };
+
 export const setToken = (token) => {
-  window.localStorage.setItem('token', token);
+  window.localStorage.setItem('token', JSON.stringify(token));
 };
 
 const defaultHeader = (json) => ({
@@ -33,10 +38,9 @@ const defaultHeader = (json) => ({
   crossDomain: false,
   headers: {
     'cache-control': 'no-cache',
-    'Content-Type': `${json ?
-      'application/json'
-      :
-      'application/x-www-form-urlencoded; charset=UTF-8'}`,
+    'Content-Type': `${json
+      ? 'application/json'
+      : 'application/x-www-form-urlencoded; charset=UTF-8'}`,
   },
   processData: false,
   contentType: false,
