@@ -33,11 +33,10 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Optional<UserDb> insert(UserDTO userDTO)throws DatabaseException {
+    public Optional<UserDb> insert(UserDTO userDTO) throws DatabaseException {
         if (isLoginTaken(userDTO.getLogin())) {
             throw new DatabaseException("Login " + userDTO.getLogin() + " již existuje.");
-        }
-        else {
+        } else {
             UserDb userWithRoles = addRolesToUser(userDTO);
             UserDb insertedUser = userRepository.save(userWithRoles);
             return Optional.of(insertedUser);
@@ -82,17 +81,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean changePassword(int userId, String userOldPassword, String userNewPassword) throws DatabaseException {
+    public boolean changePassword(String login, String userOldPassword, String userNewPassword) throws DatabaseException {
         boolean succesfullyChanged = false;
         try {
-            List<UserDb> byId = userRepository.findById(userId);
+            List<UserDb> byId = userRepository.findByLogin(login);
             UserDb user = byId.get(0);
 
             MapToDTO m = new MapToDTO();
             UserDTO u = m.mapUser(user);
             String actualPw = u.getPassword();
-            if(actualPw.equals(userOldPassword))
-            {
+            if (checkPassword(userOldPassword, actualPw)) {
                 u.setPassword(userNewPassword);
                 update(u);
                 succesfullyChanged = true;
@@ -131,7 +129,6 @@ public class UserServiceImpl implements UserService {
                 .build();
         return userToInsert;
     }
-
 
 
 }
