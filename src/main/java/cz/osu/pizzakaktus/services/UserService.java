@@ -54,4 +54,5 @@ public interface UserService {
     boolean changePassword(int userId,String userOldPassword,String userNewPassword) throws DatabaseException;
 
 
+    public boolean checkPassword(String passwordPlainText, String storedHash);
 }

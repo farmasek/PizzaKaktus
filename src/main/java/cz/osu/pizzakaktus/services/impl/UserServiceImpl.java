@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    private boolean checkPassword(String passwordPlainText, String storedHash) {
+    public boolean checkPassword(String passwordPlainText, String storedHash) {
         return !(null == storedHash || !storedHash.startsWith("$2a$"))
                 && BCrypt.checkpw(passwordPlainText, storedHash);
     }
