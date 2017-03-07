@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.Set;
  * Created by e-myslivost-ACER on 6.3.2017.
  */
 @Service
+@Transactional
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
@@ -38,26 +40,25 @@ public class AuthServiceImpl implements AuthService {
         String login = sourceAuthentication.getPrincipal().toString();
         String password = sourceAuthentication.getCredentials().toString();
 
-        List<UserDb> users = userRepository.findByLogin(login); // dat dto misto db
+        List<UserDb> users = userRepository.findByLogin(login);
 
         UserDb user = users.get(0);
-        //MapToDTO m = new MapToDTO();
-        //UserDTO userDTO = m.mapUser(user);
+        MapToDTO m = new MapToDTO();
+        UserDTO userDTO = m.mapUser(user);
         if (users.size() != 0)
         {
             Collection<GrantedAuthority> collection =  new ArrayList<GrantedAuthority>();
-                collection.add(new SimpleGrantedAuthority("ROLE_ADMIN")); //smazat až vyřešíme collection níže..
 
-           //for (String role : userDTO.getRoles())
-           // {
-           //     collection.add(new SimpleGrantedAuthority("ROLE_" + role));
-           // }
+           for (String role : userDTO.getRoles())
+            {
+                collection.add(new SimpleGrantedAuthority("ROLE_" + role));
+            }
 
             boolean islogged = userService.checkPassword(password,user.getPasswordHash());
-            if(true)//
+            if(islogged)
             {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                        login,password,collection); // tu je chyba předělat Gson.. (new Gson().toJson(user))
+                        new Gson().toJson(user),password,collection);
                 usernamePasswordAuthenticationToken.setDetails(user);
 
                 return usernamePasswordAuthenticationToken;
