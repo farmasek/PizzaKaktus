@@ -73,8 +73,6 @@
 | Historie objednávek UC4 S1 je funkční | Splněno |
 | Zákazník souhlasí s implementací UC4 S1 | Splněno |
 
-####Lessons learned
-
 ---
 ##C2
 28.2.2017 - 7.3.2017
@@ -99,11 +97,38 @@
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| UC1S1 je funkční |  |  |
-| Zákazník souhlasí s implementací UC1S1 |  |  |
-| UC1S2 je funkční |  |  |
-| Zákazník souhlasí s implementací UC1S2 |  |  |
-| UC1S3 je funkční |  |  |
-| Zákazník souhlasí s implementací UC1S3 |  |  |
+| UC1S1 je funkční | Nesplněno |
+| Zákazník souhlasí s implementací UC1S1 | Nesplněno |
+| UC1S2 je funkční | Nesplněno |
+| Zákazník souhlasí s implementací UC1S2 | Nesplněno |
+| UC1S3 je funkční | Splněno |
+| Zákazník souhlasí s implementací UC1S3 | Nesplněno |
 
-####Lessons learned
+---
+##C3
+7.3.2017 - 14.3.2017
+
+####Cíle
+
+- Revize implementace přihlášení a odhlášení UC1S1 a UC1S2
+- Vizuální úpravy - menu, tabulky, formuláře
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Implementace UC1S1 frontend | Krížová | 10h |
+| Implementace UC1S1 backend | Náhlý, Jaroš, Baránek | 20h |
+| Implementace UC1S2 frontend | Krížová | 1h |
+| Implementace UC1S2 backend | Náhlý, Jaroš, Baránek | 20h |
+| Vizuální úpravy - menu, tabulky, formuláře | Pravda | 20h |
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| UC1S1 je funkční |  |
+| Zákazník souhlasí s implementací UC1S1 |  |
+| UC1S2 je funkční |  |
+| Zákazník souhlasí s implementací UC1S2 |  |
+| Aplikace je vizuálně upravena |  |
+| Zákazník souhlasí s vizuálními úpravami |  |
