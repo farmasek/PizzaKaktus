@@ -67,18 +67,17 @@ export const prefillByEmailEpic = (action$) =>
         'POST',
         JSON.stringify(mapOrderData(action.pizzasIds, action.customer)),
         true,
-      ))
-        .switchMap(() => ([
-          {
-            type: EMPTY_SHOPPING_CART,
+      )).switchMap(() => ([
+        {
+          type: EMPTY_SHOPPING_CART,
+        },
+        {
+          type: `NOTIF_ADD`,
+          notification: {
+            message: 'Objednávka odeslána.',
           },
-          {
-            type: `NOTIF_ADD`,
-            notification: {
-              message: 'Objednávka odeslána.',
-            },
-          },
-        ]))
+        },
+      ]))
         .catch(error =>
           Observable.of({
             type: `NOTIF_ADD`,
@@ -94,7 +93,8 @@ export const prefillByEmailEpic = (action$) =>
 export const sendOrderEpic = (action$, store) =>
   action$.ofType(CART_CUSTOMER_EDIT)
     .filter(() => store.getState().shoppingCartContainer.customer.get('preFill'))
-    .filter(({ field }) => field === 'preFill' || 'email')
+    .filter(({ field }) => field === 'email')
+    .debounceTime(500)
     .switchMap(() =>
       Observable.ajax(doIt(
         hosts.pk,
@@ -111,7 +111,7 @@ export const sendOrderEpic = (action$, store) =>
         ]))
         .catch(() =>
           Observable.of({
-            type: `NOOP_user_not_found`,
+            type: `${CART_CUSTOMER_EDIT}_FAILED`,
           }))
     );
 

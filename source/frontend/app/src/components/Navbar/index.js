@@ -17,6 +17,7 @@ const Navbar = () => (
       <Link to="/manager/category">Správa kategorií</Link>&nbsp;
       <Link to="/manager/pizzas">Správa pizz</Link>&nbsp;
       <Link to="/manager/orders/history">Historie objednávek</Link>&nbsp;
+      <Link to="/manager/change-pw">změna hesla</Link>&nbsp;
     </Navigation>
   </div>
 );

@@ -81,7 +81,7 @@ public class UserController {
         return insertedUser.isPresent() ?
                 new ResponseEntity<>(insertedUser.get(), HttpStatus.OK)
                 :
-                new ResponseEntity<>(new ErrorDTO(error) , HttpStatus.BAD_REQUEST);
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -105,6 +105,7 @@ public class UserController {
                 :
                 new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
+
     /**
      * Delete user in database
      *
@@ -126,6 +127,7 @@ public class UserController {
                 :
                 new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
+
     /**
      * Update  user pw in database
      *
@@ -136,14 +138,14 @@ public class UserController {
     public HttpEntity<?> changePassword(@RequestBody UserChangePwDTO user) {
 
         boolean succesfullyChanged = false;
-        String error = "";
+        String error = "Nebylo možné změnit heslo.";
         try {
-            succesfullyChanged = userService.changePassword(user.getId(), user.getUserOldPassword(), user.getUserNewPassword());
+            succesfullyChanged = userService.changePassword(user.getLogin(), user.getUserOldPassword(), user.getUserNewPassword());
         } catch (DatabaseException e) {
-            error = "Nebylo možné změnit heslo.";
+            error = e.getMessage();
         }
         return succesfullyChanged ?
-                new ResponseEntity<>(user.getId(), HttpStatus.OK)
+                new ResponseEntity<>(user.getLogin(), HttpStatus.OK)
                 :
                 new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
@@ -157,8 +159,7 @@ public class UserController {
                 user.getFirstName().isEmpty() &&
                 user.getLastName().isEmpty() &&
                 user.getLogin().isEmpty() &&
-                user.getPhone().isEmpty())
-        {
+                user.getPhone().isEmpty()) {
             valid = false;
         }
         return valid;

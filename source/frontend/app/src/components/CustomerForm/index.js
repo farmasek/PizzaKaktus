@@ -9,7 +9,7 @@ import {
   CardTitle,
   CardText,
 } from 'react-toolbox/lib/card';
-import { Checkbox } from 'react-toolbox/lib/checkbox';
+import ProgressBar from 'react-toolbox/lib/progress_bar';
 import Input from 'react-toolbox/lib/input';
 
 class CustomerForm extends Component { // eslint-disable-line react/prefer-stateless-function
@@ -33,11 +33,7 @@ class CustomerForm extends Component { // eslint-disable-line react/prefer-state
               onKeyPress={(event) => this.props.handleConfirm(event)}
               error={this.props.customerError.get('email')}
             />
-            <Checkbox
-              label="Předvyplnit na základě emailu"
-              checked={preFill}
-              onChange={() => this.handleChange('preFill', !preFill)}
-            />
+            {this.props.isLoadingUser && <ProgressBar type="circular" mode="indeterminate" />}
           </div>
           <div className={styles.orderRow}>
             <Input

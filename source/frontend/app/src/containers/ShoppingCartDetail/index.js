@@ -74,6 +74,7 @@ class ShoppingCartDetail extends Component {
                 removeFromCart={(pizza) => this.props.actions.removeFromShoppingCart(pizza)}
               />
               <CustomerForm
+                isLoadingUser={this.props.isLoadingUser}
                 editCustomerField={this.props.actions.editCustomerField}
                 handleConfirm={(event) => this.handleConfirm(event)}
                 customerError={this.props.customerError}
@@ -118,6 +119,7 @@ ShoppingCartDetail.propTypes = {
   actions: PropTypes.object,
   dialog: PropTypes.object,
   customer: PropTypes.any,
+  isLoadingUser: PropTypes.bool,
   customerError: PropTypes.any,
 };
 
@@ -127,6 +129,7 @@ const mapStateToProps = (state) => ({
   dialog: state.shoppingCartContainer.dialog,
   customer: state.shoppingCartContainer.customer,
   customerError: state.shoppingCartContainer.customerError,
+  isLoadingUser: state.shoppingCartContainer.isLoading,
 });
 
 // mapDispatchToProps :: Dispatch -> {Action}

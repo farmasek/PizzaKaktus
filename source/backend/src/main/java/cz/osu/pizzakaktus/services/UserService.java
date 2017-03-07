@@ -46,12 +46,12 @@ public interface UserService {
 
     /**
      * Change user pw in database
-     * @param userDTO - user to be changed pw
+     * @param login - user to be changed pw
      * @param userOldPassword - old pw of user to be changed
      * @param userNewPassword - new pw of user to be changed
      * @return - true if successful, false if failed
      */
-    boolean changePassword(int userId,String userOldPassword,String userNewPassword) throws DatabaseException;
+    boolean changePassword(String login,String userOldPassword,String userNewPassword) throws DatabaseException;
 
 
     public boolean checkPassword(String passwordPlainText, String storedHash);

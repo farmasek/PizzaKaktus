@@ -20,6 +20,7 @@ const InitialState = new Record({
   },
   customer: new Customer(),
   customerError: new Customer(),
+  isLoading: false,
 });
 
 const shoppingCartReducer =
@@ -63,10 +64,14 @@ const shoppingCartReducer =
         return state.set('dialog', action.dialog);
       }
       case CART_CUSTOMER_EDIT: {
-        return state.setIn(['customer', action.field], action.value);
+        return action.field === 'email' ? state.setIn(['customer', action.field], action.value).set('isLoading', true) :
+               state.setIn(['customer', action.field], action.value)
+      }
+      case `${CART_CUSTOMER_EDIT}_FAILED`: {
+        return state.set('isLoading', false);
       }
       case `${CART_CUSTOMER_EDIT}_prefill`: {
-        return state.set('customer', mapCustomer(action.response));
+        return state.set('customer', mapCustomer(action.response)).set('isLoading', false);
       }
       case CART_CUSTOMER_ERROR_EDIT: {
         if (action.field === 'resetator') {

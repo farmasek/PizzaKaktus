@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class UserChangePwDTO {
-    private Integer id;
+    private String login;
     private String userOldPassword;
     private String userNewPassword;
 }

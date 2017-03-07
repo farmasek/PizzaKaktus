@@ -1,23 +1,28 @@
 import React from 'react';
-import { Router, Route, IndexRoute } from 'react-router';
+import {
+  Router,
+  Route,
+  IndexRoute
+} from 'react-router';
 import { Provider } from 'react-redux';
 import store, { history } from './store';
 /* eslint-disable */
 import App from 'components/App';
 import * as Pages from './pages';
+import UserChanagePassword from './containers/UserChangePassword/index';
 import { isAuthorized } from './network';
 /* eslint-enable */
 
 /*
-const requireAuth = (nextState, replace) => {
-  if (!isAuthorized()) {
-    replace({
-      pathname: '/',
-      state: { nextPathname: nextState.location.pathname },
-    });
-  }
-};
-*/
+ const requireAuth = (nextState, replace) => {
+ if (!isAuthorized()) {
+ replace({
+ pathname: '/',
+ state: { nextPathname: nextState.location.pathname },
+ });
+ }
+ };
+ */
 const routes = (
   <Provider store={store}>
     <Router
@@ -32,6 +37,7 @@ const routes = (
         <Route path="/manager/orders/history" component={Pages.ManageOrdersPage} />
         <Route path="/manager/pizzas" component={Pages.ManagePizzasPage} />
         <Route path="/manager/users" component={Pages.ManageUsersPage} />
+        <Route path="/manager/change-pw" component={UserChanagePassword} />
 
         <Route path="/cart" component={Pages.ShoppingCartPage} />
         <Route path="/menu" component={Pages.MenuPage} />
