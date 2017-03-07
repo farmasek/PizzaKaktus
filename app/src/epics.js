@@ -43,6 +43,8 @@ import {
   logoutEpic,
 } from './containers/LoginContainer/actions';
 
+import { userpwdConfirmChange } from './containers/UserChangePassword/actions';
+
 export default combineEpics(
   fetchIngredientListEpic,
   saveIngredientListEpic,
@@ -66,4 +68,5 @@ export default combineEpics(
   changeTimePaginationEpic,
   loginEpic,
   logoutEpic,
+  userpwdConfirmChange,
 );
