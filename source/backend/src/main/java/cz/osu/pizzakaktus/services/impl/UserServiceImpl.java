@@ -62,6 +62,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDb> findByLogin(String login) throws DatabaseException {
+        List<UserDb> user = userRepository.findByLogin(login);
+        if(user.isEmpty()) {
+            throw new DatabaseException("Nebylo možné najít uživatele s logienm " + login + ".");
+        } else {
+            return user;
+        }
+    }
+
+    @Override
     public boolean isLoginTaken(String login) throws DatabaseException {
         List<UserDb> byLogin = userRepository.findByLogin(login);
         return !byLogin.isEmpty();

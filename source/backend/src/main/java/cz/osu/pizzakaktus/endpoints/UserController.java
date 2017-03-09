@@ -63,6 +63,35 @@ public class UserController {
     }
 
     /**
+     * Return user by login
+     *
+     * @return Json user
+     */
+    @RequestMapping(value = "/by-login/{login}", method = RequestMethod.GET)
+    public HttpEntity<?> findUserByLogin(@PathVariable("login") String login) {
+        List<UserDb> allUsers = new ArrayList();
+        String error = "";
+        try {
+            allUsers = userService.findByLogin(login);
+            List<UserDTO> collect = allUsers.stream()
+                    .map(userDb -> UserDTO.builder()
+                            .id(userDb.getId())
+                            .firstName(userDb.getFirstName())
+                            .lastName(userDb.getLastName())
+                            .login(userDb.getLogin())
+                            .phone(userDb.getPhone())
+                            .active(userDb.isActive())
+                            .roles(userDb.getRoles().stream().map(Role::getRole).collect(Collectors.toList()))
+                            .build())
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(collect, HttpStatus.OK);
+        } catch (DatabaseException e) {
+            error = "Nebylo možné najít uživatele " + login + ".";
+            return new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
      * Insert user into database
      *
      * @param user - Json of User

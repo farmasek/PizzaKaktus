@@ -33,7 +33,7 @@ export const setToken = (token) => {
   window.localStorage.setItem('token', JSON.stringify(token));
 };
 
-const defaultHeader = (json) => ({
+const defaultHeader = (json, body) => ({
   async: true,
   crossDomain: false,
   headers: {
@@ -41,6 +41,10 @@ const defaultHeader = (json) => ({
     'Content-Type': `${json
       ? 'application/json'
       : 'application/x-www-form-urlencoded; charset=UTF-8'}`,
+    /* authorization: body
+      ? 'Basic YWNtZTphY21lc2VjcmV0'
+      : `Bearer ${getToken().access_token}`, */
+    authorization: 'Basic YWNtZTphY21lc2VjcmV0',
   },
   processData: false,
   contentType: false,
@@ -53,7 +57,8 @@ export const doIt = (host, path, methodString, body = {}, json = false) => {
     method: methodString,
     body,
   };
-  const header = defaultHeader(json);
+  const header = defaultHeader(json, body);
+  console.log(header);
   return Object.assign(
     received,
     header,

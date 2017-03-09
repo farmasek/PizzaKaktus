@@ -3,8 +3,10 @@ import {
   LOGIN_FORM_CHANGE,
   LOGIN,
   LOGIN_FORM_ERRORS,
+  SET_USER,
 } from './constants';
 import { Record, Map } from 'immutable';
+import { User, mapUser } from '../../models/User';
 
 const initialLoginForm = new Map({
   username: '',
@@ -17,6 +19,7 @@ const InitialState = new Record({
   loginForm: initialLoginForm,
   loginErrors: initialLoginForm,
   loginError: '',
+  user: new User(),
 });
 
 const loginReducer =
@@ -52,8 +55,11 @@ const loginReducer =
       }
       case `${LOGIN}_FULFILLED`: {
         return state.withMutations(s => s
-        .set('authError', '')
+        .set('loginError', '')
         .set('logging', false));
+      }
+      case SET_USER: {
+        return state.set('user', mapUser(action.user));
       }
       default:
         return state;

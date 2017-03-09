@@ -35,6 +35,13 @@ public interface UserService {
      */
     List<UserDb> findAll() throws DatabaseException;
 
+    /**
+     * Returns user by login
+     *
+     * @return user
+     */
+    List<UserDb> findByLogin(String login) throws DatabaseException;
+
     boolean isLoginTaken(String login) throws DatabaseException;
 
     /**
