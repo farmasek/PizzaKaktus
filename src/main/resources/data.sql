@@ -5,7 +5,7 @@ INSERT INTO order_status (id, status) VALUES (1,'CREATED') ON CONFLICT (id) DO N
 INSERT INTO order_status (id, status) VALUES (2,'OPENED') ON CONFLICT (id) DO NOTHING;
 INSERT INTO order_status (id, status) VALUES (3,'CLOSED') ON CONFLICT (id) DO NOTHING;
 INSERT INTO order_status (id, status) VALUES (4,'CANCELLED') ON CONFLICT (id) DO NOTHING;
---
+
 -- INSERT INTO ingredient_db (id, amount, cost, cost_custom, name) VALUES (1, '10 g', 5.00, 10.00, 'tomatový základ') ON CONFLICT (id) DO NOTHING;
 -- INSERT INTO ingredient_db (id, amount, cost, cost_custom, name) VALUES (2, '10 g', 8.00, 15.00, 'smetanový základ') ON CONFLICT (id) DO NOTHING;
 -- INSERT INTO ingredient_db (id, amount, cost, cost_custom, name) VALUES (3, '25 g', 15.00, 20.00, 'šunka') ON CONFLICT (id) DO NOTHING;
@@ -41,7 +41,6 @@ INSERT INTO order_status (id, status) VALUES (4,'CANCELLED') ON CONFLICT (id) DO
 -- INSERT INTO customer_db(id, name, surname, phone, email, street, city, zip)
 -- VALUES (4, 'Hana', 'Malá', '+420605265986', 'hana666@gmail.cz', 'Kubánská 12', 'Ostrava', '70800') ON CONFLICT (id) DO NOTHING;
 --
-
 --
 -- INSERT INTO order_db(id, date_created, date_modified, customer_id, order_status_id)
 -- VALUES (1, TO_TIMESTAMP('2017-02-21 19:21:00.914000', 'YYYY-MM-DD HH24-MI-SS.FF'),
