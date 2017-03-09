@@ -1,12 +1,11 @@
 import { Observable } from 'rxjs';
-import { browserHistory } from 'react-router';
-import { hosts, doIt, setToken, removeToken } from '../../network';
+import { hosts, doIt, setToken } from '../../network';
 import {
   LOGIN_DIALOG,
   LOGIN_FORM_CHANGE,
   LOGIN,
-  LOGOUT,
   LOGIN_FORM_ERRORS,
+  SET_USER,
 } from './constants';
 
 export const toggleDialog = () => ({
@@ -36,12 +35,13 @@ export const login = (username, password) => ({
 export const loginEpic = action$ =>
   action$.ofType(LOGIN)
   .mergeMap(action => Observable.merge(
-    Observable.ajax(doIt(hosts.auth, '/token', 'POST', action.body))
+    Observable.ajax(doIt(hosts.pk, 'oauth/token', 'POST', action.body))
     .do((payload) => {
       setToken(payload.response);
     })
     .map(payload => ({
       type: `${LOGIN}_FULFILLED`,
+      login: action.body.username,
       payload: payload.response,
     }))
     .catch(error => Observable.of({
@@ -60,29 +60,10 @@ export const loginEpic = action$ =>
       : 'Could not establish connection.',
   }));
 
-export const logout = () => ({
-  type: LOGOUT,
-});
-
-export const logoutEpic = action$ =>
-  action$.ofType(LOGOUT)
-  .switchMap(() => Observable.ajax(doIt(
-    hosts.auth,
-    'sign-out',
-    'GET',
-    {},
-  ))
-  .map(() => {
-    removeToken();
-    browserHistory.push('/');
-    return {
-      type: `${LOGOUT}_FULFILLED`,
-    };
-  }))
-  .catch(() => {
-    removeToken();
-    browserHistory.push('/');
-    return Observable.of({
-      type: `${LOGOUT}_FULFILLED`,
-    });
-  });
+export const loggedInEpic = action$ =>
+  action$.ofType(`${LOGIN}_FULFILLED`)
+  .mergeMap((action) => Observable.ajax(doIt(hosts.pk, `user/by-login/${action.login}`, 'GET', {}))
+  .map(payload => ({
+    type: SET_USER,
+    user: payload.response,
+  })));

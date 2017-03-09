@@ -40,7 +40,7 @@ import {
 } from './containers/ShoppingCartDetail/actions';
 import {
   loginEpic,
-  logoutEpic,
+  loggedInEpic,
 } from './containers/LoginContainer/actions';
 
 import { userpwdConfirmChange } from './containers/UserChangePassword/actions';
@@ -67,6 +67,6 @@ export default combineEpics(
   prefillByEmailEpic,
   changeTimePaginationEpic,
   loginEpic,
-  logoutEpic,
+  loggedInEpic,
   userpwdConfirmChange,
 );
