@@ -7,13 +7,13 @@ import {
 import { Provider } from 'react-redux';
 import store, { history } from './store';
 /* eslint-disable */
-import App from 'components/App';
+import App from 'containers/AppContainer';
 import * as Pages from './pages';
-import { isAuthorized } from './network';
+import { isLoggedIn } from './network';
 /* eslint-enable */
 /*
 const requireAuth = (nextState, replace) => {
-  if (!isAuthorized()) {
+  if (!isLoggedIn()) {
     replace({
       pathname: '/',
       state: { nextPathname: nextState.location.pathname },

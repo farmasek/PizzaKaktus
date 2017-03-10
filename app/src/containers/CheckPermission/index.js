@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Navbar } from 'components';
 import * as ImmutablePropTypes from 'react-immutable-proptypes';
 
 class CheckPermissions extends React.Component {
@@ -17,14 +16,15 @@ class CheckPermissions extends React.Component {
   };
 
   render() {
+    if (!this.props.user.login) {
+      return null;
+    } else if (!this.hasPermissions()) {
+      return null;
+    }
     return (
-      <div>
-        {
-          this.hasPermissions()
-            ? React.cloneElement(props.children, props)
-            : null
-        }
-      </div>
+      <span>
+        { React.cloneElement(this.props.children) }
+      </span>
     );
   }
 

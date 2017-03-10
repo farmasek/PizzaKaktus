@@ -41,6 +41,7 @@ import {
 import {
   loginEpic,
   loggedInEpic,
+  loggedOutEpic,
   userpwdConfirmChange,
 } from './containers/LoginContainer/actions';
 
@@ -67,5 +68,6 @@ export default combineEpics(
   changeTimePaginationEpic,
   loginEpic,
   loggedInEpic,
+  loggedOutEpic,
   userpwdConfirmChange,
 );

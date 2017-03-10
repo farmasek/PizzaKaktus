@@ -34,6 +34,9 @@ class LoginContainer extends React.Component {
     return valid;
   };
 
+  handleConfirm = (event) =>
+    event.key === 'Enter' ? this.loginUser() : null;
+
   loginUser = () => {
     if (this.validate()) {
       this.props.actions.login(
@@ -53,12 +56,14 @@ class LoginContainer extends React.Component {
         value={this.props.loginForm.get('username')}
         onChange={ (value) => this.props.actions.loginChange('username', value) }
         error={this.props.loginErrors.get('username')}
+        onKeyPress={(event) => this.handleConfirm(event)}
       />
       <Input
         type="password" label="Heslo"
         value={this.props.loginForm.get('password')}
         onChange={ (value) => this.props.actions.loginChange('password', value) }
         error={this.props.loginErrors.get('password')}
+        onKeyPress={(event) => this.handleConfirm(event)}
       />
       {
         this.props.loginError
@@ -107,6 +112,7 @@ class LoginContainer extends React.Component {
         this.props.new,
       )}
       />
+      <Button label="Zavřít" onClick={() => this.props.actions.togglePasswordDialog()}/>
     </Dialog>
   );
 

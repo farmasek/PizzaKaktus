@@ -19,7 +19,7 @@ export const getToken = () => {
   }
 };
 
-export const isAuthorized = () => {
+export const isLoggedIn = () => {
   const token = getToken();
   return token && token;
 };
@@ -40,7 +40,7 @@ const defaultHeader = (json, body) => ({
     'Content-Type': `${json
       ? 'application/json'
       : 'application/x-www-form-urlencoded; charset=UTF-8'}`,
-    authorization: isAuthorized()
+    authorization: isLoggedIn()
       ? `Bearer ${getToken().access_token}`
       : 'Basic YWNtZTphY21lc2VjcmV0',
   },
