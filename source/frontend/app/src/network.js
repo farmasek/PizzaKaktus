@@ -56,7 +56,6 @@ export const doIt = (host, path, methodString, body = {}, json = false) => {
     body,
   };
   const header = defaultHeader(json, body);
-  console.log(header);
   return Object.assign(
     received,
     header,

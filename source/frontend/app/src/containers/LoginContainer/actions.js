@@ -6,6 +6,7 @@ import {
   LOGIN,
   LOGIN_FORM_ERRORS,
   SET_USER,
+  LOGOUT,
 } from './constants';
 
 export const toggleDialog = () => ({
@@ -69,3 +70,7 @@ export const loggedInEpic = action$ =>
     type: SET_USER,
     user: payload.response,
   })));
+
+export const logout = () => ({
+  type: LOGOUT,
+});
