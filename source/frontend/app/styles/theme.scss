@@ -2,3 +2,7 @@
 @import "~react-toolbox/lib/globals";
 @import "~react-toolbox/lib/mixins";
 @import "./styles";
+
+.errText {
+  color: $color-text-error;
+}
