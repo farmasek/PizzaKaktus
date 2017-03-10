@@ -64,8 +64,9 @@ const shoppingCartReducer =
         return state.set('dialog', action.dialog);
       }
       case CART_CUSTOMER_EDIT: {
-        return action.field === 'email' ? state.setIn(['customer', action.field], action.value).set('isLoading', true) :
-               state.setIn(['customer', action.field], action.value)
+        return action.field === 'email'
+          ? state.setIn(['customer', action.field], action.value).set('isLoading', true)
+          : state.setIn(['customer', action.field], action.value);
       }
       case `${CART_CUSTOMER_EDIT}_FAILED`: {
         return state.set('isLoading', false);

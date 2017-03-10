@@ -17,7 +17,6 @@ public class MapToDTO {
 
 
     public PizzaDTO mapPizza(PizzaDb pizzaDb) {
-
         return PizzaDTO.builder()
                 .id(pizzaDb.getId())
                 .title(pizzaDb.getTitle())

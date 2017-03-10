@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Router,
   Route,
-  IndexRoute
+  IndexRoute,
 } from 'react-router';
 import { Provider } from 'react-redux';
 import store, { history } from './store';

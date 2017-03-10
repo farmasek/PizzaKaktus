@@ -9,7 +9,7 @@ import {
   Card,
   CardTitle,
   CardText,
-  CardActions
+  CardActions,
 } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
 import { Input } from 'react-toolbox/lib/input';
@@ -48,12 +48,14 @@ class UserPWDChange extends Component {
           {this.props.validationMessage}
         </CardText>
         <CardActions>
-          <Button label="Změnit heslo" disabled={!!this.props.validationMessage}
-                  primary raised onClick={() => this.props.actions.confirmChange(
-            this.props.username,
-            this.props.pwOld,
-            this.props.pw1,
-          )} />
+          <Button
+            label="Změnit heslo" disabled={!!this.props.validationMessage}
+            primary raised onClick={() => this.props.actions.confirmChange(
+              this.props.username,
+              this.props.pwOld,
+              this.props.pw1,
+            )}
+          />
         </CardActions>
       </Card>
     );
@@ -65,6 +67,7 @@ UserPWDChange.propTypes = {
   pw1: PropTypes.string,
   pw2: PropTypes.string,
   validationMessage: PropTypes.string,
+  actions: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({

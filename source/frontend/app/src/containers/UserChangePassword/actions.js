@@ -2,13 +2,11 @@ import {
   USERPWD_CHANGE_FORM_VALUE,
   USERPWD_CONFIRM_CHANGE,
 } from './constants';
-import { mapIngredient } from '../../models/Ingredient';
 import {
   doIt,
-  hosts
+  hosts,
 } from '../../network';
 import { Observable } from 'rxjs';
-import { Map } from 'immutable';
 
 export const changeValue = (input, value) => ({
   type: USERPWD_CHANGE_FORM_VALUE,
@@ -23,7 +21,7 @@ export const confirmChange = (login, oldPw, newPw) => ({
   newPw,
 });
 
-export const userpwdConfirmChange = (action$, store$) =>
+export const userpwdConfirmChange = action$ =>
   action$.ofType(USERPWD_CONFIRM_CHANGE)
     .switchMap((action) =>
       Observable.ajax(doIt(hosts.pk, 'user/changePassword', 'POST',
@@ -42,7 +40,7 @@ export const userpwdConfirmChange = (action$, store$) =>
             notification: {
               message: 'Heslo změněno.',
             },
-          }
+          },
         ])
         .catch(error =>
           Observable.of({

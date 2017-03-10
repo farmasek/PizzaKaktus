@@ -59,7 +59,8 @@ const loginReducer =
         .set('logging', false));
       }
       case SET_USER: {
-        return state.set('user', mapUser(action.user));
+        console.log(action.user);
+        return state.set('user', mapUser(action.user[0]));
       }
       default:
         return state;

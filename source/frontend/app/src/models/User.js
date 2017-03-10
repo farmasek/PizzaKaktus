@@ -19,13 +19,3 @@ export const mapUser = (user) => new User({
   phone: user.phone,
   active: user.active,
 });
-
-export const mapUserData = (firstName, lastName, passwordHash, login, roles, phone,active) => new User({
-  firstName,
-  lastName,
-  passwordHash,
-  login,
-  roles,
-  phone,
-  active,
-});
