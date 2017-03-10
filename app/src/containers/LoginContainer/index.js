@@ -12,6 +12,10 @@ import * as styles from './index.module.scss';
 
 class LoginContainer extends React.Component {
 
+  componentWillMount() {
+    localStorage.clear();
+  }
+
   validate = () => {
     let valid = true;
     let username = '';
@@ -40,7 +44,6 @@ class LoginContainer extends React.Component {
 
   loginDialog = () => (
     <Dialog
-      actions={this.actions}
       active={this.props.dialogState}
       onEscKeyDown={() => this.props.actions.toggleDialog()}
       onOverlayClick={() => this.props.actions.toggleDialog()}
@@ -67,6 +70,46 @@ class LoginContainer extends React.Component {
     </Dialog>
   );
 
+  passwordChangeDialog = () => (
+    <Dialog
+      active={this.props.dialog}
+      onEscKeyDown={() => this.props.actions.togglePasswordDialog()}
+      onOverlayClick={() => this.props.actions.togglePasswordDialog()}
+    >
+      <Input
+        type="password"
+        label="Staré heslo"
+        value={this.props.old}
+        onChange={(value) => this.props.actions.changeValue('old', value)}
+      />
+      <Input
+        type="password"
+        label="Nové heslo"
+        value={this.props.new}
+        onChange={(value) => this.props.actions.changeValue('new', value)}
+      />
+      <Input
+        type="password"
+        label="Nové heslo znovu"
+        value={this.props.newAgain}
+        onChange={(value) => this.props.actions.changeValue('newAgain', value)}
+      />
+      {
+        this.props.changeMessage
+          ? <div className={styles.errText}>{this.props.changeMessage}</div>
+          : null
+      }
+      <Button
+        label="Změnit heslo" disabled={!!this.props.changeMessage || !this.props.newAgain}
+        primary raised onClick={() => this.props.actions.confirmChange(
+        this.props.user.get('login'),
+        this.props.old,
+        this.props.new,
+      )}
+      />
+    </Dialog>
+  );
+
   render() {
     return (
       <div className={styles.loginBtn}>
@@ -75,11 +118,13 @@ class LoginContainer extends React.Component {
             ? <div>
             <span>Přihlášený uživatel: {this.props.user.firstName} {this.props.user.lastName}</span>
             <Button label="Odhlásit se" onClick={() => this.props.actions.logout()}/>
+            <Button label="Změnit heslo" onClick={() => this.props.actions.togglePasswordDialog()}/>
           </div>
             : <Button label="Přihlásit se" onClick={() => this.props.actions.toggleDialog()}/>
         }
 
         { this.loginDialog() }
+        { this.passwordChangeDialog() }
       </div>
     );
   }
@@ -93,6 +138,11 @@ LoginContainer.propTypes = {
   dialogState: PropTypes.bool.isRequired,
   loginError: PropTypes.string,
   user: ImmutablePropTypes.record,
+  old: PropTypes.string.isRequired,
+  new: PropTypes.string.isRequired,
+  newAgain: PropTypes.string.isRequired,
+  changeMessage: PropTypes.string.isRequired,
+  dialog: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -101,6 +151,11 @@ const mapStateToProps = (state) => ({
   loginErrors: state.loginReducer.loginErrors,
   loginError: state.loginReducer.loginError,
   user: state.loginReducer.user,
+  old: state.loginReducer.old,
+  new: state.loginReducer.new,
+  newAgain: state.loginReducer.newAgain,
+  changeMessage: state.loginReducer.changeMessage,
+  dialog: state.loginReducer.dialog,
 });
 
 const mapDispatchToProps = (dispatch) => ({

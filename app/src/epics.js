@@ -41,9 +41,8 @@ import {
 import {
   loginEpic,
   loggedInEpic,
+  userpwdConfirmChange,
 } from './containers/LoginContainer/actions';
-
-import { userpwdConfirmChange } from './containers/UserChangePassword/actions';
 
 export default combineEpics(
   fetchIngredientListEpic,
