@@ -35,16 +35,15 @@ export const setToken = (token) => {
 
 const defaultHeader = (json, body) => ({
   async: true,
-  crossDomain: false,
+  crossDomain: true,
   headers: {
     'cache-control': 'no-cache',
     'Content-Type': `${json
       ? 'application/json'
       : 'application/x-www-form-urlencoded; charset=UTF-8'}`,
-    /* authorization: body
-      ? 'Basic YWNtZTphY21lc2VjcmV0'
-      : `Bearer ${getToken().access_token}`, */
-    authorization: 'Basic YWNtZTphY21lc2VjcmV0',
+    authorization: isAuthorized()
+      ? `Bearer ${getToken().access_token}`
+      : 'Basic YWNtZTphY21lc2VjcmV0',
   },
   processData: false,
   contentType: false,
