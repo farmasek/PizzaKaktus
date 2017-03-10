@@ -39,11 +39,13 @@ export const loginEpic = action$ =>
     .do((payload) => {
       setToken(payload.response);
     })
-    .map(payload => ({
-      type: `${LOGIN}_FULFILLED`,
-      login: action.body.username,
-      payload: payload.response,
-    }))
+    .switchMap(payload => [
+      {
+        type: `${LOGIN}_FULFILLED`,
+        login: action.body.username,
+        payload: payload.response,
+      },
+    ])
     .catch(error => Observable.of({
       type: `${LOGIN}_REJECTED`,
       payload: error.xhr.response

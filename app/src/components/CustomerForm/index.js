@@ -19,7 +19,6 @@ class CustomerForm extends Component { // eslint-disable-line react/prefer-state
   };
 
   render() {
-    const preFill = this.props.customer.get('preFill');
     return (
       <Card >
         <CardTitle>Doručovací údaje</CardTitle>
@@ -101,6 +100,7 @@ CustomerForm.propTypes = {
   customer: PropTypes.any.isRequired,
   customerError: PropTypes.any.isRequired,
   handleConfirm: PropTypes.func.isRequired,
+  isLoadingUser: PropTypes.bool,
 
 };
 

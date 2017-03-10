@@ -21,7 +21,6 @@ export const getToken = () => {
 
 export const isAuthorized = () => {
   const token = getToken();
-  // Auth rules
   return token && token;
 };
 

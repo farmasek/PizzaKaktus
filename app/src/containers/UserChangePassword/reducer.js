@@ -4,7 +4,6 @@ import {
 } from './constants';
 import {
   Record,
-  Map
 } from 'immutable';
 
 const InitialState = new Record({
@@ -20,9 +19,10 @@ const changePwdReducer =
     switch (action.type) {
       case `${USERPWD_CHANGE_FORM_VALUE}`: {
         let newState = state.set(action.input, action.value);
-        if (newState.get('pw1') && newState.get('pw2') && newState.get('pw1') !== newState.get('pw2'))
+        if (newState.get('pw1') && newState.get('pw2') && newState.get('pw1')
+          !== newState.get('pw2')) {
           newState = newState.set('validationMessage', 'Hesla nejsou stejné');
-        else {
+        } else {
           newState = newState.set('validationMessage', '');
         }
         return newState;

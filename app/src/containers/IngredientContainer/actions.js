@@ -83,7 +83,7 @@ export const fetchIngredientListEpic = action$ =>
             type: `NOTIF_ADD`,
             notification: {
               message: error.xhr.response,
-              barStyle: { color: 'red' },
+              barStyle: { color: '#e57373' },
             },
           }))
     );
