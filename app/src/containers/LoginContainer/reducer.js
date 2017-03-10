@@ -4,6 +4,7 @@ import {
   LOGIN,
   LOGIN_FORM_ERRORS,
   SET_USER,
+  LOGOUT,
 } from './constants';
 import { Record, Map } from 'immutable';
 import { User, mapUser } from '../../models/User';
@@ -56,11 +57,15 @@ const loginReducer =
       case `${LOGIN}_FULFILLED`: {
         return state.withMutations(s => s
         .set('loginError', '')
+        .set('dialogState', false)
         .set('logging', false));
       }
       case SET_USER: {
-        console.log(action.user);
         return state.set('user', mapUser(action.user[0]));
+      }
+      case LOGOUT: {
+        localStorage.clear();
+        return state.set('user', new User());
       }
       default:
         return state;
