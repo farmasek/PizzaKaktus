@@ -11,7 +11,7 @@ import userContainer from 'containers/UserContainer/reducer';
 import menuContainer from 'containers/MenuContainer/reducer';
 import shoppingCartContainer from 'containers/ShoppingCartDetail/reducer';
 import orderContainer from 'containers/OrderContainer/reducer';
-import notificationReducer from './components/App/reducer';
+import notificationReducer from './containers/AppContainer/reducer';
 import loginReducer from './containers/LoginContainer/reducer';
 
 const rootReducer = combineReducers({

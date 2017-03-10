@@ -76,8 +76,7 @@ const loginReducer =
       case SET_USER: {
         return state.set('user', mapUser(action.user[0]));
       }
-      case LOGOUT: {
-        localStorage.clear();
+      case `${LOGOUT}_FULFILLED`: {
         return state.set('user', new User());
       }
       case USERPWD_CHANGE_FORM_VALUE: {

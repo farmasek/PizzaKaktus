@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
-import { hosts, doIt, setToken } from '../../network';
+import { browserHistory } from 'react-router';
+import { hosts, doIt, setToken, removeToken } from '../../network';
 import {
   LOGIN_DIALOG,
   LOGIN_FORM_CHANGE,
@@ -46,12 +47,19 @@ export const loginEpic = action$ =>
     Observable.ajax(doIt(hosts.pk, 'oauth/token', 'POST', action.body))
     .do((payload) => {
       setToken(payload.response);
+      browserHistory.push('/');
     })
     .switchMap(payload => [
       {
         type: `${LOGIN}_FULFILLED`,
         login: action.body.username,
         payload: payload.response,
+      },
+      {
+        type: `NOTIF_ADD`,
+        notification: {
+          message: 'Uživatel úspěšně přihlášen.',
+        },
       },
     ])
     .catch(error => Observable.of({
@@ -81,6 +89,24 @@ export const loggedInEpic = action$ =>
 export const logout = () => ({
   type: LOGOUT,
 });
+
+export const loggedOutEpic = action$ =>
+  action$.ofType(LOGOUT)
+  .do(() => {
+    removeToken();
+    browserHistory.push('/');
+  })
+  .switchMap(() => [
+    {
+      type: `NOTIF_ADD`,
+      notification: {
+        message: 'Uživatel úspěšně odhlášen.',
+      },
+    },
+    {
+      type: `${LOGOUT}_FULFILLED`,
+    },
+  ]);
 
 export const changeValue = (input, value) => ({
   type: USERPWD_CHANGE_FORM_VALUE,

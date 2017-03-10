@@ -1,4 +1,5 @@
 /* Assemble all containers for export */
+export App from './AppContainer';
 export IngredientContainer from './IngredientContainer';
 export PizzaContainer from './PizzaContainer';
 export CategoryContainer from './CategoryContainer';

@@ -7,4 +7,3 @@ export PizzaList from './PizzaList';
 export CreateCategory from './CreateCategory';
 export CategoryList from './CategoryList';
 export Navbar from './Navbar';
-export App from './App';

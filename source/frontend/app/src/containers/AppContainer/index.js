@@ -7,9 +7,9 @@ import { NotificationStack } from 'react-notification';
 import * as ImmutablePropTypes from 'react-immutable-proptypes';
 import * as actionCreators from './actions';
 import * as styles from './index.module.scss';
-import LoginContainer from '../../containers/LoginContainer/index';
+import LoginContainer from '../LoginContainer/index';
 
-const Main = (props) => (
+const AppContainer = (props) => (
   <div>
     <AppBar fixed flat>
       <Navbar />
@@ -25,7 +25,7 @@ const Main = (props) => (
   </div>
 );
 
-Main.propTypes = {
+AppContainer.propTypes = {
   children: React.PropTypes.any,
   notifications: ImmutablePropTypes.orderedSet,
 };
@@ -52,6 +52,6 @@ const mapDispatchToProps = (dispatch) => ({
 const App = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Main);
+)(AppContainer);
 
 export default App;
