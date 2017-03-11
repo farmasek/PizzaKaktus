@@ -1,7 +1,9 @@
 package cz.osu.pizzakaktus.endpoints;
 
 import com.google.gson.Gson;
+import cz.osu.pizzakaktus.endpoints.mappers.MapToDTO;
 import cz.osu.pizzakaktus.endpoints.models.ErrorDTO;
+import cz.osu.pizzakaktus.endpoints.models.UserAuthDTO;
 import cz.osu.pizzakaktus.endpoints.models.UserChangePwDTO;
 import cz.osu.pizzakaktus.endpoints.models.UserDTO;
 import cz.osu.pizzakaktus.repositories.models.Role;
@@ -14,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.ConnectException;
@@ -194,5 +198,15 @@ public class UserController {
         return valid;
     }
 
+
+    @RequestMapping("/myself")
+    public HttpEntity<?> fetchMyself() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDb userDb = new Gson().fromJson(principal.toString(), UserDb.class);
+        if (userDb != null) {
+            return new ResponseEntity<>(new MapToDTO().mapUser(userDb), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ErrorDTO("Unable to identify user"), HttpStatus.BAD_REQUEST);
+    }
 
 }
