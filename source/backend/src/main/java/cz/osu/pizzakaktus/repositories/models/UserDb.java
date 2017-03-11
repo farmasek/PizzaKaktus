@@ -23,11 +23,11 @@ public class UserDb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(length = 100)
+    @Column(length = 50)
     private String firstName;
-    @Column(length = 100)
+    @Column(length = 50)
     private String lastName;
-    @Column(updatable = false, length = 100)
+    @Column(length = 100)
     private String passwordHash;
     @Column(length = 30)
     private String login;

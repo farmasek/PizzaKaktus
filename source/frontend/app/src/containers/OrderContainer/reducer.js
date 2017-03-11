@@ -64,6 +64,13 @@ const orderReducer = (state = new InitialState(), action) => {
       if (action.paginationType === 'endDate') {
         value = moment(value);
       }
+      if (action.paginationType !== 'number') {
+        return state.withMutations(s => s
+          .setIn(['pagination', action.paginationType], value)
+          .setIn(['pagination', 'sortDir'], sortDir)
+          .setIn(['pagination', 'number'], 0)
+        );
+      }
       return state.withMutations(s => s
         .setIn(['pagination', action.paginationType], value)
         .setIn(['pagination', 'sortDir'], sortDir)
