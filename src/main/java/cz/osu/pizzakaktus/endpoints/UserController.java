@@ -17,6 +17,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -201,12 +202,19 @@ public class UserController {
 
     @RequestMapping("/myself")
     public HttpEntity<?> fetchMyself() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDb userDb = new Gson().fromJson(principal.toString(), UserDb.class);
-        if (userDb != null) {
-            return new ResponseEntity<>(new MapToDTO().mapUser(userDb), HttpStatus.OK);
+        try {
+            SecurityContext context = SecurityContextHolder.getContext();
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            UserDb userDb = new Gson().fromJson(principal.toString(), UserDb.class);
+            if (userDb != null) {
+                return new ResponseEntity<>(new MapToDTO().mapUser(userDb), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(new ErrorDTO("Unable to identify user"), HttpStatus.BAD_REQUEST);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorDTO("Unable to identify user"), HttpStatus.BAD_REQUEST);
+
         }
-        return new ResponseEntity<>(new ErrorDTO("Unable to identify user"), HttpStatus.BAD_REQUEST);
     }
 
 }
