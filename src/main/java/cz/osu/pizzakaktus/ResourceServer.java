@@ -23,8 +23,7 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
                 .antMatchers("/pizza/add").permitAll()
                 .antMatchers("/pizza/update").permitAll()
                 .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
+                .authorizeRequests().anyRequest().permitAll()
                 .and().csrf().disable();
         ;
     }
