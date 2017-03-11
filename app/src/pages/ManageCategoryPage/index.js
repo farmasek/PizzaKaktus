@@ -1,14 +1,15 @@
 import React from 'react';
 import cssModules from 'react-css-modules';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 import CategoryContainer from '../../containers/CategoryContainer';
-
-// Pages map directly to Routes, i.e. one page equals on Route
+import CheckPermission from '../../containers/CheckPermission';
 
 const ManageCategoryPage = () => (
-  <div className={styles.container}>
-    <CategoryContainer/>
-  </div>
+  <CheckPermission permissions={['ADMIN']} redirect>
+    <div className={styles.container}>
+      <CategoryContainer/>
+    </div>
+  </CheckPermission>
 );
 
 export default cssModules(ManageCategoryPage, styles);

@@ -5,13 +5,14 @@ import React from 'react';
 import cssModules from 'react-css-modules';
 import * as styles from './index.module.scss';
 import OrderContainer from '../../containers/OrderContainer';
-
-// Pages map directly to Routes, i.e. one page equals on Route
+import CheckPermission from '../../containers/CheckPermission';
 
 const ManageOrdersPage = () => (
-  <div className={styles.container}>
-    <OrderContainer/>
-  </div>
+  <CheckPermission permissions={['ADMIN']} redirect>
+    <div className={styles.container}>
+      <OrderContainer/>
+    </div>
+  </CheckPermission>
 );
 
 export default cssModules(ManageOrdersPage, styles);

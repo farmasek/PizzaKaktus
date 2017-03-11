@@ -1,14 +1,16 @@
 import React from 'react';
 import cssModules from 'react-css-modules';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 import IngredientContainer from '../../containers/IngredientContainer';
-
-// Pages map directly to Routes, i.e. one page equals on Route
+import CheckPermission from '../../containers/CheckPermission';
 
 const ManageIngredientsPage = () => (
-  <div className={styles.container}>
-    <IngredientContainer/>
-  </div>
+
+  <CheckPermission permissions={['ADMIN']} redirect>
+    <div className={styles.container}>
+      <IngredientContainer/>
+    </div>
+  </CheckPermission>
 );
 
 export default cssModules(ManageIngredientsPage, styles);
