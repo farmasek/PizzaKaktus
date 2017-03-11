@@ -2,12 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import * as ImmutablePropTypes from 'react-immutable-proptypes';
+import { isLoggedIn } from '../../network';
 
 class CheckPermissions extends React.Component {
 
   componentWillMount() {
-    if (!this.props.user.login) {
+    if (!isLoggedIn()) {
       if (this.props.redirect) browserHistory.push('/');
+    } else if (!this.props.user.login) {
+      return null;
     } else if (!this.hasPermissions()) {
       if (this.props.redirect) browserHistory.push('/');
     }
@@ -25,7 +28,9 @@ class CheckPermissions extends React.Component {
   };
 
   render() {
-    if (!this.props.user.login) {
+    if (!isLoggedIn()) {
+      return null;
+    } else if (!this.props.user.login) {
       return null;
     } else if (!this.hasPermissions()) {
       return null;
