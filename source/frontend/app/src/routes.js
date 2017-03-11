@@ -10,8 +10,7 @@ import store, { history } from './store';
 import App from 'containers/AppContainer';
 import * as Pages from './pages';
 import { isLoggedIn } from './network';
-/* eslint-enable */
-/*
+
 const requireAuth = (nextState, replace) => {
   if (!isLoggedIn()) {
     replace({
@@ -20,7 +19,7 @@ const requireAuth = (nextState, replace) => {
     });
   }
 };
-*/
+
 const routes = (
   <Provider store={store}>
     <Router
@@ -29,12 +28,12 @@ const routes = (
     >
       <Route path="/" component={App}>
 
-        <IndexRoute component={Pages.LandingPage}/>
-        <Route path="/manager/category" component={Pages.ManageCategoryPage}/>
-        <Route path="/manager/ingredients" component={Pages.ManageIngredientsPage}/>
-        <Route path="/manager/orders/history" component={Pages.ManageOrdersPage}/>
-        <Route path="/manager/pizzas" component={Pages.ManagePizzasPage}/>
-        <Route path="/manager/users" component={Pages.ManageUsersPage}/>
+        <IndexRoute component={Pages.MenuPage}/>
+        <Route path="/manager/category" component={Pages.ManageCategoryPage} oEnter={requireAuth} />
+        <Route path="/manager/ingredients" component={Pages.ManageIngredientsPage} oEnter={requireAuth} />
+        <Route path="/manager/orders/history" component={Pages.ManageOrdersPage} oEnter={requireAuth} />
+        <Route path="/manager/pizzas" component={Pages.ManagePizzasPage} oEnter={requireAuth} />
+        <Route path="/manager/users" component={Pages.ManageUsersPage} oEnter={requireAuth} />
 
         <Route path="/cart" component={Pages.ShoppingCartPage}/>
         <Route path="/menu" component={Pages.MenuPage}/>
@@ -45,5 +44,6 @@ const routes = (
     </Router>
   </Provider>
 );
+/* eslint-enable */
 
 export default routes;

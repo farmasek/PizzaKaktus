@@ -12,6 +12,7 @@ import {
   USERPWD_CONFIRM_CHANGE,
   PASSWORD_CHANGE_DIALOG,
 } from './constants';
+import { FETCH_MENU } from '../MenuContainer/constants';
 
 export const toggleDialog = () => ({
   type: LOGIN_DIALOG,
@@ -81,10 +82,15 @@ export const loginEpic = action$ =>
 export const loggedInEpic = action$ =>
   action$.ofType(`${LOGIN}_FULFILLED`)
   .mergeMap((action) => Observable.ajax(doIt(hosts.pk, `user/by-login/${action.login}`, 'GET', {}))
-  .map(payload => ({
-    type: SET_USER,
-    user: payload.response,
-  })));
+  .switchMap(payload => [
+    {
+      type: SET_USER,
+      user: payload.response,
+    },
+    {
+      type: FETCH_MENU,
+    },
+  ]));
 
 export const logout = () => ({
   type: LOGOUT,

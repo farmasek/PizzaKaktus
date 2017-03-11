@@ -3,16 +3,16 @@
  */
 import React from 'react';
 import cssModules from 'react-css-modules';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 import PizzaContainer from '../../containers/PizzaContainer';
-
-// Pages map directly to Routes, i.e. one page equals on Route
+import CheckPermission from '../../containers/CheckPermission';
 
 const ManagePizzasPage = () => (
-  <div className={styles.container}>
-    <PizzaContainer/>
-
-  </div>
+  <CheckPermission permissions={['ADMIN']} redirect>
+    <div className={styles.container}>
+      <PizzaContainer/>
+    </div>
+  </CheckPermission>
 );
 
 export default cssModules(ManagePizzasPage, styles);

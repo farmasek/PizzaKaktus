@@ -3,7 +3,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as OrderActionCreators from './actions';
-import * as PizzaActionCreators from '../PizzaContainer/actions';
 import cssModules from 'react-css-modules';
 import styles from './index.module.scss';
 import * as PropTypes from 'react/lib/ReactPropTypes';
@@ -13,7 +12,6 @@ class OrderContainer extends Component {
 
   componentWillMount() {
     this.props.actions.fetchOrderList();
-    this.props.pizzaActions.fetchPizzaList();
   }
 
   render() {
@@ -34,7 +32,6 @@ OrderContainer.propTypes = {
   orders: ImmutablePropTypes.map.isRequired,
   pizzas: ImmutablePropTypes.map.isRequired,
   actions: PropTypes.object,
-  pizzaActions: PropTypes.object,
   loading: PropTypes.bool,
   pagination: ImmutablePropTypes.map,
 };
@@ -49,10 +46,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     OrderActionCreators,
-    dispatch
-  ),
-  pizzaActions: bindActionCreators(
-    PizzaActionCreators,
     dispatch
   ),
 });

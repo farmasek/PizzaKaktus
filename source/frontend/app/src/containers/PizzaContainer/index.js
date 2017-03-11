@@ -3,8 +3,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as PizzaActionCreators from './actions';
-import * as IngredientActionCreators from '../IngredientContainer/actions';
-import * as CategoryActionCreators from '../CategoryContainer/actions';
 import cssModules from 'react-css-modules';
 import styles from './index.module.scss';
 import * as PropTypes from 'react/lib/ReactPropTypes';
@@ -17,8 +15,6 @@ class Pizza extends Component {
 
   componentWillMount() {
     this.props.actions.fetchPizzaList();
-    this.props.ingredientActions.fetchIngredientList();
-    this.props.categoryActions.fetchCategoryList();
   }
 
   render() {
@@ -74,8 +70,6 @@ Pizza.propTypes = {
   categories: ImmutablePropTypes.map.isRequired,
   ingredients: ImmutablePropTypes.map.isRequired,
   actions: PropTypes.object,
-  ingredientActions: PropTypes.object,
-  categoryActions: PropTypes.object,
   pizzaForm: PropTypes.object,
   pizzaErrors: PropTypes.object,
   pizzaError: PropTypes.string,
@@ -101,14 +95,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     PizzaActionCreators,
-    dispatch
-  ),
-  ingredientActions: bindActionCreators(
-    IngredientActionCreators,
-    dispatch
-  ),
-  categoryActions: bindActionCreators(
-    CategoryActionCreators,
     dispatch
   ),
 });

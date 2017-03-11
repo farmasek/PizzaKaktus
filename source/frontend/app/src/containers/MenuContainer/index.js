@@ -5,16 +5,12 @@ import { bindActionCreators } from 'redux';
 import cssModules from 'react-css-modules';
 import styles from './index.module.scss';
 import * as MenuActions from './actions';
-import * as IngredientActions from '../IngredientContainer/actions';
-import * as CategoryActions from '../CategoryContainer/actions';
 import * as ShoppingCartActions from '../ShoppingCartDetail/actions';
 import Menu from '../../components/Menu';
 
 class MenuContainer extends Component {
 
   componentWillMount() {
-    this.props.categoryActions.fetchCategoryList();
-    this.props.ingredientsActions.fetchIngredientList();
     this.props.actions.fetchMenu();
   }
 
@@ -38,8 +34,6 @@ MenuContainer.propTypes = {
   categories: ImmutablePropTypes.map.isRequired,
   ingredients: ImmutablePropTypes.map.isRequired,
   actions: PropTypes.object,
-  ingredientsActions: PropTypes.object,
-  categoryActions: PropTypes.object,
   shoppingCartActions: PropTypes.object,
 };
 
@@ -54,14 +48,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     MenuActions,
-    dispatch
-  ),
-  ingredientsActions: bindActionCreators(
-    IngredientActions,
-    dispatch
-  ),
-  categoryActions: bindActionCreators(
-    CategoryActions,
     dispatch
   ),
   shoppingCartActions: bindActionCreators(

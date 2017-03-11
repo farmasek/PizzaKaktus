@@ -5,6 +5,7 @@ import {
 } from './constants';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
+import { FETCH_PIZZA_LIST } from '../PizzaContainer/constants';
 
 export const fetchOrderList = () => ({
   type: FETCH_ORDER_LIST,
@@ -28,10 +29,15 @@ const fetchOrderTable = pagination =>
     }&filterEndDate=${
     pagination.get('endDate').format('x')
     }`, 'GET', {}))
-  .map(({ response }) => ({
-    type: `${FETCH_ORDER_LIST}_FULFILLED`,
-    response,
-  }))
+  .switchMap(({ response }) => [
+    {
+      type: `${FETCH_ORDER_LIST}_FULFILLED`,
+      response,
+    },
+    {
+      type: FETCH_PIZZA_LIST,
+    },
+  ])
   .catch(error =>
     Observable.of({
       type: `NOTIF_ADD`,
