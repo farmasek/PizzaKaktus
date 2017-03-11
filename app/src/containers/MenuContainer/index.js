@@ -6,14 +6,14 @@ import cssModules from 'react-css-modules';
 import styles from './index.module.scss';
 import * as MenuActions from './actions';
 import * as ShoppingCartActions from '../ShoppingCartDetail/actions';
-import * as OrderActions from '../OrderContainer/actions';
+// import * as OrderActions from '../OrderContainer/actions';
 import Menu from '../../components/Menu';
 
 class MenuContainer extends Component {
 
   componentWillMount() {
     this.props.actions.fetchMenu();
-    this.props.orderActions.fetchOrderList();
+    // this.props.orderActions.fetchOrderList();
   }
 
   render() {
@@ -56,10 +56,10 @@ const mapDispatchToProps = (dispatch) => ({
     ShoppingCartActions,
     dispatch
   ),
-  orderActions: bindActionCreators(
+  /* orderActions: bindActionCreators(
     OrderActions,
     dispatch
-  ),
+  ), */
 });
 
 const Container = cssModules(MenuContainer, styles);

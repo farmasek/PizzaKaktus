@@ -15,7 +15,9 @@ import CategoryList from '../../components/CategoryList';
 class Category extends Component { // eslint-disable-line react/prefer-stateless-function
 
   componentWillMount() {
-    this.props.actions.fetchCategoryList();
+    if (this.props.categories.size === 0) {
+      this.props.actions.fetchCategoryList();
+    }
   }
 
   render() {

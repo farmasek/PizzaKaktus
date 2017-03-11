@@ -7,14 +7,16 @@ import { Map } from 'immutable';
 import Input from 'react-toolbox/lib/input';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { isLoggedIn } from '../../network';
 import * as LoginActions from './actions';
 import * as styles from './index.module.scss';
 
 class LoginContainer extends React.Component {
 
   componentWillMount() {
-    console.log('localStorage cleared!');
-    localStorage.clear();
+    if (isLoggedIn()) {
+      this.props.actions.fetchMyself();
+    }
   }
 
   validate = () => {

@@ -3,7 +3,6 @@ import { Record } from 'immutable';
 export const User = new Record({
   firstName: '',
   lastName: '',
-  passwordHash: '',
   login: '',
   roles: {},
   phone: '',
@@ -13,7 +12,6 @@ export const User = new Record({
 export const mapUser = (user) => new User({
   firstName: user.firstName,
   lastName: user.lastName,
-  passwordHash: user.passwordHash,
   login: user.login,
   roles: user.roles,
   phone: user.phone,

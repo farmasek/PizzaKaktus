@@ -11,7 +11,9 @@ import IngredientList from '../../components/IngredientList';
 class Ingredient extends Component {
 
   componentWillMount() {
-    this.props.actions.fetchIngredientList();
+    if (this.props.ingredients.size === 0) {
+      this.props.actions.fetchIngredientList();
+    }
   }
 
   render() {

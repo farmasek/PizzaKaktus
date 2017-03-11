@@ -74,7 +74,7 @@ const loginReducer =
         .set('logging', false));
       }
       case `${FETCH_MYSELF}_FULFILLED`: {
-        return state.set('user', mapUser(action.user[0]));
+        return state.set('user', mapUser(action.user));
       }
       case `${LOGOUT}_FULFILLED`: {
         return state.set('user', new User());

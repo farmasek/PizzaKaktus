@@ -42,6 +42,10 @@ export const login = (username, password) => ({
   },
 });
 
+export const fetchMyself = () => ({
+  type: FETCH_MYSELF,
+});
+
 export const loginEpic = action$ =>
   action$.ofType(LOGIN)
   .mergeMap(action => Observable.merge(
@@ -85,20 +89,28 @@ export const loggedInEpic = action$ =>
     {
       type: FETCH_MYSELF,
     },
-    {
-      type: FETCH_MENU,
-    },
   ]);
 
 export const fetchMyselfEpic = action$ =>
   action$.ofType(FETCH_MYSELF)
   .mergeMap(() => Observable.ajax(doIt(hosts.pk, `user/myself`, 'GET', {}))
-  .switchMap(payload => [
-    {
-      type: `${FETCH_MYSELF}_FULFILLED`,
-      user: payload.response,
-    },
-  ]));
+    .switchMap(payload => [
+      {
+        type: `${FETCH_MYSELF}_FULFILLED`,
+        user: payload.response,
+      },
+      {
+        type: FETCH_MENU,
+      },
+    ])
+    .catch(error => Observable.of({
+      type: `NOTIF_ADD`,
+      notification: {
+        message: error.xhr.response,
+        barStyle: { color: '#e57373' },
+      },
+    }))
+  );
 
 export const logout = () => ({
   type: LOGOUT,
