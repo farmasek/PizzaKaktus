@@ -43,6 +43,7 @@ import {
   loggedInEpic,
   loggedOutEpic,
   userpwdConfirmChange,
+  fetchMyselfEpic,
 } from './containers/LoginContainer/actions';
 
 export default combineEpics(
@@ -70,4 +71,5 @@ export default combineEpics(
   loggedInEpic,
   loggedOutEpic,
   userpwdConfirmChange,
+  fetchMyselfEpic,
 );

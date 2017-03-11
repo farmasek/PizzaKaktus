@@ -4,9 +4,9 @@ import { hosts, doIt, setToken, removeToken } from '../../network';
 import {
   LOGIN_DIALOG,
   LOGIN_FORM_CHANGE,
-  LOGIN,
   LOGIN_FORM_ERRORS,
-  SET_USER,
+  LOGIN,
+  FETCH_MYSELF,
   LOGOUT,
   USERPWD_CHANGE_FORM_VALUE,
   USERPWD_CONFIRM_CHANGE,
@@ -81,14 +81,22 @@ export const loginEpic = action$ =>
 
 export const loggedInEpic = action$ =>
   action$.ofType(`${LOGIN}_FULFILLED`)
-  .mergeMap((action) => Observable.ajax(doIt(hosts.pk, `user/by-login/${action.login}`, 'GET', {}))
-  .switchMap(payload => [
+  .switchMap(() => [
     {
-      type: SET_USER,
-      user: payload.response,
+      type: FETCH_MYSELF,
     },
     {
       type: FETCH_MENU,
+    },
+  ]);
+
+export const fetchMyselfEpic = action$ =>
+  action$.ofType(FETCH_MYSELF)
+  .mergeMap(() => Observable.ajax(doIt(hosts.pk, `user/myself`, 'GET', {}))
+  .switchMap(payload => [
+    {
+      type: `${FETCH_MYSELF}_FULFILLED`,
+      user: payload.response,
     },
   ]));
 
