@@ -88,6 +88,13 @@ const pizzaReducer =
         if (action.paginationType === 'sortBy') {
           sortDir = sortDir === 'ASC' ? 'DESC' : 'ASC';
         }
+        if (action.paginationType !== 'number') {
+          return state.withMutations(s => s
+            .setIn(['pagination', action.paginationType], action.value)
+            .setIn(['pagination', 'sortDir'], sortDir)
+            .setIn(['pagination', 'number'], 0)
+          );
+        }
         return state.withMutations(s => s
           .setIn(['pagination', action.paginationType], action.value)
           .setIn(['pagination', 'sortDir'], sortDir)
