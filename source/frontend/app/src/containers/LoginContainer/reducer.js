@@ -3,7 +3,7 @@ import {
   LOGIN_FORM_CHANGE,
   LOGIN,
   LOGIN_FORM_ERRORS,
-  SET_USER,
+  FETCH_MYSELF,
   LOGOUT,
   USERPWD_CONFIRM_CHANGE,
   USERPWD_CHANGE_FORM_VALUE,
@@ -73,7 +73,7 @@ const loginReducer =
         .set('dialogState', false)
         .set('logging', false));
       }
-      case SET_USER: {
+      case `${FETCH_MYSELF}_FULFILLED`: {
         return state.set('user', mapUser(action.user[0]));
       }
       case `${LOGOUT}_FULFILLED`: {

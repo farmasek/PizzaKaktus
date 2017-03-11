@@ -13,6 +13,7 @@ import * as styles from './index.module.scss';
 class LoginContainer extends React.Component {
 
   componentWillMount() {
+    console.log('localStorage cleared!');
     localStorage.clear();
   }
 
