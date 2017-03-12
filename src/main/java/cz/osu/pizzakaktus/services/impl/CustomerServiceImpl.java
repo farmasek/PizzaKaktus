@@ -26,12 +26,10 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDb saveCustomer(CustomerDb customerDb) throws DatabaseException {
 
         if (findExistingCustomerByEmail(customerDb.getEmail()).isPresent()) {
-            // Aktualizuje zakaznika
             Optional<CustomerDb> customer = findExistingCustomerByEmail(customerDb.getEmail());
             customerDb.setId(customer.get().getId());
             return customerRepository.save(customerDb);
         } else {
-            // Vytvori noveho zakaznika
             return customerRepository.save(customerDb);
         }
     }

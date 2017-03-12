@@ -35,7 +35,7 @@ public class CustomerController {
         if (existingCustomerByEmail.isPresent()) {
             return new ResponseEntity<>(new CustomerDTO(existingCustomerByEmail.get()), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new ErrorDTO("Not existing user"), HttpStatus.I_AM_A_TEAPOT);
+            return new ResponseEntity<>(new ErrorDTO("Zákazník se zadaným emailem neexistuje."), HttpStatus.I_AM_A_TEAPOT);
         }
     }
 }
