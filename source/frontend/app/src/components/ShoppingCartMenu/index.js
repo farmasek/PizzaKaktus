@@ -8,6 +8,7 @@ const ShoppingCartMenu = () => (
   <div className={styles.shoppingCartMenu}>
     <Link to="/cart">
       <FontIcon value={"shopping_cart"} className={styles.cartIcon} />
+      <div className={styles.caption}>Košík</div>
     </Link>
   </div>
 );
