@@ -131,9 +131,19 @@ class LoginContainer extends React.Component {
           </div>
             : <Button label="Přihlásit se" onClick={() => this.props.actions.toggleDialog()}/>
         }
-
         { this.loginDialog() }
         { this.passwordChangeDialog() }
+        {
+          /*
+           <Button
+           label="Clear"
+           primary
+           onClick={() => {
+           localStorage.clear(); console.log('localStorage cleared'); // eslint-disable-line
+           }}
+           />
+          */
+        }
       </div>
     );
   }
