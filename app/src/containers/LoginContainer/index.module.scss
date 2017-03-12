@@ -1,5 +1,15 @@
-@import "../../../styles/theme";
-
-.loginBtn {
-
+@import "../../../styles/theme"; 
+ 
+.loginBtn {  
+  position: absolute; 
+  right: 0px; 
+  padding: 10px; 
+} 
+.loginBtn button{ 
+  background-color: white; 
+  margin-left: 10px; 
+} 
+.loginBtn button:hover { 
+  background-color: #757575!important; 
+  color: white!important; 
 }

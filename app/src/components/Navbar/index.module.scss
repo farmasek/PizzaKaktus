@@ -2,3 +2,30 @@
   max-height: 45px;
   margin-left: 6%;
 }
+
+.categories{
+  float: left;
+  margin-right: 5px;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 36px;
+  text-align: center;
+  width: 65px;
+}
+
+.caption{
+  font-size: 12px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-decoration-line: none;
+  width: 65px;
+  z-index: 1;
+}
+
+.caption a:visited, a:link {
+  text-decoration:  none;
+}
