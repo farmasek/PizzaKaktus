@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { browserHistory } from 'react-router';
-import { hosts, doIt, setToken, removeToken } from '../../network';
+import { hosts, doIt, setToken, removeToken, getToken } from '../../network';
 import {
   LOGIN_DIALOG,
   LOGIN_FORM_CHANGE,
@@ -71,7 +71,7 @@ export const loginEpic = action$ =>
       type: `${LOGIN}_REJECTED`,
       payload: error.xhr.response
         ? error.xhr.response.error_description
-        : 'Could not establish connection.',
+        : 'Nepodařilo se navázat spojení.',
     })))
   .startWith({
     type: `${LOGIN}_PENDING`,
@@ -80,7 +80,7 @@ export const loginEpic = action$ =>
     type: `${LOGIN}_REJECTED`,
     payload: error.xhr.response
       ? error.xhr.response.error_description
-      : 'Could not establish connection.',
+      : 'Nepodařilo se navázat spojení.',
   }));
 
 export const loggedInEpic = action$ =>
@@ -104,7 +104,7 @@ export const fetchMyselfEpic = action$ =>
       },
     ])
     .catch(error => Observable.of({
-      type: `NOTIF_ADD`,
+      type: 'NOTIF_ADD',
       notification: {
         message: error.xhr.response,
         barStyle: { color: '#e57373' },
@@ -116,23 +116,34 @@ export const logout = () => ({
   type: LOGOUT,
 });
 
-export const loggedOutEpic = action$ =>
+export const logoutEpic = action$ =>
   action$.ofType(LOGOUT)
-  .do(() => {
-    removeToken();
-    browserHistory.push('/');
-  })
-  .switchMap(() => [
-    {
-      type: `NOTIF_ADD`,
-      notification: {
-        message: 'Uživatel úspěšně odhlášen.',
+  .mergeMap(() =>
+    Observable.ajax(doIt(hosts.pk, `user/logout?token=${getToken().access_token}`, 'POST', {}))
+    .switchMap(payload => [
+      {
+        type: `${LOGOUT}_FULFILLED`,
+        user: payload.response,
       },
-    },
-    {
-      type: `${LOGOUT}_FULFILLED`,
-    },
-  ]);
+      {
+        type: 'NOTIF_ADD',
+        notification: {
+          message: 'Uživatel byl úspěšně odhlášen.',
+        },
+      },
+    ])
+    .do(() => {
+      removeToken();
+      browserHistory.push('/');
+    })
+    .catch(error => Observable.of({
+      type: 'NOTIF_ADD',
+      notification: {
+        message: error.xhr.response,
+        barStyle: { color: '#e57373' },
+      },
+    }))
+  );
 
 export const changeValue = (input, value) => ({
   type: USERPWD_CHANGE_FORM_VALUE,

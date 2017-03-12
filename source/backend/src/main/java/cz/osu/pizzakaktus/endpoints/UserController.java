@@ -162,7 +162,7 @@ public class UserController {
             error = "Nebylo možné odstranit uživatele.";
         }
         return successfullyDeleted ?
-                new ResponseEntity<>("Successfully deleted user", HttpStatus.OK)
+                new ResponseEntity<>("Uživatel byl úspěšně vymazán.", HttpStatus.OK)
                 :
                 new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
@@ -214,10 +214,10 @@ public class UserController {
             if (userDb != null) {
                 return new ResponseEntity<>(new MapToDTO().mapUser(userDb), HttpStatus.OK);
             }
-            return new ResponseEntity<>(new ErrorDTO("Unable to identify user"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorDTO("Nepodařilo se identifikovat uživatele."), HttpStatus.BAD_REQUEST);
 
         } catch (Exception e) {
-            return new ResponseEntity<>(new ErrorDTO("Unable to identify user"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorDTO("Nepodařilo se identifikovat uživatele."), HttpStatus.BAD_REQUEST);
 
         }
     }
@@ -225,9 +225,9 @@ public class UserController {
     public HttpEntity<?> logoutUser(@RequestParam("token") String value) {
         try {
             defaultTokenServices.revokeToken(value);
-            return new ResponseEntity<>("Successfully logged out", HttpStatus.OK);
+            return new ResponseEntity<>("Odhlášení proběhlo úspěšně.", HttpStatus.OK);
         } catch (Exception e){
-            return new ResponseEntity<>(new ErrorDTO("Something went wrong"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorDTO("Odhlášení proběhlo úspěšně."), HttpStatus.BAD_REQUEST);
         }
     }
 

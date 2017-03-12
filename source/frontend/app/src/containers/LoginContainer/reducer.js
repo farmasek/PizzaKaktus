@@ -77,7 +77,10 @@ const loginReducer =
         return state.set('user', mapUser(action.user));
       }
       case `${LOGOUT}_FULFILLED`: {
-        return state.set('user', new User());
+        return state.withMutations(s => s
+        .set('user', new User())
+        .set('loginForm', initialLoginForm)
+        .set('loginErrors', initialLoginForm));
       }
       case USERPWD_CHANGE_FORM_VALUE: {
         const newPassword = action.input === 'new' ? action.value : state.get('new');
