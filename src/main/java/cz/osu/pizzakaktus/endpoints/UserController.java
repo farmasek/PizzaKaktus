@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.ConnectException;
@@ -37,6 +38,10 @@ import java.util.stream.Stream;
 public class UserController {
     @Autowired
     UserService userService;
+
+
+    @Autowired
+    private DefaultTokenServices defaultTokenServices;
 
     /**
      * Return all users
@@ -214,6 +219,15 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorDTO("Unable to identify user"), HttpStatus.BAD_REQUEST);
 
+        }
+    }
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public HttpEntity<?> logoutUser(@RequestParam("token") String value) {
+        try {
+            defaultTokenServices.revokeToken(value);
+            return new ResponseEntity<>("Successfully logged out", HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(new ErrorDTO("Something went wrong"), HttpStatus.BAD_REQUEST);
         }
     }
 
