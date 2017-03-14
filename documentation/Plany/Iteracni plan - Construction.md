@@ -146,7 +146,7 @@
 
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
-| Implementace UC4S2 frontend | Krížová | 10h |
+| Implementace UC4S2 frontend | Krížová | 20h |
 | Implementace UC4S2 backend | Náhlý, Jaroš | 2h |
 | Oprava chyby - neaktivní uživatel se nesmí přihlásit | Náhlý | 2h |
 | Aktualizace diagramů (class) | Jaroš | 2h |
