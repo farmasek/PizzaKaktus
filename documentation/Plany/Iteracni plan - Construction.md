@@ -126,9 +126,41 @@
 ####Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| UC1S1 je funkční |  |
-| Zákazník souhlasí s implementací UC1S1 |  |
-| UC1S2 je funkční |  |
-| Zákazník souhlasí s implementací UC1S2 |  |
+| UC1S1 je funkční | Splněno |
+| Zákazník souhlasí s implementací UC1S1 | Splněno |
+| UC1S2 je funkční | Splněno |
+| Zákazník souhlasí s implementací UC1S2 | Splněno |
+| Aplikace je vizuálně upravena | Splněno |
+| Zákazník souhlasí s vizuálními úpravami | Splněno |
+
+---
+##C4
+14.3.2017 - 21.3.2017
+
+####Cíle
+
+- Implementace správy objednávek UC4S2
+- Oprava chyb a implementace připomínek (přihlášení + odhlášení)
+
+####Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Implementace UC4S2 frontend | Krížová | 10h |
+| Implementace UC4S2 backend | Náhlý, Jaroš | 2h |
+| Oprava chyby - neaktivní uživatel se nesmí přihlásit | Náhlý | 2h |
+| Aktualizace diagramů (class) | Jaroš | 2h |
+| Vizuální úpravy - menu, tabulky, formuláře | Pravda | 30h |
+| Řazení uživatelů podle loginu a neaktivní dole | Náhlý | 2h |
+| Odhlášený nesmí dělat neautorizované operace | Baránek | 2h |
+
+####Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| UC4S2 je funkční |  |
+| Zákazník souhlasí s implementací UC4S2 |  |
 | Aplikace je vizuálně upravena |  |
 | Zákazník souhlasí s vizuálními úpravami |  |
+| Chyby jsou opraveny a připomínky implementovány |  |
+| Zákazník souhlasí s opravami |  |
+| Finální verze přihlášení, odhlášení, změny hesla, správa uživatelů, správa pizz, nabídka pizz |  |

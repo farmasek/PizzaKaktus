@@ -7,7 +7,7 @@
 | 2 | Majitel/Zaměstnanec | Uživatel zadá uživatelské jméno a heslo, potvrdí zadání údajů. |
 | 3 | Aplikace | Proběhne přihlášení uživatele. |
 | 4 | Aplikace | Zobrazí se stránka se seznamem objednávek. |
-
+sp
 ### Alternative flow:
 | Krok | Actor | Reakce |
 |:---:|:---|:---|
@@ -198,7 +198,7 @@
 |:---:|:---|:---|
 | 1 | Aplikace | V menu pro majitele/zaměstnance je položka pro zobrazení stavů objednávek. |
 | 2 | Majitel/Zaměstnanec | Uživatel klikne na položku menu. |
-| 3 | Aplikace | Zobrazí se stránka s výčtem založených a otevřených objednávek. U každé objednávky je uveden stav. Stav lze změnit na základě aktuálního stavu - ze založené na otevřenou nebo z otevřené na uzavřenou, nebo z otevřené,uzavřené na skartovanou. Na stránce je tlačítko pro potvrzení změn. |
+| 3 | Aplikace | Zobrazí se stránka s výčtem založených a otevřených objednávek. U každé objednávky je uveden stav. Stav lze změnit na základě aktuálního stavu - ze založené na otevřenou nebo z otevřené na uzavřenou, nebo z otevřené, uzavřené na skartovanou. Na stránce je tlačítko pro potvrzení změn. |
 | 4 | Majitel/Zaměstnanec | Uživatel provede změny a potvrdí uložení. |
 | 5 | Aplikace | V výpisu objednávek se změní stavy podle zadání uživatele. |
 | 6 | Aplikace | Do logu se přidají zápisy o změnách - kdo, kdy a co změnil. |
