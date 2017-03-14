@@ -1,5 +1,7 @@
 package cz.osu.pizzakaktus;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -14,8 +16,10 @@ import java.io.IOException;
  */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
+@PropertySource("classpath:application.properties")
 public class CorsFilter implements Filter {
-    private String host = "http://localhost:1337";
+    @Value("${allowed-origins}")
+    private String host;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
