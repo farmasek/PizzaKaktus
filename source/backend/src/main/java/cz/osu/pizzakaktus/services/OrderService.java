@@ -1,5 +1,6 @@
 package cz.osu.pizzakaktus.services;
 
+import cz.osu.pizzakaktus.endpoints.models.ChangeOrderStatusDTO;
 import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
 import cz.osu.pizzakaktus.repositories.models.CustomerDb;
 import cz.osu.pizzakaktus.repositories.models.OrderDb;
@@ -74,4 +75,6 @@ public interface OrderService
      * @return OrderDb - inserted order
      */
     Optional<OrderDb> insertOrderToDatabase(OrderDb orderDb) throws DatabaseException;
+
+    OrderDb changeOrderStatus(ChangeOrderStatusDTO order) throws DatabaseException;
 }

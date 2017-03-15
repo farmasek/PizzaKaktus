@@ -1,5 +1,6 @@
 package cz.osu.pizzakaktus.services.impl;
 
+import cz.osu.pizzakaktus.endpoints.models.ChangeOrderStatusDTO;
 import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
 import cz.osu.pizzakaktus.repositories.OrderRepository;
 import cz.osu.pizzakaktus.repositories.OrderStatusRepository;
@@ -214,5 +215,20 @@ public class OrderServiceImpl implements OrderService {
         } catch (Exception e) {
             throw new DatabaseException("Objednávku nebylo možno uložit.");
         }
+    }
+
+    @Override
+    public OrderDb changeOrderStatus(ChangeOrderStatusDTO order) throws DatabaseException {
+
+        OrderDb orderToChange = orderRepository.findById(order.getId());
+        OrderStatus orderStatus = order.getOrderStatus();
+        orderToChange.setOrderStatus(orderStatus);
+        try {
+           orderRepository.save(orderToChange);
+            return orderToChange;
+        } catch (Exception e) {
+            throw new DatabaseException("Nebylo možno změnit status objednávky.");
+        }
+
     }
 }

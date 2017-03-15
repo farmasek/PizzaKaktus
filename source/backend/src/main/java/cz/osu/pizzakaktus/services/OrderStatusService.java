@@ -33,4 +33,5 @@ public interface OrderStatusService {
      * @return order status based on its status
      */
     OrderStatus findByStatus(String status)throws DatabaseException;
+
 }

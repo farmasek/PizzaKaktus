@@ -3,6 +3,7 @@ package cz.osu.pizzakaktus.endpoints;
 import com.google.gson.Gson;
 import com.google.gson.LongSerializationPolicy;
 import cz.osu.pizzakaktus.endpoints.mappers.MapToDTO;
+import cz.osu.pizzakaktus.endpoints.models.ChangeOrderStatusDTO;
 import cz.osu.pizzakaktus.endpoints.models.ErrorDTO;
 import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
 import cz.osu.pizzakaktus.repositories.models.OrderDb;
@@ -76,6 +77,22 @@ public class OrderController {
         } catch (DatabaseException e) {
             return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    /**
+     * Change order status
+     *
+     * @return Json order with change status
+     */
+    @RequestMapping(value = "/change-order-status", method = RequestMethod.POST)
+    public HttpEntity<?> changeOrderStatus(@RequestBody ChangeOrderStatusDTO order)throws DatabaseException {
+        try {
+        OrderDb orderWithChangeStatus = orderService.changeOrderStatus(order);
+        return new ResponseEntity<>(mapToDTO.mapOrder(orderWithChangeStatus), HttpStatus.OK);
+        } catch (DatabaseException e) {
+            return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+
     }
 
 }
