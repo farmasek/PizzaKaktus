@@ -23,4 +23,14 @@ public class OrderDTO  {
     private String orderStatus;
     private Timestamp dateCreated;
     private Timestamp dateModified;
+
+    public OrderDTO(OrderDb orderDb)
+    {
+        this.id = orderDb.getId();
+        this.pizzasIds = orderDb.getPizzasIds();
+        this.customer = new CustomerDTO(orderDb.getCustomer());
+        this.orderStatus = orderDb.getOrderStatus().getStatus();
+        this.dateCreated = orderDb.getDateCreated();
+        this.dateModified = orderDb.getDateModified();
+    }
 }

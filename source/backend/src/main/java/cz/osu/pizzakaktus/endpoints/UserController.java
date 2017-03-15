@@ -23,9 +23,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.ConnectException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -65,6 +63,7 @@ public class UserController {
                             .roles(userDb.getRoles().stream().map(Role::getRole).collect(Collectors.toList()))
                             .build())
                     .collect(Collectors.toList());
+
             return new ResponseEntity<>(collect, HttpStatus.OK);
         } catch (DatabaseException e) {
             error = "Nebylo možné najít všechny uživatele.";
@@ -227,7 +226,7 @@ public class UserController {
             defaultTokenServices.revokeToken(value);
             return new ResponseEntity<>("Odhlášení proběhlo úspěšně.", HttpStatus.OK);
         } catch (Exception e){
-            return new ResponseEntity<>(new ErrorDTO("Odhlášení proběhlo úspěšně."), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorDTO("Odhlášení se nezdařilo."), HttpStatus.BAD_REQUEST);
         }
     }
 
