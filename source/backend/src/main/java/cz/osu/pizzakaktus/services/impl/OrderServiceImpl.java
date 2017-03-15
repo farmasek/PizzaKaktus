@@ -127,7 +127,7 @@ public class OrderServiceImpl implements OrderService {
     private String Send(String subject, String body, String to) throws DatabaseException {
         String emailApiKey = System.getenv("email-api");
         if (emailApiKey == null) {
-            throw new DatabaseException("Chyba při kontaktování email serveru");
+            throw new DatabaseException("Chyba při kontaktování emailového serveru.");
         }
         try {
             String encoding = "UTF-8";
@@ -203,7 +203,7 @@ public class OrderServiceImpl implements OrderService {
             System.out.println("Order accepted mail sent.");
 
         } catch (Exception e) {
-            throw new DatabaseException("Chyba pri posíláni emailu z lokálního serveru");
+            throw new DatabaseException("Chyba při posíláni emailu z lokálního serveru.");
         }
     }
 
@@ -214,6 +214,18 @@ public class OrderServiceImpl implements OrderService {
             return Optional.of(insertedOrder);
         } catch (Exception e) {
             throw new DatabaseException("Objednávku nebylo možno uložit.");
+        }
+    }
+
+    @Override
+    public List<OrderDb> findAllActive() throws DatabaseException {
+        try
+        {
+            return orderRepository.findByOrderStatus(new OrderStatus(OrderStatus.OPENED));
+        }
+        catch (Exception e)
+        {
+            throw new DatabaseException("Nebylo možné získat aktivní objednávky.");
         }
     }
 

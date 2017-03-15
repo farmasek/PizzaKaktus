@@ -1,6 +1,7 @@
 package cz.osu.pizzakaktus.repositories;
 
 import cz.osu.pizzakaktus.repositories.models.OrderDb;
+import cz.osu.pizzakaktus.repositories.models.OrderStatus;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -16,5 +17,7 @@ public interface OrderRepository extends PagingAndSortingRepository<OrderDb, Int
     List<OrderDb> findAll();
 
     OrderDb findById(Integer id);
+
+    List<OrderDb> findByOrderStatus(OrderStatus orderStatus);
 
 }

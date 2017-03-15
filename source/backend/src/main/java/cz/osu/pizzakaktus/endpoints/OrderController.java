@@ -23,7 +23,9 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -62,7 +64,7 @@ public class OrderController {
      * @return Json list of all orders
      */
     @RequestMapping(value = "/all-orders", method = RequestMethod.GET)
-    public HttpEntity<?> findAllPizzas(@RequestParam(value = "filterAttribute", required = false) String filterAttribute,
+    public HttpEntity<?> findAllOrders(@RequestParam(value = "filterAttribute", required = false) String filterAttribute,
                                        @RequestParam(value = "filterPhrase", required = false) String filterPhrase,
                                        @RequestParam(value = "filterStartDate", required = false) String filterStartDate,
                                        @RequestParam(value = "filterEndDate", required = false) String filterEndDate,
@@ -95,4 +97,24 @@ public class OrderController {
 
     }
 
+    /**
+     * Return all active orders
+     *
+     * @return Json list of all active orders
+     */
+    @RequestMapping(value = "/all-active-orders", method = RequestMethod.GET)
+    public HttpEntity<?> findAllActiveOrders(@RequestBody OrderDTO orderDTO) {
+        List<OrderDb> activeOrders = new ArrayList();
+        List<OrderDTO> activeOrdersDTO = new ArrayList();
+
+        try {
+            activeOrders = orderService.findAllActive();
+            for (OrderDb order : activeOrders) {
+                activeOrdersDTO.add(new OrderDTO(order));
+            }
+            return new ResponseEntity<>(activeOrdersDTO, HttpStatus.OK);
+        } catch (DatabaseException e) {
+            return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
 }
