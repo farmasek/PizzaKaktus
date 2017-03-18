@@ -18,6 +18,6 @@ public interface OrderRepository extends PagingAndSortingRepository<OrderDb, Int
 
     OrderDb findById(Integer id);
 
-    List<OrderDb> findByOrderStatus(OrderStatus orderStatus);
+    List<OrderDb> findByOrderStatusId(int id);
 
 }

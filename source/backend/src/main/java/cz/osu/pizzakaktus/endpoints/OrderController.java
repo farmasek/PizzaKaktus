@@ -102,17 +102,17 @@ public class OrderController {
      *
      * @return Json list of all active orders
      */
-    @RequestMapping(value = "/all-active-orders", method = RequestMethod.GET)
-    public HttpEntity<?> findAllActiveOrders(@RequestBody OrderDTO orderDTO) {
-        List<OrderDb> activeOrders = new ArrayList();
-        List<OrderDTO> activeOrdersDTO = new ArrayList();
+    @RequestMapping(value = "/all-opened-orders", method = RequestMethod.GET)
+    public HttpEntity<?> findAllActiveOrders() {
+        List<OrderDb> createdAndOpenedOrders = new ArrayList();
+        List<OrderDTO> createdAndOpenedOrdersDTO = new ArrayList();
 
         try {
-            activeOrders = orderService.findAllActive();
-            for (OrderDb order : activeOrders) {
-                activeOrdersDTO.add(new OrderDTO(order));
+            createdAndOpenedOrders = orderService.findAllCreatedAndOpened();
+            for (OrderDb order : createdAndOpenedOrders) {
+                createdAndOpenedOrdersDTO.add(new OrderDTO(order));
             }
-            return new ResponseEntity<>(activeOrdersDTO, HttpStatus.OK);
+            return new ResponseEntity<>(createdAndOpenedOrdersDTO, HttpStatus.OK);
         } catch (DatabaseException e) {
             return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }

@@ -24,10 +24,9 @@ public interface UserRepository extends CrudRepository<UserDb, Integer>  {
 
     List<UserDb> findByLogin(String login);
 
-    // Jedno z toho možna bude fungovat ...
-    @OrderBy("isActive DESC, login ASC")
     List<UserDb> findAll();
-    //List<UserDb> findAllByOrderByIsActiveDescLoginAsc();
+
+    List<UserDb> findAllByOrderByActiveDescLoginAsc();
 
     @Transactional
     void deleteById (Integer userId)throws DatabaseException;

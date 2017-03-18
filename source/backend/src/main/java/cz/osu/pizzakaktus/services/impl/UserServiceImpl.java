@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDb> findAll() throws DatabaseException {
-        Iterable<UserDb> usersList = userRepository.findAll();
+        Iterable<UserDb> usersList = userRepository.findAllByOrderByActiveDescLoginAsc();
         return Lists.newArrayList(usersList);
     }
 
