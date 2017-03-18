@@ -77,10 +77,18 @@ public interface OrderService
     Optional<OrderDb> insertOrderToDatabase(OrderDb orderDb) throws DatabaseException;
 
     /**
-     * Returns list of OrderDb - all active orders
+     * Returns list of OrderDb - all opened orders
      *
-     * @return list of OrderDb - all active orders
+     * @return list of OrderDb - all opened orders
      */
+    List<OrderDb> findAllOpened() throws DatabaseException;
+
+    /**
+     * Returns list of OrderDb - all created and opened orders
+     *
+     * @return list of OrderDb - all created and opened orders
+     */
+    List<OrderDb> findAllCreatedAndOpened() throws DatabaseException;
     List<OrderDb> findAllActive() throws DatabaseException;
 
     OrderDb changeOrderStatus(ChangeOrderStatusDTO order) throws DatabaseException;

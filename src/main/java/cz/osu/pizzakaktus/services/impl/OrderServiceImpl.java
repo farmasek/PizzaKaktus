@@ -218,14 +218,33 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDb> findAllActive() throws DatabaseException {
+    public List<OrderDb> findAllCreatedAndOpened() throws DatabaseException {
         try
         {
-            return orderRepository.findByOrderStatus(new OrderStatus(OrderStatus.OPENED));
+            OrderStatus openedStatus = orderStatusRepository.findByStatus("OPENED");
+            OrderStatus createdStatus = orderStatusRepository.findByStatus("CREATED");
+
+            List<OrderDb> openedAndCreatedOrders = orderRepository.findByOrderStatusId(openedStatus.getId());
+            openedAndCreatedOrders.addAll(orderRepository.findByOrderStatusId(createdStatus.getId()));
+
+            return openedAndCreatedOrders;
         }
         catch (Exception e)
         {
-            throw new DatabaseException("Nebylo možné získat aktivní objednávky.");
+            throw new DatabaseException("Nebylo možné získat vytvořené a otevřené objednávky.");
+        }
+    }
+
+    @Override
+    public List<OrderDb> findAllOpened() throws DatabaseException {
+        try
+        {
+            OrderStatus openedStatus = orderStatusRepository.findByStatus("OPENED");
+            return orderRepository.findByOrderStatusId(openedStatus.getId());
+        }
+        catch (Exception e)
+        {
+            throw new DatabaseException("Nebylo možné získat otevřené objednávky.");
         }
     }
 
