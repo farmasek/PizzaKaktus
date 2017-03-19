@@ -125,7 +125,7 @@ class LoginContainer extends React.Component {
         {
           this.props.user.login
             ?
-            <div>
+            <div className={styles.loginBar}>
               <span>
                 Přihlášený uživatel:&nbsp;
                 {this.props.user.firstName}&nbsp;

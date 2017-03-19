@@ -63,7 +63,7 @@ class ShoppingCartDetail extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.emptyCart}>
         {
           this.props.shoppingCart.length > 0
             ?
@@ -105,7 +105,7 @@ class ShoppingCartDetail extends Component {
                 <p>Opravdu chcete vysypat košík? Tato akce je nevratná.</p>
               </Dialog>
             </div>
-            : <span>Košík je prázdný.</span>
+            : <span><h2>Košík je prázdný.</h2></span>
         }
       </div>
     );
