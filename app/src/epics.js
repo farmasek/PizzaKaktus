@@ -46,6 +46,10 @@ import {
   fetchMyselfEpic,
   logoutWindowsEpic,
 } from './containers/LoginContainer/actions';
+import {
+  fetchOrdersEpic,
+  changeOrderStatusesEpic,
+} from './containers/OrderContainer/actions';
 
 export default combineEpics(
   fetchIngredientListEpic,
@@ -74,4 +78,6 @@ export default combineEpics(
   userpwdConfirmChange,
   fetchMyselfEpic,
   logoutWindowsEpic,
+  fetchOrdersEpic,
+  changeOrderStatusesEpic,
 );
