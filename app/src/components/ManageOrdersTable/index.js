@@ -3,6 +3,7 @@ import cssModules from 'react-css-modules';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import Checkbox from 'react-toolbox/lib/checkbox';
+import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
 import * as styles from './index.module.scss';
 import { statuses } from '../../models/Order';
@@ -54,7 +55,9 @@ class OrderList extends Component {
   render() {
     return (
       <div className={styles.orderList}>
-        <h1>Správa objednávek</h1>
+        <Card >
+          <CardTitle>Správa objednávek</CardTitle>
+          <CardText>
         <table className={styles.orderListTable}>
           <thead>
           <tr>
@@ -85,11 +88,15 @@ class OrderList extends Component {
             (order) => this.renderRow(order)) }
           </tbody>
         </table>
+          </CardText>
+          <CardActions>
         <Button
           label={'Změnit stavy vybraných objednávek'}
           onClick={() => this.handleChangeClick()}
           primary raised
         />
+          </CardActions>
+        </Card>
       </div>
     );
   }

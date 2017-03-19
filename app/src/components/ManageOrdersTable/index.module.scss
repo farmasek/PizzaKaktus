@@ -34,8 +34,20 @@
     th {
       line-height: 2.1em;
     }
-  }
+    label{
+      margin-top: 10px;
 
+      span{
+        margin-top: 4px;
+      }
+    }
+  }
+  table{
+    margin-bottom: 5px !important;
+  }
+  button{
+    margin: 0 0 9px 9px !important;
+  }
 }
 
 .disabled {

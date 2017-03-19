@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import cssModules from 'react-css-modules';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Input from 'react-toolbox/lib/input';
+import { Card, CardTitle, CardText } from 'react-toolbox/lib/card';
 import DatePicker from 'react-toolbox/lib/date_picker';
 import TimePicker from 'react-toolbox/lib/time_picker';
 import * as styles from './index.module.scss';
@@ -68,7 +69,9 @@ class OrderList extends Component {
       : <i className={`${styles.sortIcon} material-icons`}>arrow_downward</i>;
     return (
       <div className={styles.orderList}>
-        <h1>Historie objednávek</h1>
+        <Card >
+          <CardTitle>Historie objednávek</CardTitle>
+          <CardText>
         <div className={styles.paginationLane}>
           <Input
             className={styles.sortName}
@@ -159,6 +162,8 @@ class OrderList extends Component {
             (order) => this.renderRow(order)) }
           </tbody>
         </table>
+          </CardText>
+        </Card>
       </div>
     );
   }
