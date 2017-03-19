@@ -2,10 +2,11 @@ import { Record, List } from 'immutable';
 import moment from 'moment';
 import { mapCustomer } from './Customer';
 
-export const CREATED = 'CREATED';
-export const OPENED = 'OPENED';
-export const CLOSED = 'CLOSED';
-export const CANCELLED = 'CANCELLED';
+const CREATED = 'CREATED';
+const OPENED = 'OPENED';
+const CLOSED = 'CLOSED';
+const CANCELLED = 'CANCELLED';
+export const statuses = { CREATED, OPENED, CLOSED, CANCELLED };
 
 export const Order = new Record({
   id: null,
