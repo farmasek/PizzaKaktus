@@ -1,16 +1,16 @@
-
+﻿
 ---
-#Iterační plány Construction
+# Iterační plány Construction
 
-##C0
+## C0
 14.2.2017 - 21.2.2017
 
-####Cíle
+#### Cíle
 
 - Implementace objednávání bez upravených pizz
 - Implementace automatického doplňování údajů při objednávání
 
-####Úkoly
+#### Úkoly
 
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
@@ -19,7 +19,7 @@
 | Předvyplnění údajů v objednávce na základě e-mailu | Baránek | 6h |
 | Stack of snacks - zobrazování více hlášek | Baránek | 8h |
 
-####Kritéria hodnocení
+#### Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
 | Objednávání je implementováno (backend) | Splněno |
@@ -27,20 +27,20 @@
 | Předvyplňování je funkční | Nesplněno |
 | Frontend zobrazuje více hlášek | Splněno |
 
-####Lessons learned
+#### Lessons learned
 
 ---
-##C1
+## C1
 21.2.2017 - 28.2.2017
 
-####Cíle
+#### Cíle
 
 - Implementace automatického doplňování údajů při objednávání
 - Oprava implementace mazání/deaktivace uživatele UC7 S2
 - Implementace změny hesla UC7 S3
 - Implementace historie objednávek UC4 S1
 
-####Úkoly
+#### Úkoly
 
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
@@ -55,7 +55,7 @@
 | Refactoring order statusu u objednávky | Jaroš | 1h |
 | Implementace historie objednávek UC4 S1 | Krížová | 20h |
 
-####Kritéria hodnocení
+#### Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
 | Předvyplňování emailu je funkční | Splněno |
@@ -74,15 +74,15 @@
 | Zákazník souhlasí s implementací UC4 S1 | Splněno |
 
 ---
-##C2
+## C2
 28.2.2017 - 7.3.2017
 
-####Cíle
+#### Cíle
 
 - Implementace přihlášení a odhlášení UC1S1 a UC1S2
 - Implementace změny hesla UC1S3
 
-####Úkoly
+#### Úkoly
 
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
@@ -94,7 +94,7 @@
 | Implementace UC1S3 frontend | Baránek | 5h |
 | Implementace UC1S3 backend | Náhlý | 5h |
 
-####Kritéria hodnocení
+#### Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
 | UC1S1 je funkční | Nesplněno |
@@ -105,15 +105,15 @@
 | Zákazník souhlasí s implementací UC1S3 | Nesplněno |
 
 ---
-##C3
+## C3
 7.3.2017 - 14.3.2017
 
-####Cíle
+#### Cíle
 
 - Revize implementace přihlášení a odhlášení UC1S1 a UC1S2
 - Vizuální úpravy - menu, tabulky, formuláře
 
-####Úkoly
+#### Úkoly
 
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
@@ -123,7 +123,7 @@
 | Implementace UC1S2 backend | Náhlý, Jaroš, Baránek | 20h |
 | Vizuální úpravy - menu, tabulky, formuláře | Pravda | 20h |
 
-####Kritéria hodnocení
+#### Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
 | UC1S1 je funkční | Splněno |
@@ -134,15 +134,15 @@
 | Zákazník souhlasí s vizuálními úpravami | Splněno |
 
 ---
-##C4
+## C4
 14.3.2017 - 21.3.2017
 
-####Cíle
+#### Cíle
 
 - Implementace správy objednávek UC4S2
 - Oprava chyb a implementace připomínek (přihlášení + odhlášení)
 
-####Úkoly
+#### Úkoly
 
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
@@ -154,7 +154,7 @@
 | Řazení uživatelů podle loginu a neaktivní dole | Náhlý | 2h |
 | Odhlášený nesmí dělat neautorizované operace | Baránek | 2h |
 
-####Kritéria hodnocení
+#### Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
 | UC4S2 je funkční |  |
