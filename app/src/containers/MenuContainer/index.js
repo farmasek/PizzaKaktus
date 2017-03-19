@@ -6,7 +6,7 @@ import cssModules from 'react-css-modules';
 import styles from './index.module.scss';
 import * as MenuActions from './actions';
 import * as ShoppingCartActions from '../ShoppingCartDetail/actions';
-// import * as OrderActions from '../OrderContainer/actions';
+// import * as OrderActions from '../HistoryContainer/actions';
 import Menu from '../../components/Menu';
 
 class MenuContainer extends Component {

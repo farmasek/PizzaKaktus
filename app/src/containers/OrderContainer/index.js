@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as OrderActionCreators from './actions';
 import cssModules from 'react-css-modules';
-import styles from './index.module.scss';
-import * as PropTypes from 'react/lib/ReactPropTypes';
-import OrderList from '../../components/OrderList';
+import * as styles from './index.module.scss';
 
 class OrderContainer extends Component {
 
@@ -17,30 +15,17 @@ class OrderContainer extends Component {
   render() {
     return (
       <div className={styles.pizza}>
-        <OrderList
-          orders={this.props.orders}
-          pizzas={this.props.pizzas}
-          pagination={this.props.pagination}
-          changePagination={this.props.actions.changePaginationProperties}
-          changeTime={this.props.actions.changeTime}
-        />
       </div>
     );
   }
 }
 OrderContainer.propTypes = {
   orders: ImmutablePropTypes.map.isRequired,
-  pizzas: ImmutablePropTypes.map.isRequired,
-  actions: PropTypes.object,
-  loading: PropTypes.bool,
-  pagination: ImmutablePropTypes.map,
+  actions: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   orders: state.orderContainer.orders,
-  pizzas: state.pizzaContainer.pizzas,
-  pagination: state.orderContainer.pagination,
-  loading: state.orderContainer.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

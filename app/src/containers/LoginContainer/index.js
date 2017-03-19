@@ -124,26 +124,23 @@ class LoginContainer extends React.Component {
       <div className={styles.loginBtn}>
         {
           this.props.user.login
-            ? <div>
-            <span>Přihlášený uživatel: {this.props.user.firstName} {this.props.user.lastName}</span>
-            <Button label="Odhlásit se" onClick={() => this.props.actions.logout()}/>
-            <Button label="Změnit heslo" onClick={() => this.props.actions.togglePasswordDialog()}/>
-          </div>
+            ?
+            <div>
+              <span>
+                Přihlášený uživatel:&nbsp;
+                {this.props.user.firstName}&nbsp;
+                {this.props.user.lastName}
+                </span>
+              <Button label="Odhlásit se" onClick={() => this.props.actions.logout()}/>
+              <Button
+                label="Změnit heslo"
+                onClick={() => this.props.actions.togglePasswordDialog()}
+              />
+            </div>
             : <Button label="Přihlásit se" onClick={() => this.props.actions.toggleDialog()}/>
         }
         { this.loginDialog() }
         { this.passwordChangeDialog() }
-        {
-          /*
-           <Button
-           label="Clear"
-           primary
-           onClick={() => {
-           localStorage.clear(); console.log('localStorage cleared'); // eslint-disable-line
-           }}
-           />
-          */
-        }
       </div>
     );
   }

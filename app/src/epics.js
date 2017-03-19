@@ -20,7 +20,7 @@ import {
   fetchOrderListEpic,
   fetchOrdersAfterPaginationChange,
   changeTimePaginationEpic,
-} from './containers/OrderContainer/actions';
+} from './containers/HistoryContainer/actions';
 import {
   fetchUserListEpic,
   saveUserListEpic,
@@ -44,6 +44,7 @@ import {
   logoutEpic,
   userpwdConfirmChange,
   fetchMyselfEpic,
+  logoutWindowsEpic,
 } from './containers/LoginContainer/actions';
 
 export default combineEpics(
@@ -72,4 +73,5 @@ export default combineEpics(
   logoutEpic,
   userpwdConfirmChange,
   fetchMyselfEpic,
+  logoutWindowsEpic,
 );

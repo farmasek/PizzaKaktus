@@ -12,12 +12,12 @@ import LoginContainer from '../LoginContainer/index';
 const AppContainer = (props) => (
   <div>
     <AppBar fixed flat>
+      <LoginContainer />
       <Navbar />
       <NotificationStack
         notifications={props.notifications.toArray()}
         onDismiss={(element) => props.actions.removeNotification(element)}
       />
-      <LoginContainer />
     </AppBar>
     <div className={styles.content}>
       {React.cloneElement(props.children, props)}

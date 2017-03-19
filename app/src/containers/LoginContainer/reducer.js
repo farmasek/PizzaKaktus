@@ -8,8 +8,10 @@ import {
   USERPWD_CONFIRM_CHANGE,
   USERPWD_CHANGE_FORM_VALUE,
   PASSWORD_CHANGE_DIALOG,
+  LOGOUT_ALL,
 } from './constants';
 import { Record, Map } from 'immutable';
+import { removeToken } from '../../network';
 import { User, mapUser } from '../../models/User';
 
 const initialLoginForm = new Map({
@@ -56,13 +58,13 @@ const loginReducer =
         return state.set('loginErrors', action.loginErrors);
       }
       case LOGIN: {
+        removeToken();
         return state.set('loginErrors', initialLoginForm);
       }
       case `${LOGIN}_PENDING`: {
         return state.set('logging', true);
       }
       case `${LOGIN}_REJECTED`: {
-        localStorage.clear();
         return state.withMutations(s => s
         .set('loginError', action.payload)
         .set('logging', false));
@@ -77,6 +79,19 @@ const loginReducer =
         return state.set('user', mapUser(action.user));
       }
       case `${LOGOUT}_FULFILLED`: {
+        return state.withMutations(s => s
+        .set('user', new User())
+        .set('loginForm', initialLoginForm)
+        .set('loginErrors', initialLoginForm));
+      }
+      case `${LOGOUT}_REJECTED`: {
+        return state.withMutations(s => s
+        .set('user', new User())
+        .set('loginForm', initialLoginForm)
+        .set('loginErrors', initialLoginForm));
+      }
+      case LOGOUT_ALL: {
+        localStorage.removeItem('action');
         return state.withMutations(s => s
         .set('user', new User())
         .set('loginForm', initialLoginForm)
