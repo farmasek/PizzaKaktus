@@ -80,10 +80,10 @@ class ShoppingCartDetail extends Component {
                 customerError={this.props.customerError}
                 customer={this.props.customer}
               />
-              <Button label={"Vysypat košík"} onClick={() =>
+              <Button className={styles.buttonRemove} label={"Vysypat košík"} onClick={() =>
                 this.props.actions.handleDialog(true)}
               />
-              <Button primary label={"Objednat"} onClick={() =>
+              <Button className={styles.buttonConfirm} primary label={"Objednat"} onClick={() =>
                 this.confirmDialog()}
               />
               <Dialog

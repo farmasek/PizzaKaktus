@@ -73,8 +73,16 @@ class LoginContainer extends React.Component {
           ? <div className={styles.errText}>{this.props.loginError}</div>
           : null
       }
-      <Button primary label="Přihlásit se" onClick={() => this.loginUser()}/>
-      <Button label="Zavřít" onClick={() => this.props.actions.toggleDialog()}/>
+      <Button
+        className={styles.buttonLogin}
+        primary label="Přihlásit se"
+        onClick={() => this.loginUser()}
+      />
+      <Button
+        className={styles.buttonClose}
+        label="Zavřít"
+        onClick={() => this.props.actions.toggleDialog()}
+      />
     </Dialog>
   );
 
