@@ -10,9 +10,10 @@ import categoryContainer from 'containers/CategoryContainer/reducer';
 import userContainer from 'containers/UserContainer/reducer';
 import menuContainer from 'containers/MenuContainer/reducer';
 import shoppingCartContainer from 'containers/ShoppingCartDetail/reducer';
-import orderContainer from 'containers/OrderContainer/reducer';
+import historyContainer from 'containers/HistoryContainer/reducer';
 import notificationReducer from './containers/AppContainer/reducer';
 import loginReducer from './containers/LoginContainer/reducer';
+import orderContainer from 'containers/OrderContainer/reducer';
 
 const rootReducer = combineReducers({
   // Apply all of the reducers here.
@@ -24,8 +25,9 @@ const rootReducer = combineReducers({
   menuContainer,
   shoppingCartContainer,
   notificationReducer,
-  orderContainer,
+  historyContainer,
   loginReducer,
+  orderContainer,
   routing: routerReducer,
   form: formReducer,
 });

@@ -23,7 +23,7 @@ const Navbar = () => (
       {/* ZAMĚSTNANEC */}
       <CheckPermissions permissions={['EMPLOYEE', 'ADMIN']}>
         <div className={styles.categories}>
-          <Link to="/">
+          <Link to="/manage/orders">
             <FontIcon value={"indeterminate_check_box"} className={styles.icon} />
             <div className={styles.caption}>Správa objednávek</div>
           </Link>

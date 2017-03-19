@@ -5,7 +5,6 @@ import { browserHistory } from 'react-router';
 // import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise-middleware';
 import rootReducer from './reducers';
-
 import { createEpicMiddleware } from 'redux-observable';
 import rootEpics from '../src/epics';
 
@@ -37,8 +36,8 @@ if (typeof devToolsExtension === 'function') {
 }
 
 const composedEnhancers = compose(
-    applyMiddleware(...middlewares),
-    ...enhancers
+  applyMiddleware(...middlewares),
+  ...enhancers
 );
 
 /* Hopefully by now you understand what a store is and how redux uses them,
@@ -46,9 +45,9 @@ const composedEnhancers = compose(
  * And https://egghead.io/lessons/javascript-redux-implementing-store-from-scratch
  */
 const store = createStore(
-    rootReducer,
-    initialState,
-    composedEnhancers,
+  rootReducer,
+  initialState,
+  composedEnhancers,
 );
 
 /* See: https://github.com/reactjs/react-router-redux/issues/305 */

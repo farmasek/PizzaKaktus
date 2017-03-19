@@ -6,3 +6,5 @@ export CategoryContainer from './CategoryContainer';
 export FeatureFirstContainer from './FeatureFirstContainer';
 export ShoppingCartDetail from './ShoppingCartDetail';
 export MenuContainer from './MenuContainer';
+export HistoryContainer from './HistoryContainer';
+export OrderContainer from './OrderContainer';

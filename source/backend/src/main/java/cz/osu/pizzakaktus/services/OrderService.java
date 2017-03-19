@@ -89,7 +89,6 @@ public interface OrderService
      * @return list of OrderDb - all created and opened orders
      */
     List<OrderDb> findAllCreatedAndOpened() throws DatabaseException;
-    List<OrderDb> findAllActive() throws DatabaseException;
 
     OrderDb changeOrderStatus(ChangeOrderStatusDTO order) throws DatabaseException;
 }

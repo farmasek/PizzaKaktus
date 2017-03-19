@@ -260,6 +260,6 @@ public class OrderServiceImpl implements OrderService {
         } catch (Exception e) {
             throw new DatabaseException("Nebylo možno změnit status objednávky.");
         }
-
     }
+
 }

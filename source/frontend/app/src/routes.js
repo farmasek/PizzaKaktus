@@ -31,9 +31,11 @@ const routes = (
         <IndexRoute component={Pages.MenuPage}/>
         <Route path="/manager/category" component={Pages.ManageCategoryPage} oEnter={requireAuth} />
         <Route path="/manager/ingredients" component={Pages.ManageIngredientsPage} oEnter={requireAuth} />
-        <Route path="/manager/orders/history" component={Pages.ManageOrdersPage} oEnter={requireAuth} />
+        <Route path="/manager/orders/history" component={Pages.ManagerHistoryPage} oEnter={requireAuth} />
         <Route path="/manager/pizzas" component={Pages.ManagePizzasPage} oEnter={requireAuth} />
         <Route path="/manager/users" component={Pages.ManageUsersPage} oEnter={requireAuth} />
+
+        <Route path="/manage/orders" component={Pages.ManageOrdersPage} onEnter={requireAuth} />
 
         <Route path="/cart" component={Pages.ShoppingCartPage}/>
         <Route path="/menu" component={Pages.MenuPage}/>

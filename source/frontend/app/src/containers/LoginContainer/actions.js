@@ -8,6 +8,7 @@ import {
   LOGIN,
   FETCH_MYSELF,
   LOGOUT,
+  LOGOUT_ALL,
   USERPWD_CHANGE_FORM_VALUE,
   USERPWD_CONFIRM_CHANGE,
   PASSWORD_CHANGE_DIALOG,
@@ -120,10 +121,9 @@ export const logoutEpic = action$ =>
   action$.ofType(LOGOUT)
   .mergeMap(() =>
     Observable.ajax(doIt(hosts.pk, `user/logout?token=${getToken().access_token}`, 'POST', {}))
-    .switchMap(payload => [
+    .switchMap(() => [
       {
         type: `${LOGOUT}_FULFILLED`,
-        user: payload.response,
       },
       {
         type: 'NOTIF_ADD',
@@ -136,14 +136,24 @@ export const logoutEpic = action$ =>
       removeToken();
       browserHistory.push('/');
     })
-    .catch(error => Observable.of({
-      type: 'NOTIF_ADD',
-      notification: {
-        message: error.xhr.response,
-        barStyle: { color: '#e57373' },
-      },
-    }))
+    .catch(error => {
+      removeToken();
+      browserHistory.push('/');
+      return Observable.of({
+        type: 'NOTIF_ADD',
+        notification: {
+          message: error.xhr.response,
+          barStyle: { color: '#e57373' },
+        },
+      });
+    })
   );
+
+export const logoutWindowsEpic = action$ =>
+  action$.ofType(LOGOUT_ALL)
+  .do(() => {
+    browserHistory.push('/');
+  });
 
 export const changeValue = (input, value) => ({
   type: USERPWD_CHANGE_FORM_VALUE,
