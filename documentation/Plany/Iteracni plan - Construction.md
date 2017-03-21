@@ -1,4 +1,4 @@
-﻿
+
 ---
 # Iterační plány Construction
 
@@ -163,4 +163,39 @@
 | Zákazník souhlasí s vizuálními úpravami |  |
 | Chyby jsou opraveny a připomínky implementovány |  |
 | Zákazník souhlasí s opravami |  |
-| Finální verze přihlášení, odhlášení, změny hesla, správa uživatelů, správa pizz, nabídka pizz |  |
+
+---
+## C5
+21.3.2017 - 28.3.2017
+
+#### Cíle
+
+- Implementace storna objednávky UC4S3
+- Implementace editace ingredience UC5S2
+- Revize implementace správy objednávek UC4S2
+
+#### Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Implementace UC4S3 frontend | Krížová | 10h |
+| Implementace UC4S3 backend | Jaroš | 10h |
+| Implementace UC5S2 frontend | Krížová | 10h |
+| Implementace UC5S2 backend | Náhlý | 20h |
+| Oprava implementace UC4S2 správy objednávek | Baránek | 1h |
+| Opravit chybu po změně práv (nemůže se pak přihlásit, asi se mu mění heslo) | Baránek | 5 minut |
+| Přeložit hlášku po nemožném přihlášení (Could not ...) | Krížová | 5 minut |
+| Opravit viditelnost selectboxu kategorie u vytváření pizzy, zarovnání data atd. nahoře u správy objednávek | Pravda | 1h |
+| Po odhlášení není napsáno, že uživatel přihlášený je; checkbox disabled u neaktivních userů | Baránek | 1h |
+
+#### Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| UC4S3 je funkční |  |
+| Zákazník souhlasí s UC4S3 |  |
+| UC4S2 je funkční |  |
+| Zákazník souhlasí s UC4S2 |  |
+| UC5S2 je funkční |  |
+| Zákazník souhlasí s UC5S2 |  |
+| Chyby jsou opraveny a připomínky implementovány |  |
+| Zákazník souhlasí s opravami |  |
