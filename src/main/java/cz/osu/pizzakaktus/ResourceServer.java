@@ -16,14 +16,8 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/user/**").permitAll()
-                .antMatchers("/category/add").permitAll()
-                .antMatchers("/ingredient/add").permitAll()
-                .antMatchers("/order/all-orders").permitAll()
-                .antMatchers("/pizza/add").permitAll()
-                .antMatchers("/pizza/update").permitAll()
-                .and()
-                .authorizeRequests().anyRequest().permitAll()
+                .antMatchers("/user/**", "/category/add", "/ingredient/add", "/order/all-orders", "/pizza/add", "/pizza/update").authenticated()
+                .anyRequest().permitAll()
                 .and().csrf().disable();
         ;
     }
