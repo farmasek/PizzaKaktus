@@ -6,7 +6,9 @@ import cz.osu.pizzakaktus.services.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableAsync
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableResourceServer
+@EnableAutoConfiguration(exclude = RepositoryRestMvcAutoConfiguration.class)
 @SpringBootApplication
 public class PizzaKaktusApplication {
 
