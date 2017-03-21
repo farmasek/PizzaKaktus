@@ -17,5 +17,5 @@ import java.util.List;
 @AllArgsConstructor
 public class ChangeOrderStatusDTO {
     private Integer id;
-    private OrderStatus orderStatus;
+    private String orderStatus;
 }

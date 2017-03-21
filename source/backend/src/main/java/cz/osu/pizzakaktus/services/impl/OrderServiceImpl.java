@@ -1,5 +1,6 @@
 package cz.osu.pizzakaktus.services.impl;
 
+import cz.osu.pizzakaktus.endpoints.mappers.MapToDTO;
 import cz.osu.pizzakaktus.endpoints.models.ChangeOrderStatusDTO;
 import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
 import cz.osu.pizzakaktus.repositories.OrderRepository;
@@ -8,6 +9,7 @@ import cz.osu.pizzakaktus.repositories.models.*;
 import cz.osu.pizzakaktus.services.*;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -45,6 +47,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    MapToDTO mapToDTO;
 
     @Override
     public Page<OrderDb> findAll(Pageable pageable, String filterAttribute, String filterPhrase,
@@ -249,17 +254,29 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDb changeOrderStatus(ChangeOrderStatusDTO order) throws DatabaseException {
+    public List<OrderDTO> changeOrderStatus(List<ChangeOrderStatusDTO> order) throws DatabaseException {
 
-        OrderDb orderToChange = orderRepository.findById(order.getId());
-        OrderStatus orderStatus = order.getOrderStatus();
-        orderToChange.setOrderStatus(orderStatus);
+
+        List<OrderDTO> listOfOrders = new ArrayList<>();
+        for (ChangeOrderStatusDTO orders:order) {
+
+            OrderDb orderToChange = orderRepository.findById(orders.getId());
+            OrderStatus orderStatus = orderStatusRepository.findByStatus(orders.getOrderStatus());
+            orderToChange.setOrderStatus(orderStatus);
+           // listOfOrders.add(orderRepository.findById(orders.getId()));
+            listOfOrders.add(mapToDTO.mapOrder(orderRepository.findById(orders.getId())));
+
+            orderRepository.save(orderToChange);
+        }
         try {
-           orderRepository.save(orderToChange);
-            return orderToChange;
+            return listOfOrders;
         } catch (Exception e) {
             throw new DatabaseException("Nebylo možno změnit status objednávky.");
         }
+
+
+
+
     }
 
 }

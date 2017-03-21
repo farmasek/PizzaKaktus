@@ -90,5 +90,5 @@ public interface OrderService
      */
     List<OrderDb> findAllCreatedAndOpened() throws DatabaseException;
 
-    OrderDb changeOrderStatus(ChangeOrderStatusDTO order) throws DatabaseException;
+    List<OrderDTO> changeOrderStatus(List<ChangeOrderStatusDTO> order) throws DatabaseException;
 }

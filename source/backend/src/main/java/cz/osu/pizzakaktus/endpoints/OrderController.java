@@ -87,10 +87,10 @@ public class OrderController {
      * @return Json order with change status
      */
     @RequestMapping(value = "/change-order-status", method = RequestMethod.POST)
-    public HttpEntity<?> changeOrderStatus(@RequestBody ChangeOrderStatusDTO order)throws DatabaseException {
+    public HttpEntity<?> changeOrderStatus(@RequestBody List<ChangeOrderStatusDTO> order)throws DatabaseException {
         try {
-        OrderDb orderWithChangeStatus = orderService.changeOrderStatus(order);
-        return new ResponseEntity<>(mapToDTO.mapOrder(orderWithChangeStatus), HttpStatus.OK);
+        List<OrderDTO> orderWithChangeStatus = orderService.changeOrderStatus(order);
+        return new ResponseEntity<>(orderWithChangeStatus, HttpStatus.OK);
         } catch (DatabaseException e) {
             return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
