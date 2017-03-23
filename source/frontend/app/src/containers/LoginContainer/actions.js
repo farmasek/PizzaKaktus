@@ -68,21 +68,25 @@ export const loginEpic = action$ =>
         },
       },
     ])
-    .catch(error => Observable.of({
-      type: `${LOGIN}_REJECTED`,
-      payload: error.xhr.response
-        ? error.xhr.response.error_description
-        : 'Nepodařilo se navázat spojení.',
-    })))
+    .catch(error => {
+      let message = '';
+      if (error.xhr.response) {
+        if (error.xhr.response.error_description.includes('Could not authenticate')) {
+          message = 'Přihlášení se nezdařilo.';
+        } else {
+          message = error.xhr.response.error_description;
+        }
+      } else {
+        message = 'Nepodařilo se navázat spojení.';
+      }
+      return Observable.of({
+        type: `${LOGIN}_REJECTED`,
+        payload: message,
+      })
+    })
   .startWith({
     type: `${LOGIN}_PENDING`,
-  }))
-  .catch(error => Observable.of({
-    type: `${LOGIN}_REJECTED`,
-    payload: error.xhr.response
-      ? error.xhr.response.error_description
-      : 'Nepodařilo se navázat spojení.',
-  }));
+  })));
 
 export const loggedInEpic = action$ =>
   action$.ofType(`${LOGIN}_FULFILLED`)

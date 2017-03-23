@@ -32,7 +32,7 @@ class OrderList extends Component {
   };
 
   formatDate = (value) => {
-    const day = value.getDate();
+    const day = (value.getDate() < 10) ? `0${value.getDate()}` : value.getDate();
     const month = (value.getMonth() + 1 < 10) ? `0${value.getMonth() + 1}` : value.getMonth() + 1;
     const year = value.getFullYear();
     return `${day}.${month}.${year}`;
@@ -72,96 +72,100 @@ class OrderList extends Component {
         <Card >
           <CardTitle>Historie objednávek</CardTitle>
           <CardText>
-        <div className={styles.paginationLane}>
-          <Input
-            className={styles.sortName}
-            label="Filtr stavu a emailu" type="text"
-            value={pagination.get('filterPhrase')}
-            onChange={(val) => this.props.changePagination('filterPhrase', val)}
-          />
-          <DatePicker
-            label="Od"
-            onChange={(val) => this.props.changePagination('startDate', val)}
-            value={pagination.get('startDate').toDate()}
-            inputFormat={(value) => this.formatDate(value)}
-            locale={localeCS}
-            style={{ width: '100px' }}
-          />
-          <TimePicker
-            label=""
-            onChange={(val) => this.props.changeTime('startDate', val)}
-            value={pagination.get('startDate').toDate()}
-            style={{ width: '100px' }}
-          />
-          <DatePicker
-            label="Do"
-            onChange={(val) => this.props.changePagination('endDate', val)}
-            value={pagination.get('endDate').toDate()}
-            inputFormat={(value) => this.formatDate(value)}
-            locale={localeCS}
-            style={{ width: '100px' }}
-          />
-          <TimePicker
-            label=""
-            onChange={(val) => this.props.changeTime('endDate', val)}
-            value={pagination.get('endDate').toDate()}
-            style={{ width: '100px' }}
-          />
-          <Input
-            className={styles.sortSize}
-            label="Počet"
-            type="number" value={pagination.get('size')}
-            onChange={(val) => this.props.changePagination('size', val)}
-          />
-          {
-            pagination.get('totalPages') > 0
-              ? this.renderNumberLine(pagination.get('totalPages')) :
-              pagination.get('totalPages')
-          }
-        </div>
-        <table className={styles.orderListTable}>
-          <thead>
-          <tr>
-            <th
-              className={`${styles.tableHeaderSortable} ${styles.dateColumn}`}
-            >
-              <span
-                onClick={() => this.props.changePagination('sortBy', 'dateCreated')}
-              >Vytvořeno</span>
-              {pagination.get('sortBy') === 'dateCreated' ? arrow : null}
-            </th>
-            <th
-              className={`${styles.tableHeaderSortable} ${styles.dateColumn}`}
-            >
-              <span
-                onClick={() => this.props.changePagination('sortBy', 'dateModified')}
-              >Změněno</span>
-              {pagination.get('sortBy') === 'dateModified' ? arrow : null}
-            </th>
-            <th
-              className={`${styles.tableHeaderSortable} ${styles.orderStatusColumn}`}
-            >
-              <span
-                onClick={() => this.props.changePagination('sortBy', 'orderStatus')}
-              >Stav</span>
-              {pagination.get('sortBy') === 'orderStatus' ? arrow : null}
-            </th>
-            <th
-              className={styles.tableHeaderSortable}
-            >
-              <span
-                onClick={() => this.props.changePagination('sortBy', 'customer.email')}
-              >Email</span>
-              {pagination.get('sortBy') === 'customer.email' ? arrow : null}
-            </th>
-            <th>Pizzy</th>
-          </tr>
-          </thead>
-          <tbody>
-          { this.props.orders.toIndexedSeq().map(
-            (order) => this.renderRow(order)) }
-          </tbody>
-        </table>
+            <div className={styles.paginationLane}>
+              <Input
+                className={styles.sortName}
+                label="Filtr stavu a emailu" type="text"
+                value={pagination.get('filterPhrase')}
+                onChange={(val) => this.props.changePagination('filterPhrase', val)}
+              />
+              <DatePicker
+                label="Od"
+                onChange={(val) => this.props.changePagination('startDate', val)}
+                value={pagination.get('startDate').toDate()}
+                inputFormat={(value) => this.formatDate(value)}
+                locale={localeCS}
+                style={{ width: '100px' }}
+              />
+              <TimePicker
+                label=""
+                onChange={(val) => this.props.changeTime('startDate', val)}
+                value={pagination.get('startDate').toDate()}
+                style={{ width: '100px' }}
+              />
+              <DatePicker
+                label="Do"
+                onChange={(val) => this.props.changePagination('endDate', val)}
+                value={pagination.get('endDate').toDate()}
+                inputFormat={(value) => this.formatDate(value)}
+                locale={localeCS}
+                style={{ width: '100px' }}
+              />
+              <TimePicker
+                label=""
+                onChange={(val) => this.props.changeTime('endDate', val)}
+                value={pagination.get('endDate').toDate()}
+                style={{ width: '100px' }}
+              />
+              <Input
+                className={styles.sortSize}
+                label="Počet"
+                type="number" value={pagination.get('size')}
+                onChange={(val) => this.props.changePagination('size', val)}
+              />
+              {
+                pagination.get('totalPages') > 0
+                  ? this.renderNumberLine(pagination.get('totalPages')) :
+                  pagination.get('totalPages')
+              }
+            </div>
+            {
+              this.props.orders.size > 0
+                ? <table className={styles.orderListTable}>
+                  <thead>
+                  <tr>
+                    <th
+                      className={`${styles.tableHeaderSortable} ${styles.dateColumn}`}
+                    >
+                  <span
+                    onClick={() => this.props.changePagination('sortBy', 'dateCreated')}
+                  >Vytvořeno</span>
+                      {pagination.get('sortBy') === 'dateCreated' ? arrow : null}
+                    </th>
+                    <th
+                      className={`${styles.tableHeaderSortable} ${styles.dateColumn}`}
+                    >
+                  <span
+                    onClick={() => this.props.changePagination('sortBy', 'dateModified')}
+                  >Změněno</span>
+                      {pagination.get('sortBy') === 'dateModified' ? arrow : null}
+                    </th>
+                    <th
+                      className={`${styles.tableHeaderSortable} ${styles.orderStatusColumn}`}
+                    >
+                  <span
+                    onClick={() => this.props.changePagination('sortBy', 'orderStatus')}
+                  >Stav</span>
+                      {pagination.get('sortBy') === 'orderStatus' ? arrow : null}
+                    </th>
+                    <th
+                      className={styles.tableHeaderSortable}
+                    >
+                  <span
+                    onClick={() => this.props.changePagination('sortBy', 'customer.email')}
+                  >Email</span>
+                      {pagination.get('sortBy') === 'customer.email' ? arrow : null}
+                    </th>
+                    <th>Pizzy</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  { this.props.orders.toIndexedSeq().map(
+                    (order) => this.renderRow(order)) }
+                  </tbody>
+                </table>
+                : <h2>Na základě vybraných filtrů nebyly nalezeny žádné objednávky.</h2>
+            }
           </CardText>
         </Card>
       </div>

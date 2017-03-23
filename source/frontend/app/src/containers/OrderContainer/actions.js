@@ -2,6 +2,8 @@ import {
   FETCH_ORDERS,
   CHECKBOX_STATUS_CHANGE,
   CHANGE_ORDER_STATUSES,
+  CANCEL_ORDER_DIALOG,
+  PICK_ORDER_CANCEL,
 } from './constants';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
@@ -51,12 +53,20 @@ export const changeOrderStatusesEpic = action$ =>
   action$.ofType(CHANGE_ORDER_STATUSES)
   .mergeMap(action =>
     Observable.ajax(doIt(hosts.pk, 'order/change-order-status', 'POST', action.changes, true))
-    .switchMap(() => [
+    .switchMap(({ response }) => [
       {
         type: `${CHANGE_ORDER_STATUSES}_FULFILLED`,
       },
       {
         type: FETCH_ORDERS,
+      },
+      {
+        type: `NOTIF_ADD`,
+        notification: {
+          message: response.length > 1
+            ? 'Stavy objednávek úspěšně změněny.'
+            : 'Stav objednávky úspěšně změněn.',
+        },
       },
     ])
     .catch(error =>
@@ -70,3 +80,12 @@ export const changeOrderStatusesEpic = action$ =>
         },
       }))
   );
+
+export const handleDialog = () => ({
+  type: CANCEL_ORDER_DIALOG,
+});
+
+export const orderCancel = (order) => ({
+  type: PICK_ORDER_CANCEL,
+  order,
+});

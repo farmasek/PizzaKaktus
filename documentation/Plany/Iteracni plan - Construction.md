@@ -179,14 +179,14 @@
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
 | Implementace UC4S3 frontend | Krížová | 10h |
-| Implementace UC4S3 backend | Jaroš | 10h |
 | Implementace UC5S2 frontend | Krížová | 10h |
 | Implementace UC5S2 backend | Náhlý | 20h |
 | Oprava implementace UC4S2 správy objednávek | Baránek | 1h |
 | Opravit chybu po změně práv (nemůže se pak přihlásit, asi se mu mění heslo) | Baránek | 5 minut |
 | Přeložit hlášku po nemožném přihlášení (Could not ...) | Krížová | 5 minut |
 | Opravit viditelnost selectboxu kategorie u vytváření pizzy, zarovnání data atd. nahoře u správy objednávek | Pravda | 1h |
-| Po odhlášení není napsáno, že uživatel přihlášený je; checkbox disabled u neaktivních userů | Baránek | 1h |
+| Po odhlášení není napsáno, že uživatel přihlášený je | Baránek | 1h |
+| Checkbox disabled u neaktivních userů | Krížová | 10 minut |
 
 #### Kritéria hodnocení
 | Úkol | Stav |

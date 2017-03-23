@@ -50,6 +50,15 @@ class OrderList extends Component {
           onChange={(checked) => this.props.handleOrderCheckbox(order.get('id'), checked)}
         />
       </td>
+      <td>
+        <Button
+          label={'Stornovat'}
+          flat
+          disabled={order.orderStatus !== statuses.CREATED}
+          className={order.orderStatus !== statuses.CREATED ? styles.disabled : null}
+          onClick={() => this.props.orderCancel(order)}
+        />
+      </td>
     </tr>;
 
   render() {
@@ -81,6 +90,7 @@ class OrderList extends Component {
               <span>Stav</span>
             </th>
             <th>Změnit stav</th>
+            <th>Stornovat</th>
           </tr>
           </thead>
           <tbody>
@@ -109,6 +119,7 @@ OrderList.propTypes = {
   pizzas: ImmutablePropTypes.map.isRequired,
   handleOrderCheckbox: PropTypes.func.isRequired,
   handleOrderStatuses: PropTypes.func.isRequired,
+  orderCancel: PropTypes.func.isRequired,
 };
 
 export default cssModules(OrderList, styles);

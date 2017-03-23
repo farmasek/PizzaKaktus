@@ -10,7 +10,7 @@ class PizzaList extends React.Component {
 
   renderRow = (pizza) =>
     <tr key={pizza.id}>
-      <td className={styles.columnLeft} >{pizza.title}</td>
+      <td className={styles.columnLeft}>{pizza.title}</td>
       <td className={styles.columnLeft}>
         {
           this.props.categories.size > 0
@@ -35,16 +35,12 @@ class PizzaList extends React.Component {
         { pizza.get('price') }
       </td>
       <td>
-        {
-          pizza.active.toString() === 'true'
-            ?
-            <Checkbox
-              checked={pizza.active}
-              onChange={() => this.props.handleDialog(true, pizza)}
-            />
-            :
-            <Checkbox checked={pizza.active} disabled={!pizza.active} className={styles.disabled}/>
-        }
+        <Checkbox
+          checked={pizza.active}
+          disabled={!pizza.active}
+          className={pizza.active ? null : styles.disabled}
+          onChange={() => this.props.handleDialog(true, pizza)}
+        />
       </td>
       <td>
         <IconButton icon="input" onClick={() => this.props.copyPizza(pizza)}/>

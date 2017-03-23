@@ -16,3 +16,8 @@ h6 {
 header{
   height: 80px!important;
 }
+
+.disabled, .disabled *, .disabled * * {
+  cursor: not-allowed !important;
+  pointer-events: auto !important;
+}

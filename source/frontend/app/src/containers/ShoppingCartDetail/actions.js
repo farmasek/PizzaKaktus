@@ -58,7 +58,7 @@ export const sendOrder = (pizzasIds, customer) => ({
   customer,
 });
 
-export const prefillByEmailEpic = (action$) =>
+export const sendOrderEpic = (action$) =>
   action$.ofType(SEND_ORDER)
     .switchMap((action) =>
       Observable.ajax(doIt(
@@ -90,7 +90,7 @@ export const prefillByEmailEpic = (action$) =>
           }))
     );
 
-export const sendOrderEpic = (action$, store) =>
+export const prefillByEmailEpic = (action$, store) =>
   action$.ofType(CART_CUSTOMER_EDIT)
     .filter(() => store.getState().shoppingCartContainer.customer.get('preFill'))
     .filter(({ field }) => field === 'email')
