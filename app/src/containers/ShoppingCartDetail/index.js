@@ -105,7 +105,7 @@ class ShoppingCartDetail extends Component {
                 <p>Opravdu chcete vysypat košík? Tato akce je nevratná.</p>
               </Dialog>
             </div>
-            : <span><h2>Košík je prázdný.</h2></span>
+            : <h2>Košík je prázdný.</h2>
         }
       </div>
     );

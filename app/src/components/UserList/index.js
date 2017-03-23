@@ -29,7 +29,9 @@ class UserList extends Component {
       </td>
       <td>
         <Checkbox
-          checked={user.active ? user.active === true : false}
+          checked={user.active}
+          disabled={!user.active}
+          className={!user.active ? styles.disabled : null}
           onChange={() => this.props.updateUser(user, 'active', false)}
         />
       </td>
@@ -67,7 +69,6 @@ class UserList extends Component {
       </div>);
   }
 }
-
 
 UserList.propTypes = {
   users: PropTypes.object.isRequired,
