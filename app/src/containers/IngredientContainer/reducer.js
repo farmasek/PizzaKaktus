@@ -3,8 +3,11 @@ import {
   INGREDIENT_CHANGE_FORM_VALUE,
   INGREDIENT_VALIDATION,
   INGREDIENT_CREATE_NEW,
+  INGREDIENT_COPY,
+  INGREDIENT_UPDATE,
 } from './constants';
 import { Record, Map } from 'immutable';
+import { mapIngredientForm } from '../../models/Ingredient';
 
 const initialIngredientErrors = {
   nameErr: '',
@@ -26,6 +29,7 @@ const InitialState = new Record({
   ingredientForm: initialIngredientForm,
   ingredientErrors: initialIngredientErrors,
   ingredientError: '',
+  copied: false,
 });
 
 const ingredientReducer =
@@ -34,6 +38,7 @@ const ingredientReducer =
       case `${FETCH_INGREDIENT_LIST}`: {
         return state.withMutations(s => s
         .set('isLoading', true)
+        .set('copied', false)
         .set('ingredientErrors', initialIngredientErrors)
         .set('ingredientForm', initialIngredientForm));
       }
@@ -57,6 +62,14 @@ const ingredientReducer =
       case `${INGREDIENT_CREATE_NEW}_FAILED`: {
         return state.withMutations(s => s
         .set('ingredientError', action.ingredientError));
+      }
+      case INGREDIENT_COPY: {
+        return state.withMutations(s => s
+          .set('ingredientForm', mapIngredientForm(action.ingredient))
+          .set('copied', true));
+      }
+      case `${INGREDIENT_UPDATE}_FULFILLED`: {
+        return state.set('copied', false);
       }
       default:
         return state;

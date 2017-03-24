@@ -23,6 +23,7 @@ class Ingredient extends Component {
           {!this.props.isLoading ?
             <IngredientList
               ingredients={this.props.ingredients}
+              copyIngredient={this.props.actions.copyIngredient}
             />
             : null}
         </div>
@@ -34,6 +35,8 @@ class Ingredient extends Component {
             ingredientErrors={this.props.ingredientErrors}
             ingredientValidation={this.props.actions.ingredientValidation}
             ingredientError={this.props.ingredientError}
+            confirmUpdate={this.props.actions.updateIngredient}
+            copied={this.props.copied}
           />
         </div>
       </div>
@@ -47,6 +50,7 @@ Ingredient.propTypes = {
   isLoading: PropTypes.bool,
   ingredientErrors: PropTypes.object,
   ingredientError: PropTypes.string,
+  copied: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -55,6 +59,7 @@ const mapStateToProps = (state) => ({
   ingredientForm: state.ingredientContainer.ingredientForm,
   ingredientError: state.ingredientContainer.ingredientError,
   ingredientErrors: state.ingredientContainer.ingredientErrors,
+  copied: state.ingredientContainer.copied,
 });
 
 const mapDispatchToProps = (dispatch) => ({

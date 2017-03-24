@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-
+import { IconButton } from 'react-toolbox/lib/button';
 import styles from './index.module.scss';
 import cssModules from 'react-css-modules';
 
@@ -19,6 +19,9 @@ class IngredientList extends Component { // eslint-disable-line react/prefer-sta
       <td>
         {ingredient.costCustom}
       </td>
+      <td>
+        <IconButton icon="input" onClick={() => this.props.copyIngredient(ingredient)}/>
+      </td>
     </tr>;
 
   render() {
@@ -32,6 +35,7 @@ class IngredientList extends Component { // eslint-disable-line react/prefer-sta
             <th>Množství</th>
             <th>Cena</th>
             <th>Cena přídavku</th>
+            <th>Kopírovat</th>
           </tr>
           </thead>
           <tbody>
@@ -45,6 +49,7 @@ class IngredientList extends Component { // eslint-disable-line react/prefer-sta
 
 IngredientList.propTypes = {
   ingredients: PropTypes.object.isRequired,
+  copyIngredient: PropTypes.func.isRequired,
 };
 
 export default cssModules(IngredientList, styles);
