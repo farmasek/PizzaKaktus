@@ -82,7 +82,7 @@ export const loginEpic = action$ =>
       return Observable.of({
         type: `${LOGIN}_REJECTED`,
         payload: message,
-      })
+      });
     })
   .startWith({
     type: `${LOGIN}_PENDING`,

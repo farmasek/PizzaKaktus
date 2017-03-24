@@ -5,6 +5,7 @@ import { combineEpics } from 'redux-observable';
 import {
   fetchIngredientListEpic,
   saveIngredientListEpic,
+  updateIngredientEpic,
 } from './containers/IngredientContainer/actions';
 import {
   fetchCategoryListEpic,
@@ -80,4 +81,5 @@ export default combineEpics(
   logoutWindowsEpic,
   fetchOrdersEpic,
   changeOrderStatusesEpic,
+  updateIngredientEpic,
 );

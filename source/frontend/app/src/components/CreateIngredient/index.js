@@ -19,6 +19,12 @@ class CreateIngredient extends Component {
     }
   }
 
+  confirmUpdate() {
+    if (this.validateState()) {
+      this.props.confirmUpdate();
+    }
+  }
+
   validateState() {
     const validation = {
       errName: '',
@@ -90,7 +96,11 @@ class CreateIngredient extends Component {
           </div>
         </CardText>
         <CardActions>
-          <Button label="Přidat" primary raised onClick={() => this.confirmDialog()} />
+          {
+            this.props.copied
+              ? <Button label="Upravit" primary raised onClick={() => this.confirmUpdate()} />
+              : <Button label="Přidat" primary raised onClick={() => this.confirmDialog()} />
+          }
         </CardActions>
       </Card>);
   }
@@ -99,9 +109,11 @@ class CreateIngredient extends Component {
 CreateIngredient.propTypes = {
   editValue: PropTypes.func.isRequired,
   confirmForm: PropTypes.func.isRequired,
+  confirmUpdate: PropTypes.func.isRequired,
   ingredientForm: PropTypes.object,
   ingredientErrors: PropTypes.object,
   ingredientValidation: PropTypes.func,
+  copied: PropTypes.bool.isRequired,
 };
 
 export default cssModules(CreateIngredient, styles);
