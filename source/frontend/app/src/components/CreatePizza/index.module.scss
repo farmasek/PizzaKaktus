@@ -19,7 +19,18 @@
       float: left;
     }
   }
+  .dropDownList{
+    ul{
+      top: 0 !important;
+      position: relative !important;
+      padding: 3px !important;
+      margin: -10px 0 0 0 !important;
+    }
+  }
 
+  :focus {
+    outline: 0!important;
+  }
   .err {
     color: #de3226;
   }

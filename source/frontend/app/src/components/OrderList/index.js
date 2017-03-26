@@ -5,7 +5,7 @@ import Input from 'react-toolbox/lib/input';
 import { Card, CardTitle, CardText } from 'react-toolbox/lib/card';
 import DatePicker from 'react-toolbox/lib/date_picker';
 import TimePicker from 'react-toolbox/lib/time_picker';
-import * as styles from './index.module.scss';
+import styles from './index.module.scss';
 
 const localeCS = {
   months: 'Leden_Únor_Březen_Duben_Květen_Červen_Červenec_Srpen_Září_Říjen_Listopad_Prosinec'
@@ -101,7 +101,7 @@ class OrderList extends Component {
                 locale={localeCS}
                 style={{ width: '100px' }}
               />
-              <TimePicker
+              <TimePicker theme={styles}
                 label=""
                 onChange={(val) => this.props.changeTime('endDate', val)}
                 value={pagination.get('endDate').toDate()}

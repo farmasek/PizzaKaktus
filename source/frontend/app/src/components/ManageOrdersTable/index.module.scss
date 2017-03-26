@@ -15,7 +15,7 @@
     }
 
     td {
-      padding: 0.2em 0.3em;
+      padding: 7px 10px 7px 0;
       min-width: 75px;
 
       &.dateColumn {
@@ -31,13 +31,14 @@
     tr {
       border-bottom: 1px solid rgba(0, 0, 0, 0.14);
       height: 2.5em;
+      vertical-align: top;
     }
 
     th {
       line-height: 2.1em;
     }
     label{
-      margin-top: 10px;
+      margin-top: -3px;
 
       span{
         margin-top: 4px;
@@ -49,6 +50,13 @@
   }
   button{
     margin: 0 0 9px 9px !important;
+  }
+}
+
+.stornoButton{
+  button{
+    height: 19px !important;
+    line-height: 19px !important;
   }
 }
 
