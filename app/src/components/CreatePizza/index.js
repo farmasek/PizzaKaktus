@@ -102,7 +102,7 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
             onKeyPress={(event) => this.handleConfirm(event)}
             error={this.props.pizzaErrors.titleErr}
           />
-          <Dropdown
+          <Dropdown className={styles.dropDownList}
             auto
             onChange={ (value) => this.handleChange('categoryId', value) }
             source={ this.createSelectItems() }

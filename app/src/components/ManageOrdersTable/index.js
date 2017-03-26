@@ -50,12 +50,12 @@ class OrderList extends Component {
           onChange={(checked) => this.props.handleOrderCheckbox(order.get('id'), checked)}
         />
       </td>
-      <td>
+      <td className={styles.stornoButton}>
         <Button
           label={'Stornovat'}
           flat
           disabled={order.orderStatus !== statuses.CREATED}
-          className={order.orderStatus !== statuses.CREATED ? styles.disabled : null}
+          className={ order.orderStatus !== statuses.CREATED ? styles.disabled : null}
           onClick={() => this.props.orderCancel(order)}
         />
       </td>
