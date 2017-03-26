@@ -73,12 +73,12 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public Optional<IngredientDb> update(IngredientDTO ingredient)throws DatabaseException {
+    public Optional<IngredientDb> update(IngredientDb ingredient)throws DatabaseException {
         try{
-            IngredientDb found = ingredientRepository.findByName(ingredient.getName());
+            IngredientDb found = ingredientRepository.findOne(ingredient.getId());
             if(found == null)
             {
-                throw new DatabaseException("Ingredience s názvem " + ingredient.getName() + " neexistuje, nelze jí upravit.");
+                throw new DatabaseException("Ingredience s ID " + ingredient.getId() + " neexistuje, nelze jí upravit.");
 
             }
             else

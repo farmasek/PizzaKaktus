@@ -34,5 +34,5 @@ public interface IngredientService {
      */
     List<IngredientDb> findAllById(List<Integer> ids)throws DatabaseException;
 
-    Optional<IngredientDb> update(IngredientDTO ingredient) throws DatabaseException;
+    Optional<IngredientDb> update(IngredientDb ingredient) throws DatabaseException;
 }
