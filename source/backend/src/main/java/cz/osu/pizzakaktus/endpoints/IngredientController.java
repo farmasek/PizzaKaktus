@@ -82,7 +82,7 @@ public class IngredientController {
      * @return if successful then inserted object, if not successful then error message
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public HttpEntity<?> updateIngredient(@RequestBody IngredientDTO ingredient) {
+    public HttpEntity<?> updateIngredient(@RequestBody IngredientDb ingredient) {
         Optional<IngredientDb> updateIngredient = Optional.empty();
         String error = "";
         try {
