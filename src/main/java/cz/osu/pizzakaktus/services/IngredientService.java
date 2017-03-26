@@ -1,5 +1,6 @@
 package cz.osu.pizzakaktus.services;
 
+import cz.osu.pizzakaktus.endpoints.models.IngredientDTO;
 import cz.osu.pizzakaktus.repositories.models.IngredientDb;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 
@@ -32,4 +33,6 @@ public interface IngredientService {
      * @return list of ingredients
      */
     List<IngredientDb> findAllById(List<Integer> ids)throws DatabaseException;
+
+    Optional<IngredientDb> update(IngredientDTO ingredient) throws DatabaseException;
 }

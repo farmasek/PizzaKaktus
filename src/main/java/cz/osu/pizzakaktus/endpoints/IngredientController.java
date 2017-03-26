@@ -75,6 +75,26 @@ public class IngredientController {
                 new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Update ingredient into database
+     *
+     * @param ingredient - Json of ingredient to update
+     * @return if successful then inserted object, if not successful then error message
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public HttpEntity<?> updateIngredient(@RequestBody IngredientDTO ingredient) {
+        Optional<IngredientDb> updateIngredient = Optional.empty();
+        String error = "";
+        try {
+            updateIngredient = ingredientService.update(ingredient);
+        } catch (DatabaseException e) {
+            error = e.getMessage();
+        }
+        return updateIngredient.isPresent() ?
+                new ResponseEntity<>(updateIngredient.get(), HttpStatus.OK)
+                :
+                new ResponseEntity<>(new ErrorDTO(error), HttpStatus.BAD_REQUEST);
+    }
 
 }
 
