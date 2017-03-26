@@ -3,6 +3,7 @@ package cz.osu.pizzakaktus.repositories.models;
 import cz.osu.pizzakaktus.endpoints.models.IngredientDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Getter
+@Setter
 public class IngredientDb {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

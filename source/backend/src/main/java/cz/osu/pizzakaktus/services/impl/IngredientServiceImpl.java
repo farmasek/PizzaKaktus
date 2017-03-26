@@ -1,5 +1,6 @@
 package cz.osu.pizzakaktus.services.impl;
 
+import cz.osu.pizzakaktus.endpoints.models.IngredientDTO;
 import cz.osu.pizzakaktus.repositories.IngredientRepository;
 import cz.osu.pizzakaktus.repositories.models.IngredientDb;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
@@ -68,6 +69,31 @@ public class IngredientServiceImpl implements IngredientService {
         else
         {
             return listAll;
+        }
+    }
+
+    @Override
+    public Optional<IngredientDb> update(IngredientDTO ingredient)throws DatabaseException {
+        try{
+            IngredientDb found = ingredientRepository.findByName(ingredient.getName());
+            if(found == null)
+            {
+                throw new DatabaseException("Ingredience s názvem " + ingredient.getName() + " neexistuje, nelze jí upravit.");
+
+            }
+            else
+            {
+                found.setName(ingredient.getName());
+                found.setAmount(ingredient.getAmount());
+                found.setCost(ingredient.getCost());
+                found.setCostCustom(ingredient.getCostCustom());
+                IngredientDb savedObject = ingredientRepository.save(found);
+                return Optional.of(savedObject);
+            }
+        }
+        catch(DatabaseException ex)
+        {
+            throw ex;
         }
     }
 }
