@@ -62,4 +62,8 @@ public interface UserService {
 
 
     public boolean checkPassword(String passwordPlainText, String storedHash);
+
+    UserDb mapToUserDBWithPassword(UserDTO userDTO) throws DatabaseException;
+
+    UserDb mapToUserDBWitoutPassword(UserDTO userDTO) throws DatabaseException;
 }

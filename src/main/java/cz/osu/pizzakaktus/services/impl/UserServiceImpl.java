@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by e-myslivost on 26.10.2016.
@@ -37,7 +36,7 @@ public class UserServiceImpl implements UserService {
         if (isLoginTaken(userDTO.getLogin())) {
             throw new DatabaseException("Login " + userDTO.getLogin() + " již existuje.");
         } else {
-            UserDb userWithRoles = addRolesToUser(userDTO);
+            UserDb userWithRoles = mapToUserDBWithPassword(userDTO);
             UserDb insertedUser = userRepository.save(userWithRoles);
             return Optional.of(insertedUser);
         }
@@ -47,7 +46,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<UserDb> update(UserDTO userDTO) throws DatabaseException {
         try {
-            UserDb userDb = addRolesToUser(userDTO);
+            UserDb userDb = mapToUserDBWitoutPassword(userDTO);
             UserDb updatedUser = userRepository.save(userDb);
             return Optional.of(updatedUser);
         } catch (Exception e) {
@@ -64,7 +63,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDb> findByLogin(String login) throws DatabaseException {
         List<UserDb> user = userRepository.findByLogin(login);
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             throw new DatabaseException("Nebylo možné najít uživatele s loginem " + login + ".");
         } else {
             return user;
@@ -92,24 +91,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean changePassword(String login, String userOldPassword, String userNewPassword) throws DatabaseException {
-        boolean succesfullyChanged = false;
         try {
             List<UserDb> byId = userRepository.findByLogin(login);
             UserDb user = byId.get(0);
 
-            MapToDTO m = new MapToDTO();
-            UserDTO u = m.mapUser(user);
-            String actualPw = u.getPassword();
-            if (checkPassword(userOldPassword, actualPw)) {
-                u.setPassword(userNewPassword);
-                update(u);
-                succesfullyChanged = true;
-            }
+            if(user!=null && checkPassword(userOldPassword, user.getPasswordHash())){
+                UserDb userDb = user.withPasswordHash(hashPassword(userNewPassword));
+                userRepository.save(userDb);
+                return true;
+            }else{
+                throw new DatabaseException("Hesla nejsou stejná");
+          }
         } catch (Exception e) {
             System.out.println(e.toString());
-            succesfullyChanged = false;
+            throw e;
         }
-        return succesfullyChanged;
     }
 
 
@@ -124,10 +120,10 @@ public class UserServiceImpl implements UserService {
                 && BCrypt.checkpw(passwordPlainText, storedHash);
     }
 
-
-    private UserDb addRolesToUser(UserDTO userDTO) throws DatabaseException {
+    @Override
+    public UserDb mapToUserDBWithPassword(UserDTO userDTO) throws DatabaseException {
         Set<Role> roleStream = userDTO.getRoles().stream().map(role -> roleRepository.findByRole(role)).collect(Collectors.toSet());
-        UserDb userToInsert = UserDb.builder()
+        return UserDb.builder()
                 .id(userDTO.getId())
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
@@ -137,7 +133,25 @@ public class UserServiceImpl implements UserService {
                 .active(userDTO.isActive())
                 .passwordHash(hashPassword(userDTO.getPassword()))
                 .build();
-        return userToInsert;
+    }
+
+    @Override
+    public UserDb mapToUserDBWitoutPassword(UserDTO userDTO) throws DatabaseException {
+        Set<Role> roleStream = userDTO.getRoles().stream().map(role -> roleRepository.findByRole(role)).collect(Collectors.toSet());
+        List<UserDb> byLogin = userRepository.findByLogin(userDTO.getLogin());
+        if (byLogin.get(0) == null) {
+            throw new DatabaseException("Nebyl nalezen uživatel");
+        }
+        return UserDb.builder()
+                .id(userDTO.getId())
+                .firstName(userDTO.getFirstName())
+                .lastName(userDTO.getLastName())
+                .login(userDTO.getLogin())
+                .roles(roleStream)
+                .phone(userDTO.getPhone())
+                .active(userDTO.isActive())
+                .passwordHash(byLogin.get(0).getPasswordHash())
+                .build();
     }
 
 
