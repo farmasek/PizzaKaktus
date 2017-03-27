@@ -21,7 +21,7 @@ export const getToken = () => {
 
 export const isLoggedIn = () => {
   const token = getToken();
-  return token && token;
+  return token && token.access_token;
 };
 
 export const removeToken = () => {

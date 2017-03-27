@@ -120,6 +120,9 @@ const loginReducer =
       case `${USERPWD_CONFIRM_CHANGE}_REJECTED`: {
         return state.set('changeMessage', 'Heslo úspěšně změněno');
       }
+      case `USER_LOGOUT_CLEAR_EVERYTHING_FOREVER-_-`: {
+        return new InitialState();
+      }
       default:
         return state;
     }
