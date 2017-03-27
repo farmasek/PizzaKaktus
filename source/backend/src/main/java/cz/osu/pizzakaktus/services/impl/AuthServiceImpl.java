@@ -45,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
         UserDb user = users.get(0);
         MapToDTO m = new MapToDTO();
         UserDTO userDTO = m.mapUser(user);
-        if (users.size() != 0)
+        if (user!=null && user.isActive())
         {
             Collection<GrantedAuthority> collection =  new ArrayList<GrantedAuthority>();
 
