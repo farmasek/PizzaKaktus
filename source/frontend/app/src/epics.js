@@ -52,6 +52,11 @@ import {
   changeOrderStatusesEpic,
 } from './containers/OrderContainer/actions';
 
+import {
+  epicClearTheMessAfterMK,
+  epicClearTheMessAfterMKRoutes,
+} from './containers/AppContainer/actions';
+
 export default combineEpics(
   fetchIngredientListEpic,
   saveIngredientListEpic,
@@ -74,12 +79,14 @@ export default combineEpics(
   prefillByEmailEpic,
   changeTimePaginationEpic,
   loginEpic,
+  epicClearTheMessAfterMK,
   loggedInEpic,
   logoutEpic,
   userpwdConfirmChange,
   fetchMyselfEpic,
   logoutWindowsEpic,
   fetchOrdersEpic,
+  epicClearTheMessAfterMKRoutes,
   changeOrderStatusesEpic,
   updateIngredientEpic,
 );

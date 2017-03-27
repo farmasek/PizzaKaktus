@@ -18,9 +18,15 @@ export const Notification = () => fromJS({
 export const mapSrcToNotificationWithKey =
   ({ message, action, dismissAfter = 3000, barStyle }, key) =>
     fromJS({
-      message: message.message || message,
+      message: cheatTheMessage(message.message || message),
       key,
       action,
       dismissAfter,
       barStyle,
     });
+export const powerMessage = 'YOU HAVE NO POWER HERE!'
+export const weekMessage = 'Full authentication is required to access this resource'
+
+const cheatTheMessage = (mess) =>
+  mess === weekMessage?
+    powerMessage : mess;
