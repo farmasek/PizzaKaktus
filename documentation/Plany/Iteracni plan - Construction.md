@@ -199,3 +199,25 @@
 | Zákazník souhlasí s UC5S2 |  |
 | Chyby jsou opraveny a připomínky implementovány |  |
 | Zákazník souhlasí s opravami |  |
+---
+## C6
+21.3.2017 - 28.3.2017
+
+#### Cíle
+
+- Implementace objednávky s editací UC2S2
+
+#### Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Implementace UC2S2 frontend | Krížová,Pravda | 10h |
+| Implementace UC2S2 backend | Jaroš, Náhlý | 40h |
+
+#### Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| UC2S2 je funkční |  |
+| Zákazník souhlasí s UC2S2 |  |
+| UC2S2 je funkční |  |
+| Zákazník souhlasí s UC2S2 |  |
