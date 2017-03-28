@@ -191,17 +191,18 @@
 #### Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| UC4S3 je funkční |  |
-| Zákazník souhlasí s UC4S3 |  |
-| UC4S2 je funkční |  |
-| Zákazník souhlasí s UC4S2 |  |
-| UC5S2 je funkční |  |
-| Zákazník souhlasí s UC5S2 |  |
-| Chyby jsou opraveny a připomínky implementovány |  |
-| Zákazník souhlasí s opravami |  |
+| UC4S3 je funkční | splněno |
+| Zákazník souhlasí s UC4S3 | splněno |
+| UC4S2 je funkční | splněno |
+| Zákazník souhlasí s UC4S2 | splněno |
+| UC5S2 je funkční | splněno |
+| Zákazník souhlasí s UC5S2 | splněno |
+| Chyby jsou opraveny a připomínky implementovány | splněno |
+| Zákazník souhlasí s opravami | splněno |
 ---
+
 ## C6
-21.3.2017 - 28.3.2017
+28.3.2017 - 4.4.2017
 
 #### Cíle
 
@@ -213,6 +214,11 @@
 |:------|:----------------|:-----------------:|
 | Implementace UC2S2 frontend | Krížová,Pravda | 10h |
 | Implementace UC2S2 backend | Jaroš, Náhlý | 40h |
+| Přeložit stavy objednávek  | Krížová,Pravda | 10m |
+| Sjednotit formát objednávek (na stránce historie) | Krížová,Pravda | 10m |
+| U ingrediencí přepsat nadpis kopírovat na editovat | Krížová,Pravda | 10m |
+| Zaměstanec nemůže jít na odkaz správa objednávek | Krížová,Pravda | 10m |
+| opravit chybu objednávek na produkčním prostředí | Baránek | 5h |
 
 #### Kritéria hodnocení
 | Úkol | Stav |
@@ -221,3 +227,5 @@
 | Zákazník souhlasí s UC2S2 |  |
 | UC2S2 je funkční |  |
 | Zákazník souhlasí s UC2S2 |  |
+| Požadavky zákazníka jsou vyřešeny |  |
+| Aplikace běží na produkčním prostředí |  |
