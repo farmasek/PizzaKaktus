@@ -7,9 +7,10 @@ export const removeNotification = (element) => ({
 });
 export const epicClearTheMessAfterMK = (action) =>
   action.ofType('NOTIF_ADD')
-    .filter(a => a.notification.message === 'Full authentication is required to access this resource')
+    .filter(a => a.notification.message
+      === 'Full authentication is required to access this resource')
     .do(() => browserHistory.push('/'))
-    .map(() => ({ type: 'USER_LOGOUT_CLEAR_EVERYTHING_FOREVER-_-' }))
+    .map(() => ({ type: 'USER_LOGOUT_CLEAR_EVERYTHING_FOREVER-_-' }));
 
 export const epicClearTheMessAfterMKRoutes = (action) =>
   action.ofType('@@router/LOCATION_CHANGE')
@@ -24,4 +25,4 @@ export const epicClearTheMessAfterMKRoutes = (action) =>
         notification: {
           message: 'Level 0 activated',
         },
-      }])
+      }]);

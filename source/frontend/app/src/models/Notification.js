@@ -1,5 +1,13 @@
 import { fromJS } from 'immutable';
 
+export const powerMessage = 'YOU HAVE NO POWER HERE!';
+export const weekMessage = 'Full authentication is required to access this resource';
+
+const cheatTheMessage = (mess) =>
+  mess === weekMessage
+    ? powerMessage
+    : mess;
+
 export const cNotification = {
   message: 'message',
   key: 'key',
@@ -24,9 +32,3 @@ export const mapSrcToNotificationWithKey =
       dismissAfter,
       barStyle,
     });
-export const powerMessage = 'YOU HAVE NO POWER HERE!'
-export const weekMessage = 'Full authentication is required to access this resource'
-
-const cheatTheMessage = (mess) =>
-  mess === weekMessage?
-    powerMessage : mess;
