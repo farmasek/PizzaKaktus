@@ -8,7 +8,7 @@ import OrderContainer from '../../containers/OrderContainer';
 import CheckPermission from '../../containers/CheckPermission';
 
 const ManageOrdersPage = () => (
-  <CheckPermission permissions={['ADMIN', 'EMPLOYEE' ]} redirect>
+  <CheckPermission permissions={['ADMIN', 'EMPLOYEE']} redirect>
     <div className={styles.container}>
       <OrderContainer />
     </div>

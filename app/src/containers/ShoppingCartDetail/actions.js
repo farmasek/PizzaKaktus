@@ -7,12 +7,12 @@ import {
   CART_CUSTOMER_EDIT,
   CART_CUSTOMER_ERROR_EDIT,
   SEND_ORDER,
+  CHANGE_PIZZA_INGREDIENTS,
+  TOGGLE_EDIT_INGREDIENTS_DIALOG,
+  SELECT_PIZZA_TO_EDIT_INGREDIENTS,
 } from './constants';
 import { mapOrderData } from '../../models/Order';
-import {
-  doIt,
-  hosts,
-} from '../../network';
+import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
 
 export const editCustomerField = (field, value) => ({
@@ -36,9 +36,9 @@ export const addToShoppingCart = (pizza) => ({
   pizza,
 });
 
-export const removeFromShoppingCart = (pizza) => ({
+export const removeFromShoppingCart = (index) => ({
   type: REMOVE_FROM_SHOPPING_CART,
-  pizza,
+  index,
 });
 
 export const emptyShoppingCart = () => ({
@@ -132,3 +132,18 @@ export const showRemovePizzaNotification = (action) =>
         message: 'Pizza byla odebrána z košíku.',
       },
     }));
+
+export const changePizzaIngredients = (index, ingredientId) => ({
+  type: CHANGE_PIZZA_INGREDIENTS,
+  index,
+  ingredientId,
+});
+
+export const toggleDialog = () => ({
+  type: TOGGLE_EDIT_INGREDIENTS_DIALOG,
+});
+
+export const selectPizzaToEditIngredients = (index) => ({
+  type: SELECT_PIZZA_TO_EDIT_INGREDIENTS,
+  index,
+});

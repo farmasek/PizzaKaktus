@@ -1,13 +1,32 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { List } from 'immutable';
+import { List, fromJS } from 'immutable';
 import cssModules from 'react-css-modules';
 import styles from './index.module.scss';
 import { IconButton } from 'react-toolbox/lib/button';
 
 class ShoppingCartList extends Component {
 
-  getTableRow = (pizza, index) =>
+  getPizzaPrice = (pizza, index) => {
+    let price = pizza.price;
+    const pizzaIngredients = fromJS(pizza.ingredientsId);
+    const editIngredients = this.props.ingredientsCart.get(index);
+    if (this.props.ingredients.size > 0) {
+      editIngredients.map(ingredient => {
+        if (!pizzaIngredients.includes(ingredient)) {
+          price += this.props.ingredients.get(ingredient).cost;
+        }
+      });
+      pizzaIngredients.map(ingredient => {
+        if (!editIngredients.includes(ingredient)) {
+          price -= this.props.ingredients.get(ingredient).cost;
+        }
+      });
+    }
+    return price;
+  };
+
+  getTableRow = (pizza, index, price) =>
     <tr key={index}>
       <td className={`${styles.columnLeft} ${styles.titleColumn}`}>{pizza.title}</td>
       <td className={`${styles.columnLeft} ${styles.ingredientsColumn}`}>
@@ -24,28 +43,34 @@ class ShoppingCartList extends Component {
         </ul>
       </td>
       <td className={styles.smallColumn}>
-        { pizza.price }
+        { price }
+      </td>
+      <td className={styles.smallColumn}>
+        <IconButton
+          icon="compare_arrows"
+          onClick={() => this.props.select(index)}
+        />
       </td>
       <td className={styles.smallColumn}>
         <IconButton
           icon="remove_shopping_cart"
-          onClick={() => this.props.removeFromCart(pizza)}
+          onClick={() => this.props.removeFromCart(index)}
         />
       </td>
     </tr>;
 
   getTotalPrice = () => {
     let total = 0;
-    this.props.shoppingCart.map((pizza) => {
-      total += pizza.price;
+    this.props.shoppingCart.forEach((value, key) => {
+      total += this.getPizzaPrice(value, key);
     });
     return total;
   };
 
   render() {
     let tableRows = new List();
-    this.props.shoppingCart.map((pizza, index) => {
-      tableRows = tableRows.push(this.getTableRow(pizza, index));
+    this.props.shoppingCart.forEach((value, key) => {
+      tableRows = tableRows.push(this.getTableRow(value, key, this.getPizzaPrice(value, key)));
     });
     const totalPrice = this.getTotalPrice();
     return (
@@ -57,6 +82,7 @@ class ShoppingCartList extends Component {
             <th className={`${styles.columnLeft} ${styles.titleColumn}`}>Název</th>
             <th className={`${styles.columnLeft} ${styles.ingredientsColumn}`}>Ingredience</th>
             <th className={styles.smallColumn}>Cena</th>
+            <th>Editovat ingredience</th>
             <th className={styles.smallColumn}>Odebrat z košíku</th>
           </tr>
           </thead>
@@ -73,9 +99,11 @@ class ShoppingCartList extends Component {
 }
 
 ShoppingCartList.propTypes = {
-  shoppingCart: PropTypes.array.isRequired,
+  shoppingCart: ImmutablePropTypes.map.isRequired,
   ingredients: ImmutablePropTypes.map.isRequired,
   removeFromCart: PropTypes.func.isRequired,
+  select: PropTypes.func.isRequired,
+  ingredientsCart: ImmutablePropTypes.map.isRequired,
 };
 
 export default cssModules(ShoppingCartList, styles);

@@ -10,6 +10,7 @@ import { Button } from 'react-toolbox/lib/button';
 import ShoppingCartList from '../../components/ShoppingCartList/index';
 import Dialog from 'react-toolbox/lib/dialog';
 import CustomerForm from '../../components/CustomerForm';
+import EditIngredientsDialog from '../../components/EditPizzaIngredients';
 
 class ShoppingCartDetail extends Component {
 
@@ -65,13 +66,15 @@ class ShoppingCartDetail extends Component {
     return (
       <div className={styles.emptyCart}>
         {
-          this.props.shoppingCart.length > 0
+          this.props.shoppingCart.size > 0
             ?
             <div>
               <ShoppingCartList
                 shoppingCart={this.props.shoppingCart}
                 ingredients={this.props.ingredients}
                 removeFromCart={(pizza) => this.props.actions.removeFromShoppingCart(pizza)}
+                select={this.props.actions.selectPizzaToEditIngredients}
+                ingredientsCart={this.props.cartIngredients}
               />
               <CustomerForm
                 isLoadingUser={this.props.isLoadingUser}
@@ -85,6 +88,15 @@ class ShoppingCartDetail extends Component {
               />
               <Button className={styles.buttonConfirm} primary label={"Objednat"} onClick={() =>
                 this.confirmDialog()}
+              />
+              <EditIngredientsDialog
+                index={this.props.selected}
+                cartIngredients={this.props.cartIngredients}
+                ingredients={this.props.ingredients}
+                toggleDialog={this.props.actions.toggleDialog}
+                active={this.props.active}
+                changePizzaIngredients={(index, ingredientId) =>
+                  this.props.actions.changePizzaIngredients(index, ingredientId)}
               />
               <Dialog
                 actions={[
@@ -113,7 +125,7 @@ class ShoppingCartDetail extends Component {
 }
 
 ShoppingCartDetail.propTypes = {
-  shoppingCart: PropTypes.array.isRequired,
+  shoppingCart: ImmutablePropTypes.map.isRequired,
   ingredients: ImmutablePropTypes.map.isRequired,
   ingredientsActions: PropTypes.object,
   actions: PropTypes.object,
@@ -121,6 +133,9 @@ ShoppingCartDetail.propTypes = {
   customer: PropTypes.any,
   isLoadingUser: PropTypes.bool,
   customerError: PropTypes.any,
+  cartIngredients: ImmutablePropTypes.map.isRequired,
+  active: PropTypes.bool.isRequired,
+  selected: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -130,9 +145,11 @@ const mapStateToProps = (state) => ({
   customer: state.shoppingCartContainer.customer,
   customerError: state.shoppingCartContainer.customerError,
   isLoadingUser: state.shoppingCartContainer.isLoading,
+  active: state.shoppingCartContainer.active,
+  cartIngredients: state.shoppingCartContainer.cartIngredients,
+  selected: state.shoppingCartContainer.selected,
 });
 
-// mapDispatchToProps :: Dispatch -> {Action}
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     ShoppingCartActions,
