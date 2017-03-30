@@ -35,7 +35,7 @@ class IngredientList extends Component { // eslint-disable-line react/prefer-sta
             <th>Množství</th>
             <th>Cena</th>
             <th>Cena přídavku</th>
-            <th>Kopírovat</th>
+            <th>Editovat</th>
           </tr>
           </thead>
           <tbody>
