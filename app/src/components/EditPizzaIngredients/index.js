@@ -20,15 +20,17 @@ class EditPizzaIngredients extends Component {
             { this.props.ingredients.toIndexedSeq().map((ingredient) =>
               <li className={styles.ingredientItem} key={ingredient.get('id')}>
                 {
-                  <Checkbox
-                    checked={(this.props.cart
+                  this.props.cart.get(this.props.index)
+                    ? <Checkbox
+                      checked={(this.props.cart
                       .get(this.props.index)
                       .ingredientsIds
                       .indexOf(ingredient.get('id')) > -1)}
-                    label={`${ingredient.get('name')} (${ingredient.get('cost')} Kč)`}
-                    onChange={() =>
-                      this.props.changePizzaIngredients(this.props.index, ingredient.get('id'))}
-                  />
+                      label={`${ingredient.get('name')} (${ingredient.get('cost')} Kč)`}
+                      onChange={() =>
+                        this.props.changePizzaIngredients(this.props.index, ingredient.get('id'))}
+                    />
+                    : null
                 }
               </li>
             )}
