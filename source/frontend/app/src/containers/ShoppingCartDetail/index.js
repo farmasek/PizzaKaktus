@@ -55,7 +55,7 @@ class ShoppingCartDetail extends Component {
 
   confirmDialog() {
     if (this.validateState()) {
-      this.props.actions.sendOrder(this.props.shoppingCart, this.props.customer);
+      this.props.actions.sendOrder(this.props.cart, this.props.customer);
     }
   }
 
@@ -66,15 +66,14 @@ class ShoppingCartDetail extends Component {
     return (
       <div className={styles.emptyCart}>
         {
-          this.props.shoppingCart.size > 0
+          this.props.cart.size > 0
             ?
             <div>
               <ShoppingCartList
-                shoppingCart={this.props.shoppingCart}
+                shoppingCart={this.props.cart}
                 ingredients={this.props.ingredients}
                 removeFromCart={(pizza) => this.props.actions.removeFromShoppingCart(pizza)}
                 select={this.props.actions.selectPizzaToEditIngredients}
-                ingredientsCart={this.props.cartIngredients}
               />
               <CustomerForm
                 isLoadingUser={this.props.isLoadingUser}
@@ -91,7 +90,7 @@ class ShoppingCartDetail extends Component {
               />
               <EditIngredientsDialog
                 index={this.props.selected}
-                cartIngredients={this.props.cartIngredients}
+                cart={this.props.cart}
                 ingredients={this.props.ingredients}
                 toggleDialog={this.props.actions.toggleDialog}
                 active={this.props.active}
@@ -125,7 +124,7 @@ class ShoppingCartDetail extends Component {
 }
 
 ShoppingCartDetail.propTypes = {
-  shoppingCart: ImmutablePropTypes.map.isRequired,
+  cart: ImmutablePropTypes.map.isRequired,
   ingredients: ImmutablePropTypes.map.isRequired,
   ingredientsActions: PropTypes.object,
   actions: PropTypes.object,
@@ -133,20 +132,18 @@ ShoppingCartDetail.propTypes = {
   customer: PropTypes.any,
   isLoadingUser: PropTypes.bool,
   customerError: PropTypes.any,
-  cartIngredients: ImmutablePropTypes.map.isRequired,
   active: PropTypes.bool.isRequired,
   selected: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  shoppingCart: state.shoppingCartContainer.shoppingCart,
+  cart: state.shoppingCartContainer.cart,
   ingredients: state.ingredientContainer.ingredients,
   dialog: state.shoppingCartContainer.dialog,
   customer: state.shoppingCartContainer.customer,
   customerError: state.shoppingCartContainer.customerError,
   isLoadingUser: state.shoppingCartContainer.isLoading,
   active: state.shoppingCartContainer.active,
-  cartIngredients: state.shoppingCartContainer.cartIngredients,
   selected: state.shoppingCartContainer.selected,
 });
 

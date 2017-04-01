@@ -15,10 +15,13 @@ import {
   Customer,
   mapCustomer,
 } from '../../models/Customer';
+import {
+  mapCart,
+  mapCartItemData,
+} from '../../models/CartItem';
 
 const InitialState = new Record({
-  shoppingCart: new Map(),
-  cartIngredients: new Map(),
+  cart: new Map(),
   dialog: {
     showDialog: false,
   },
@@ -33,50 +36,32 @@ const shoppingCartReducer =
   (state = new InitialState(), action) => {
     switch (action.type) {
       case FETCH_SHOPPING_CART: {
-        const localShoppingCart = JSON.parse(localStorage.getItem('shoppingCart'))
-          || [];
-        let cartIngredients = new Map();
-        let cart = new Map();
-        if (localShoppingCart.length > 0) {
-          for (let i = 0; i < localShoppingCart.length; i++) {
-            cartIngredients = cartIngredients.set(i, fromJS(localShoppingCart[i].ingredientsId));
-            cart = cart.set(i, localShoppingCart[i]);
-          }
-        }
+        const cart = mapCart(JSON.parse(localStorage.getItem('cart'))) || new Map();
         return state.withMutations(s => s
-          .set('shoppingCart', cart)
-          .set('cartIngredients', cartIngredients)
+          .set('cart', cart)
           .set('dialog', { showDialog: false })
         );
       }
       case ADD_TO_SHOPPING_CART: {
-        let shoppingCartWithAdded = state.get('shoppingCart');
-        const index = shoppingCartWithAdded.size;
-        shoppingCartWithAdded = shoppingCartWithAdded.set(index, action.pizza);
-        localStorage.setItem('shoppingCart', JSON.stringify(shoppingCartWithAdded.toIndexedSeq()));
-        const cartIngredients = state
-          .get('cartIngredients')
-          .set(index, fromJS(action.pizza.ingredientsId));
+        let cart = state.get('cart');
+        const i = cart.size;
+        cart = cart.set(i, mapCartItemData(action.pizza, fromJS(action.pizza.ingredientsId)));
+        localStorage.setItem('cart', JSON.stringify(cart));
         return state.withMutations(s => s
-          .set('shoppingCart', shoppingCartWithAdded)
-          .set('cartIngredients', cartIngredients)
+          .set('cart', cart)
         );
       }
       case REMOVE_FROM_SHOPPING_CART: {
-        const shoppingCartWithRemoved = state.get('shoppingCart').delete(action.index);
-        localStorage.setItem('shoppingCart',
-          JSON.stringify(shoppingCartWithRemoved.toIndexedSeq()));
-        const cartIngredients = state.get('cartIngredients').delete(action.index);
+        const cart = state.get('cart').delete(action.index);
+        localStorage.setItem('cart', JSON.stringify(cart));
         return state.withMutations(s => s
-          .set('shoppingCart', shoppingCartWithRemoved)
-          .set('cartIngredients', cartIngredients)
+          .set('cart', cart)
         );
       }
       case EMPTY_SHOPPING_CART: {
-        localStorage.setItem('shoppingCart', JSON.stringify([]));
+        localStorage.setItem('cart', JSON.stringify([]));
         return state.withMutations(s => s
-          .set('shoppingCart', new Map())
-          .set('cartIngredients', new Map())
+          .set('cart', new Map())
           .set('customer', new Customer())
           .set('customerError', new Customer())
         );
@@ -102,16 +87,20 @@ const shoppingCartReducer =
         return state.setIn(['customerError', action.field], action.value);
       }
       case CHANGE_PIZZA_INGREDIENTS: {
-        let cartIngredients = state.get('cartIngredients');
-        let pizzasIngredients = fromJS(cartIngredients.get(action.index));
-        if (pizzasIngredients.contains(action.ingredientId)) {
-          pizzasIngredients = pizzasIngredients
-            .delete(pizzasIngredients.indexOf(action.ingredientId));
+        const index = action.index;
+        let cart = state.get('cart');
+        let cartItem = fromJS(state.get('cart').get(index));
+        let ingredients = fromJS(cartItem.get('ingredientsIds'));
+        if (ingredients.includes(action.ingredientId)) {
+          ingredients = ingredients.delete(ingredients.indexOf(action.ingredientId));
         } else {
-          pizzasIngredients = pizzasIngredients.push(action.ingredientId);
+          ingredients = ingredients.push(action.ingredientId);
         }
-        cartIngredients = cartIngredients.set(action.index, pizzasIngredients);
-        return state.set('cartIngredients', cartIngredients);
+        cartItem = cartItem.set('ingredientsIds', ingredients);
+        cart = cart.set(index, cartItem);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        return state.withMutations(s => s
+          .set('cart', cart));
       }
       case TOGGLE_EDIT_INGREDIENTS_DIALOG: {
         return state.set('active', !state.get('active'));
