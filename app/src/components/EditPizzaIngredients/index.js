@@ -21,8 +21,9 @@ class EditPizzaIngredients extends Component {
               <li className={styles.ingredientItem} key={ingredient.get('id')}>
                 {
                   <Checkbox
-                    checked={(this.props.cartIngredients
+                    checked={(this.props.cart
                       .get(this.props.index)
+                      .ingredientsIds
                       .indexOf(ingredient.get('id')) > -1)}
                     label={`${ingredient.get('name')} (${ingredient.get('cost')} Kč)`}
                     onChange={() =>
@@ -41,7 +42,7 @@ class EditPizzaIngredients extends Component {
 
 EditPizzaIngredients.propTypes = {
   index: PropTypes.number.isRequired,
-  cartIngredients: ImmutablePropTypes.map.isRequired,
+  cart: ImmutablePropTypes.map.isRequired,
   ingredients: ImmutablePropTypes.map.isRequired,
   toggleDialog: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,

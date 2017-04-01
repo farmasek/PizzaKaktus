@@ -7,10 +7,10 @@ import { IconButton } from 'react-toolbox/lib/button';
 
 class ShoppingCartList extends Component {
 
-  getPizzaPrice = (pizza, index) => {
-    let price = pizza.price;
-    const pizzaIngredients = fromJS(pizza.ingredientsId);
-    const editIngredients = this.props.ingredientsCart.get(index);
+  getPizzaPrice = (value) => {
+    let price = value.pizza.price;
+    const pizzaIngredients = fromJS(value.pizza.ingredientsId);
+    const editIngredients = fromJS(value.ingredientsIds);
     if (this.props.ingredients.size > 0) {
       editIngredients.map(ingredient => {
         if (!pizzaIngredients.includes(ingredient)) {
@@ -26,19 +26,19 @@ class ShoppingCartList extends Component {
     return price;
   };
 
-  getTableRow = (pizza, index, price) =>
+  getTableRow = (value, index, price) =>
     <tr key={index}>
-      <td className={`${styles.columnLeft} ${styles.titleColumn}`}>{pizza.title}</td>
+      <td className={`${styles.columnLeft} ${styles.titleColumn}`}>{value.pizza.title}</td>
       <td className={`${styles.columnLeft} ${styles.ingredientsColumn}`}>
         <ul className={styles.ingredientsList}>
           {
             this.props.ingredients.size > 0
-              ? pizza.ingredientsId.map(
+              ? value.ingredientsIds.map(
               (ingredient) => <li className={styles.ingredient} key={ingredient}>
                 { this.props.ingredients.get(ingredient).get('name') }
               </li>
             )
-              : pizza.ingredientsId
+              : value.ingredientsIds
           }
         </ul>
       </td>
@@ -70,7 +70,11 @@ class ShoppingCartList extends Component {
   render() {
     let tableRows = new List();
     this.props.shoppingCart.forEach((value, key) => {
-      tableRows = tableRows.push(this.getTableRow(value, key, this.getPizzaPrice(value, key)));
+      tableRows = tableRows.push(this.getTableRow(
+        value,
+        key,
+        this.getPizzaPrice(value)
+      ));
     });
     const totalPrice = this.getTotalPrice();
     return (
@@ -83,7 +87,7 @@ class ShoppingCartList extends Component {
             <th className={`${styles.columnLeft} ${styles.ingredientsColumn}`}>Ingredience</th>
             <th className={styles.smallColumn}>Cena</th>
             <th>Editovat ingredience</th>
-            <th className={styles.smallColumn}>Odebrat z košíku</th>
+            <th className={styles.smallColumn}>Odebrat</th>
           </tr>
           </thead>
           <tbody>
@@ -103,7 +107,6 @@ ShoppingCartList.propTypes = {
   ingredients: ImmutablePropTypes.map.isRequired,
   removeFromCart: PropTypes.func.isRequired,
   select: PropTypes.func.isRequired,
-  ingredientsCart: ImmutablePropTypes.map.isRequired,
 };
 
 export default cssModules(ShoppingCartList, styles);
