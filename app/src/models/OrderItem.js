@@ -11,3 +11,9 @@ export const mapOrderItem = (cartItem) => new OrderItem({
     ? new List()
     : cartItem.ingredientsIds,
 });
+
+export const mapOrderCart = (cart) => {
+  let orderCart = new List();
+  cart.forEach((value) => orderCart = orderCart.push(mapOrderItem(value)));
+  return orderCart;
+};

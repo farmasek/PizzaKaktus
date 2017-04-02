@@ -1,31 +1,22 @@
 import { Record, List } from 'immutable';
 import moment from 'moment';
 import { mapCustomer } from './Customer';
+import { mapOrderCart } from './OrderItem';
 
-const CREATED = 'CREATED';
-const OPENED = 'OPENED';
-const CLOSED = 'CLOSED';
-const CANCELLED = 'CANCELLED';
+const CREATED = 'Vytvořená';
+const OPENED = 'Otevřená';
+const CLOSED = 'Zavřená';
+const CANCELLED = 'Stornovaná';
 export const statuses = { CREATED, OPENED, CLOSED, CANCELLED };
 
 export const Order = new Record({
   id: null,
   orderStatus: CREATED,
-  pizzasIds: new List(),
+  orderCart: new List(),
   customer: null,
   dateCreated: null,
   dateModified: null,
 });
-
-export const mapOrderStatus = (orderStatus) => {
-  switch (orderStatus) {
-    case CREATED: return 'Vytvořeno';
-    case OPENED: return 'Otevřeno';
-    case CLOSED: return 'Uzavřeno';
-    case CANCELLED: return 'Zrušeno';
-    default: return 'Vytvořeno';
-  }
-};
 
 export const mapOrder = src => {
   const created = moment(src.dateCreated).format('DD.MM.YYYY H:mm:ss');
@@ -34,24 +25,18 @@ export const mapOrder = src => {
     id: src.id,
     // orderStatus: mapOrderStatus(src.orderStatus),
     orderStatus: src.orderStatus,
-    pizzasIds: src.pizzasIds,
+    orderCart: src.orderCart,
     customer: src.customer,
     dateCreated: created,
     dateModified: modified,
   });
 };
 
-export const mapOrderData = (pizzasIds, customer) => {
-  let ids = new List();
-  for (let i = 0; i < pizzasIds.length; i++) {
-    ids = ids.push(pizzasIds[i].id);
-  }
-  return new Order({
-    id: '',
-    orderStatus: CREATED,
-    pizzasIds: ids,
-    customer: mapCustomer(customer),
-    dateCreated: '',
-    dateModified: '',
-  });
-};
+export const mapOrderData = (orderCart, customer) => new Order({
+  id: '',
+  orderStatus: CREATED,
+  orderCart: mapOrderCart(orderCart),
+  customer: mapCustomer(customer),
+  dateCreated: '',
+  dateModified: '',
+});

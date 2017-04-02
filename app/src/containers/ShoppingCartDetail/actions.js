@@ -52,9 +52,9 @@ export const handleDialog = (showDialog) => ({
   },
 });
 
-export const sendOrder = (pizzasIds, customer) => ({
+export const sendOrder = (orderCart, customer) => ({
   type: SEND_ORDER,
-  pizzasIds,
+  orderCart,
   customer,
 });
 
@@ -65,7 +65,7 @@ export const sendOrderEpic = (action$) =>
         hosts.pk,
         'order/create-order',
         'POST',
-        JSON.stringify(mapOrderData(action.pizzasIds, action.customer)),
+        JSON.stringify(mapOrderData(action.orderCart, action.customer)),
         true,
       )).switchMap(() => ([
         {
