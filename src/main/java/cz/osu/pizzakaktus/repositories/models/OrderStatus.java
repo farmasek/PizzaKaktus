@@ -12,10 +12,10 @@ import javax.persistence.*;
 @Setter
 @Getter
 public class OrderStatus {
-    public static final String CREATED = "CREATED";
-    public static final String OPENED = "OPENED";
-    public static final String CLOSED = "CLOSED";
-    public static final String CANCELLED = "CANCELLED";
+    public static final String CREATED = "Vytvořená";
+    public static final String OPENED = "Otevřená";
+    public static final String CLOSED = "Zavřená";
+    public static final String CANCELLED = "Stornovaná";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
