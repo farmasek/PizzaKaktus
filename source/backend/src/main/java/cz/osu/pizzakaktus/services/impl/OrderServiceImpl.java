@@ -226,8 +226,8 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDb> findAllCreatedAndOpened() throws DatabaseException {
         try
         {
-            OrderStatus openedStatus = orderStatusRepository.findByStatus("OPENED");
-            OrderStatus createdStatus = orderStatusRepository.findByStatus("CREATED");
+            OrderStatus openedStatus = orderStatusRepository.findByStatus(OrderStatus.OPENED);
+            OrderStatus createdStatus = orderStatusRepository.findByStatus(OrderStatus.CREATED);
 
             List<OrderDb> openedAndCreatedOrders = orderRepository.findByOrderStatusId(openedStatus.getId());
             openedAndCreatedOrders.addAll(orderRepository.findByOrderStatusId(createdStatus.getId()));
@@ -244,7 +244,7 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDb> findAllOpened() throws DatabaseException {
         try
         {
-            OrderStatus openedStatus = orderStatusRepository.findByStatus("OPENED");
+            OrderStatus openedStatus = orderStatusRepository.findByStatus(OrderStatus.OPENED);
             return orderRepository.findByOrderStatusId(openedStatus.getId());
         }
         catch (Exception e)

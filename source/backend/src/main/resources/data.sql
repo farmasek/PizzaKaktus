@@ -1,10 +1,10 @@
 INSERT INTO role (id, role) VALUES (0,'ADMIN') ON CONFLICT (id) DO NOTHING;
 INSERT INTO role (id, role) VALUES (1,'EMPLOYEE') ON CONFLICT (id) DO NOTHING;
 
-INSERT INTO order_status (id, status) VALUES (1,'CREATED') ON CONFLICT (id) DO NOTHING;
-INSERT INTO order_status (id, status) VALUES (2,'OPENED') ON CONFLICT (id) DO NOTHING;
-INSERT INTO order_status (id, status) VALUES (3,'CLOSED') ON CONFLICT (id) DO NOTHING;
-INSERT INTO order_status (id, status) VALUES (4,'CANCELLED') ON CONFLICT (id) DO NOTHING;
+INSERT INTO order_status (id, status) VALUES (1,'Vytvořená') ON CONFLICT (id) DO NOTHING;
+INSERT INTO order_status (id, status) VALUES (2,'Otevřená') ON CONFLICT (id) DO NOTHING;
+INSERT INTO order_status (id, status) VALUES (3,'Zavřená') ON CONFLICT (id) DO NOTHING;
+INSERT INTO order_status (id, status) VALUES (4,'Stornována') ON CONFLICT (id) DO NOTHING;
 
 -- INSERT INTO ingredient_db (id, amount, cost, cost_custom, name) VALUES (1, '10 g', 5.00, 10.00, 'tomatový základ') ON CONFLICT (id) DO NOTHING;
 -- INSERT INTO ingredient_db (id, amount, cost, cost_custom, name) VALUES (2, '10 g', 8.00, 15.00, 'smetanový základ') ON CONFLICT (id) DO NOTHING;
