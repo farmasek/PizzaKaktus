@@ -14,7 +14,7 @@ class EditPizzaIngredients extends Component {
           active={this.props.active}
           onEscKeyDown={() => this.props.toggleDialog()}
           onOverlayClick={() => this.props.toggleDialog()}
-          title={'Editovat ingredience'}
+          title={'Zvolte ingredience'}
         >
           <ul className={styles.ingredientsList}>
             { this.props.ingredients.toIndexedSeq().map((ingredient) =>

@@ -1,0 +1,27 @@
+.ingredientsList {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+
+  .ingredientItem {
+    display: inline-block;
+    width: 33.3333%;
+  }
+
+  @media screen and (max-width: 1250px) {
+
+    .ingredientItem {
+      width: 50%;
+    }
+
+  }
+
+  @media screen and (max-width: 880px) {
+
+    .ingredientItem {
+      width: 100%;
+    }
+
+  }
+
+}
