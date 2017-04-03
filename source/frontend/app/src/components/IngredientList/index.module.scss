@@ -7,12 +7,15 @@
     width: 100%;
     text-align: center;
     margin-bottom: 2em;
+
     .columnLeft {
       text-align: left;
     }
+
     td {
-      padding: 0.5em 0 0.5em 0;
+      padding: 0.2em 0;
     }
+
     tr {
       border-bottom: 1px solid rgba(0, 0, 0, 0.14);
     }
