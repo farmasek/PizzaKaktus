@@ -10,17 +10,19 @@ import { statuses } from '../../models/Order';
 
 class OrderList extends Component {
 
-  getOrdersPizzas = (pizzasIds) => {
+  getOrdersPizzas = (orderCart) => {
     const titles = [];
     if (this.props.pizzas.size > 0) {
-      pizzasIds.map((id, index) => {
+      orderCart.map((item, index) => {
         titles.push(<span key={index}>
-          { this.props.pizzas.get(id).title }
-          { index !== pizzasIds.length - 1 ? <span>, </span> : null }
+          { this.props.pizzas.get(item.pizzaId)
+            ? this.props.pizzas.get(item.pizzaId).title
+            : 'Vlastní' }
+          { index !== item.pizzaId.length - 1 ? <span>, </span> : null }
         </span>);
       });
     }
-    return titles.length > 0 ? titles : pizzasIds;
+    return titles.length > 0 ? titles : '';
   };
 
   handleChangeClick = () => {
@@ -41,7 +43,7 @@ class OrderList extends Component {
       <td>{order.dateCreated}</td>
       <td>{order.dateModified}</td>
       <td className={styles.columnLeft}>{order.customer.email}</td>
-      <td className={styles.columnLeft}>{this.getOrdersPizzas(order.pizzasIds)}</td>
+      <td className={styles.columnLeft}>{this.getOrdersPizzas(order.orderCart)}</td>
       <td>{order.orderStatus}</td>
       <td>
         <Checkbox
