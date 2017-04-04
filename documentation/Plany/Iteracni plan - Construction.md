@@ -241,6 +241,7 @@
 
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
+| Revize Implementace UC2S2 frontend,baceknd | Krížová,Jaroš | 10h |
 | Implementace UC2S3 frontend | Krížová,Pravda | 10h |
 | Implementace UC2S3 backend | Jaroš, Náhlý | 40h |
 | Změnit řazení v správě objednávek(první nejnovější obj.) | Krížová,Pravda | 10m |
