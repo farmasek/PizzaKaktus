@@ -27,16 +27,17 @@ public class MapToDTO {
                 .build();
     }
 
-    public OrderDTO mapOrder(OrderDb orderDb) {
+    /*public OrderDTO mapOrder(OrderDb orderDb) {
         return OrderDTO.builder()
                 .id(orderDb.getId())
                 .customer(mapCustomer(orderDb.getCustomer()))
                 .orderStatus(orderDb.getOrderStatus().getStatus())
+                .orderCart(orderDb.)
                 .pizzasIds(orderDb.getPizzasIds())
                 .dateCreated(orderDb.getDateCreated())
                 .dateModified(orderDb.getDateModified())
                 .build();
-    }
+    }*/
 
     public CustomerDTO mapCustomer(CustomerDb customerDb) {
         return CustomerDTO.builder()

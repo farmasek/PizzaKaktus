@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public interface PizzaRepository extends PagingAndSortingRepository<PizzaDb, Integer>, QueryDslPredicateExecutor<PizzaDb> {
 
+
     List<PizzaDb> findById(Integer id);
 
     List<PizzaDb> findAll();

@@ -3,8 +3,12 @@ package cz.osu.pizzakaktus.services.impl;
 import cz.osu.pizzakaktus.endpoints.mappers.MapToDTO;
 import cz.osu.pizzakaktus.endpoints.models.ChangeOrderStatusDTO;
 import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
+import cz.osu.pizzakaktus.endpoints.models.OrderPizzaDTO;
+import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
+import cz.osu.pizzakaktus.repositories.IngredientRepository;
 import cz.osu.pizzakaktus.repositories.OrderRepository;
 import cz.osu.pizzakaktus.repositories.OrderStatusRepository;
+import cz.osu.pizzakaktus.repositories.PizzaRepository;
 import cz.osu.pizzakaktus.repositories.models.*;
 import cz.osu.pizzakaktus.services.*;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
@@ -44,6 +48,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     PizzaService pizzaService;
+
+    @Autowired
+    PizzaRepository pizzaRepository;
+
+    @Autowired
+    IngredientRepository ingredientRepository;
 
     @Autowired
     CustomerService customerService;
@@ -87,12 +97,34 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDb createOrder(OrderDTO order) throws DatabaseException {
+
+
         CustomerDb customer = new CustomerDb(order.getCustomer());
-        OrderStatus orderStatus = orderStatusRepository.findByStatus(OrderStatus.CREATED);
+        OrderStatus orderStatus = orderStatusRepository.findById(1);
         long now = System.currentTimeMillis();
         Timestamp dateCreated = new Timestamp(now);
         Timestamp dateModified = new Timestamp(now);
-        OrderDb orderDb = new OrderDb(order.getPizzasIds(), customer, orderStatus,
+
+        List<OrderPizzaDTO> origPizzas = new ArrayList<>();
+        List<OrderPizzaDTO> customPizzas = new ArrayList<>();
+        //List<Integer> customPizzasIds = new ArrayList<>();
+        List<Integer> allPizzasIds = new ArrayList<>();
+
+        for (OrderPizzaDTO pizza : order.getOrderCart()) {
+
+            if(pizza.getIngredientsIds().isEmpty())
+            {
+                origPizzas.add(pizza);
+                allPizzasIds.add(pizza.getPizzaId());
+            }
+            else
+            {
+                customPizzas.add(pizza);
+                allPizzasIds.add(saveCustomPizza(pizza));
+            }
+        }
+
+        OrderDb orderDb = new OrderDb(allPizzasIds, customer, orderStatus,
                 dateCreated, dateModified);
         List<PizzaDb> pizzas = new ArrayList<>();
         List<Integer> pizzasIDs = orderDb.getPizzasIds();
@@ -115,6 +147,34 @@ public class OrderServiceImpl implements OrderService {
             throw e;
         }
         return insertedOrder.get();
+    }
+
+    @Override
+    public Integer saveCustomPizza(OrderPizzaDTO pizza) throws DatabaseException
+    {
+        PizzaDb orginPizza =  pizzaService.findById(pizza.getPizzaId()).get(0);
+        PizzaDTO newPizza = new PizzaDTO();
+        newPizza.setActive(false);
+        newPizza.setTitle(orginPizza.getTitle() + "-Upravená");
+        newPizza.setCategoryId(orginPizza.getCategory().getId());
+        List<Integer> newPizzaIngIds =  new ArrayList<>();
+        double price = orginPizza.getPrice();
+
+        //přidaní nových ingrediencí do listu
+        for (int newIng : pizza.getIngredientsIds()) {
+            IngredientDb ingredient = ingredientRepository.findOne(newIng);
+            price += ingredient.getCostCustom();
+            newPizzaIngIds.add(ingredient.getId());
+        }
+        //přidaní původních ingrediencí do listu
+        for (IngredientDb ingDb : orginPizza.getIngredients()) {
+            newPizzaIngIds.add(ingDb.getId());
+        }
+        newPizza.setIngredientsId(newPizzaIngIds);
+        newPizza.setPrice(price);
+        Optional<PizzaDb>  insertedNewPizza = pizzaService.insert(newPizza);
+
+        return insertedNewPizza.get().getId();
     }
 
     @Override
@@ -264,8 +324,9 @@ public class OrderServiceImpl implements OrderService {
             OrderStatus orderStatus = orderStatusRepository.findByStatus(orders.getOrderStatus());
             orderToChange.setOrderStatus(orderStatus);
            // listOfOrders.add(orderRepository.findById(orders.getId()));
-            listOfOrders.add(mapToDTO.mapOrder(orderRepository.findById(orders.getId())));
 
+            //listOfOrders.add(mapToDTO.mapOrder(orderRepository.findById(orders.getId())));
+            listOfOrders.add(new OrderDTO(orderRepository.findById(orders.getId())));
             orderRepository.save(orderToChange);
         }
         try {
