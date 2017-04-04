@@ -26,7 +26,7 @@ class OrderList extends Component {
           { this.props.pizzas.get(item.pizzaId)
             ? this.props.pizzas.get(item.pizzaId).title
             : 'Vlastní' }
-          { index !== item.pizzaId.length - 1 ? <span>, </span> : null }
+          { index !== orderCart.length - 1 ? <span>, </span> : null }
         </span>);
       });
     }
