@@ -224,7 +224,21 @@ public class OrderServiceImpl implements OrderService {
     public String makeOrderMailBody(CustomerDb customer, List<PizzaDb> pizzas) throws DatabaseException {
         String orderedPizzas = "";
         for (int i = 0; i < pizzas.size(); i++) {
-            orderedPizzas += "- " + pizzas.get(i).getTitle() + " " + (int) Math.round(pizzas.get(i).getPrice()) + "kč\n";
+            orderedPizzas += "- " + pizzas.get(i).getTitle() + " (" ;
+
+            for (int j = 0; j < pizzas.get(i).getIngredients().size(); j++)
+            {
+                IngredientDb ingredient = pizzas.get(i).getIngredients().get(j);
+                if(j == pizzas.get(i).getIngredients().size() - 1)
+                {
+                    orderedPizzas += ingredient.getName();
+                }
+                else
+                {
+                    orderedPizzas += ingredient.getName() + ", ";
+                }
+            }
+            orderedPizzas += ") " + (int) Math.round(pizzas.get(i).getPrice()) + "kč\n";
         }
 
         int totalCost = countTotalPizzasCost(pizzas);
@@ -286,8 +300,8 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDb> findAllCreatedAndOpened() throws DatabaseException {
         try
         {
-            OrderStatus openedStatus = orderStatusRepository.findByStatus(OrderStatus.OPENED);
-            OrderStatus createdStatus = orderStatusRepository.findByStatus(OrderStatus.CREATED);
+            OrderStatus openedStatus = orderStatusRepository.findById(2);
+            OrderStatus createdStatus = orderStatusRepository.findById(1);
 
             List<OrderDb> openedAndCreatedOrders = orderRepository.findByOrderStatusId(openedStatus.getId());
             openedAndCreatedOrders.addAll(orderRepository.findByOrderStatusId(createdStatus.getId()));
@@ -304,7 +318,7 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDb> findAllOpened() throws DatabaseException {
         try
         {
-            OrderStatus openedStatus = orderStatusRepository.findByStatus(OrderStatus.OPENED);
+            OrderStatus openedStatus = orderStatusRepository.findById(2);
             return orderRepository.findByOrderStatusId(openedStatus.getId());
         }
         catch (Exception e)
