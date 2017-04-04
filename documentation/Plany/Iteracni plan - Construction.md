@@ -251,8 +251,9 @@
 #### Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| UC2S3 je funkční |  |
-| Zákazník souhlasí s UC2S3 |  |
+| UC2S2 je funkční |  |
+| Zákazník souhlasí s UC2S2 |  |
 | UC2S3 je funkční |  |
 | Zákazník souhlasí s UC2S3 |  |
 | Požadavky zákazníka jsou vyřešeny |  |
+| Zákazník souhlasí se scénařem zobrazení detailu objednávky |  |
