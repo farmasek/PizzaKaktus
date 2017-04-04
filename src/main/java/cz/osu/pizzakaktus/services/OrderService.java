@@ -2,6 +2,7 @@ package cz.osu.pizzakaktus.services;
 
 import cz.osu.pizzakaktus.endpoints.models.ChangeOrderStatusDTO;
 import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
+import cz.osu.pizzakaktus.endpoints.models.OrderPizzaDTO;
 import cz.osu.pizzakaktus.repositories.models.CustomerDb;
 import cz.osu.pizzakaktus.repositories.models.OrderDb;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
@@ -89,6 +90,13 @@ public interface OrderService
      * @return list of OrderDb - all created and opened orders
      */
     List<OrderDb> findAllCreatedAndOpened() throws DatabaseException;
+
+    /**
+     *
+     *
+     * @return
+     */
+     Integer saveCustomPizza(OrderPizzaDTO pizza) throws DatabaseException;
 
     List<OrderDTO> changeOrderStatus(List<ChangeOrderStatusDTO> order) throws DatabaseException;
 }

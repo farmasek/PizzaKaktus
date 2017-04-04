@@ -52,7 +52,7 @@ public class OrderController {
     public HttpEntity<?> sendOrder(@RequestBody OrderDTO order) {
         try {
             OrderDb insertedOrder = orderService.createOrder(order);
-            return new ResponseEntity<>(mapToDTO.mapOrder(insertedOrder), HttpStatus.OK);
+            return new ResponseEntity<>(new OrderDTO(insertedOrder), HttpStatus.OK);
         } catch (DatabaseException e) {
             return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
@@ -74,7 +74,7 @@ public class OrderController {
         Timestamp endDate = new Timestamp(Long.valueOf(filterEndDate));
         try {
             allOrders = orderService.findAll(pageable, filterAttribute, filterPhrase, startDate, endDate);
-            Page<OrderDTO> orderDTOs = allOrders.map(orderDb -> mapToDTO.mapOrder(orderDb));
+            Page<OrderDTO> orderDTOs = allOrders.map(orderDb -> new OrderDTO(orderDb));
             return new ResponseEntity<>(orderDTOs, HttpStatus.OK);
         } catch (DatabaseException e) {
             return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);

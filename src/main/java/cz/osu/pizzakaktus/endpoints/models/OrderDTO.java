@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,19 +19,28 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDTO  {
     private Integer id;
-    private List<Integer> pizzasIds;
+    private List<OrderPizzaDTO> orderCart = new ArrayList<>();
     private CustomerDTO customer;
     private String orderStatus;
     private Timestamp dateCreated;
     private Timestamp dateModified;
 
+
     public OrderDTO(OrderDb orderDb)
     {
         this.id = orderDb.getId();
-        this.pizzasIds = orderDb.getPizzasIds();
+        makeCart(orderDb.getPizzasIds());
+        //this.pizzasIds = orderDb.getPizzasIds();
         this.customer = new CustomerDTO(orderDb.getCustomer());
         this.orderStatus = orderDb.getOrderStatus().getStatus();
         this.dateCreated = orderDb.getDateCreated();
         this.dateModified = orderDb.getDateModified();
+    }
+
+    private void makeCart(List<Integer> pizzasId)
+    {
+        for (Integer id : pizzasId) {
+            this.orderCart.add(new OrderPizzaDTO(id, new ArrayList<>()));
+        }
     }
 }
