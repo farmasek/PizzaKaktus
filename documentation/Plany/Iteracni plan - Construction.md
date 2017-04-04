@@ -241,10 +241,10 @@
 
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
-| Revize Implementace UC2S2 frontend,baceknd | Krížová,Jaroš | 10h |
+| Revize Implementace UC2S2 frontend, backend | Krížová,Jaroš | 10h |
 | Implementace UC2S3 frontend | Krížová,Pravda | 10h |
 | Implementace UC2S3 backend | Jaroš, Náhlý | 40h |
-| Změnit řazení v správě objednávek(první nejnovější obj.) | Krížová,Pravda | 10m |
+| Změnit řazení v správě objednávek (první nejnovější obj.) | Jaroš, Náhlý | 10m |
 | Vytvořit scenář na zobrazení detailu objednávky | Náhlý | 10m |
 | Zaměstanec nemůže stornovat objednávku | Baránek | 1 h |
 
