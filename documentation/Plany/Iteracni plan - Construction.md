@@ -229,3 +229,29 @@
 | Zákazník souhlasí s UC2S2 |  |
 | Požadavky zákazníka jsou vyřešeny |  |
 | Aplikace běží na produkčním prostředí |  |
+
+## C7
+4.4.2017 - 11.4.2017
+
+#### Cíle
+
+- Implementace objednávky s editací UC2S3
+
+#### Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Implementace UC2S3 frontend | Krížová,Pravda | 10h |
+| Implementace UC2S3 backend | Jaroš, Náhlý | 40h |
+| Změnit řazení v správě objednávek(první nejnovější obj.) | Krížová,Pravda | 10m |
+| Vytvořit scenář na zobrazení detailu objednávky | Náhlý | 10m |
+| Zaměstanec nemůže stornovat objednávku | Baránek | 1 h |
+
+#### Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| UC2S3 je funkční |  |
+| Zákazník souhlasí s UC2S3 |  |
+| UC2S3 je funkční |  |
+| Zákazník souhlasí s UC2S3 |  |
+| Požadavky zákazníka jsou vyřešeny |  |
