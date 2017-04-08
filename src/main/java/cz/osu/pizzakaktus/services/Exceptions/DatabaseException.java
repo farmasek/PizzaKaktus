@@ -14,5 +14,12 @@ public class DatabaseException extends Exception {
         System.out.println("OPPA error");
         System.out.println(errMessage);
     }
+ public DatabaseException(String errMessage,Exception e)
+    {
+        super(errMessage);
+        System.out.println("OPPA error");
+        System.out.println(errMessage);
+        System.out.println(e.getMessage());
+    }
 
 }
