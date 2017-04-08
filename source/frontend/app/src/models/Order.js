@@ -6,7 +6,7 @@ import { mapOrderCart } from './OrderItem';
 const CREATED = 'Vytvořená';
 const OPENED = 'Otevřená';
 const CLOSED = 'Zavřená';
-const CANCELLED = 'Stornovaná';
+const CANCELLED = 'Stornována';
 export const statuses = { CREATED, OPENED, CLOSED, CANCELLED };
 
 export const Order = new Record({

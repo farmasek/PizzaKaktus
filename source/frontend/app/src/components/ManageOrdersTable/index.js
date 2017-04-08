@@ -7,6 +7,7 @@ import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
 import * as styles from './index.module.scss';
 import { statuses } from '../../models/Order';
+import CheckPermission from '../../containers/CheckPermission';
 
 class OrderList extends Component {
 
@@ -53,13 +54,16 @@ class OrderList extends Component {
         />
       </td>
       <td className={styles.stornoButton}>
-        <Button
-          label={'Stornovat'}
-          flat
-          disabled={order.orderStatus !== statuses.CREATED}
-          className={ order.orderStatus !== statuses.CREATED ? styles.disabled : null}
-          onClick={() => this.props.orderCancel(order)}
-        />
+        <CheckPermission permissions={['ADMIN']}>
+          <Button
+            label={'Stornovat'}
+            flat
+            disabled={order.orderStatus !== statuses.CREATED}
+            className={ order.orderStatus !== statuses.CREATED ? styles.disabled : null}
+            onClick={() => this.props.orderCancel(order)}
+          />
+        </CheckPermission>
+
       </td>
     </tr>;
 
@@ -69,44 +73,47 @@ class OrderList extends Component {
         <Card >
           <CardTitle>Správa objednávek</CardTitle>
           <CardText>
-        <table className={styles.orderListTable}>
-          <thead>
-          <tr>
-            <th
-              className={styles.dateColumn}
-            >
-              <span>Vytvořeno</span>
-            </th>
-            <th
-              className={styles.dateColumn}
-            >
-              <span>Změněno</span>
-            </th>
-            <th>
-              <span>Email</span>
-            </th>
-            <th>Pizzy</th>
-            <th
-              className={styles.orderStatusColumn}
-            >
-              <span>Stav</span>
-            </th>
-            <th>Změnit stav</th>
-            <th>Stornovat</th>
-          </tr>
-          </thead>
-          <tbody>
-          { this.props.orders.toIndexedSeq().map(
-            (order) => this.renderRow(order)) }
-          </tbody>
-        </table>
+            <table className={styles.orderListTable}>
+              <thead>
+              <tr>
+                <th
+                  className={styles.dateColumn}
+                >
+                  <span>Vytvořeno</span>
+                </th>
+                <th
+                  className={styles.dateColumn}
+                >
+                  <span>Změněno</span>
+                </th>
+                <th>
+                  <span>Email</span>
+                </th>
+                <th>Pizzy</th>
+                <th
+                  className={styles.orderStatusColumn}
+                >
+                  <span>Stav</span>
+                </th>
+                <th>Změnit stav</th>
+                <th><CheckPermission permissions={['ADMIN']}>
+                  <span>Stornovat</span>
+                </CheckPermission>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              { this.props.orders.toIndexedSeq().map(
+                (order) => this.renderRow(order)) }
+              </tbody>
+            </table>
           </CardText>
           <CardActions>
-        <Button
-          label={'Změnit stavy vybraných objednávek'}
-          onClick={() => this.handleChangeClick()}
-          primary raised
-        />
+            <Button
+              label={'Změnit stavy vybraných objednávek'}
+              onClick={() => this.handleChangeClick()}
+              primary raised
+            />
           </CardActions>
         </Card>
       </div>

@@ -6,6 +6,11 @@ INSERT INTO order_status (id, status) VALUES (2,'Otevřená') ON CONFLICT (id) D
 INSERT INTO order_status (id, status) VALUES (3,'Zavřená') ON CONFLICT (id) DO NOTHING;
 INSERT INTO order_status (id, status) VALUES (4,'Stornována') ON CONFLICT (id) DO NOTHING;
 
+-- INSERT INTO user_db(id,active,first_name,last_name,login,password_hash,phone) VALUES (0,true,'firstname','lastname','admin','$2a$12$Tl9wBhQax9I6Xds60d4rfOgyBU5hT7Sua5EbvgVMtuhcXOt9KBepm','111222333');
+--
+-- INSERT INTO user_db_roles(user_db_id, roles_id) VALUES (0,0);
+-- INSERT INTO user_db_roles(user_db_id, roles_id) VALUES (0,1);
+
 -- INSERT INTO ingredient_db (id, amount, cost, cost_custom, name) VALUES (1, '10 g', 5.00, 10.00, 'tomatový základ') ON CONFLICT (id) DO NOTHING;
 -- INSERT INTO ingredient_db (id, amount, cost, cost_custom, name) VALUES (2, '10 g', 8.00, 15.00, 'smetanový základ') ON CONFLICT (id) DO NOTHING;
 -- INSERT INTO ingredient_db (id, amount, cost, cost_custom, name) VALUES (3, '25 g', 15.00, 20.00, 'šunka') ON CONFLICT (id) DO NOTHING;

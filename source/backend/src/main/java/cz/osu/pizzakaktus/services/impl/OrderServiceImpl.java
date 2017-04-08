@@ -321,25 +321,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDTO> changeOrderStatus(List<ChangeOrderStatusDTO> order) throws DatabaseException {
-
+    public List<OrderDTO> changeOrderStatus(List<ChangeOrderStatusDTO> orders) throws DatabaseException {
+        try {
 
         List<OrderDTO> listOfOrders = new ArrayList<>();
-        for (ChangeOrderStatusDTO orders:order) {
+        for (ChangeOrderStatusDTO order:orders) {
 
-            OrderDb orderToChange = orderRepository.findById(orders.getId());
-            OrderStatus orderStatus = orderStatusRepository.findByStatus(orders.getOrderStatus());
+            OrderDb orderToChange = orderRepository.findById(order.getId());
+            OrderStatus orderStatus = orderStatusRepository.findByStatus(order.getOrderStatus());
             orderToChange.setOrderStatus(orderStatus);
-           // listOfOrders.add(orderRepository.findById(orders.getId()));
-
-            //listOfOrders.add(mapToDTO.mapOrder(orderRepository.findById(orders.getId())));
-            listOfOrders.add(new OrderDTO(orderRepository.findById(orders.getId())));
+            listOfOrders.add(new OrderDTO(orderRepository.findById(order.getId())));
             orderRepository.save(orderToChange);
         }
-        try {
             return listOfOrders;
         } catch (Exception e) {
-            throw new DatabaseException("Nebylo možno změnit status objednávky.");
+            throw new DatabaseException("Nebylo možno změnit status objednávky.",e);
         }
 
 
