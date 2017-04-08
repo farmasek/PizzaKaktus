@@ -38,6 +38,7 @@ import {
   showRemovePizzaNotification,
   sendOrderEpic,
   prefillByEmailEpic,
+  changePizzaIngredientsNotifEpic,
 } from './containers/ShoppingCartDetail/actions';
 import {
   loginEpic,
@@ -89,4 +90,5 @@ export default combineEpics(
   epicClearTheMessAfterMKRoutes,
   changeOrderStatusesEpic,
   updateIngredientEpic,
+  changePizzaIngredientsNotifEpic,
 );
