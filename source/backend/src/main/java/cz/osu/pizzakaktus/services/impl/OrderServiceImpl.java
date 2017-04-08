@@ -98,7 +98,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDb createOrder(OrderDTO order) throws DatabaseException {
 
-
         CustomerDb customer = new CustomerDb(order.getCustomer());
         OrderStatus orderStatus = orderStatusRepository.findById(1);
         long now = System.currentTimeMillis();
@@ -165,10 +164,6 @@ public class OrderServiceImpl implements OrderService {
             IngredientDb ingredient = ingredientRepository.findOne(newIng);
             price += ingredient.getCostCustom();
             newPizzaIngIds.add(ingredient.getId());
-        }
-        //přidaní původních ingrediencí do listu
-        for (IngredientDb ingDb : orginPizza.getIngredients()) {
-            newPizzaIngIds.add(ingDb.getId());
         }
         newPizza.setIngredientsId(newPizzaIngIds);
         newPizza.setPrice(price);
