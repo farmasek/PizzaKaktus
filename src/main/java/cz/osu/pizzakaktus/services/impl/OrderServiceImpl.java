@@ -29,10 +29,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Created by Vojta on 20.2.2017.
@@ -300,6 +297,7 @@ public class OrderServiceImpl implements OrderService {
 
             List<OrderDb> openedAndCreatedOrders = orderRepository.findByOrderStatusId(openedStatus.getId());
             openedAndCreatedOrders.addAll(orderRepository.findByOrderStatusId(createdStatus.getId()));
+            openedAndCreatedOrders.sort(Comparator.comparing(OrderDb::getDateCreated).reversed());
 
             return openedAndCreatedOrders;
         }
