@@ -1,5 +1,8 @@
 import {
   FETCH_MENU,
+  TOGGLE_CUSTOM_PIZZA_DIALOG,
+  CUSTOM_PIZZA_EDIT,
+  CUSTOM_PIZZA_VALIDATION,
 } from './constants';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
@@ -40,3 +43,19 @@ export const fetchMenuEpic = action$ =>
               },
             }))
         ));
+
+export const toggleCustomPizzaForm = () => ({
+  type: TOGGLE_CUSTOM_PIZZA_DIALOG,
+});
+
+export const editCustomPizzaValue = (field, value, price) => ({
+  type: CUSTOM_PIZZA_EDIT,
+  field,
+  value,
+  price,
+});
+
+export const customPizzaValidation = pizzaErrors => ({
+  type: CUSTOM_PIZZA_VALIDATION,
+  pizzaErrors,
+});
