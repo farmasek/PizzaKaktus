@@ -7,8 +7,8 @@ import { Button } from 'react-toolbox/lib/button';
 import * as styles from './index.module.scss';
 import * as MenuActions from './actions';
 import * as ShoppingCartActions from '../ShoppingCartDetail/actions';
-import Menu from '../../components/Menu';
-import CustomPizzaDialog from '../../components/CustomPizzaDialog';
+import MenuList from '../../components/Menu';
+import PizzaIngredientsDialog from '../../components/PizzaIngredientsDialog';
 
 class MenuContainer extends Component {
 
@@ -24,14 +24,15 @@ class MenuContainer extends Component {
   render() {
     return (
       <div>
-        <Menu
+        <MenuList
           menu={this.props.menu}
           categories={this.props.categories}
           ingredients={this.props.ingredients}
           addToCart={(pizza) => this.props.shoppingCartActions.addToShoppingCart(pizza)}
           fetchCart={this.props.shoppingCartActions.fetchShoppingCart}
         />
-        <CustomPizzaDialog
+        <PizzaIngredientsDialog
+          editing={false}
           active={this.props.customActive}
           toggleDialog={this.props.actions.toggleCustomPizzaForm}
           editValue={this.props.actions.editCustomPizzaValue}

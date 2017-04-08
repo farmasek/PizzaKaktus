@@ -28,7 +28,13 @@ class ShoppingCartList extends Component {
 
   getTableRow = (value, index, price) =>
     <tr key={index}>
-      <td className={`${styles.columnLeft} ${styles.titleColumn}`}>{value.pizza.title}</td>
+      <td className={`${styles.columnLeft} ${styles.titleColumn}`}>
+        {
+          value.pizza.title
+            ? value.pizza.title
+            : 'Vlastní'
+        }
+      </td>
       <td className={`${styles.columnLeft} ${styles.ingredientsColumn}`}>
         <ul className={styles.ingredientsList}>
           {

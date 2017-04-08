@@ -72,6 +72,9 @@ export const sendOrderEpic = (action$) =>
           type: EMPTY_SHOPPING_CART,
         },
         {
+          type: `${SEND_ORDER}_FULFILLED`,
+        },
+        {
           type: `NOTIF_ADD`,
           notification: {
             message: 'Objednávka odeslána.',
@@ -88,6 +91,11 @@ export const sendOrderEpic = (action$) =>
               barStyle: { color: '#e57373' },
             },
           }))
+        .switchMap(() => ([
+          {
+            type: `${SEND_ORDER}_REJECTED`,
+          },
+        ]))
     );
 
 export const prefillByEmailEpic = (action$, store) =>

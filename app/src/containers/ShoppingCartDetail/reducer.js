@@ -9,12 +9,10 @@ import {
   CHANGE_PIZZA_INGREDIENTS,
   TOGGLE_EDIT_INGREDIENTS_DIALOG,
   SELECT_PIZZA_TO_EDIT_INGREDIENTS,
+  SEND_ORDER,
 } from './constants';
 import { Record, Map, fromJS } from 'immutable';
-import {
-  Customer,
-  mapCustomer,
-} from '../../models/Customer';
+import { Customer, mapCustomer } from '../../models/Customer';
 import {
   mapCart,
   mapCartItemData,
@@ -30,6 +28,7 @@ const InitialState = new Record({
   isLoading: false,
   active: false,
   selected: 0,
+  sending: false,
 });
 
 const shoppingCartReducer =
@@ -110,6 +109,15 @@ const shoppingCartReducer =
           .set('active', true)
           .set('selected', action.index)
         );
+      }
+      case SEND_ORDER: {
+        return state.set('sending', true);
+      }
+      case `${SEND_ORDER}_FULFILLED`: {
+        return state.set('sending', false);
+      }
+      case `${SEND_ORDER}_REJECTED`: {
+        return state.set('sending', false);
       }
       default:
         return state;

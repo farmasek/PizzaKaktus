@@ -8,9 +8,10 @@ import * as ShoppingCartActions from './actions';
 import * as IngredientActions from '../IngredientContainer/actions';
 import { Button } from 'react-toolbox/lib/button';
 import ShoppingCartList from '../../components/ShoppingCartList/index';
+import ProgressBar from 'react-toolbox/lib/progress_bar';
 import Dialog from 'react-toolbox/lib/dialog';
 import CustomerForm from '../../components/CustomerForm';
-import EditIngredientsDialog from '../../components/EditPizzaIngredients';
+import PizzaIngredientsDialog from '../../components/PizzaIngredientsDialog';
 
 class ShoppingCartDetail extends Component {
 
@@ -95,7 +96,9 @@ class ShoppingCartDetail extends Component {
                 label={"Objednat"}
                 onClick={() => this.confirmDialog()}
               />
-              <EditIngredientsDialog
+              { this.props.sending && <ProgressBar type="circular" mode="indeterminate" /> }
+              <PizzaIngredientsDialog
+                editing
                 index={this.props.selected}
                 cart={this.props.cart}
                 ingredients={this.props.ingredients}
@@ -141,6 +144,7 @@ ShoppingCartDetail.propTypes = {
   customerError: PropTypes.any,
   active: PropTypes.bool.isRequired,
   selected: PropTypes.number.isRequired,
+  sending: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -152,6 +156,7 @@ const mapStateToProps = (state) => ({
   isLoadingUser: state.shoppingCartContainer.isLoading,
   active: state.shoppingCartContainer.active,
   selected: state.shoppingCartContainer.selected,
+  sending: state.shoppingCartContainer.sending,
 });
 
 const mapDispatchToProps = (dispatch) => ({
