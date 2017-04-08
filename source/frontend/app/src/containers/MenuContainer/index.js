@@ -3,18 +3,23 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cssModules from 'react-css-modules';
-import styles from './index.module.scss';
+import { Button } from 'react-toolbox/lib/button';
+import * as styles from './index.module.scss';
 import * as MenuActions from './actions';
 import * as ShoppingCartActions from '../ShoppingCartDetail/actions';
-// import * as OrderActions from '../HistoryContainer/actions';
 import Menu from '../../components/Menu';
+import CustomPizzaDialog from '../../components/CustomPizzaDialog';
 
 class MenuContainer extends Component {
 
   componentWillMount() {
     this.props.actions.fetchMenu();
-    // this.props.orderActions.fetchOrderList();
   }
+
+  customPizzaToCart = () => {
+    this.props.shoppingCartActions.addToShoppingCart(this.props.customPizza);
+    this.props.actions.toggleCustomPizzaForm();
+  };
 
   render() {
     return (
@@ -25,6 +30,21 @@ class MenuContainer extends Component {
           ingredients={this.props.ingredients}
           addToCart={(pizza) => this.props.shoppingCartActions.addToShoppingCart(pizza)}
           fetchCart={this.props.shoppingCartActions.fetchShoppingCart}
+        />
+        <CustomPizzaDialog
+          active={this.props.customActive}
+          toggleDialog={this.props.actions.toggleCustomPizzaForm}
+          editValue={this.props.actions.editCustomPizzaValue}
+          confirmForm={() => this.customPizzaToCart()}
+          pizza={this.props.customPizza}
+          ingredients={this.props.ingredients}
+          pizzaErrors={this.props.customPizzaErrors}
+          pizzaValidation={this.props.actions.customPizzaValidation}
+        />
+        <Button
+          label={'Sestavit vlastní pizzu'}
+          onClick={() => this.props.actions.toggleCustomPizzaForm()}
+          raised primary
         />
       </div>
     );
@@ -37,16 +57,20 @@ MenuContainer.propTypes = {
   ingredients: ImmutablePropTypes.map.isRequired,
   actions: PropTypes.object,
   shoppingCartActions: PropTypes.object,
+  customPizza: ImmutablePropTypes.record.isRequired,
+  customActive: PropTypes.bool.isRequired,
+  customPizzaErrors: PropTypes.object.isRequired,
 };
 
-// mapStateToProps :: {State} -> {Props}
 const mapStateToProps = (state) => ({
   menu: state.menuContainer.menu,
   categories: state.categoryContainer.categories,
   ingredients: state.ingredientContainer.ingredients,
+  customPizza: state.menuContainer.customPizza,
+  customActive: state.menuContainer.customActive,
+  customPizzaErrors: state.menuContainer.customPizzaErrors,
 });
 
-// mapDispatchToProps :: Dispatch -> {Action}
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     MenuActions,
@@ -56,10 +80,6 @@ const mapDispatchToProps = (dispatch) => ({
     ShoppingCartActions,
     dispatch
   ),
-  /* orderActions: bindActionCreators(
-    OrderActions,
-    dispatch
-  ), */
 });
 
 const Container = cssModules(MenuContainer, styles);
