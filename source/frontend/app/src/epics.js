@@ -16,6 +16,7 @@ import {
   savePizzaListEpic,
   updatePizzaEpic,
   fetchPizzaAfterPaginationChange,
+  fetchAllPizzasEpic,
 } from './containers/PizzaContainer/actions';
 import {
   fetchOrderListEpic,
@@ -56,6 +57,7 @@ import {
 import {
   epicClearTheMessAfterMK,
   epicClearTheMessAfterMKRoutes,
+  handleInvalidTokenEpic,
 } from './containers/AppContainer/actions';
 
 export default combineEpics(
@@ -91,4 +93,6 @@ export default combineEpics(
   changeOrderStatusesEpic,
   updateIngredientEpic,
   changePizzaIngredientsNotifEpic,
+  handleInvalidTokenEpic,
+  fetchAllPizzasEpic,
 );

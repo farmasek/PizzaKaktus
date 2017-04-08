@@ -40,7 +40,27 @@ public class PizzaController {
      * @return Json list of all pizzas
      */
     @RequestMapping(value = "/all-pizzas", method = RequestMethod.GET)
-    public HttpEntity<?> findAllPizzas(@RequestParam(value = "filterBy", required = false)
+    public HttpEntity<?> findAllPizzas() {
+        List<PizzaDb> allPizzas = null;
+        try {
+            allPizzas = pizzaService.findAll();
+            List<PizzaDTO> pizzaDTOs = new ArrayList<>();
+            allPizzas.forEach(pizzaDb -> {
+                pizzaDTOs.add(mapToDTO.mapPizza(pizzaDb));
+            });
+            return new ResponseEntity<>(pizzaDTOs, HttpStatus.OK);
+        } catch (DatabaseException e) {
+            return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Return all pizzas
+     *
+     * @return Json list of all pizzas
+     */
+    @RequestMapping(value = "/pizzas-page", method = RequestMethod.GET)
+    public HttpEntity<?> findPizzasPage(@RequestParam(value = "filterBy", required = false)
                                                String filterBy, Pageable pageable) {
         Page<PizzaDb> allPizzas = null;
         try {
