@@ -15,7 +15,6 @@ const InitialState = new Record({
   customPizza: initialCustomPizza,
   customActive: false,
   customPizzaErrors: {
-    title: '',
     ingredientsId: '',
   },
 });

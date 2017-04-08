@@ -6,7 +6,7 @@ export const OrderItem = new Record({
 });
 
 export const mapOrderItem = (cartItem) => new OrderItem({
-  pizzaId: cartItem.pizza.id,
+  pizzaId: cartItem.pizza.id ? cartItem.pizza.id : null,
   ingredientsIds: is(cartItem.ingredientsIds, cartItem.pizza.ingredientsId)
     ? new List()
     : cartItem.ingredientsIds,
