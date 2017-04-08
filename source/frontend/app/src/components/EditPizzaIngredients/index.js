@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Dialog from 'react-toolbox/lib/dialog';
 import Checkbox from 'react-toolbox/lib/checkbox';
+import { Button } from 'react-toolbox/lib/button';
 import cssModules from 'react-css-modules';
 import * as styles from './index.module.scss';
 
@@ -35,6 +36,12 @@ class EditPizzaIngredients extends Component {
               </li>
             )}
           </ul>
+          <Button
+            label={'Zavřít'}
+            onClick={() => this.props.toggleDialog()}
+            raised
+            primary
+          />
         </Dialog>
       </div>
     );

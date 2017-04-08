@@ -6,21 +6,7 @@
 	}
 }
 
-.buttonRemove{
-   background-color: #cdcdcd;
-   margin: 12px 0px 0px 0px !important;
-   width: 140px;
-}
-.buttonRemove:hover {
-  background-color: #dcdcdc !important;
-}
-
-.buttonConfirm{
-  background-color: #303f9f;
-  color: white !important;
+.buttonConfirm, .buttonRemove {
   margin: 12px 0px 0px 10px !important;
   width: 140px;
-}
-.buttonConfirm:hover {
-  background-color: #303f9f!important;
 }

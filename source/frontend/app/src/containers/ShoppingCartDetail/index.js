@@ -3,7 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cssModules from 'react-css-modules';
-import styles from './index.module.scss';
+import * as styles from './index.module.scss';
 import * as ShoppingCartActions from './actions';
 import * as IngredientActions from '../IngredientContainer/actions';
 import { Button } from 'react-toolbox/lib/button';
@@ -82,11 +82,18 @@ class ShoppingCartDetail extends Component {
                 customerError={this.props.customerError}
                 customer={this.props.customer}
               />
-              <Button className={styles.buttonRemove} label={"Vysypat košík"} onClick={() =>
-                this.props.actions.handleDialog(true)}
+              <Button
+                className={styles.buttonRemove}
+                label={"Vysypat košík"}
+                onClick={() => this.props.actions.handleDialog(true)}
+                raised
               />
-              <Button className={styles.buttonConfirm} primary label={"Objednat"} onClick={() =>
-                this.confirmDialog()}
+              <Button
+                className={styles.buttonConfirm}
+                primary
+                raised
+                label={"Objednat"}
+                onClick={() => this.confirmDialog()}
               />
               <EditIngredientsDialog
                 index={this.props.selected}

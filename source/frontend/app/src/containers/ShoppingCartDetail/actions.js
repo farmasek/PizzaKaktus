@@ -139,6 +139,15 @@ export const changePizzaIngredients = (index, ingredientId) => ({
   ingredientId,
 });
 
+export const changePizzaIngredientsNotifEpic = (action) =>
+  action.ofType(CHANGE_PIZZA_INGREDIENTS)
+  .map(() => ({
+    type: `NOTIF_ADD`,
+    notification: {
+      message: 'Vybrané ingredience byly upraveny.',
+    },
+  }));
+
 export const toggleDialog = () => ({
   type: TOGGLE_EDIT_INGREDIENTS_DIALOG,
 });
