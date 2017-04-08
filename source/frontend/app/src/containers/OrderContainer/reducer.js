@@ -5,7 +5,7 @@ import {
   PICK_ORDER_CANCEL,
   CHANGE_ORDER_STATUSES,
 } from './constants';
-import { Record, Map } from 'immutable';
+import { Record, Map, OrderedMap } from 'immutable';
 import { Order, mapOrder } from '../../models/Order';
 
 const InitialState = new Record({
@@ -25,7 +25,7 @@ const orderReducer = (state = new InitialState(), action) => {
       .set('checkboxes', new Map()));
     }
     case `${FETCH_ORDERS}_FULFILLED`: {
-      let orders = new Map();
+      let orders = new OrderedMap();
       let checkboxes = new Map();
       action.payload.map(order => {
         orders = orders.set(order.id, mapOrder(order));

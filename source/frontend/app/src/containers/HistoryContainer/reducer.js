@@ -4,7 +4,7 @@ import {
   FETCH_ORDER_LIST,
   ORDER_PAG_TIME,
 } from './constants';
-import { Record, Map, fromJS } from 'immutable';
+import { Record, Map, OrderedMap, fromJS } from 'immutable';
 import { mapOrder } from '../../models/Order';
 
 const InitialState = new Record({
@@ -34,7 +34,7 @@ const historyReducer = (state = new InitialState(), action) => {
     case `${FETCH_ORDER_LIST}_FULFILLED`: {
       const { content, totalPages, totalElements, size, number } = action.response;
       const { direction, property } = action.response.sort ? action.response.sort[0] : null;
-      let orders = new Map();
+      let orders = new OrderedMap();
       content.map(order => orders = orders.set(order.id, mapOrder(order)));
       return state.withMutations(s => s
       .setIn(['pagination', 'totalPages'], totalPages)
