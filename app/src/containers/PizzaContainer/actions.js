@@ -1,5 +1,5 @@
 import {
-  FETCH_PIZZA_LIST,
+  FETCH_PIZZA_TABLE,
   PIZZA_CHANGE_FORM_VALUE,
   PIZZA_CREATE_NEW,
   PIZZA_VALIDATION,
@@ -7,6 +7,7 @@ import {
   PIZZA_COPY,
   PIZZA_PAG_PROPERTIES,
   PIZZA_DIALOG,
+  FETCH_ALL_PIZZAS,
 } from './constants';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
@@ -31,34 +32,34 @@ export const savePizza = () => ({
 
 export const savePizzaListEpic = (action$, store$) =>
   action$.ofType(PIZZA_CREATE_NEW)
-    .switchMap(() =>
-      Observable.ajax(doIt(
-        hosts.pk,
-        'pizza/add',
-        'POST',
-        JSON.stringify(store$.getState().pizzaContainer.pizzaForm),
-        true,
-      ))
-        .switchMap(() => [{
-          type: `${FETCH_PIZZA_LIST}`,
-          created: true,
+  .switchMap(() =>
+    Observable.ajax(doIt(
+      hosts.pk,
+      'pizza/add',
+      'POST',
+      JSON.stringify(store$.getState().pizzaContainer.pizzaForm),
+      true,
+    ))
+    .switchMap(() => [{
+      type: `${FETCH_PIZZA_TABLE}`,
+      created: true,
+    },
+      {
+        type: `NOTIF_ADD`,
+        notification: {
+          message: 'Pizza vytvořena.',
         },
-          {
-            type: `NOTIF_ADD`,
-            notification: {
-              message: 'Pizza vytvořena.',
-            },
-          },
-        ])
-        .catch(error =>
-          Observable.of({
-            type: `NOTIF_ADD`,
-            notification: {
-              message: error.xhr.response,
-              barStyle: { color: '#e57373' },
-            },
-          }))
-    );
+      },
+    ])
+    .catch(error =>
+      Observable.of({
+        type: `NOTIF_ADD`,
+        notification: {
+          message: error.xhr.response,
+          barStyle: { color: '#e57373' },
+        },
+      }))
+  );
 
 export const changePaginationProperties = (paginationType, value) => ({
   type: PIZZA_PAG_PROPERTIES,
@@ -67,11 +68,11 @@ export const changePaginationProperties = (paginationType, value) => ({
 });
 
 export const fetchPizzaList = () => ({
-  type: FETCH_PIZZA_LIST,
+  type: FETCH_PIZZA_TABLE,
 });
 
 const fetchPizzaTable = (pagination) =>
-  Observable.ajax(doIt(hosts.pk, `pizza/all-pizzas?page=${
+  Observable.ajax(doIt(hosts.pk, `pizza/pizzas-page?page=${
     pagination.get('number')
     }&size=${
     pagination.get('size')
@@ -82,40 +83,64 @@ const fetchPizzaTable = (pagination) =>
     }&filterBy=${
     pagination.get('filterBy')
     }`, 'GET', {}))
-    .switchMap(({ response }) => [
-      {
-        type: `${FETCH_PIZZA_LIST}_FULFILLED`,
-        response,
+  .switchMap(({ response }) => [
+    {
+      type: `${FETCH_PIZZA_TABLE}_FULFILLED`,
+      response,
+    },
+    {
+      type: FETCH_CATEGORY_LIST,
+    },
+    {
+      type: FETCH_INGREDIENT_LIST,
+    },
+  ])
+  .catch(error =>
+    Observable.of({
+      type: `NOTIF_ADD`,
+      notification: {
+        message: error.xhr.response,
+        barStyle: { color: '#e57373' },
       },
+    })
+  );
+
+export const fetchPizzaListEpic = (action$, store) =>
+  action$.ofType(FETCH_PIZZA_TABLE)
+  .map(() => store.getState().pizzaContainer.get('pagination'))
+  .switchMap((pagination) => fetchPizzaTable(pagination)
+  );
+
+export const fetchPizzaAfterPaginationChange = (action$, store) =>
+  action$.ofType(PIZZA_PAG_PROPERTIES)
+  .debounceTime(250)
+  .map(() => store.getState().pizzaContainer.get('pagination'))
+  .switchMap((pagination) => fetchPizzaTable(pagination)
+  );
+
+export const fetchAllPizzas = () => ({
+  type: FETCH_ALL_PIZZAS,
+});
+
+export const fetchAllPizzasEpic = (action$) =>
+  action$.ofType(FETCH_ALL_PIZZAS)
+  .switchMap(() =>
+    Observable.ajax(doIt(hosts.pk, 'pizza/all-pizzas', 'GET', {}))
+    .switchMap(({ response }) => ([
       {
-        type: FETCH_CATEGORY_LIST,
+        type: `${FETCH_ALL_PIZZAS}_FULFILLED`,
+        pizzas: response,
       },
-      {
-        type: FETCH_INGREDIENT_LIST,
-      },
-    ])
-    .catch(error =>
+    ]))
+    .catch((error) =>
       Observable.of({
         type: `NOTIF_ADD`,
         notification: {
           message: error.xhr.response,
           barStyle: { color: '#e57373' },
         },
-      })
-    );
-
-export const fetchPizzaListEpic = (action$, store) =>
-  action$.ofType(FETCH_PIZZA_LIST)
-    .map(() => store.getState().pizzaContainer.get('pagination'))
-    .switchMap((pagination) => fetchPizzaTable(pagination)
-    );
-
-export const fetchPizzaAfterPaginationChange = (action$, store) =>
-  action$.ofType(PIZZA_PAG_PROPERTIES)
-    .debounceTime(250)
-    .map(() => store.getState().pizzaContainer.get('pagination'))
-    .switchMap((pagination) => fetchPizzaTable(pagination)
-    );
+      }))
+  );
 
 export const updatePizza = (pizza, field, value) => {
   let pizzaMap = fromJS(pizza);
@@ -128,28 +153,28 @@ export const updatePizza = (pizza, field, value) => {
 
 export const updatePizzaEpic = (action$) =>
   action$.ofType(PIZZA_UPDATE)
-    .switchMap(({ pizzaMap }) =>
-      Observable.ajax(doIt(hosts.pk, 'pizza/update', 'PUT',
-        pizzaMap, true))
-        .switchMap(() => ([{
-          type: `${FETCH_PIZZA_LIST}`,
+  .switchMap(({ pizzaMap }) =>
+    Observable.ajax(doIt(hosts.pk, 'pizza/update', 'PUT',
+      pizzaMap, true))
+    .switchMap(() => ([{
+      type: `${FETCH_PIZZA_TABLE}`,
+    },
+      {
+        type: `NOTIF_ADD`,
+        notification: {
+          message: 'Pizza byla upravena.',
         },
-          {
-            type: `NOTIF_ADD`,
-            notification: {
-              message: 'Pizza byla upravena.',
-            },
-          },
-        ]))
-        .catch((error) =>
-          Observable.of({
-            type: `NOTIF_ADD`,
-            notification: {
-              message: error.xhr.response,
-              barStyle: { color: '#e57373' },
-            },
-          }))
-    );
+      },
+    ]))
+    .catch((error) =>
+      Observable.of({
+        type: `NOTIF_ADD`,
+        notification: {
+          message: error.xhr.response,
+          barStyle: { color: '#e57373' },
+        },
+      }))
+  );
 
 export const copyPizza = (pizza) => ({
   type: PIZZA_COPY,

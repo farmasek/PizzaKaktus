@@ -7,7 +7,7 @@ import {
 } from './constants';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
-import { FETCH_PIZZA_LIST } from '../PizzaContainer/constants';
+import { FETCH_ALL_PIZZAS } from '../PizzaContainer/constants';
 
 export const fetchOrders = () => ({
   type: FETCH_ORDERS,
@@ -23,7 +23,7 @@ export const fetchOrdersEpic = action$ =>
         payload: payload.response,
       },
       {
-        type: FETCH_PIZZA_LIST,
+        type: FETCH_ALL_PIZZAS,
       },
     ])
     .catch(error =>

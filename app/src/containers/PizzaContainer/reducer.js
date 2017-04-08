@@ -1,10 +1,11 @@
 import {
-  FETCH_PIZZA_LIST,
+  FETCH_PIZZA_TABLE,
   PIZZA_CHANGE_FORM_VALUE,
   PIZZA_VALIDATION,
   PIZZA_COPY,
   PIZZA_PAG_PROPERTIES,
   PIZZA_DIALOG,
+  FETCH_ALL_PIZZAS,
 } from './constants';
 import { Record, Map, List, fromJS } from 'immutable';
 import { mapPizzaForm, mapPizza } from '../../models/Pizza';
@@ -53,7 +54,7 @@ const InitialState = new Record(
 const pizzaReducer =
   (state = new InitialState(), action) => {
     switch (action.type) {
-      case `${FETCH_PIZZA_LIST}`: {
+      case `${FETCH_PIZZA_TABLE}`: {
         return state.withMutations(s => s
         .set('loading', true)
         .set('pizzaErrors', initialPizzaErrors)
@@ -62,7 +63,7 @@ const pizzaReducer =
         .set('pizzaForm', initialPizzaForm)
         );
       }
-      case `${FETCH_PIZZA_LIST}_FULFILLED`: {
+      case `${FETCH_PIZZA_TABLE}_FULFILLED`: {
         const { content, totalPages, totalElements, size, number } = action.response;
         const { direction, property } = action.response.sort ? action.response.sort[0] : null;
         let pizzas = new Map();
@@ -77,7 +78,7 @@ const pizzaReducer =
         .set('pizzas', pizzas)
         .set('loading', false));
       }
-      case `${FETCH_PIZZA_LIST}_FAILED`: {
+      case `${FETCH_PIZZA_TABLE}_FAILED`: {
         return state.withMutations(s => s
         .set('pizzas', new Map())
         .set('loading', false)
@@ -116,6 +117,11 @@ const pizzaReducer =
       }
       case PIZZA_DIALOG: {
         return state.set('dialog', action.dialog);
+      }
+      case `${FETCH_ALL_PIZZAS}_FULFILLED`: {
+        let pizzas = new Map();
+        action.pizzas.map(pizza => pizzas = pizzas.set(pizza.id, mapPizza(pizza)));
+        return state.set('pizzas', pizzas);
       }
       default:
         return state;
