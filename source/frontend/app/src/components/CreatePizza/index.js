@@ -140,7 +140,11 @@ class CreatePizza extends Component { // eslint-disable-line react/prefer-statel
           />
         </CardText>
         <CardActions>
-          <Button label="Přidat" primary raised onClick={() => this.confirmDialog()}/>
+          <Button
+            className={styles.buttoner}
+            label="Přidat" primary raised
+            onClick={() => this.confirmDialog()}
+          />
         </CardActions>
       </Card>);
   }

@@ -43,6 +43,7 @@ class MenuContainer extends Component {
           pizzaValidation={this.props.actions.customPizzaValidation}
         />
         <Button
+          className={styles.buttons}
           label={'Sestavit vlastní pizzu'}
           onClick={() => this.props.actions.toggleCustomPizzaForm()}
           raised primary

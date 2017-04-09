@@ -49,7 +49,11 @@ class CreateCategory extends Component {
           />
         </CardText>
         <CardActions>
-          <Button label="Přidat" primary raised onClick={() => this.confirmDialog()} />
+          <Button
+            className={styles.buttoner}
+            label="Přidat" primary raised
+            onClick={() => this.confirmDialog()}
+          />
         </CardActions>
 
       </Card>);
