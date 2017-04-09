@@ -98,8 +98,16 @@ class CreateIngredient extends Component {
         <CardActions>
           {
             this.props.copied
-              ? <Button label="Upravit" primary raised onClick={() => this.confirmUpdate()} />
-              : <Button label="Přidat" primary raised onClick={() => this.confirmDialog()} />
+              ? <Button
+                className={styles.buttoner}
+                label="Upravit"
+                primary raised onClick={() => this.confirmUpdate()}
+              />
+              : <Button
+                className={styles.buttoner}
+                label="Přidat"
+                primary raised onClick={() => this.confirmDialog()}
+              />
           }
         </CardActions>
       </Card>);

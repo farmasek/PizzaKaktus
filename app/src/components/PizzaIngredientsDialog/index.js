@@ -100,13 +100,16 @@ class PizzaIngredientsDialog extends Component {
               : null
           }
           <Button
+            className={styles.buttonerClose}
             label={'Zavřít'}
             onClick={() => this.props.toggleDialog()}
             raised
+            button
           />
           {
             !this.props.editing
               ? <Button
+                className={styles.buttoner}
                 label={'Vložit do košíku'}
                 onClick={() => this.confirmDialog()}
                 raised

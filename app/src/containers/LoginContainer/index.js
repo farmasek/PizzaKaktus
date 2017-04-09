@@ -123,7 +123,11 @@ class LoginContainer extends React.Component {
         this.props.new,
       )}
       />
-      <Button label="Zavřít" onClick={() => this.props.actions.togglePasswordDialog()}/>
+      <Button
+        className={styles.buttoner}
+        label="Zavřít" onClick={() => this.props.actions.togglePasswordDialog()}
+        raised
+      />
     </Dialog>
   );
 

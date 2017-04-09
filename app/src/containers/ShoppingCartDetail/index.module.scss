@@ -6,7 +6,12 @@
 	}
 }
 
-.buttonConfirm, .buttonRemove {
-  margin: 12px 0px 0px 10px !important;
+.buttonConfirm {
+  margin-top: 12px!important;
   width: 140px;
+}
+.buttonRemove {
+  margin: 12px 10px 0px 0px!important;
+  width: 140px;
+  background-color: #cdcdcd!important;
 }
