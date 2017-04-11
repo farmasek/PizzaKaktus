@@ -96,7 +96,7 @@ public interface OrderService
      *
      * @return
      */
-     Integer saveCustomPizza(OrderPizzaDTO pizza) throws DatabaseException;
+     Integer saveCustomPizza(OrderPizzaDTO pizza, String email) throws DatabaseException;
 
     List<OrderDTO> changeOrderStatus(List<ChangeOrderStatusDTO> order) throws DatabaseException;
 }
