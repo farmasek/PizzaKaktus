@@ -217,6 +217,15 @@ sp
 | 7 | Aplikace | Aplikace uloží záznam do logu. |
 | 8 | Aplikace | Aplikace aktualizuje stav objednávky na stránce. |
 
+## UC4	S4	Zobrazení detailu objednávky
+### Preconditions: Spuštěná aplikace, přihlášený majitel, zobrazená stránka s objednávkami
+### Basic flow:
+| Krok | Actor | Akce |
+|:---:|:---|:---|
+| 1 | Aplikace | Na stránce je seznam založených a otevřených objednávek |
+| 2 | Majitel | Majitel, nebo zaměstnanec vybere objednávku u které chce zobrazit jeji detial. |
+| 3 | Aplikace | Aplikace zobrazi detial objednávky se všemi údaji z objednávky. |
+
 ## UC5	S1	Vložení nové ingredience
 ### Preconditions: Spuštěná aplikace, přihlášený uživatel
 ### Basic flow:
