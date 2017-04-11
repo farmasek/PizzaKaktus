@@ -223,12 +223,12 @@
 #### Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| UC2S2 je funkční |  |
-| Zákazník souhlasí s UC2S2 |  |
-| UC2S2 je funkční |  |
-| Zákazník souhlasí s UC2S2 |  |
-| Požadavky zákazníka jsou vyřešeny |  |
-| Aplikace běží na produkčním prostředí |  |
+| UC2S2 je funkční | splněno |
+| Zákazník souhlasí s UC2S2 | splněno |
+| UC2S2 je funkční | splněno |
+| Zákazník souhlasí s UC2S2 | splněno |
+| Požadavky zákazníka jsou vyřešeny | splněno |
+| Aplikace běží na produkčním prostředí | splněno |
 
 ## C7
 4.4.2017 - 11.4.2017
@@ -251,9 +251,37 @@
 #### Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| UC2S2 je funkční |  |
-| Zákazník souhlasí s UC2S2 |  |
-| UC2S3 je funkční |  |
-| Zákazník souhlasí s UC2S3 |  |
-| Požadavky zákazníka jsou vyřešeny |  |
-| Zákazník souhlasí se scénařem zobrazení detailu objednávky |  |
+| UC2S2 je funkční | splněno |
+| Zákazník souhlasí s UC2S2 | splněno |
+| UC2S3 je funkční | splněno |
+| Zákazník souhlasí s UC2S3 | splněno |
+| Požadavky zákazníka jsou vyřešeny | splněno |
+| Zákazník souhlasí se scénařem zobrazení detailu objednávky | splněno |
+
+## C8
+11.4.2017 - 18.4.2017
+
+#### Cíle
+
+- UC6S1	Zobrazení prodejnosti pizz za období
+
+#### Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Implementace UC6S1 frontend | Baránek | 2h |
+| Implementace UC6S1 backend | Náhlý, Jaroš | 10h |
+| Opravit výpočet ceny při vytváření vlastní pizzy | Križová, Pravda | 5h |
+| Přepsat Zavřít na OK u výběru ingrediencí |  Križová | 1m |
+| Opravit potvrzení objednávky (po kliknutí na odeslat) - smazat košík a přejít na nabídku | Križová, Pravda | 1h |
+| Opravit UC4S4 vyměnit majitel za zaměstnanec | Náhlý | 2m |
+
+#### Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| UC6S1 je funkční |  |
+| Zákazník souhlasí s UC6S1 |  |
+| Cena se počítá správně při vytváření vlastní pizzy |  |
+| U výběru ingrediencí je OK, místo zavřít |  |
+| Po potvrzení objednávky se smaže košík a přejde se na nabídku |  |
+| UC4S4 je opraven |  |
