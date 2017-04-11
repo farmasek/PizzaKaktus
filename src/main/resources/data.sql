@@ -1,6 +1,8 @@
 INSERT INTO role (id, role) VALUES (0,'ADMIN') ON CONFLICT (id) DO NOTHING;
 INSERT INTO role (id, role) VALUES (1,'EMPLOYEE') ON CONFLICT (id) DO NOTHING;
 
+INSERT INTO category_db (id, name) VALUES (0, 'Vlastní') ON CONFLICT (id) DO NOTHING;
+
 INSERT INTO order_status (id, status) VALUES (1,'Vytvořená') ON CONFLICT (id) DO NOTHING;
 INSERT INTO order_status (id, status) VALUES (2,'Otevřená') ON CONFLICT (id) DO NOTHING;
 INSERT INTO order_status (id, status) VALUES (3,'Zavřená') ON CONFLICT (id) DO NOTHING;

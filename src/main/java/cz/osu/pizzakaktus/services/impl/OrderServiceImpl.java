@@ -37,6 +37,8 @@ import java.util.*;
 @Service
 public class OrderServiceImpl implements OrderService {
     private static final String ORDER_EMAIL_ADRESS = "justtestingpizza@gmail.com";
+    private static final int DOUGH_PRICE = 80;
+
     @Autowired
     OrderRepository orderRepository;
 
@@ -101,6 +103,8 @@ public class OrderServiceImpl implements OrderService {
         Timestamp dateCreated = new Timestamp(now);
         Timestamp dateModified = new Timestamp(now);
 
+
+         // Opravit, posilaji se vsecky ???
         List<OrderPizzaDTO> origPizzas = new ArrayList<>();
         List<OrderPizzaDTO> customPizzas = new ArrayList<>();
         //List<Integer> customPizzasIds = new ArrayList<>();
@@ -116,7 +120,8 @@ public class OrderServiceImpl implements OrderService {
             else
             {
                 customPizzas.add(pizza);
-                allPizzasIds.add(saveCustomPizza(pizza));
+                String email = order.getCustomer().getEmail();
+                allPizzasIds.add(saveCustomPizza(pizza, email));
             }
         }
 
@@ -146,15 +151,28 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Integer saveCustomPizza(OrderPizzaDTO pizza) throws DatabaseException
+    public Integer saveCustomPizza(OrderPizzaDTO pizza, String email) throws DatabaseException
     {
-        PizzaDb orginPizza =  pizzaService.findById(pizza.getPizzaId()).get(0);
         PizzaDTO newPizza = new PizzaDTO();
+        double price = 0;
+
+        if(pizza.getPizzaId() == null)
+        {
+            price = DOUGH_PRICE;
+            // Kategorie vlastní
+            newPizza.setCategoryId(0);
+            newPizza.setTitle("Vlastní-" + email);
+        }
+        else
+        {
+            PizzaDb orginPizza =  pizzaService.findById(pizza.getPizzaId()).get(0);
+            newPizza.setTitle(orginPizza.getTitle() + "-Upravená");
+            newPizza.setCategoryId(orginPizza.getCategory().getId());
+            price = orginPizza.getPrice();
+        }
+
         newPizza.setActive(false);
-        newPizza.setTitle(orginPizza.getTitle() + "-Upravená");
-        newPizza.setCategoryId(orginPizza.getCategory().getId());
         List<Integer> newPizzaIngIds =  new ArrayList<>();
-        double price = orginPizza.getPrice();
 
         //přidaní nových ingrediencí do listu
         for (int newIng : pizza.getIngredientsIds()) {
@@ -164,7 +182,7 @@ public class OrderServiceImpl implements OrderService {
         }
         newPizza.setIngredientsId(newPizzaIngIds);
         newPizza.setPrice(price);
-        Optional<PizzaDb>  insertedNewPizza = pizzaService.insert(newPizza);
+        Optional<PizzaDb> insertedNewPizza = pizzaService.insert(newPizza);
 
         return insertedNewPizza.get().getId();
     }
@@ -177,7 +195,6 @@ public class OrderServiceImpl implements OrderService {
             System.out.println(send);
         } else {
             orderAcceptedMail(customer.getEmail(), makeOrderMailBody(customer, pizzas));
-
         }
     }
 
