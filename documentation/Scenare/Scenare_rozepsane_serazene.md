@@ -223,8 +223,8 @@ sp
 | Krok | Actor | Akce |
 |:---:|:---|:---|
 | 1 | Aplikace | Na stránce je seznam založených a otevřených objednávek |
-| 2 | Majitel | Majitel, nebo zaměstnanec vybere objednávku u které chce zobrazit jeji detial. |
-| 3 | Aplikace | Aplikace zobrazi detial objednávky se všemi údaji z objednávky. |
+| 2 | Majitel | Majitel, nebo zaměstnanec vybere objednávku u které chce zobrazit jeji detail. |
+| 3 | Aplikace | Aplikace zobrazi detail objednávky se všemi údaji z objednávky. |
 
 ## UC5	S1	Vložení nové ingredience
 ### Preconditions: Spuštěná aplikace, přihlášený uživatel
