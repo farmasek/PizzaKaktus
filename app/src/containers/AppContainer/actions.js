@@ -29,23 +29,23 @@ export const epicClearTheMessAfterMKRoutes = (action) =>
     }]);
 
 export const handleInvalidTokenEpic = (action) =>
-  action.ofType('NOTIF_ADD')
-  .filter(a => a.notification.message.includes('Invalid access token'))
-  .do(() => {
-    removeToken();
-    browserHistory.push('/');
-  })
-  .switchMap(() => [
-    {
-      type: `NOTIF_ADD`,
-      notification: {
-        message: 'Platnost přihlášení vyprchala.',
-      },
-    },
-    {
-      type: 'USER_LOGOUT_CLEAR_EVERYTHING_FOREVER-_-',
-    },
-    {
-      type: FETCH_MENU,
-    },
-  ]);
+action.ofType('NOTIF_ADD').filter(a=>false)
+  // .filter(a => a.notification.message && a.notification.message.includes('Invalid access token'))
+  // .do(() => {
+  //   removeToken();
+  //   browserHistory.push('/');
+  // })
+  // .switchMap(() => [
+  //   {
+  //     type: `NOTIF_ADD`,
+  //     notification: {
+  //       message: 'Platnost přihlášení vyprchala.',
+  //     },
+  //   },
+  //   {
+  //     type: 'USER_LOGOUT_CLEAR_EVERYTHING_FOREVER-_-',
+  //   },
+  //   {
+  //     type: FETCH_MENU,
+  //   },
+  // ]);
