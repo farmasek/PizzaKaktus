@@ -29,6 +29,7 @@
 |  S1 | Zobrazení historie objednávek, řazení dle: datum, zákazník, pizza | 12 h |
 |  S2 | Editace stavu objednávky - založená, otevřená, uzavřená | 15 h |
 |  S3 | Storno objednávky | 5 h |
+|  S4 | Zobrazeni detailu objednávky | 5 h |
 
 ### UC5 &nbsp;&nbsp; Správa ingrediencí
 
