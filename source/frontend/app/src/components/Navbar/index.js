@@ -71,6 +71,14 @@ const Navbar = () => (
           </Link>
         </div>
       </CheckPermissions>
+      <CheckPermissions permissions={['ADMIN']}>
+        <div className={styles.categories}>
+          <Link to="/manager/orders/statistics">
+            <FontIcon value={"dashboard"} className={styles.icon} />
+            <div className={styles.caption}>Statistiky</div>
+          </Link>
+        </div>
+      </CheckPermissions>
 
     </Navigation>
   </div>

@@ -118,4 +118,15 @@ public class OrderController {
             return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
+
+    //TODO count with startDate and endDate params
+    @RequestMapping(value = "/statistics/fields", method = RequestMethod.GET)
+    public HttpEntity<?> orderStatisticsFields() {
+       return new ResponseEntity<>(HttpStatus.OK);
+    }
+    //TODO count with startDate and endDate params
+    @RequestMapping(value = "/statistics/graph", method = RequestMethod.GET)
+    public HttpEntity<?> orderStatisticGraph() {
+       return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

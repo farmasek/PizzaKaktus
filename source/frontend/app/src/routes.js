@@ -36,6 +36,8 @@ const routes = (
         <Route path="/manager/users" component={Pages.ManageUsersPage} oEnter={requireAuth} />
 
         <Route path="/manage/orders" component={Pages.ManageOrdersPage} onEnter={requireAuth} />
+        <Route path="/manage/orders" component={Pages.ManageOrdersPage} onEnter={requireAuth} />
+        <Route path="/manager/orders/statistics" component={Pages.ManagerStatisticsPage} onEnter={requireAuth} />
 
         <Route path="/cart" component={Pages.ShoppingCartPage}/>
         <Route path="/menu" component={Pages.MenuPage}/>

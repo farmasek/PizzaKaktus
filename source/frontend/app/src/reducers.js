@@ -14,6 +14,7 @@ import historyContainer from 'containers/HistoryContainer/reducer';
 import notificationReducer from './containers/AppContainer/reducer';
 import loginReducer from './containers/LoginContainer/reducer';
 import orderContainer from 'containers/OrderContainer/reducer';
+import statisticsReducer from 'containers/StatisticsContainer/reducer';
 
 const rootReducer = combineReducers({
   // Apply all of the reducers here.
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   historyContainer,
   loginReducer,
   orderContainer,
+  statisticsReducer,
   routing: routerReducer,
   form: formReducer,
 });
