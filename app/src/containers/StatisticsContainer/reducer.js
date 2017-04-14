@@ -26,7 +26,7 @@ const statisticsReducer = (state = new InitialState(), action) => {
     }
     case `${FETCH_STATS_GRAPH}_FULFILLED`: {
       let ordersGraph = new List();
-      const data = action.payload;
+      const data = action.payload || [];
       data.forEach(item => ordersGraph = ordersGraph.push({
         day: moment(item.day).format('DD.MM'),
         sold: item.sold,
