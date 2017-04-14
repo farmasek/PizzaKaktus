@@ -7,7 +7,7 @@ import DatePicker from 'react-toolbox/lib/date_picker';
 import TimePicker from 'react-toolbox/lib/time_picker';
 import styles from './index.module.scss';
 
-const localeCS = {
+export const localeCS = {
   months: 'Leden_Únor_Březen_Duben_Květen_Červen_Červenec_Srpen_Září_Říjen_Listopad_Prosinec'
   .split('_'),
   monthsShort: 'led_úno_bře_dub_kvě_čer_čec_srp_zář_říj_lis_pro'.split('_'),

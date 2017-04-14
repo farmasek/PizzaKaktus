@@ -60,6 +60,11 @@ import {
   handleInvalidTokenEpic,
 } from './containers/AppContainer/actions';
 
+import {
+  fetchStatsFieldsEpic,
+  fetchStatsGraphEpic,
+} from './containers/StatisticsContainer/actions';
+
 export default combineEpics(
   fetchIngredientListEpic,
   saveIngredientListEpic,
@@ -92,6 +97,8 @@ export default combineEpics(
   epicClearTheMessAfterMKRoutes,
   changeOrderStatusesEpic,
   updateIngredientEpic,
+  fetchStatsFieldsEpic,
+  fetchStatsGraphEpic,
   changePizzaIngredientsNotifEpic,
   handleInvalidTokenEpic,
   fetchAllPizzasEpic,
