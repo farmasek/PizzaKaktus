@@ -43,8 +43,10 @@ const ingredientReducer =
         .set('ingredientForm', initialIngredientForm));
       }
       case `${FETCH_INGREDIENT_LIST}_FULFILLED`: {
+        const ingredients = action.response;
+        const sorted = ingredients.sortBy(ing => ing.name);
         return state.withMutations(s => s
-          .set('ingredients', action.response)
+          .set('ingredients', sorted)
           .set('isLoading', false));
       }
       case `${FETCH_INGREDIENT_LIST}_FAILED`: {

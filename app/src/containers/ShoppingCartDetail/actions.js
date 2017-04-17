@@ -60,86 +60,88 @@ export const sendOrder = (orderCart, customer) => ({
 
 export const sendOrderEpic = (action$) =>
   action$.ofType(SEND_ORDER)
-    .switchMap((action) =>
-      Observable.ajax(doIt(
-        hosts.pk,
-        'order/create-order',
-        'POST',
-        JSON.stringify(mapOrderData(action.orderCart, action.customer)),
-        true,
-      )).switchMap(() => ([
-        {
-          type: EMPTY_SHOPPING_CART,
+  .switchMap((action) =>
+    Observable.ajax(doIt(
+      hosts.pk,
+      'order/create-order',
+      'POST',
+      JSON.stringify(mapOrderData(action.orderCart, action.customer)),
+      true,
+    )).switchMap(() => ([
+      {
+        type: EMPTY_SHOPPING_CART,
+      },
+      {
+        type: `${SEND_ORDER}_FULFILLED`,
+      },
+      {
+        type: `NOTIF_ADD`,
+        notification: {
+          message: 'Objednávka odeslána.',
         },
-        {
-          type: `${SEND_ORDER}_FULFILLED`,
+      },
+    ]))
+    .catch(error =>
+      Observable.of({
+        type: `${SEND_ORDER}_REJECTED`,
+        notification: {
+          message: error.xhr.response
+            ? error.xhr.response.message
+            : 'Nastala neočekávaná chyba.',
+          barStyle: { color: '#e57373' },
         },
-        {
-          type: `NOTIF_ADD`,
-          notification: {
-            message: 'Objednávka odeslána.',
-          },
-        },
-      ]))
-        .catch(error =>
-          Observable.of({
-            type: `NOTIF_ADD`,
-            notification: {
-              message: error.xhr.response
-                ? error.xhr.response.message
-                : 'Nastala neočekávaná chyba.',
-              barStyle: { color: '#e57373' },
-            },
-          }))
-        .switchMap(() => ([
-          {
-            type: `${SEND_ORDER}_REJECTED`,
-          },
-        ]))
-    );
+      }))
+  );
+
+export const orderRejectedEpic = action$ =>
+  action$.ofType(`${SEND_ORDER}_REJECTED`)
+  .map(action => Observable.of({
+    type: 'NOTIF_ADD',
+    notification: action.notification,
+  }));
 
 export const prefillByEmailEpic = (action$, store) =>
   action$.ofType(CART_CUSTOMER_EDIT)
-    .filter(() => store.getState().shoppingCartContainer.customer.get('preFill'))
-    .filter(({ field }) => field === 'email')
-    .debounceTime(500)
-    .switchMap(() =>
-      Observable.ajax(doIt(
-        hosts.pk,
-        `customer/by-email?email=${store.getState().shoppingCartContainer.customer.get('email')}`,
-        'GET',
-        {},
-        false,
-      ))
-        .switchMap(({ response }) => ([
-          {
-            type: `${CART_CUSTOMER_EDIT}_prefill`,
-            response,
-          },
-        ]))
-        .catch(() =>
-          Observable.of({
-            type: `${CART_CUSTOMER_EDIT}_FAILED`,
-          }))
-    );
+  .filter(() => store.getState().shoppingCartContainer.customer.get('preFill'))
+  .filter(({ field }) => field === 'email')
+  .debounceTime(500)
+  .switchMap(() =>
+    Observable.ajax(doIt(
+      hosts.pk,
+      `customer/by-email?email=${store.getState().shoppingCartContainer.customer.get('email')}`,
+      'GET',
+      {},
+      false,
+    ))
+    .switchMap(({ response }) => ([
+      {
+        type: `${CART_CUSTOMER_EDIT}_prefill`,
+        response,
+      },
+    ]))
+    .catch(() =>
+      Observable.of({
+        type: `${CART_CUSTOMER_EDIT}_FAILED`,
+      }))
+  );
 
 export const showAddedNotification = (action) =>
   action.ofType(ADD_TO_SHOPPING_CART)
-    .map(() => ({
-      type: `NOTIF_ADD`,
-      notification: {
-        message: 'Pizza přidána do košíku.',
-      },
-    }));
+  .map(() => ({
+    type: `NOTIF_ADD`,
+    notification: {
+      message: 'Pizza přidána do košíku.',
+    },
+  }));
 
 export const showRemovePizzaNotification = (action) =>
   action.ofType(REMOVE_FROM_SHOPPING_CART)
-    .map(() => ({
-      type: `NOTIF_ADD`,
-      notification: {
-        message: 'Pizza byla odebrána z košíku.',
-      },
-    }));
+  .map(() => ({
+    type: `NOTIF_ADD`,
+    notification: {
+      message: 'Pizza byla odebrána z košíku.',
+    },
+  }));
 
 export const changePizzaIngredients = (index, ingredientId) => ({
   type: CHANGE_PIZZA_INGREDIENTS,
@@ -160,7 +162,8 @@ export const toggleDialog = () => ({
   type: TOGGLE_EDIT_INGREDIENTS_DIALOG,
 });
 
-export const selectPizzaToEditIngredients = (index) => ({
+export const selectPizzaToEditIngredients = (index, pizza = null) => ({
   type: SELECT_PIZZA_TO_EDIT_INGREDIENTS,
   index,
+  pizza,
 });

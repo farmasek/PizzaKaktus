@@ -1,5 +1,7 @@
 import { Record, Map } from 'immutable';
 
+export const DOUGH_PRICE = 80;
+
 export const Ingredient = new Record({
   id: null,
   name: '',
