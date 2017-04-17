@@ -99,6 +99,7 @@ class ShoppingCartDetail extends Component {
               { this.props.sending && <ProgressBar type="circular" mode="indeterminate" /> }
               <PizzaIngredientsDialog
                 editing
+                ownPizza={this.props.ownPizza}
                 index={this.props.selected}
                 cart={this.props.cart}
                 ingredients={this.props.ingredients}
@@ -145,6 +146,7 @@ ShoppingCartDetail.propTypes = {
   active: PropTypes.bool.isRequired,
   selected: PropTypes.number.isRequired,
   sending: PropTypes.bool.isRequired,
+  ownPizza: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -157,6 +159,7 @@ const mapStateToProps = (state) => ({
   active: state.shoppingCartContainer.active,
   selected: state.shoppingCartContainer.selected,
   sending: state.shoppingCartContainer.sending,
+  ownPizza: state.shoppingCartContainer.ownPizza,
 });
 
 const mapDispatchToProps = (dispatch) => ({

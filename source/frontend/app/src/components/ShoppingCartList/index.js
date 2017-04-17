@@ -4,24 +4,32 @@ import { List, fromJS } from 'immutable';
 import cssModules from 'react-css-modules';
 import styles from './index.module.scss';
 import { IconButton } from 'react-toolbox/lib/button';
+import { DOUGH_PRICE } from '../../models/Ingredient';
 
 class ShoppingCartList extends Component {
 
   getPizzaPrice = (value) => {
-    let price = value.pizza.price;
-    const pizzaIngredients = fromJS(value.pizza.ingredientsId);
-    const editIngredients = fromJS(value.ingredientsIds);
+    let price = DOUGH_PRICE;
     if (this.props.ingredients.size > 0) {
-      editIngredients.map(ingredient => {
-        if (!pizzaIngredients.includes(ingredient)) {
-          price += this.props.ingredients.get(ingredient).cost;
-        }
-      });
-      pizzaIngredients.map(ingredient => {
-        if (!editIngredients.includes(ingredient)) {
-          price -= this.props.ingredients.get(ingredient).cost;
-        }
-      });
+      const pizzaIngredients = fromJS(value.pizza.ingredientsId);
+      const editIngredients = fromJS(value.ingredientsIds);
+      if (value.pizza.title) {
+        price = value.pizza.price;
+        editIngredients.map(ingredient => {
+          if (!pizzaIngredients.includes(ingredient)) {
+            price += this.props.ingredients.get(ingredient).get('cost');
+          }
+        });
+        pizzaIngredients.map(ingredient => {
+          if (!editIngredients.includes(ingredient)) {
+            price -= this.props.ingredients.get(ingredient).get('cost');
+          }
+        });
+      } else {
+        editIngredients.map(ingredient => {
+          price += this.props.ingredients.get(ingredient).get('costCustom');
+        });
+      }
     }
     return price;
   };
@@ -44,7 +52,7 @@ class ShoppingCartList extends Component {
                 { this.props.ingredients.get(ingredient).get('name') }
               </li>
             )
-              : value.ingredientsIds
+              : 'žádné ingredience'
           }
         </ul>
       </td>
@@ -54,7 +62,7 @@ class ShoppingCartList extends Component {
       <td className={styles.smallColumn}>
         <IconButton
           icon="compare_arrows"
-          onClick={() => this.props.select(index)}
+          onClick={() => this.props.select(index, value.pizza)}
         />
       </td>
       <td className={styles.smallColumn}>

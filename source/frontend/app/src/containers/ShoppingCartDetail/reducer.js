@@ -29,6 +29,7 @@ const InitialState = new Record({
   active: false,
   selected: 0,
   sending: false,
+  ownPizza: false,
 });
 
 const shoppingCartReducer =
@@ -107,6 +108,7 @@ const shoppingCartReducer =
       case SELECT_PIZZA_TO_EDIT_INGREDIENTS: {
         return state.withMutations(s => s
           .set('active', true)
+          .set('ownPizza', !action.pizza.title)
           .set('selected', action.index)
         );
       }

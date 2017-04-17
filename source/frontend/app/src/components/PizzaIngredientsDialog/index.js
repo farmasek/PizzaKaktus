@@ -5,6 +5,7 @@ import { fromJS } from 'immutable';
 import Dialog from 'react-toolbox/lib/dialog';
 import Checkbox from 'react-toolbox/lib/checkbox';
 import { Button } from 'react-toolbox/lib/button';
+import { DOUGH_PRICE } from '../../models/Ingredient';
 import * as styles from './index.module.scss';
 
 class PizzaIngredientsDialog extends Component {
@@ -12,6 +13,7 @@ class PizzaIngredientsDialog extends Component {
   getCheckboxes = () =>
     this.props.ingredients.toIndexedSeq().map((ingredient) => {
       const checkboxes = [];
+      const cost = this.props.ownPizza ? ingredient.get('costCustom') : ingredient.get('cost');
       if (this.props.editing) {
         if (this.props.cart.get(this.props.index)) {
           checkboxes.push(
@@ -21,7 +23,7 @@ class PizzaIngredientsDialog extends Component {
                 .get(this.props.index)
                 .ingredientsIds
                 .indexOf(ingredient.get('id')) > -1)}
-                label={`${ingredient.get('name')} (${ingredient.get('cost')} Kč)`}
+                label={`${ingredient.get('name')} (${ cost } Kč)`}
                 onChange={() =>
                   this.props.changePizzaIngredients(this.props.index, ingredient.get('id'))}
               />
@@ -33,7 +35,7 @@ class PizzaIngredientsDialog extends Component {
           <Checkbox
             checked={this.props.pizza
             .get('ingredientsId').includes(ingredient.get('id'))}
-            label={ingredient.get('name')}
+            label={`${ingredient.get('name')} (${ cost } Kč)`}
             onChange={(checked) =>
               this.handleIngredientsChange(ingredient.get('id'), checked)}
           />
@@ -42,12 +44,15 @@ class PizzaIngredientsDialog extends Component {
       return checkboxes;
     });
 
-  getPizzaPrice = () => {
-    let price = 40;
-    const ingredients = fromJS(this.props.pizza.ingredientsId);
+  getPizzaPrice = (ingredients = fromJS(this.props.pizza.ingredientsId)) => {
+    let price = DOUGH_PRICE;
     if (this.props.ingredients.size > 0) {
       ingredients.map(ingredient => {
-        price += this.props.ingredients.get(ingredient).costCustom;
+        if (this.props.ownPizza) {
+          price += this.props.ingredients.get(ingredient).get('costCustom');
+        } else {
+          price += this.props.ingredients.get(ingredient).get('cost');
+        }
       });
     }
     return price;
@@ -59,7 +64,7 @@ class PizzaIngredientsDialog extends Component {
       : this.props.pizza.get('ingredientsId').delete(
         this.props.pizza.get('ingredientsId').indexOf(ingredient)
       );
-    this.props.editValue('ingredientsId', ingredients, this.getPizzaPrice());
+    this.props.editValue('ingredientsId', ingredients, this.getPizzaPrice(ingredients));
   };
 
   validateForm() {
@@ -94,17 +99,11 @@ class PizzaIngredientsDialog extends Component {
           <ul className={styles.ingredientsList}>
             { checkboxes }
           </ul>
-          {
-            !this.props.editing
-              ? null
-              : null
-          }
           <Button
             className={styles.buttonerClose}
-            label={'Zavřít'}
+            label={this.props.editing ? 'OK' : 'Zavřít'}
             onClick={() => this.props.toggleDialog()}
             raised
-            button
           />
           {
             !this.props.editing
@@ -126,6 +125,7 @@ class PizzaIngredientsDialog extends Component {
 
 PizzaIngredientsDialog.propTypes = {
   editing: PropTypes.bool.isRequired,
+  ownPizza: PropTypes.bool.isRequired,
 
   index: PropTypes.number,
   cart: ImmutablePropTypes.map,

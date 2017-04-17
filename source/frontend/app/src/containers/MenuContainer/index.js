@@ -33,6 +33,7 @@ class MenuContainer extends Component {
         />
         <PizzaIngredientsDialog
           editing={false}
+          ownPizza
           active={this.props.customActive}
           toggleDialog={this.props.actions.toggleCustomPizzaForm}
           editValue={this.props.actions.editCustomPizzaValue}
