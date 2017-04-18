@@ -1,10 +1,7 @@
 package cz.osu.pizzakaktus.services.impl;
 
 import cz.osu.pizzakaktus.endpoints.mappers.MapToDTO;
-import cz.osu.pizzakaktus.endpoints.models.ChangeOrderStatusDTO;
-import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
-import cz.osu.pizzakaktus.endpoints.models.OrderPizzaDTO;
-import cz.osu.pizzakaktus.endpoints.models.PizzaDTO;
+import cz.osu.pizzakaktus.endpoints.models.*;
 import cz.osu.pizzakaktus.repositories.IngredientRepository;
 import cz.osu.pizzakaktus.repositories.OrderRepository;
 import cz.osu.pizzakaktus.repositories.OrderStatusRepository;
@@ -355,9 +352,104 @@ public class OrderServiceImpl implements OrderService {
             throw new DatabaseException("Nebylo možno změnit status objednávky.",e);
         }
 
+    }
+
+    @Override
+    public List<StatisticDTO> getStatisFromTo(Timestamp from, Timestamp to) throws DatabaseException {
+        List<StatisticDTO> ret = new ArrayList<>();
+        long od = from.getTime();
+        long po = to.getTime();
+
+        List<OrderDb> allOrders = orderRepository.findAll();
+        List<OrderDb> ordersFromTo = new ArrayList<>();
+        for (OrderDb order:allOrders) {
+            if(from.getTime() <= order.getDateCreated().getTime() && order.getDateCreated().getTime() <= to.getTime())
+            {
+                ordersFromTo.add(order);
+            }
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(ordersFromTo.get(0).getDateCreated().getTime());
+        int day = cal.get(Calendar.DATE);
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int pocetProdanychPizzZaDen =0;
+
+        for (OrderDb order:ordersFromTo) {
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTimeInMillis(order.getDateCreated().getTime());
+            int day2 = cal2.get(Calendar.DATE);
+            int month2 = cal2.get(Calendar.MONTH);
+            int year2 = cal2.get(Calendar.YEAR);
+
+            if(day == day2 && month==month2 && year==year2)
+            {
+                pocetProdanychPizzZaDen++;
+            }else
+            {
+                Timestamp ts;
+                ret.add(new StatisticDTO(ts = new Timestamp(cal.getTimeInMillis()),pocetProdanychPizzZaDen));
+                pocetProdanychPizzZaDen = 1;
+                day = day2;
+                month = month2;
+                year = year2;
+                cal.setTimeInMillis(order.getDateCreated().getTime());
+            }
+        }
+        Timestamp ts;
+        ret.add(new StatisticDTO(ts = new Timestamp(cal.getTimeInMillis()),pocetProdanychPizzZaDen));
+        return ret;
+    }
+
+    @Override
+    public Statistic2DTO getStatis(Timestamp from, Timestamp to) throws DatabaseException {
+        Statistic2DTO ret = new Statistic2DTO();
+        long od = from.getTime();
+        long po = to.getTime();
+
+        List<OrderDb> allOrders = orderRepository.findAll();
+        List<OrderDb> ordersFromTo = new ArrayList<>();
+        for (OrderDb order:allOrders) {
+            if(from.getTime() <= order.getDateCreated().getTime() && order.getDateCreated().getTime() <= to.getTime())
+            {
+                ordersFromTo.add(order);
+            }
+        }
+        double totalPrice = 0;
+        String nejprodavanejsi = "gg";
+
+        for (OrderDb order:ordersFromTo) {
+            for (int pizzaId :order.getPizzasIds()) {
+                totalPrice += pizzaRepository.findOne(pizzaId).getPrice();
+            }
+        }
+
+        int max = 0;
+        int actual = 0;
+        for (PizzaDb pizzaDb :pizzaRepository.findAll()) {
+
+            for (OrderDb order:ordersFromTo) {
+                for (int pizzaId :order.getPizzasIds()) {
+                    if(pizzaDb.getId() == pizzaId)
+                    {
+                        actual++;
+                    }
+                }
+            }
+            if(actual >= max)
+            {
+                max =  actual;
+                actual = 0;
+                nejprodavanejsi = pizzaDb.getTitle();
+            }
+        }
 
 
+        ret.setSoldPizzaCount(ordersFromTo.size());
+        ret.setSoldPizzaMoney(totalPrice);
+        ret.setMostSoldPizza(nejprodavanejsi);
 
+        return ret;
     }
 
 }

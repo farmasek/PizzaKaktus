@@ -6,6 +6,7 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -19,5 +20,6 @@ public interface OrderRepository extends PagingAndSortingRepository<OrderDb, Int
     OrderDb findById(Integer id);
 
     List<OrderDb> findByOrderStatusId(int id);
+
 
 }
