@@ -1,8 +1,6 @@
 package cz.osu.pizzakaktus.services;
 
-import cz.osu.pizzakaktus.endpoints.models.ChangeOrderStatusDTO;
-import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
-import cz.osu.pizzakaktus.endpoints.models.OrderPizzaDTO;
+import cz.osu.pizzakaktus.endpoints.models.*;
 import cz.osu.pizzakaktus.repositories.models.CustomerDb;
 import cz.osu.pizzakaktus.repositories.models.OrderDb;
 import cz.osu.pizzakaktus.repositories.models.PizzaDb;
@@ -99,4 +97,9 @@ public interface OrderService
      Integer saveCustomPizza(OrderPizzaDTO pizza, String email) throws DatabaseException;
 
     List<OrderDTO> changeOrderStatus(List<ChangeOrderStatusDTO> order) throws DatabaseException;
+
+
+    List<StatisticDTO> getStatisFromTo(Timestamp from, Timestamp to)throws DatabaseException;
+
+    Statistic2DTO getStatis(Timestamp fromTS, Timestamp toTS)throws DatabaseException;
 }

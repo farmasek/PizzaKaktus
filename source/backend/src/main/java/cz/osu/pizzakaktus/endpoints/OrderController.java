@@ -3,9 +3,7 @@ package cz.osu.pizzakaktus.endpoints;
 import com.google.gson.Gson;
 import com.google.gson.LongSerializationPolicy;
 import cz.osu.pizzakaktus.endpoints.mappers.MapToDTO;
-import cz.osu.pizzakaktus.endpoints.models.ChangeOrderStatusDTO;
-import cz.osu.pizzakaktus.endpoints.models.ErrorDTO;
-import cz.osu.pizzakaktus.endpoints.models.OrderDTO;
+import cz.osu.pizzakaktus.endpoints.models.*;
 import cz.osu.pizzakaktus.repositories.models.OrderDb;
 import cz.osu.pizzakaktus.services.Exceptions.DatabaseException;
 import cz.osu.pizzakaktus.services.OrderService;
@@ -121,12 +119,41 @@ public class OrderController {
 
     //TODO count with startDate and endDate params
     @RequestMapping(value = "/statistics/fields", method = RequestMethod.GET)
-    public HttpEntity<?> orderStatisticsFields() {
-       return new ResponseEntity<>(HttpStatus.OK);
+    public HttpEntity<?> orderStatisticsFields(@RequestParam(value = "startDate", required = false) String from,
+                                               @RequestParam(value = "endDate", required = false) String to) {
+
+        Timestamp fromTS =  new Timestamp(Long.parseLong(from));
+        Timestamp toTS =  new Timestamp(Long.parseLong(to));
+
+        Statistic2DTO ret = new Statistic2DTO();
+
+        try {
+            ret = orderService.getStatis(fromTS,toTS);
+            return new ResponseEntity<>(ret,HttpStatus.OK);
+        } catch (DatabaseException e) {
+            return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+
     }
+
+
     //TODO count with startDate and endDate params
     @RequestMapping(value = "/statistics/graph", method = RequestMethod.GET)
-    public HttpEntity<?> orderStatisticGraph() {
-       return new ResponseEntity<>(HttpStatus.OK);
+    public HttpEntity<?> orderStatisticGraph(@RequestParam(value = "startDate", required = false) String from,
+                                             @RequestParam(value = "endDate", required = false) String to) {
+
+        Timestamp fromTS =  new Timestamp(Long.parseLong(from));
+        Timestamp toTS =  new Timestamp(Long.parseLong(to));
+
+        List<StatisticDTO> ret = new ArrayList<>();
+
+        try {
+            ret = orderService.getStatisFromTo(fromTS,toTS);
+            return new ResponseEntity<>(ret,HttpStatus.OK);
+        } catch (DatabaseException e) {
+            return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+
+
     }
 }
