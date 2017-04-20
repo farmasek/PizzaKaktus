@@ -259,22 +259,24 @@
 | Zákazník souhlasí se scénařem zobrazení detailu objednávky | splněno |
 
 ## C8
-11.4.2017 - 18.4.2017
+11.4.2017 - 25.4.2017
 
 #### Cíle
 
 - UC6S1	Zobrazení prodejnosti pizz za období
+- UC4S4	Zobrazení detailu objednávky
 
 #### Úkoly
 
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
-| Implementace UC6S1 frontend | Baránek | 2h |
-| Implementace UC6S1 backend | Náhlý, Jaroš | 10h |
-| Opravit výpočet ceny při vytváření vlastní pizzy | Križová, Pravda | 5h |
-| Přepsat Zavřít na OK u výběru ingrediencí |  Križová | 1m |
-| Opravit potvrzení objednávky (po kliknutí na odeslat) - smazat košík a přejít na nabídku | Križová, Pravda | 1h |
-| Opravit UC4S4 vyměnit majitel za zaměstnanec | Náhlý | 2m |
+| Implementace UC6S1 frontend | Baránek | 2 h |
+| Implementace UC6S1 backend | Náhlý, Jaroš | 10 h |
+| Opravit výpočet ceny při vytváření vlastní pizzy | Krížová, Pravda | 5 h |
+| Přepsat Zavřít na OK u výběru ingrediencí |  Krížová | 1 m |
+| Opravit potvrzení objednávky (po kliknutí na odeslat) - smazat košík a přejít na nabídku | Krížová, Pravda | 1 h |
+| Opravit UC4S4 vyměnit majitel za zaměstnanec | Náhlý | 2 m |
+| Implementace UC4S4 | Krížová, Pravda | 2 h |
 
 #### Kritéria hodnocení
 | Úkol | Stav |
@@ -285,3 +287,5 @@
 | U výběru ingrediencí je OK, místo zavřít |  |
 | Po potvrzení objednávky se smaže košík a přejde se na nabídku |  |
 | UC4S4 je opraven |  |
+| UC4S4 je funkční |  |
+| Zákazník souhlasí s UC4S4 |  |
