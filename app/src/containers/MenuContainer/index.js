@@ -43,12 +43,16 @@ class MenuContainer extends Component {
           pizzaErrors={this.props.customPizzaErrors}
           pizzaValidation={this.props.actions.customPizzaValidation}
         />
-        <Button
-          className={styles.buttons}
-          label={'Sestavit vlastní pizzu'}
-          onClick={() => this.props.actions.toggleCustomPizzaForm()}
-          raised primary
-        />
+        {
+          this.props.menu
+            ? <Button
+              className={styles.buttons}
+              label={'Sestavit vlastní pizzu'}
+              onClick={() => this.props.actions.toggleCustomPizzaForm()}
+              raised primary
+            />
+            : null
+        }
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import { Record, List } from 'immutable';
 import moment from 'moment';
-import { mapCustomer } from './Customer';
+import { Customer, mapCustomer } from './Customer';
 import { mapOrderCart } from './OrderItem';
 
 const CREATED = 'Vytvořená';
@@ -10,12 +10,12 @@ const CANCELLED = 'Stornována';
 export const statuses = { CREATED, OPENED, CLOSED, CANCELLED };
 
 export const Order = new Record({
-  id: null,
+  id: 0,
   orderStatus: CREATED,
   orderCart: new List(),
-  customer: null,
-  dateCreated: null,
-  dateModified: null,
+  customer: new Customer(),
+  dateCreated: '',
+  dateModified: '',
 });
 
 export const mapOrder = src => {
@@ -23,10 +23,9 @@ export const mapOrder = src => {
   const modified = moment(src.dateModified).format('DD.MM.YYYY H:mm:ss');
   return new Order({
     id: src.id,
-    // orderStatus: mapOrderStatus(src.orderStatus),
     orderStatus: src.orderStatus,
     orderCart: src.orderCart,
-    customer: src.customer,
+    customer: mapCustomer(src.customer),
     dateCreated: created,
     dateModified: modified,
   });

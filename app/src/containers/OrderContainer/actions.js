@@ -4,6 +4,7 @@ import {
   CHANGE_ORDER_STATUSES,
   CANCEL_ORDER_DIALOG,
   PICK_ORDER_CANCEL,
+  ORDER_DETAIL,
 } from './constants';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
@@ -87,5 +88,10 @@ export const handleDialog = () => ({
 
 export const orderCancel = (order) => ({
   type: PICK_ORDER_CANCEL,
+  order,
+});
+
+export const toggleOrderDetail = (order = null) => ({
+  type: ORDER_DETAIL,
   order,
 });

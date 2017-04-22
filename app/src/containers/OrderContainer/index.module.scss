@@ -1,0 +1,22 @@
+.orderDetailWrapper {
+
+  .ingredientsList {
+    padding: 0;
+    margin: 0;
+    display: inline;
+
+    .ingredient {
+      display: inline;
+
+      &:after {
+        content: ", ";
+      }
+
+      &:last-of-type:after {
+        content: "";
+      }
+    }
+
+  }
+
+}

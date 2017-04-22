@@ -4,7 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import Checkbox from 'react-toolbox/lib/checkbox';
 import { Card, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
-import { Button } from 'react-toolbox/lib/button';
+import { Button, IconButton } from 'react-toolbox/lib/button';
 import * as styles from './index.module.scss';
 import { statuses } from '../../models/Order';
 import CheckPermission from '../../containers/CheckPermission';
@@ -43,7 +43,6 @@ class OrderList extends Component {
     <tr key={`order-${order.id}`}>
       <td>{order.dateCreated}</td>
       <td>{order.dateModified}</td>
-      <td className={styles.columnLeft}>{order.customer.email}</td>
       <td className={styles.columnLeft}>{this.getOrdersPizzas(order.orderCart)}</td>
       <td>{order.orderStatus}</td>
       <td>
@@ -63,7 +62,12 @@ class OrderList extends Component {
             onClick={() => this.props.orderCancel(order)}
           />
         </CheckPermission>
-
+      </td>
+      <td>
+        <IconButton
+          icon={'description'}
+          onClick={() => this.props.showDetail(order)}
+        />
       </td>
     </tr>;
 
@@ -86,9 +90,6 @@ class OrderList extends Component {
                 >
                   <span>Změněno</span>
                 </th>
-                <th>
-                  <span>Email</span>
-                </th>
                 <th>Pizzy</th>
                 <th
                   className={styles.orderStatusColumn}
@@ -99,6 +100,9 @@ class OrderList extends Component {
                 <th><CheckPermission permissions={['ADMIN']}>
                   <span>Stornovat</span>
                 </CheckPermission>
+                </th>
+                <th>
+                  <span>Detail</span>
                 </th>
               </tr>
               </thead>
@@ -129,6 +133,7 @@ OrderList.propTypes = {
   handleOrderCheckbox: PropTypes.func.isRequired,
   handleOrderStatuses: PropTypes.func.isRequired,
   orderCancel: PropTypes.func.isRequired,
+  showDetail: PropTypes.func.isRequired,
 };
 
 export default cssModules(OrderList, styles);

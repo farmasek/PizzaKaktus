@@ -14,9 +14,7 @@ import { initialPizzaForm } from './reducer';
 class Pizza extends Component {
 
   componentWillMount() {
-    if (this.props.pizzas.size === 0) {
-      this.props.actions.fetchPizzaList();
-    }
+    this.props.actions.fetchPizzaList();
   }
 
   render() {
