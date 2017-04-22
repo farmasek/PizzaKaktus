@@ -4,6 +4,7 @@ import {
   CANCEL_ORDER_DIALOG,
   PICK_ORDER_CANCEL,
   CHANGE_ORDER_STATUSES,
+  ORDER_DETAIL,
 } from './constants';
 import { Record, Map, OrderedMap } from 'immutable';
 import { Order, mapOrder } from '../../models/Order';
@@ -14,6 +15,8 @@ const InitialState = new Record({
   loading: false,
   dialog: false,
   cancel: new Order(),
+  detail: false,
+  detailOrder: new Order(),
 });
 
 const orderReducer = (state = new InitialState(), action) => {
@@ -51,6 +54,11 @@ const orderReducer = (state = new InitialState(), action) => {
       return state.withMutations(s => s
         .set('cancel', action.order)
         .set('dialog', true));
+    }
+    case ORDER_DETAIL: {
+      return state.withMutations(s => s
+        .set('detailOrder', action.order ? action.order : state.get('detailOrder'))
+        .set('detail', !state.get('detail')));
     }
     default:
       return state;
