@@ -158,12 +158,12 @@ public class OrderServiceImpl implements OrderService {
             price = DOUGH_PRICE;
             // Kategorie vlastní
             newPizza.setCategoryId(0);
-            newPizza.setTitle("Vlastní-" + email);
+            newPizza.setTitle("Vlastní (" + email + ")");
         }
         else
         {
             PizzaDb orginPizza =  pizzaService.findById(pizza.getPizzaId()).get(0);
-            newPizza.setTitle(orginPizza.getTitle() + "-Upravená");
+            newPizza.setTitle(orginPizza.getTitle() + " (upravená)");
             newPizza.setCategoryId(orginPizza.getCategory().getId());
             price = orginPizza.getPrice();
         }
