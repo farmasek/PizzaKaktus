@@ -86,6 +86,7 @@ class OrderContainer extends Component {
           <p>Opravdu chcete stornovat vybranou objednávku? Tato akce je nevratná.</p>
         </Dialog>
         <Dialog
+          className={styles.orderDetails}
           actions={[
             { label: 'Zavřít', onClick: () =>
               this.props.actions.toggleOrderDetail() },

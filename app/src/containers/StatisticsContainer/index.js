@@ -50,12 +50,12 @@ class StatisticsContainer extends Component {
 
               /></div>
             <div className={styles.pickerz}>
-              <h3>Počet prodaných pizz: </h3><h2>{this.props.stats.soldPizzaCount}</h2>
+              <h3>Počet prodaných pizz: </h3><h3>{this.props.stats.soldPizzaCount}</h3>
             </div>
             <div className={styles.pickerz}>
-              <h3>Celková tržba: </h3><h2>{this.props.stats.soldPizzaMoney} Kč</h2></div>
+              <h3>Celková tržba: </h3><h3>{this.props.stats.soldPizzaMoney} Kč</h3></div>
             <div className={styles.pickerz}>
-              <h3>Nejprodávanější pizza: </h3><h2>{this.props.stats.mostSoldPizza}</h2>
+              <h3>Nejprodávanější pizza: </h3><h3>{this.props.stats.mostSoldPizza}</h3>
             </div>
           </CardText>
         </Card>

@@ -63,7 +63,7 @@ class OrderList extends Component {
           />
         </CheckPermission>
       </td>
-      <td>
+      <td className={styles.detailIcon}>
         <IconButton
           icon={'description'}
           onClick={() => this.props.showDetail(order)}
