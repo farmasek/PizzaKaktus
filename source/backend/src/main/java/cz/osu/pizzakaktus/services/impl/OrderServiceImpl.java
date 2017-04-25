@@ -26,6 +26,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 /**
@@ -101,7 +105,7 @@ public class OrderServiceImpl implements OrderService {
         Timestamp dateModified = new Timestamp(now);
 
 
-         // Opravit, posilaji se vsecky ???
+        // Opravit, posilaji se vsecky ???
         List<OrderPizzaDTO> origPizzas = new ArrayList<>();
         List<OrderPizzaDTO> customPizzas = new ArrayList<>();
         //List<Integer> customPizzasIds = new ArrayList<>();
@@ -109,13 +113,10 @@ public class OrderServiceImpl implements OrderService {
 
         for (OrderPizzaDTO pizza : order.getOrderCart()) {
 
-            if(pizza.getIngredientsIds().isEmpty())
-            {
+            if (pizza.getIngredientsIds().isEmpty()) {
                 origPizzas.add(pizza);
                 allPizzasIds.add(pizza.getPizzaId());
-            }
-            else
-            {
+            } else {
                 customPizzas.add(pizza);
                 String email = order.getCustomer().getEmail();
                 allPizzasIds.add(saveCustomPizza(pizza, email));
@@ -148,28 +149,24 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Integer saveCustomPizza(OrderPizzaDTO pizza, String email) throws DatabaseException
-    {
+    public Integer saveCustomPizza(OrderPizzaDTO pizza, String email) throws DatabaseException {
         PizzaDTO newPizza = new PizzaDTO();
         double price = 0;
 
-        if(pizza.getPizzaId() == null)
-        {
+        if (pizza.getPizzaId() == null) {
             price = DOUGH_PRICE;
             // Kategorie vlastní
             newPizza.setCategoryId(0);
             newPizza.setTitle("Vlastní (" + email + ")");
-        }
-        else
-        {
-            PizzaDb orginPizza =  pizzaService.findById(pizza.getPizzaId()).get(0);
+        } else {
+            PizzaDb orginPizza = pizzaService.findById(pizza.getPizzaId()).get(0);
             newPizza.setTitle(orginPizza.getTitle() + " (upravená)");
             newPizza.setCategoryId(orginPizza.getCategory().getId());
             price = orginPizza.getPrice();
         }
 
         newPizza.setActive(false);
-        List<Integer> newPizzaIngIds =  new ArrayList<>();
+        List<Integer> newPizzaIngIds = new ArrayList<>();
 
         //přidaní nových ingrediencí do listu
         for (int newIng : pizza.getIngredientsIds()) {
@@ -230,17 +227,13 @@ public class OrderServiceImpl implements OrderService {
     public String makeOrderMailBody(CustomerDb customer, List<PizzaDb> pizzas) throws DatabaseException {
         String orderedPizzas = "";
         for (int i = 0; i < pizzas.size(); i++) {
-            orderedPizzas += "- " + pizzas.get(i).getTitle() + " (" ;
+            orderedPizzas += "- " + pizzas.get(i).getTitle() + " (";
 
-            for (int j = 0; j < pizzas.get(i).getIngredients().size(); j++)
-            {
+            for (int j = 0; j < pizzas.get(i).getIngredients().size(); j++) {
                 IngredientDb ingredient = pizzas.get(i).getIngredients().get(j);
-                if(j == pizzas.get(i).getIngredients().size() - 1)
-                {
+                if (j == pizzas.get(i).getIngredients().size() - 1) {
                     orderedPizzas += ingredient.getName();
-                }
-                else
-                {
+                } else {
                     orderedPizzas += ingredient.getName() + ", ";
                 }
             }
@@ -304,8 +297,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDb> findAllCreatedAndOpened() throws DatabaseException {
-        try
-        {
+        try {
             OrderStatus openedStatus = orderStatusRepository.findById(2);
             OrderStatus createdStatus = orderStatusRepository.findById(1);
 
@@ -314,22 +306,17 @@ public class OrderServiceImpl implements OrderService {
             openedAndCreatedOrders.sort(Comparator.comparing(OrderDb::getDateCreated).reversed());
 
             return openedAndCreatedOrders;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new DatabaseException("Nebylo možné získat vytvořené a otevřené objednávky.");
         }
     }
 
     @Override
     public List<OrderDb> findAllOpened() throws DatabaseException {
-        try
-        {
+        try {
             OrderStatus openedStatus = orderStatusRepository.findById(2);
             return orderRepository.findByOrderStatusId(openedStatus.getId());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new DatabaseException("Nebylo možné získat otevřené objednávky.");
         }
     }
@@ -338,68 +325,42 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDTO> changeOrderStatus(List<ChangeOrderStatusDTO> orders) throws DatabaseException {
         try {
 
-        List<OrderDTO> listOfOrders = new ArrayList<>();
-        for (ChangeOrderStatusDTO order:orders) {
+            List<OrderDTO> listOfOrders = new ArrayList<>();
+            for (ChangeOrderStatusDTO order : orders) {
 
-            OrderDb orderToChange = orderRepository.findById(order.getId());
-            OrderStatus orderStatus = orderStatusRepository.findByStatus(order.getOrderStatus());
-            orderToChange.setOrderStatus(orderStatus);
-            listOfOrders.add(new OrderDTO(orderRepository.findById(order.getId())));
-            orderRepository.save(orderToChange);
-        }
+                OrderDb orderToChange = orderRepository.findById(order.getId());
+                OrderStatus orderStatus = orderStatusRepository.findByStatus(order.getOrderStatus());
+                orderToChange.setOrderStatus(orderStatus);
+                listOfOrders.add(new OrderDTO(orderRepository.findById(order.getId())));
+                orderRepository.save(orderToChange);
+            }
             return listOfOrders;
         } catch (Exception e) {
-            throw new DatabaseException("Nebylo možno změnit status objednávky.",e);
+            throw new DatabaseException("Nebylo možno změnit status objednávky.", e);
         }
 
     }
+
     // God please no...
     @Override
     public List<StatisticDTO> getStatisFromTo(Timestamp from, Timestamp to) throws DatabaseException {
-        List<StatisticDTO> ret = new ArrayList<>();
-        long od = from.getTime();
-        long po = to.getTime();
+        List<StatisticDTO> statisticDTOS = new ArrayList<>();
 
-        List<OrderDb> allOrders = orderRepository.findAll();
-        List<OrderDb> ordersBetween = orderRepository.findByDateCreatedBetween(from,to);
-        List<OrderDb> ordersFromTo = new ArrayList<>();
-        for (OrderDb order:allOrders) {
-            if(from.getTime() <= order.getDateCreated().getTime() && order.getDateCreated().getTime() <= to.getTime())
-            {
-                ordersFromTo.add(order);
-            }
+        List<OrderDb> ordersBetween = orderRepository.findByDateCreatedBetween(from, to);
+
+        LocalDate ldtFrom =
+                LocalDate.from(from.toLocalDateTime());
+        LocalDate ldtTo =
+                LocalDate.from(to.toLocalDateTime());
+
+        while (ldtFrom.isBefore(ldtTo)) {
+            Timestamp today = Timestamp.valueOf(ldtFrom.atStartOfDay());
+            Timestamp tomorrow = Timestamp.valueOf(ldtFrom.atStartOfDay().plusDays(1));
+            long count = ordersBetween.stream().filter(orderDb -> orderDb.getDateCreated().after(today) && orderDb.getDateCreated().before(tomorrow)).count();
+            statisticDTOS.add(new StatisticDTO(today, (int) count));
+            ldtFrom = ldtFrom.plusDays(1);
         }
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(ordersFromTo.get(0).getDateCreated().getTime());
-        int day = cal.get(Calendar.DATE);
-        int month = cal.get(Calendar.MONTH);
-        int year = cal.get(Calendar.YEAR);
-        int pocetProdanychPizzZaDen =0;
-
-        for (OrderDb order:ordersFromTo) {
-            Calendar cal2 = Calendar.getInstance();
-            cal2.setTimeInMillis(order.getDateCreated().getTime());
-            int day2 = cal2.get(Calendar.DATE);
-            int month2 = cal2.get(Calendar.MONTH);
-            int year2 = cal2.get(Calendar.YEAR);
-
-            if(day == day2 && month==month2 && year==year2)
-            {
-                pocetProdanychPizzZaDen++;
-            }else
-            {
-                Timestamp ts;
-                ret.add(new StatisticDTO(ts = new Timestamp(cal.getTimeInMillis()),pocetProdanychPizzZaDen));
-                pocetProdanychPizzZaDen = 1;
-                day = day2;
-                month = month2;
-                year = year2;
-                cal.setTimeInMillis(order.getDateCreated().getTime());
-            }
-        }
-        Timestamp ts;
-        ret.add(new StatisticDTO(ts = new Timestamp(cal.getTimeInMillis()),pocetProdanychPizzZaDen));
-        return ret;
+        return statisticDTOS;
     }
 
     @Override
@@ -410,36 +371,33 @@ public class OrderServiceImpl implements OrderService {
 
         List<OrderDb> allOrders = orderRepository.findAll();
         List<OrderDb> ordersFromTo = new ArrayList<>();
-        for (OrderDb order:allOrders) {
-            if(from.getTime() <= order.getDateCreated().getTime() && order.getDateCreated().getTime() <= to.getTime())
-            {
+        for (OrderDb order : allOrders) {
+            if (from.getTime() <= order.getDateCreated().getTime() && order.getDateCreated().getTime() <= to.getTime()) {
                 ordersFromTo.add(order);
             }
         }
         double totalPrice = 0;
         String nejprodavanejsi = "gg";
 
-        for (OrderDb order:ordersFromTo) {
-            for (int pizzaId :order.getPizzasIds()) {
+        for (OrderDb order : ordersFromTo) {
+            for (int pizzaId : order.getPizzasIds()) {
                 totalPrice += pizzaRepository.findOne(pizzaId).getPrice();
             }
         }
 
         int max = 0;
         int actual = 0;
-        for (PizzaDb pizzaDb :pizzaRepository.findAll()) {
+        for (PizzaDb pizzaDb : pizzaRepository.findAll()) {
 
-            for (OrderDb order:ordersFromTo) {
-                for (int pizzaId :order.getPizzasIds()) {
-                    if(pizzaDb.getId() == pizzaId)
-                    {
+            for (OrderDb order : ordersFromTo) {
+                for (int pizzaId : order.getPizzasIds()) {
+                    if (pizzaDb.getId() == pizzaId) {
                         actual++;
                     }
                 }
             }
-            if(actual >= max)
-            {
-                max =  actual;
+            if (actual >= max) {
+                max = actual;
                 actual = 0;
                 nejprodavanejsi = pizzaDb.getTitle();
             }
