@@ -68,7 +68,7 @@ class StatisticsContainer extends Component {
                   this.props.actions.changeDateRange('endDate', val);
                   this.props.actions.fetchStatsGraph(
                     this.props.stats.startDate,
-                    moment(val) 
+                    moment(val)
                   );
                 }}
                 value={this.props.stats.endDate.toDate()}
