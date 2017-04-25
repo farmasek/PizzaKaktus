@@ -109,7 +109,7 @@ export const updateUserEpic = (action$) =>
           }, {
             type: `NOTIF_ADD`,
             notification: {
-              message: 'Uživatel upraven',
+              message: 'Uživatel upraven.',
             },
           },
         ])
