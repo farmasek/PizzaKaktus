@@ -281,11 +281,34 @@
 #### Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| UC6S1 je funkční |  |
-| Zákazník souhlasí s UC6S1 |  |
-| Cena se počítá správně při vytváření vlastní pizzy |  |
-| U výběru ingrediencí je OK, místo zavřít |  |
-| Po potvrzení objednávky se smaže košík a přejde se na nabídku |  |
-| UC4S4 je opraven |  |
-| UC4S4 je funkční |  |
-| Zákazník souhlasí s UC4S4 |  |
+| UC6S1 je funkční | splněno |
+| Zákazník souhlasí s UC6S1 | splněno |
+| Cena se počítá správně při vytváření vlastní pizzy | splněno |
+| U výběru ingrediencí je OK, místo zavřít | splněno |
+| Po potvrzení objednávky se smaže košík a přejde se na nabídku | splněno |
+| UC4S4 je opraven | splněno |
+| UC4S4 je funkční | splněno |
+| Zákazník souhlasí s UC4S4 | splněno |
+## C8
+25.4.2017 - 2.5.2017
+
+#### Cíle
+
+- Doladit přání zákazníka
+
+#### Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Po objednání přechod na nabídku(nyní je na košík) | Baránek | 1m |
+| Přidat scrollování k detailu objednávky, přidat mezery za dvojtečku | Pravda, Križová | 20m |
+| Upravit scénář editace na deaktivaci | Náhlý | 10m |
+| Řazení aktivních a neaktivních pizz, fix bug | Jaroš | 2h |
+| Validovat telefoní číslo (nemožnost přidání písmen) u objednávky a přidání uživatele | Baránek | 10m |
+| Chybová hláška(notifikace) deaktivace uživatele chybí tečka na konci. | Križová | 10s |
+| Tlačítko přidat pizzu není aktivní pokud není vybraná alespon jedna ingredience | Pravda | 5m  |
+
+#### Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| Požadavky zákazníka jsou implementovány | |
