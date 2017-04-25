@@ -301,11 +301,11 @@
 | Úkol | Odpovědnost | Časový odhad |
 |:------|:----------------|:-----------------:|
 | Po objednání přechod na nabídku(nyní je na košík) | Baránek | 1m |
-| Přidat scrollování k detailu objednávky, přidat mezery za dvojtečku | Pravda, Križová | 20m |
+| Přidat scrollování k detailu objednávky, přidat mezery za dvojtečku | Pravda | 20m |
 | Upravit scénář editace na deaktivaci | Náhlý | 10m |
 | Řazení aktivních a neaktivních pizz, fix bug | Jaroš | 2h |
 | Validovat telefoní číslo (nemožnost přidání písmen) u objednávky a přidání uživatele | Baránek | 10m |
-| Chybová hláška(notifikace) deaktivace uživatele chybí tečka na konci. | Križová | 10s |
+| Chybová hláška(notifikace) deaktivace uživatele chybí tečka na konci. | Krížová | 10s |
 | Tlačítko přidat pizzu není aktivní pokud není vybraná alespon jedna ingredience | Pravda | 5m  |
 
 #### Kritéria hodnocení
