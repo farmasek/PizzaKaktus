@@ -353,7 +353,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
     }
-
+    // God please no...
     @Override
     public List<StatisticDTO> getStatisFromTo(Timestamp from, Timestamp to) throws DatabaseException {
         List<StatisticDTO> ret = new ArrayList<>();
@@ -361,6 +361,7 @@ public class OrderServiceImpl implements OrderService {
         long po = to.getTime();
 
         List<OrderDb> allOrders = orderRepository.findAll();
+        List<OrderDb> ordersBetween = orderRepository.findByDateCreatedBetween(from,to);
         List<OrderDb> ordersFromTo = new ArrayList<>();
         for (OrderDb order:allOrders) {
             if(from.getTime() <= order.getDateCreated().getTime() && order.getDateCreated().getTime() <= to.getTime())

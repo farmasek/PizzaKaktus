@@ -21,5 +21,6 @@ public interface OrderRepository extends PagingAndSortingRepository<OrderDb, Int
 
     List<OrderDb> findByOrderStatusId(int id);
 
+    List<OrderDb> findByDateCreatedBetween(Timestamp from, Timestamp to);
 
 }
