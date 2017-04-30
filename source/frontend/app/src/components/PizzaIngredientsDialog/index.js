@@ -19,10 +19,10 @@ class PizzaIngredientsDialog extends Component {
           checkboxes.push(
             <li className={styles.ingredientItem} key={ingredient.get('id')}>
               <Checkbox
-                checked={(this.props.cart
+                checked={this.props.cart
                 .get(this.props.index)
                 .ingredientsIds
-                .indexOf(ingredient.get('id')) > -1)}
+                .indexOf(ingredient.get('id')) > -1}
                 label={`${ingredient.get('name')} (${ cost } Kč)`}
                 onChange={() =>
                   this.props.changePizzaIngredients(this.props.index, ingredient.get('id'))}
@@ -88,12 +88,24 @@ class PizzaIngredientsDialog extends Component {
 
   render() {
     const checkboxes = this.getCheckboxes();
+    let disabledBtn = false;
+    if (this.props.editing) {
+      if (this.props.cart.get(this.props.index)) {
+        disabledBtn = this.props.cart.get(this.props.index).ingredientsIds.size === 0;
+      }
+    } else {
+      disabledBtn = this.props.pizza.get('ingredientsId').size === 0;
+    }
     return (
       <div>
         <Dialog
           active={this.props.active}
-          onEscKeyDown={() => this.props.toggleDialog()}
-          onOverlayClick={() => this.props.toggleDialog()}
+          onEscKeyDown={() => disabledBtn && this.props.editing
+            ? null
+            : this.props.toggleDialog()}
+          onOverlayClick={() => disabledBtn && this.props.editing
+            ? null
+            : this.props.toggleDialog()}
           title={ this.props.editing ? 'Zvolte ingredience' : 'Sestavit pizzu' }
         >
           <ul className={styles.ingredientsList}>
@@ -103,6 +115,7 @@ class PizzaIngredientsDialog extends Component {
             className={styles.buttonerClose}
             label={this.props.editing ? 'OK' : 'Zavřít'}
             onClick={() => this.props.toggleDialog()}
+            disabled={ this.props.editing ? disabledBtn : false}
             raised
           />
           {
@@ -111,6 +124,7 @@ class PizzaIngredientsDialog extends Component {
                 className={styles.buttoner}
                 label={'Vložit do košíku'}
                 onClick={() => this.confirmDialog()}
+                disabled={disabledBtn}
                 raised
                 primary
               />
