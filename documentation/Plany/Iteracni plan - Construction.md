@@ -289,6 +289,8 @@
 | UC4S4 je opraven | splněno |
 | UC4S4 je funkční | splněno |
 | Zákazník souhlasí s UC4S4 | splněno |
+
+
 ## C8
 25.4.2017 - 2.5.2017
 
@@ -311,4 +313,28 @@
 #### Kritéria hodnocení
 | Úkol | Stav |
 |:---|:----|
-| Požadavky zákazníka jsou implementovány | |
+| Požadavky zákazníka jsou implementovány | Splněno |
+
+## C9
+2.5.2017 - 9.5.2017
+
+#### Cíle
+
+- Opravit aktulizaci dat ve statistikách
+
+#### Úkoly
+
+| Úkol | Odpovědnost | Časový odhad |
+|:------|:----------------|:-----------------:|
+| Aktualizace statistik po změně parametrů | Baránek | 30m |
+| Aktualizovat class diagram | Jaroš | 2h |
+| Aktualizovat DB diagram | Pravda | 1m |
+| Aktualizovat projektový plán | Náhlý | 10m |
+
+#### Kritéria hodnocení
+| Úkol | Stav |
+|:---|:----|
+| Statistiky se aktualizují ihned po změně parametrů | |
+| Zákazník souhlasí s přehledem statistik |  |
+| Dokumenty jsou aktualizovány (všechny) |  |
+
