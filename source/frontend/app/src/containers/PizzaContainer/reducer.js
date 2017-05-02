@@ -7,7 +7,7 @@ import {
   PIZZA_DIALOG,
   FETCH_ALL_PIZZAS,
 } from './constants';
-import { Record, Map, List, fromJS } from 'immutable';
+import { Record, Map, List, fromJS, OrderedMap } from 'immutable';
 import { mapPizzaForm, mapPizza } from '../../models/Pizza';
 
 export const initialPizzaForm = new Map({
@@ -32,7 +32,7 @@ const initialDialog = {
 
 const InitialState = new Record({
   loading: false,
-  pizzas: new Map(),
+  pizzas: new OrderedMap(),
   pizzaForm: initialPizzaForm,
   pizzaErrors: initialPizzaErrors,
   copied: false,
@@ -70,7 +70,7 @@ const pizzaReducer = (state = new InitialState(), action) => {
       const { direction, property } = action.response.sort
         ? action.response.sort[0]
         : { direction: '', property: '' };
-      let pizzas = new Map();
+      let pizzas = new OrderedMap();
       content.map(pizza => pizzas = pizzas.set(pizza.id, mapPizza(pizza)));
       return state.withMutations(s =>
         s
@@ -85,7 +85,7 @@ const pizzaReducer = (state = new InitialState(), action) => {
     }
     case `${FETCH_PIZZA_TABLE}_FAILED`: {
       return state.withMutations(s =>
-        s.set('pizzas', new Map()).set('loading', false));
+        s.set('pizzas', new OrderedMap()).set('loading', false));
     }
     case `${PIZZA_PAG_PROPERTIES}`: {
       let sortDir = state.getIn(['pagination', 'sortDir']);
@@ -121,7 +121,7 @@ const pizzaReducer = (state = new InitialState(), action) => {
       return state.set('dialog', action.dialog);
     }
     case `${FETCH_ALL_PIZZAS}_FULFILLED`: {
-      let pizzas = new Map();
+      let pizzas = new OrderedMap();
       action.pizzas.map(
         pizza => pizzas = pizzas.set(pizza.id, mapPizza(pizza))
       );
