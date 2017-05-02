@@ -12,20 +12,18 @@ const roles = [
 ];
 
 class CreateUser extends Component {
-
   handleChange = (name, value) => {
     this.props.editValue(name, value);
   };
 
-  handleConfirm = (event) =>
-    event.key === 'Enter' ? this.confirmDialog() : null;
+  handleConfirm = event => event.key === 'Enter' ? this.confirmDialog() : null;
 
   handleRolesChange = (role, value) => {
     const userRoles = value
       ? this.props.userForm.get('roles').push(role)
-      : this.props.userForm.get('roles').delete(
-      this.props.userForm.get('roles').indexOf(role)
-    );
+      : this.props.userForm
+          .get('roles')
+          .delete(this.props.userForm.get('roles').indexOf(role));
     this.props.editValue('roles', userRoles);
   };
 
@@ -63,6 +61,10 @@ class CreateUser extends Component {
       validation.phoneErr = 'Je nutné vyplnit. ';
       valid = false;
     }
+    if (!this.props.userForm.get('phone').match(/^\+?\d*$/)) {
+      validation.phoneErr = 'Formát telefoního čísla není validní.';
+      valid = false;
+    }
     this.props.userValidation(validation);
     return valid;
   }
@@ -81,67 +83,80 @@ class CreateUser extends Component {
           <CardText className={styles.createUser}>
             <div>
               <Input
-                type="text" label="Jméno" maxLength={ 50 }
-                value={ this.props.userForm.get('firstName') }
-                onChange={ (value) => this.handleChange('firstName', value) }
-                error={ this.props.userErrors.firstNameErr }
-                onKeyPress={ (event) => this.handleConfirm(event) }
+                type="text"
+                label="Jméno"
+                maxLength={50}
+                value={this.props.userForm.get('firstName')}
+                onChange={value => this.handleChange('firstName', value)}
+                error={this.props.userErrors.firstNameErr}
+                onKeyPress={event => this.handleConfirm(event)}
               />
               <Input
-                type="text" label="Příjmení" maxLength={ 50 }
-                value={ this.props.userForm.get('lastName') }
-                onChange={ (value) => this.handleChange('lastName', value) }
-                error={ this.props.userErrors.lastNameErr }
-                onKeyPress={ (event) => this.handleConfirm(event) }
+                type="text"
+                label="Příjmení"
+                maxLength={50}
+                value={this.props.userForm.get('lastName')}
+                onChange={value => this.handleChange('lastName', value)}
+                error={this.props.userErrors.lastNameErr}
+                onKeyPress={event => this.handleConfirm(event)}
               />
               <Input
-                type="text" label="Login" maxLength={ 20 }
-                value={ this.props.userForm.get('login') }
-                onChange={ (value) => this.handleChange('login', value) }
-                error={ this.props.userErrors.loginErr }
-                onKeyPress={ (event) => this.handleConfirm(event) }
+                type="text"
+                label="Login"
+                maxLength={20}
+                value={this.props.userForm.get('login')}
+                onChange={value => this.handleChange('login', value)}
+                error={this.props.userErrors.loginErr}
+                onKeyPress={event => this.handleConfirm(event)}
               />
             </div>
             <div>
               <Input
-                type="password" label="Heslo" maxLength={ 20 } minLength={ 6 }
-                value={ this.props.userForm.get('password') }
-                onChange={ (value) => this.handleChange('password', value) }
-                error={ this.props.userErrors.passwordErr }
-                onKeyPress={ (event) => this.handleConfirm(event) }
+                type="password"
+                label="Heslo"
+                maxLength={20}
+                minLength={6}
+                value={this.props.userForm.get('password')}
+                onChange={value => this.handleChange('password', value)}
+                error={this.props.userErrors.passwordErr}
+                onKeyPress={event => this.handleConfirm(event)}
               />
               <Input
-                type="text" label="Telefon" maxLength={ 15 }
-                value={ this.props.userForm.get('phone') }
-                onChange={ (value) => this.handleChange('phone', value) }
-                error={ this.props.userErrors.phoneErr }
-                onKeyPress={ (event) => this.handleConfirm(event) }
+                type="text"
+                label="Telefon"
+                maxLength={15}
+                value={this.props.userForm.get('phone')}
+                onChange={value => this.handleChange('phone', value)}
+                error={this.props.userErrors.phoneErr}
+                onKeyPress={event => this.handleConfirm(event)}
               />
               <h1>Role</h1>
-              {
-                roles.map(role =>
-                  <Checkbox
-                    key={role.value}
-                    checked={this.props.userForm
-                    .get('roles').includes(role.value)}
-                    label={role.label}
-                    onChange={(checked) => this.handleRolesChange(`${role.value}`, checked)}
-                    className={styles.roleCheckbox}
-                  />
-                )
-              }
-              {
-                this.props.userErrors.rolesErr !== ''
-                  ? <span className={styles.err}>{ this.props.userErrors.rolesErr }</span>
-                  : null
-              }
+              {roles.map(role => (
+                <Checkbox
+                  key={role.value}
+                  checked={this.props.userForm
+                    .get('roles')
+                    .includes(role.value)}
+                  label={role.label}
+                  onChange={checked =>
+                    this.handleRolesChange(`${role.value}`, checked)}
+                  className={styles.roleCheckbox}
+                />
+              ))}
+              {this.props.userErrors.rolesErr !== ''
+                ? <span className={styles.err}>
+                    {this.props.userErrors.rolesErr}
+                  </span>
+                : null}
             </div>
           </CardText>
           <CardActions>
             <Button
               className={styles.buttoner}
-              label="Přidat" primary raised
-              onClick={ () => this.confirmDialog() }
+              label="Přidat"
+              primary
+              raised
+              onClick={() => this.confirmDialog()}
             />
           </CardActions>
 

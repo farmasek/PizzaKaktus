@@ -112,7 +112,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new NpmInstallPlugin(),
     new HtmlwebpackPlugin({
-      title: 'Scalable React Boilerplate',
+      title: 'Pizza kaktus',
       template: 'index.html'
     }),
     new Visualizer()
