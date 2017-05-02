@@ -14,7 +14,6 @@ import CustomerForm from '../../components/CustomerForm';
 import PizzaIngredientsDialog from '../../components/PizzaIngredientsDialog';
 
 class ShoppingCartDetail extends Component {
-
   componentWillMount() {
     this.props.ingredientsActions.fetchIngredientList();
     this.props.actions.fetchShoppingCart();
@@ -39,6 +38,13 @@ class ShoppingCartDetail extends Component {
       this.props.actions.editCustomerErrorField('phone', 'Je nutné vyplnit');
       valid = false;
     }
+    if (!this.props.customer.get('phone').match(/^\+?\d*$/)) {
+      this.props.actions.editCustomerErrorField(
+        'phone',
+        'Formát telefoního čísla není validní'
+      );
+      valid = false;
+    }
     if (this.props.customer.get('city') === '') {
       this.props.actions.editCustomerErrorField('city', 'Je nutné vyplnit');
       valid = false;
@@ -60,32 +66,30 @@ class ShoppingCartDetail extends Component {
     }
   }
 
-  handleConfirm = (event) =>
-    event.key === 'Enter' ? this.confirmDialog() : null;
+  handleConfirm = event => event.key === 'Enter' ? this.confirmDialog() : null;
 
   render() {
     return (
       <div className={styles.emptyCart}>
-        {
-          this.props.cart.size > 0
-            ?
-            <div>
+        {this.props.cart.size > 0
+          ? <div>
               <ShoppingCartList
                 shoppingCart={this.props.cart}
                 ingredients={this.props.ingredients}
-                removeFromCart={(pizza) => this.props.actions.removeFromShoppingCart(pizza)}
+                removeFromCart={pizza =>
+                  this.props.actions.removeFromShoppingCart(pizza)}
                 select={this.props.actions.selectPizzaToEditIngredients}
               />
               <CustomerForm
                 isLoadingUser={this.props.isLoadingUser}
                 editCustomerField={this.props.actions.editCustomerField}
-                handleConfirm={(event) => this.handleConfirm(event)}
+                handleConfirm={event => this.handleConfirm(event)}
                 customerError={this.props.customerError}
                 customer={this.props.customer}
               />
               <Button
                 className={styles.buttonRemove}
-                label={"Vysypat košík"}
+                label={'Vysypat košík'}
                 onClick={() => this.props.actions.handleDialog(true)}
                 raised
               />
@@ -93,10 +97,11 @@ class ShoppingCartDetail extends Component {
                 className={styles.buttonConfirm}
                 primary
                 raised
-                label={"Objednat"}
+                label={'Objednat'}
                 onClick={() => this.confirmDialog()}
               />
-              { this.props.sending && <ProgressBar type="circular" mode="indeterminate" /> }
+              {this.props.sending &&
+                <ProgressBar type="circular" mode="indeterminate" />}
               <PizzaIngredientsDialog
                 editing
                 ownPizza={this.props.ownPizza}
@@ -106,17 +111,20 @@ class ShoppingCartDetail extends Component {
                 toggleDialog={this.props.actions.toggleDialog}
                 active={this.props.active}
                 changePizzaIngredients={(index, ingredientId) =>
-                  this.props.actions.changePizzaIngredients(index, ingredientId)}
+                  this.props.actions.changePizzaIngredients(
+                    index,
+                    ingredientId
+                  )}
               />
               <Dialog
                 actions={[
                   {
-                    label: 'Zrušit', onClick: () =>
-                    this.props.actions.handleDialog(false),
+                    label: 'Zrušit',
+                    onClick: () => this.props.actions.handleDialog(false),
                   },
                   {
-                    label: 'Potvrdit', onClick: () =>
-                    this.props.actions.emptyShoppingCart(),
+                    label: 'Potvrdit',
+                    onClick: () => this.props.actions.emptyShoppingCart(),
                   },
                 ]}
                 active={this.props.dialog.showDialog}
@@ -127,8 +135,7 @@ class ShoppingCartDetail extends Component {
                 <p>Opravdu chcete vysypat košík? Tato akce je nevratná.</p>
               </Dialog>
             </div>
-            : <h2>Košík je prázdný.</h2>
-        }
+          : <h2>Košík je prázdný.</h2>}
       </div>
     );
   }
@@ -149,7 +156,7 @@ ShoppingCartDetail.propTypes = {
   ownPizza: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   cart: state.shoppingCartContainer.cart,
   ingredients: state.ingredientContainer.ingredients,
   dialog: state.shoppingCartContainer.dialog,
@@ -162,20 +169,11 @@ const mapStateToProps = (state) => ({
   ownPizza: state.shoppingCartContainer.ownPizza,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(
-    ShoppingCartActions,
-    dispatch
-  ),
-  ingredientsActions: bindActionCreators(
-    IngredientActions,
-    dispatch
-  ),
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(ShoppingCartActions, dispatch),
+  ingredientsActions: bindActionCreators(IngredientActions, dispatch),
 });
 
 const Container = cssModules(ShoppingCartDetail, styles);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Container);
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

@@ -19,6 +19,8 @@
   }
 }
 .orderDetails{
+  overflow-y: auto;
+  overflow-x: auto;
   div{
     margin-top: 30px;
     div{

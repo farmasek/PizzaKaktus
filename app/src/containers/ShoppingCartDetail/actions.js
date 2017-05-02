@@ -14,6 +14,7 @@ import {
 import { mapOrderData } from '../../models/Order';
 import { doIt, hosts } from '../../network';
 import { Observable } from 'rxjs';
+import { browserHistory } from 'react-router';
 
 export const editCustomerField = (field, value) => ({
   type: CART_CUSTOMER_EDIT,
@@ -31,12 +32,12 @@ export const fetchShoppingCart = () => ({
   type: FETCH_SHOPPING_CART,
 });
 
-export const addToShoppingCart = (pizza) => ({
+export const addToShoppingCart = pizza => ({
   type: ADD_TO_SHOPPING_CART,
   pizza,
 });
 
-export const removeFromShoppingCart = (index) => ({
+export const removeFromShoppingCart = index => ({
   type: REMOVE_FROM_SHOPPING_CART,
   index,
 });
@@ -45,7 +46,7 @@ export const emptyShoppingCart = () => ({
   type: EMPTY_SHOPPING_CART,
 });
 
-export const handleDialog = (showDialog) => ({
+export const handleDialog = showDialog => ({
   type: SHOPPING_CART_DIALOG,
   dialog: {
     showDialog,
@@ -58,85 +59,90 @@ export const sendOrder = (orderCart, customer) => ({
   customer,
 });
 
-export const sendOrderEpic = (action$) =>
-  action$.ofType(SEND_ORDER)
-  .switchMap((action) =>
-    Observable.ajax(doIt(
-      hosts.pk,
-      'order/create-order',
-      'POST',
-      JSON.stringify(mapOrderData(action.orderCart, action.customer)),
-      true,
-    )).switchMap(() => ([
-      {
-        type: EMPTY_SHOPPING_CART,
-      },
-      {
-        type: `${SEND_ORDER}_FULFILLED`,
-      },
-      {
-        type: `NOTIF_ADD`,
-        notification: {
-          message: 'Objednávka odeslána.',
+export const sendOrderEpic = action$ =>
+  action$.ofType(SEND_ORDER).switchMap(action =>
+    Observable.ajax(
+      doIt(
+        hosts.pk,
+        'order/create-order',
+        'POST',
+        JSON.stringify(mapOrderData(action.orderCart, action.customer)),
+        true
+      )
+    )
+      .switchMap(() => [
+        {
+          type: EMPTY_SHOPPING_CART,
         },
-      },
-    ]))
-    .catch(error =>
-      Observable.of({
-        type: `${SEND_ORDER}_REJECTED`,
-        notification: {
-          message: error.xhr.response
-            ? error.xhr.response.message
-            : 'Nastala neočekávaná chyba.',
-          barStyle: { color: '#e57373' },
+        {
+          type: `${SEND_ORDER}_FULFILLED`,
         },
-      }))
-  );
+        {
+          type: `NOTIF_ADD`,
+          notification: {
+            message: 'Objednávka odeslána.',
+          },
+        },
+      ])
+      .do(() => browserHistory.push('/menu'))
+      .catch(error =>
+        Observable.of({
+          type: `${SEND_ORDER}_REJECTED`,
+          notification: {
+            message: error.xhr.response
+              ? error.xhr.response.message
+              : 'Nastala neočekávaná chyba.',
+            barStyle: { color: '#e57373' },
+          },
+        })));
 
 export const orderRejectedEpic = action$ =>
-  action$.ofType(`${SEND_ORDER}_REJECTED`)
-  .map(action => Observable.of({
-    type: 'NOTIF_ADD',
-    notification: action.notification,
-  }));
+  action$.ofType(`${SEND_ORDER}_REJECTED`).map(action =>
+    Observable.of({
+      type: 'NOTIF_ADD',
+      notification: action.notification,
+    }));
 
 export const prefillByEmailEpic = (action$, store) =>
-  action$.ofType(CART_CUSTOMER_EDIT)
-  .filter(() => store.getState().shoppingCartContainer.customer.get('preFill'))
-  .filter(({ field }) => field === 'email')
-  .debounceTime(500)
-  .switchMap(() =>
-    Observable.ajax(doIt(
-      hosts.pk,
-      `customer/by-email?email=${store.getState().shoppingCartContainer.customer.get('email')}`,
-      'GET',
-      {},
-      false,
-    ))
-    .switchMap(({ response }) => ([
-      {
-        type: `${CART_CUSTOMER_EDIT}_prefill`,
-        response,
-      },
-    ]))
-    .catch(() =>
-      Observable.of({
-        type: `${CART_CUSTOMER_EDIT}_FAILED`,
-      }))
-  );
+  action$
+    .ofType(CART_CUSTOMER_EDIT)
+    .filter(() =>
+      store.getState().shoppingCartContainer.customer.get('preFill'))
+    .filter(({ field }) => field === 'email')
+    .debounceTime(500)
+    .switchMap(() =>
+      Observable.ajax(
+        doIt(
+          hosts.pk,
+          `customer/by-email?email=${store
+            .getState()
+            .shoppingCartContainer.customer.get('email')}`,
+          'GET',
+          {},
+          false
+        )
+      )
+        .switchMap(({ response }) => [
+          {
+            type: `${CART_CUSTOMER_EDIT}_prefill`,
+            response,
+          },
+        ])
+        .catch(() =>
+          Observable.of({
+            type: `${CART_CUSTOMER_EDIT}_FAILED`,
+          })));
 
-export const showAddedNotification = (action) =>
-  action.ofType(ADD_TO_SHOPPING_CART)
-  .map(() => ({
+export const showAddedNotification = action =>
+  action.ofType(ADD_TO_SHOPPING_CART).map(() => ({
     type: `NOTIF_ADD`,
     notification: {
       message: 'Pizza přidána do košíku.',
     },
   }));
 
-export const showRemovePizzaNotification = (action) =>
-  action.ofType(REMOVE_FROM_SHOPPING_CART)
-  .map(() => ({
+export const showRemovePizzaNotification = action =>
+  action.ofType(REMOVE_FROM_SHOPPING_CART).map(() => ({
     type: `NOTIF_ADD`,
     notification: {
       message: 'Pizza byla odebrána z košíku.',
@@ -149,9 +155,8 @@ export const changePizzaIngredients = (index, ingredientId) => ({
   ingredientId,
 });
 
-export const changePizzaIngredientsNotifEpic = (action) =>
-  action.ofType(CHANGE_PIZZA_INGREDIENTS)
-  .map(() => ({
+export const changePizzaIngredientsNotifEpic = action =>
+  action.ofType(CHANGE_PIZZA_INGREDIENTS).map(() => ({
     type: `NOTIF_ADD`,
     notification: {
       message: 'Vybrané ingredience byly upraveny.',

@@ -97,34 +97,34 @@ class OrderContainer extends Component {
           title={`Detail objednávky ${detailOrder.id}`}
         >
           <div>
-            <label>Datum vytvoření:</label>
+            <label>Datum vytvoření: </label>
             <span>{ detailOrder.dateCreated }</span>
           </div>
           <div>
-            <label>Datum změny:</label>
+            <label>Datum změny: </label>
             <span>{ detailOrder.dateModified }</span>
           </div>
           <div>
-            <label>Stav objednávky:</label>
+            <label>Stav objednávky: </label>
             <span>{ detailOrder.orderStatus }</span>
           </div>
           <div>
-            <label>Zákazník:</label>
-            <span>{ detailOrder.customer.name }{ detailOrder.customer.surname }</span>
+            <label>Zákazník: </label>
+            <span>{ detailOrder.customer.name } { detailOrder.customer.surname }</span>
             <span>{ detailOrder.customer.street }, { detailOrder.customer.city } &nbsp;
               { detailOrder.customer.zip }</span>
           </div>
           <div>
-            <label>Kontakt:</label>
+            <label>Kontakt: </label>
             <span>{ detailOrder.customer.email }</span>
             <span>{ detailOrder.customer.phone }</span>
           </div>
           <div>
-            <label>Položky objednávky:</label>
+            <label>Položky objednávky: </label>
             { detailPizzas }
           </div>
           <div>
-            <label>Celková cena objednávky:</label>
+            <label>Celková cena objednávky: </label>
             <span>{ orderPrice } Kč</span>
           </div>
         </Dialog>
