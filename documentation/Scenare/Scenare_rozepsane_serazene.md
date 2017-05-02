@@ -135,7 +135,7 @@ sp
 | 2 | Majitel | Majitel vybere tuto možnost.|
 | 3 | Aplikace | Zobrazí se stránka se seznamem pizz. |
 | 4 | Majitel | Majitel u vybrané pizzy zvolí možnost deaktivace. |
-| 5 | Aplikace | Aplikace ověř, že si je majitel jistý svým činem a deaktivuje danou pizzu. |
+| 5 | Aplikace | Aplikace ověří, že si je majitel jistý svým činem a deaktivuje danou pizzu. |
 | 6 | Aplikace | Aktualizuje se seznam všech pizz a pizza se zobrazí jako deaktivovaná. |
 
 ### Alternative flow:
