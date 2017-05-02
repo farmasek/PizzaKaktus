@@ -126,33 +126,19 @@ sp
 | 4a | Majitel | Vložení nevalidních údajů. | 
 | | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
 
-## UC3	S2	Editace vytvořené pizzy, deaktivace
+## UC3	S2	Deaktivace pizzy
 ### Preconditions: Spuštěná aplikace, přihlášený majitel
 ### Basic flow:
 | Krok | Actor | Akce |
 |:---:|:---|:---|
 | 1 | Aplikace | V menu pro majitele je položka "Správa pizz". |
 | 2 | Majitel | Majitel vybere tuto možnost.|
-| 3 | Aplikace | Zobrazí se stránka se seznamem pizz a formulářem pro vytvoření nové. |
-| 4 | Majitel | Majitel u vybrané pizzy zvolí možnost editace. |
-| 5 | Aplikace | Aplikace našte pizzu do formuláře. |
-| 6 | Majitel | Majitel upraví položky načtené pizzy a potvrdí změny. |
-| 7 | Aplikace | Uloží se změny provedené majitelem. |
-| 8 | Aplikace | Aktualizuje se seznam všech pizz. |
+| 3 | Aplikace | Zobrazí se stránka se seznamem pizz. |
+| 4 | Majitel | Majitel u vybrané pizzy zvolí možnost deaktivace. |
+| 5 | Aplikace | Aplikace ověř, že si je majitel jistý svým činem a deaktivuje danou pizzu. |
+| 6 | Aplikace | Aktualizuje se seznam všech pizz a pizza se zobrazí jako deaktivovaná. |
 
 ### Alternative flow:
-| Krok | Actor | Reakce |
-|:---:|:---|:---|
-| 4a | Majitel | Vložení nevalidních údajů. | 
-| | Aplikace | Zobrazí se hláška s upozorněním na nesprávné údaje. | 
-
-| Krok | Actor | Reakce |
-|:---:|:---|:---|
-| 4a | Majitel | Majitel u vybrané pizzy zvolí možnost deaktivace. |
-| | Aplikace | Aplikace ověří, že si je majitel jistý deaktivací pizzy. |
-| | Majitel | Majitel potvrdí deaktivaci pizzy. |
-| | Aplikace | Aplikace deaktivuje pizzu. |
-| | Aplikace | Aplikace u pizzy v seznamu aktualizuje její stav. |
 
 ## UC3	S3	Vložení nové pizzy do nabídky založené na existující pizze
 ### Preconditions: Spuštěná aplikace, přihlášený majitel
