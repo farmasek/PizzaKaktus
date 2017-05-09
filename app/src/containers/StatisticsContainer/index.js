@@ -61,6 +61,7 @@ class StatisticsContainer extends Component {
                     this.props.stats.endDate
                   );
                 }}
+                maxDate={this.props.stats.endDate.toDate()}
                 value={this.props.stats.startDate.toDate()}
                 style={{ width: '200px' }}
                 locale={localeCS}
@@ -79,24 +80,29 @@ class StatisticsContainer extends Component {
                     moment(val)
                   );
                 }}
+                minDate={this.props.stats.startDate.toDate()}
                 value={this.props.stats.endDate.toDate()}
                 style={{ width: '200px' }}
                 locale={localeCS}
                 inputFormat={value => this.formatDate(value)}
               />
             </div>
-            <div className={styles.pickerz}>
-              <h3>Počet prodaných pizz: </h3>
-              <h3>{this.props.stats.soldPizzaCount}</h3>
-            </div>
-            <div className={styles.pickerz}>
-              <h3>Celková tržba: </h3>
-              <h3>{this.props.stats.soldPizzaMoney} Kč</h3>
-            </div>
-            <div className={styles.pickerz}>
-              <h3>Nejprodávanější pizza: </h3>
-              <h3>{this.props.stats.mostSoldPizza}</h3>
-            </div>
+            {this.props.stats.soldPizzaCount
+              ? <div>
+                  <div className={styles.pickerz}>
+                    <h3>Počet prodaných pizz: </h3>
+                    <h3>{this.props.stats.soldPizzaCount}</h3>
+                  </div>
+                  <div className={styles.pickerz}>
+                    <h3>Celková tržba: </h3>
+                    <h3>{this.props.stats.soldPizzaMoney} Kč</h3>
+                  </div>
+                  <div className={styles.pickerz}>
+                    <h3>Nejprodávanější pizza: </h3>
+                    <h3>{this.props.stats.mostSoldPizza}</h3>
+                  </div>
+                </div>
+              : <h3>V daném období se neprodala žádná pizza</h3>}
           </CardText>
         </Card>
         <br />
