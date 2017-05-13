@@ -291,7 +291,7 @@
 | Zákazník souhlasí s UC4S4 | splněno |
 
 
-## C8
+## C9
 25.4.2017 - 2.5.2017
 
 #### Cíle
@@ -315,7 +315,7 @@
 |:---|:----|
 | Požadavky zákazníka jsou implementovány | Splněno |
 
-## C9
+## C10
 2.5.2017 - 9.5.2017
 
 #### Cíle
