@@ -131,13 +131,13 @@ Projektový plán pro projekt PizzaKaktus
 <tr>
 <td align="left"></td>
 <td align="left">C4</td>
-<td align="left">UC4S2</td>
+<td align="left">UC4S2, Opravy chyb z předchozích iterací. Dodělávky dle přání zákazníka.</td>
 <td align="left">14.3. - 21.3.2017</td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">C5</td>
-<td align="left">UC4S3 a UC5S2, opravy, dodělávky</td>
+<td align="left">UC4S3 a UC5S2, opravy, dodělávky. Revize implementace správy objednávek UC4S2</td>
 <td align="left">21.3. - 28.3.2017</td>
 </tr>
 <tr>
@@ -155,37 +155,43 @@ Projektový plán pro projekt PizzaKaktus
 <tr>
 <td align="left"></td>
 <td align="left">C8</td>
-<td align="left">UC6S1</td>
-<td align="left">11.4. - 18.4.2017</td>
+<td align="left">UC6S1, UC4S4</td>
+<td align="left">11.4. - 24.4.2017</td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">C9</td>
-<td align="left">UC6S2</td>
-<td align="left">18.4. - 25.4.2017</td>
+<td align="left">Doladit aplikaci dle přání zákazníka. </td>
+<td align="left">25.4. - 1.5.2017</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">C10</td>
+<td align="left">Oprava nalezených chyb, příprava na předání. Doplnění dle přání zákazníka</td>
+<td align="left">2.5. - 9.5.2017</td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">IOP</td>
 <td align="left"></td>
-<td align="left">25.4.2017</td>
+<td align="left">9.5.2017</td>
 </tr>
 <tr>
 <td align="left">Transition</td>
 <td align="left">T0</td>
 <td align="left"></td>
-<td align="left">25.4. - 2.5.2017</td>
+<td align="left">datum neznámý</td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">T1</td>
 <td align="left"></td>
-<td align="left">2.5. - 9.5.2017</td>
+<td align="left">datum neznámý</td>
 </tr>
 <tr>
 <td align="left"></td>
 <td align="left">PR</td>
 <td align="left"></td>
-<td align="left">9.5.2017</td>
+<td align="left">datum neznámý</td>
 </tr>
 </tbody></table>
